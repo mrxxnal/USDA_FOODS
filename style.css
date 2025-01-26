@@ -1,57 +1,65 @@
+/* Global styles */
 body {
+    font-family: 'Lato', sans-serif;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-image: url('assets/USDA_FOODS.jpeg');
+    padding: 0;
+    color: #2c3e50;
+    background: url('assets/USDA_FOODS.jpeg') no-repeat center center fixed;
     background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: #333;
 }
 
+/* Navbar styles */
 .navbar {
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: #333;
-    padding: 20px; /* Increased padding for wider navigation bar */
-    position: sticky;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
 .navbar a {
-    color: white;
     text-decoration: none;
-    padding: 15px 20px;
+    color: white;
+    padding: 10px 15px;
     font-size: 16px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: 0.3s;
 }
 
 .navbar a:hover {
-    background-color: #555;
-    color: #fff;
+    background-color: #575757;
     border-radius: 5px;
-    cursor: pointer;
 }
 
-.section {
-    padding: 50px 20px;
-    margin: 20px auto;
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    width: 80%;
+.navbar .active {
+    border-bottom: 3px solid #e67e22;
+}
+
+/* Content Section */
+.content-section {
     max-width: 900px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin: 100px auto; /* Adjusted for fixed navbar */
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
-h2 {
+/* Heading styles */
+.content-section h1 {
+    font-size: 36px;
+    font-weight: bold;
     text-align: center;
-    color: #222;
+    margin-bottom: 20px;
+    color: #34495e;
 }
 
-p {
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: center;
+/* Paragraph styles */
+.content-wrapper p {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 15px;
 }
