@@ -26,11 +26,13 @@ body {
     padding: 10px 15px;
     font-size: 16px;
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .navbar a:hover {
     background-color: #575757;
-    border-radius: 5px;
+    color: white;
+    border-radius: 7px;
 }
 
 .navbar .active {
@@ -41,30 +43,30 @@ body {
 .content-section {
     max-width: 900px;
     margin: 120px auto; /* Adjusted for fixed navbar */
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.6); /* Semi-transparent white background */
+    padding: 18px;
+    background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white background */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border-radius: 15px; /* Rounded corners */
+    border-radius: 18px; /* Rounded corners */
 }
 
 /* Heading styles */
 .content-section h1 {
-    font-size: 40px;
+    font-size: 45px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 25px;
     color: #2c3e50;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
-    border-radius: 10px; /* Rounded border for the heading */
+    background-color: rgba(255, 255, 255, 0.5); /* Transparent white background */
+    border-radius: 12px; /* Rounded border for the heading */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Paragraph styles */
 .content-wrapper {
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Transparent white for content */
-    border-radius: 10px; /* Rounded corners for content div */
+    background-color: rgba(255, 255, 255, 0.5); /* Transparent white for content */
+    border-radius: 12px; /* Rounded corners for content div */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
@@ -74,4 +76,11 @@ body {
     text-align: justify;
     margin-bottom: 15px;
     color: #34495e;
+}
+
+/* Hover effect for links */
+.navbar a:hover {
+    background-color: #e67e22;
+    color: white;
+    border-radius: 5px;
 }
