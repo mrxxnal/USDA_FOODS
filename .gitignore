@@ -10,4 +10,4 @@ __pycache__/
 
 # Ignore API keys or configuration files
 config.json
-secrets.json
+secrets.json.DS_Store
