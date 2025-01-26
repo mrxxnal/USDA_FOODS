@@ -4,17 +4,13 @@ import pandas as pd
 # Title for your app
 st.title("USDA Food Analysis")
 
-# Subtitle or description
-st.markdown("This app analyzes ultra-processed foods using USDA FoodData Central API data.")
-
-# Check if the cleaned data exists
 try:
-    # Load the cleaned data
+    # Load cleaned data
     data = pd.read_csv("data/cleaned_data.csv")
-    
+
     # Display the data
     st.subheader("Dataset Preview")
-    st.write(data.head())
+    st.write(data)
 
     # Display the visualization
     st.subheader("Visualization: Calories in Ultra-Processed Foods")
