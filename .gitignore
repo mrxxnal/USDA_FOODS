@@ -8,9 +8,6 @@ __pycache__/
 # Ignore log files
 *.log
 
-# Ignore data files if needed
-*.csv
-
 # Ignore API keys or configuration files
 config.json
 secrets.json
