@@ -1,52 +1,109 @@
 import pandas as pd
+import numpy as np
 import os
+from sklearn.preprocessing import StandardScaler
 
 # Ensure the 'data' directory exists
 os.makedirs("data", exist_ok=True)
 
-# Load the raw data
+# Define file paths
 raw_data_path = "data/raw_data.csv"
 cleaned_data_path = "data/cleaned_data.csv"
 
 # Load the dataset
 try:
+    print("Loading raw data...")
     df = pd.read_csv(raw_data_path)
     print("Raw data loaded successfully.")
 except FileNotFoundError:
-    print("Error: raw_data.csv file not found. Please ensure the file is in the 'data' directory.")
+    print(f"Error: {raw_data_path} file not found. Please ensure the file is in the 'data' directory.")
     exit()
 
-# Display initial info about the data
+# Display initial dataset information
 print(f"Initial dataset size: {df.shape}")
-print("Dataset preview:")
+print("Initial dataset preview:")
 print(df.head())
+print(df.info())
 
-# Remove duplicates
-df = df.drop_duplicates()
-print(f"After removing duplicates: {df.shape}")
+# Step 1: Handle Missing Values
+print("\nHandling missing values...")
+missing_values_summary = df.isnull().sum()
+print("Missing values summary before handling:\n", missing_values_summary)
 
-# Handle missing values
-missing_values = df.isnull().sum()
-print(f"Missing values before cleaning:\n{missing_values}")
+# Fill missing values with default values
+default_values = {
+    'Calories': 0,
+    'Protein': 0,
+    'Fat': 0,
+    'Carbs': 0,
+    'Brand': 'Unknown',
+    'Category': 'Uncategorized',
+    'Description': 'No Description'
+}
+df.fillna(default_values, inplace=True)
 
-# Replace missing values with suitable defaults or drop rows/columns
-df['Calories'] = df['Calories'].fillna(0)  # Replace missing calories with 0
-df['Protein'] = df['Protein'].fillna(0)    # Replace missing protein with 0
-df['Fat'] = df['Fat'].fillna(0)            # Replace missing fat with 0
-df['Carbs'] = df['Carbs'].fillna(0)        # Replace missing carbs with 0
-df['Brand'] = df['Brand'].fillna("Unknown") # Replace missing brand with "Unknown"
+# Verify missing values have been handled
+print("\nMissing values summary after handling:\n", df.isnull().sum())
 
-# Drop rows with missing descriptions or categories as they are essential
-df = df.dropna(subset=['Description', 'Category'])
-print(f"After handling missing values: {df.shape}")
+# Step 2: Remove Duplicate Rows
+print("\nChecking for duplicate rows...")
+duplicate_count = df.duplicated().sum()
+print(f"Number of duplicate rows: {duplicate_count}")
+if duplicate_count > 0:
+    print("Removing duplicate rows...")
+    df = df.drop_duplicates()
+    print(f"After removing duplicates: {df.shape}")
 
-# Standardize column names (optional, for consistency)
-df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
+# Step 3: Identify and Handle Outliers
+print("\nIdentifying and handling outliers...")
+numerical_cols = ['Calories', 'Protein', 'Fat', 'Carbs']
 
-# Save the cleaned data
+for col in numerical_cols:
+    Q1 = df[col].quantile(0.25)
+    Q3 = df[col].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+
+    outliers_count = df[(df[col] < lower_bound) | (df[col] > upper_bound)].shape[0]
+    print(f"{col}: Found {outliers_count} outliers.")
+
+    # Remove outliers
+    df = df[(df[col] >= lower_bound) & (df[col] <= upper_bound)]
+    print(f"After removing outliers in {col}: {df.shape}")
+
+# Step 4: Remove Unnecessary Columns
+if 'Unnamed: 0' in df.columns:
+    print("\nRemoving unnecessary columns...")
+    df = df.drop(columns=['Unnamed: 0'])
+    print("Unnecessary columns removed.")
+
+# Step 5: Feature Generation
+print("\nGenerating additional features...")
+df['Calories_per_Protein'] = df['Calories'] / (df['Protein'] + 1e-5)  # Avoid division by zero
+df['Calories_per_Fat'] = df['Calories'] / (df['Fat'] + 1e-5)  # Avoid division by zero
+df['Calories_per_Carb'] = df['Calories'] / (df['Carbs'] + 1e-5)  # Avoid division by zero
+print("New features generated successfully.")
+
+# Step 6: Normalize Data
+print("\nNormalizing data using StandardScaler...")
+scaler = StandardScaler()
+scaled_cols = ['Calories', 'Protein', 'Fat', 'Carbs']
+df[scaled_cols] = scaler.fit_transform(df[scaled_cols])
+print("Data normalized successfully.")
+
+# Step 7: Discretization (Binning)
+print("\nPerforming discretization (binning)...")
+df['Calories_Bin'] = pd.qcut(df['Calories'], q=4, labels=['Low', 'Medium', 'High', 'Very High'])
+print("Discretization completed successfully.")
+
+# Save the cleaned dataset
+print(f"\nSaving cleaned data to {cleaned_data_path}...")
 df.to_csv(cleaned_data_path, index=False)
-print(f"Cleaned data saved to {cleaned_data_path}. Final dataset size: {df.shape}")
+print(f"Cleaned data saved successfully. Final dataset size: {df.shape}")
 
-# Quick summary of the cleaned data
-print("Cleaned dataset preview:")
+# Summary of the cleaned dataset
+print("\nCleaned Dataset Preview:")
 print(df.head())
+print("\nColumns in the cleaned dataset:")
+print(df.columns.tolist())
