@@ -108,11 +108,12 @@ body {
 }
 
 .profile-pic {
-    width: auto; /* Automatically adjusts width */
-    height: 100%; /* Matches the content height */
-    max-height: 200px; /* Sets a maximum height to maintain a natural scale */
-    border-radius: 50%; /* Ensures the image stays circular */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: auto;               /* Width of the picture */
+    height: auto;               /* Adjust height to maintain aspect ratio */
+    border-radius: 12px;        /* Soft corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-right: 20px;
+    object-fit: cover;          /* Ensures the image fits well */
 }
 
 .about-text {
