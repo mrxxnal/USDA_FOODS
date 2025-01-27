@@ -144,3 +144,19 @@ body {
     background-color: #e67e22;
     color: white;
 }
+
+/* Center image container */
+.image-container {
+    display: flex;
+    justify-content: center; /* Centers the image horizontally */
+    align-items: center;    /* Centers the image vertically (if needed) */
+    margin: 20px auto;       /* Adds spacing around the container */
+}
+
+/* Styles for topic images */
+.topic-image {
+    max-width: 100%;         /* Ensures the image is responsive */
+    height: auto;            /* Maintains aspect ratio */
+    border-radius: 12px;     /* Adds rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for better visual appeal */
+}
