@@ -89,7 +89,7 @@ body {
 
 .about-container {
     display: flex;
-    align-items: stretch; /* Align both image and text equally */
+    align-items: center; /* Vertically centers the content */
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px;
@@ -100,24 +100,22 @@ body {
 }
 
 .about-image {
-    flex: 1;
+    flex: 1; /* Image container will take 1 part of the space */
     display: flex;
-    align-items: center;
+    align-items: center; /* Center the image within the container */
     justify-content: center;
-    max-height: 100%; /* Ensures the image container doesn't exceed content height */
 }
 
 .profile-pic {
-    width: auto;               /* Width of the picture */
-    height: auto;               /* Adjust height to maintain aspect ratio */
-    border-radius: 12px;        /* Soft corners */
+    max-width: 100%;        /* Ensures the width doesn't exceed its container */
+    max-height: 300px;      /* Restricts the height */
+    border-radius: 12px;    /* Adds soft corners for a rectangular appearance */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    margin-right: 20px;
-    object-fit: cover;          /* Ensures the image fits well */
+    object-fit: scale-down; /* Prevents stretching and maintains original aspect ratio */
 }
 
 .about-text {
-    flex: 2; /* Ensures the text occupies more space */
+    flex: 2; /* Text container will take 2 parts of the space */
     padding-left: 20px;
     color: #2c3e50;
     font-size: 18px;
