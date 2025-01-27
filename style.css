@@ -87,10 +87,9 @@ body {
     border-radius: 5px;
 }
 
-/* About Me Section */
 .about-container {
     display: flex;
-    align-items: center;
+    align-items: stretch; /* Align both image and text equally */
     justify-content: space-between;
     background-color: rgba(255, 255, 255, 0.5);
     border-radius: 15px;
@@ -102,19 +101,22 @@ body {
 
 .about-image {
     flex: 1;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100%; /* Ensures the image container doesn't exceed content height */
 }
 
 .profile-pic {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+    width: auto; /* Automatically adjusts width */
+    height: 100%; /* Matches the content height */
+    max-height: 200px; /* Sets a maximum height to maintain a natural scale */
+    border-radius: 50%; /* Ensures the image stays circular */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-right: 20px;
 }
 
 .about-text {
-    flex: 2;
+    flex: 2; /* Ensures the text occupies more space */
     padding-left: 20px;
     color: #2c3e50;
     font-size: 18px;
