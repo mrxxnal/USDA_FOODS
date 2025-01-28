@@ -64,13 +64,13 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-/* Paragraph styles */
+/* Updated Content Wrapper */
 .content-wrapper {
-    padding: 25px; /* Increased padding for better spacing */
-    background-color: rgba(255, 255, 255, 0.7); /* Adjusted transparency for better readability */
-    border-radius: 15px; /* Slightly larger rounding for better alignment */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for better separation */
-    width: 90%; /* Ensures proper alignment without stretching */
+    padding: 25px; /* Adjusted padding for consistency */
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly more opaque for better readability */
+    border-radius: 15px; /* Softened edges */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Improved shadow effect */
+    width: 90%; /* Ensures consistent width across sections */
     margin: 20px auto; /* Centers the section properly */
     display: flex;
     flex-direction: column;
@@ -111,32 +111,37 @@ body {
     justify-content: center;
 }
 
-/* Data Section */
+/* Ensure padding is applied to the entire data section */
 .data-section {
     display: flex;
-    flex-direction: column; /* Forces items to stack vertically */
-    align-items: center; /* Centers content */
-    gap: 30px; /* Adds space between Raw and Cleaned Data */
-    margin: 20px auto;
+    flex-direction: column; /* Ensures data boxes stack vertically */
+    align-items: center;
+    justify-content: center;
+    width: 90%; /* Ensures it doesn't stretch full-width */
+    max-width: 900px; /* Consistent width */
+    padding: 20px; /* Adds proper spacing */
+    margin: 0 auto; /* Centers the section */
 }
 
-/* Box containing each data visualization */
+/* Fix alignment of the data-box */
 .data-box {
     width: 100%;
-    max-width: 700px; /* Ensures readable width */
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 20px;
+    max-width: 700px; /* Prevents it from taking full screen width */
+    background-color: rgba(255, 255, 255, 0.85); /* Improved readability */
+    padding: 25px; /* Ensures consistent spacing inside */
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+    margin-bottom: 25px; /* Adds spacing between sections */
 }
 
-/* Image Styling */
+/* Centering Images */
 .data-image {
     max-width: 100%;
     height: auto;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px; /* Space below images */
 }
 
 .profile-pic {
