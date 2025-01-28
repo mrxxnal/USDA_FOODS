@@ -191,6 +191,7 @@ body {
     justify-content: center; /* Centers the image horizontally */
     align-items: center;    /* Centers the image vertically (if needed) */
     margin: 20px auto;       /* Adds spacing around the container */
+    max-width: 900px;        /* Prevents excessive stretching */
 }
 
 /* Styles for topic images */
@@ -199,4 +200,6 @@ body {
     height: auto;            /* Maintains aspect ratio */
     border-radius: 12px;     /* Adds rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for better visual appeal */
+    display: block;          /* Ensures proper alignment */
+    margin: 0 auto;          /* Centers the image inside the container */
 }
