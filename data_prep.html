@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Page Title]</title>
+    <title>Data Preparation</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>
-        <a href="data_prep.html"class="active">Data Prep</a>
+        <a href="data_prep.html" class="active">Data Prep</a>
         <a href="eda.html">EDA</a>        
         <a href="pca.html">PCA</a>
         <a href="clustering.html">Clustering</a>
@@ -25,8 +24,55 @@
     </div>
 
     <div class="content-section">
-        <h1>[Page Heading]</h1>
-        <p>[Page Content]</p>
+        <h1>Data Preparation</h1>
+        <p>
+            The data used in this project was sourced from the USDA FoodData Central API, a reliable and comprehensive repository of food and nutrient data. The decision to use USDA's database stems from its authoritative and up-to-date information on food composition, making it an ideal choice for a health analytics project. By gathering data directly from the USDA, we ensure a high level of accuracy and relevance for analyzing the impact of ultra-processed foods on public health. Health analytics is essential for uncovering critical trends and making informed decisions about dietary habits, addressing global health crises such as obesity and chronic diseases. 
+        </p>
+
+        <h2>How the Data Was Gathered</h2>
+        <p>
+            Data was collected using the USDA FoodData Central API. This API provides access to a wealth of food-related data, including nutrient profiles, food descriptions, and categories. The core endpoint utilized was:
+        </p>
+        <pre><code>https://api.nal.usda.gov/fdc/v1/foods/search</code></pre>
+        <p>
+            Example of a GET request used to fetch the data:
+        </p>
+        <pre><code>{
+    "query": "soda",
+    "pageSize": 50,
+    "pageNumber": 1,
+    "api_key": "YOUR_API_KEY"
+}</code></pre>
+        <p>
+            Multiple food categories were queried, including soda, chips, cookies, candy, fast food, and other ultra-processed food items. Each query was executed with pagination to ensure a comprehensive dataset.
+        </p>
+
+        <h2>Raw and Cleaned Data</h2>
+        <p>Below are snapshots of the raw and cleaned data, providing an overview of the transformation process:</p>
+
+        <div class="image-container">
+            <h3>Raw Data</h3>
+            <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot" class="data-image">
+            <p>The raw data, as retrieved from the API, contained multiple inconsistencies, such as missing values and unstructured nutrient information. This required extensive cleaning to ensure usability and accuracy for analysis.</p>
+        </div>
+
+        <div class="image-container">
+            <h3>Cleaned Data</h3>
+            <img src="assets/cleaned_data.jpg" alt="Cleaned Data Snapshot" class="data-image">
+            <p>After cleaning, the data was structured into a consistent format with clearly defined columns for Description, Category, Brand, Calories, Protein, Fat, and Carbs. This step was crucial for ensuring reliable and accurate analysis across various models and visualizations.</p>
+        </div>
+
+        <h2>Download the Data</h2>
+        <p>Explore the full datasets by downloading them using the links below:</p>
+        <div class="button-container">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/raw_data.csv" class="button">Download Raw Data</a>
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" class="button">Download Cleaned Data</a>
+        </div>
+
+        <h2>Why Health Analytics Matters</h2>
+        <p>
+            Health analytics plays a pivotal role in understanding the dietary factors contributing to global health crises. By analyzing food data, we can uncover critical insights into the consumption patterns of ultra-processed foods and their association with chronic diseases like obesity, diabetes, and cardiovascular conditions. This project is driven by the belief that data-driven insights can empower individuals, policymakers, and organizations to make informed decisions, paving the way for healthier societies and improved public health outcomes.
+        </p>
     </div>
 </body>
 </html>
