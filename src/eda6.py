@@ -1,42 +1,47 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 import os
 
 # Base path
 base_path = os.getcwd()
 
 # Paths
-data_path = os.path.join(base_path, "../data/cleaned_data.csv")
-visuals_path = os.path.join(base_path, "../visuals")
-
-# Ensure visuals folder exists
-os.makedirs(visuals_path, exist_ok=True)
+data_path = "/Users/mrunal/USDA_FOOD/data/cleaned_data.csv"  # Full path to your CSV file
+visuals_path = os.path.join(base_path, "visuals")
 
 # Load dataset
-df = pd.read_csv(data_path)
+try:
+    df = pd.read_csv(data_path)
+    print("Dataset loaded successfully.")
+except FileNotFoundError:
+    print(f"Error: The dataset file was not found at {data_path}. Please check the path.")
+    exit()
 
-# Filter beverages
+# Filter for beverages
 beverages = df[df["Category"].str.contains("Soda|Beverages", na=False, case=False)]
 
-# Plot: Swarm Plot
-plt.figure(figsize=(14, 8))
-sns.swarmplot(
-    data=beverages,
-    x="Brand",
-    y="Calories_per_Carb",
-    hue="Calories_Bin",
-    palette="viridis",
-    dodge=True
+# Calculate average Calories_per_Carb for each brand
+brand_avg = (
+    beverages.groupby("Brand", as_index=False)["Calories_per_Carb"]
+    .mean()
+    .sort_values(by="Calories_per_Carb", ascending=False)
 )
-plt.title("Sugar Content in Beverages by Brand", fontsize=16, weight='bold')
-plt.xlabel("Brand", fontsize=12)
-plt.ylabel("Calories per Carbohydrate (kcal)", fontsize=12)
-plt.xticks(rotation=45, ha='right', fontsize=10)
-plt.legend(title="Calories Bin", bbox_to_anchor=(1.05, 1), loc='upper left')
+
+# Select the top 10 brands for visualization
+top_brands = brand_avg.head(10)
+
+# Plot: Vertical Bar Chart
+plt.figure(figsize=(12, 8))
+plt.barh(top_brands["Brand"], top_brands["Calories_per_Carb"], color="teal")
+plt.title("Top 10 Brands by Average Sugar Content in Beverages", fontsize=16, weight="bold")
+plt.xlabel("Average Calories per Carbohydrate (kcal)", fontsize=12)
+plt.ylabel("Brand", fontsize=12)
+plt.gca().invert_yaxis()  # Invert the y-axis to show the highest value at the top
 plt.tight_layout()
 
-# Save the plot
-swarmplot_path = os.path.join(visuals_path, "swarmplot_sugar_content_by_brand.png")
-plt.savefig(swarmplot_path)
-plt.show()
+# Save the plot directly
+bar_chart_path = os.path.join(visuals_path, "beverages_sugar_content_bar_chart.png")
+plt.savefig(bar_chart_path)
+plt.close()  # Close the plot to avoid displaying it
+
+print("Visualization saved at {bar_chart_path}.")
