@@ -109,18 +109,18 @@ body {
 /* Data Section */
 .data-section {
     display: flex;
-    flex-direction: column; /* Stack images vertically */
-    align-items: center; /* Center the content */
-    gap: 20px;
+    flex-direction: column; /* Forces items to stack vertically */
+    align-items: center; /* Centers content */
+    gap: 30px; /* Adds space between Raw and Cleaned Data */
     margin: 20px auto;
 }
 
 /* Box containing each data visualization */
 .data-box {
-    width: 100%; /* Full width */
-    max-width: 700px; /* Limit width for readability */
+    width: 100%;
+    max-width: 700px; /* Ensures readable width */
     background-color: rgba(255, 255, 255, 0.7);
-    padding: 15px;
+    padding: 20px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
