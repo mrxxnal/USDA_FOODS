@@ -85,6 +85,43 @@
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" class="github-button">Cleaned Data</a>
             </div>
         </div>
+
+        <h2>Data Transformation Process</h2>
+        <div class="content-wrapper">
+            <p>
+                After gathering and cleaning the data, we performed essential transformations to enhance its usability. This step ensures the data is structured correctly for modeling and visualization. Below is an overview of the key transformations applied:
+            </p>
+
+            <div class="data-section">
+                <div class="data-box">
+                    <h3>Feature Engineering and Data Normalization</h3>
+                    <img src="assets/data_prep.jpeg" alt="Feature Engineering and Normalization" class="data-image">
+                    <p>
+                        The transformation process included three major steps:
+                    </p>
+                    <ol>
+                        <li>
+                            <strong>Removing Unnecessary Columns:</strong> The dataset often contained an "Unnamed: 0" column, which was automatically added during certain processing steps. This column was removed to streamline the data structure.
+                        </li>
+                        <li>
+                            <strong>Feature Engineering:</strong> To derive deeper insights, we created three new features:
+                            <ul>
+                                <li><code>Calories_per_Protein</code> - The ratio of calories to protein content.</li>
+                                <li><code>Calories_per_Fat</code> - The ratio of calories to fat content.</li>
+                                <li><code>Calories_per_Carb</code> - The ratio of calories to carbohydrates.</li>
+                            </ul>
+                            To avoid division by zero, a small constant (1e-5) was added to the denominator.
+                        </li>
+                        <li>
+                            <strong>Data Normalization:</strong> We used the <code>StandardScaler</code> from <code>sklearn</code> to normalize the numerical features (<code>Calories, Protein, Fat, Carbs</code>). This process ensures that all features have a consistent scale, improving the performance of machine learning models.
+                        </li>
+                    </ol>
+                    <p>
+                        These transformations were critical for ensuring that our dataset was well-structured, free from inconsistencies, and ready for further analysis. The combination of feature engineering and normalization enables more effective pattern recognition in subsequent modeling steps.
+                    </p>
+                </div>
+            </div>
+        </div>
     
         <h2>Why Health Analytics Matters</h2>
         <div class="content-wrapper">
