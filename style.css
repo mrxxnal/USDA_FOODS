@@ -109,22 +109,24 @@ body {
 /* Data Section */
 .data-section {
     display: flex;
-    justify-content: space-between; 
+    flex-direction: column; /* Stack images vertically */
+    align-items: center; /* Center the content */
     gap: 20px;
     margin: 20px auto;
-    flex-wrap: wrap;
 }
 
+/* Box containing each data visualization */
 .data-box {
-    flex: 1;
-    max-width: 48%;
-    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%; /* Full width */
+    max-width: 700px; /* Limit width for readability */
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 15px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
+/* Image Styling */
 .data-image {
     max-width: 100%;
     height: auto;
