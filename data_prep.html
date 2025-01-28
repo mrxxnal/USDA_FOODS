@@ -37,18 +37,24 @@
             <p>
                 Data was collected using the USDA FoodData Central API. This API provides access to a wealth of food-related data, including nutrient profiles, food descriptions, and categories. The core endpoint utilized was:
             </p>
-            <pre><code>https://api.nal.usda.gov/fdc/v1/foods/search</code></pre>
+    
+            <div class="button-section">
+                <a href="https://api.nal.usda.gov/fdc/v1/foods/search" target="_blank" class="github-button">Core Endpoint</a>
+            </div>
+
             <p>
                 Example of a GET request used to fetch the data:
             </p>
+    
             <pre><code>{
-        "query": "soda",
-        "pageSize": 50,
-        "pageNumber": 1,
-        "api_key": "YOUR_API_KEY"
-    }</code></pre>
+            "query": "soda",
+            "pageSize": 50,
+            "pageNumber": 1,
+            "api_key": "YOUR_API_KEY"
+        }</code></pre>
+    
             <p>
-                Multiple food categories were queried, including soda, chips, cookies, candy, fast food, and other ultra-processed food items. Each query was executed with pagination to ensure a comprehensive dataset.
+            Multiple food categories were queried, including soda, chips, cookies, candy, fast food, and other ultra-processed food items. Each query was executed with pagination to ensure a comprehensive dataset.
             </p>
         </div>
     
