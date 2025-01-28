@@ -23,137 +23,110 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-    <div class="content-wrapper">
+    <div class="content-section">
         <h1>Data Preparation</h1>
-        
+
         <div class="content-wrapper">
             <p>
                 The data used in this project was sourced from the USDA FoodData Central API, a reliable and comprehensive repository of food and nutrient data. The decision to use USDA's database stems from its authoritative and up-to-date information on food composition, making it an ideal choice for a health analytics project. By gathering data directly from the USDA, we ensure a high level of accuracy and relevance for analyzing the impact of ultra-processed foods on public health. Health analytics is essential for uncovering critical trends and making informed decisions about dietary habits, addressing global health crises such as obesity and chronic diseases.
             </p>
         </div>
-    
+
         <h2>How the Data Was Gathered</h2>
-    <div class="content-section">
-        <p>
-            Data was collected using the USDA FoodData Central API, a trusted and comprehensive source of food and nutrition information. 
-            The USDA (United States Department of Agriculture) maintains an extensive repository of food composition data, making it a
-            reliable resource for health and nutrition analytics. The **USDA FoodData Central API** provides access to various datasets, 
-            including nutrient profiles, food descriptions, and product categories.
-        </p>
 
-        <div class="button-section">
-            <a href="https://www.usda.gov/" target="_blank" class="github-button">USDA Data Website</a>
-        </div>
-
-        <p>
-            For programmatic access, we used the **FoodData Central API**, which allows querying foods based on categories, brand names, and 
-            specific nutrient values. The core endpoint utilized for retrieving food data was:
-        </p>
-
-        <div class="button-section">
-            <a href="https://api.nal.usda.gov/fdc/v1/foods/search" target="_blank" class="github-button">Core Endpoint</a>
-        </div>
-
-        <p>
-            Example of a GET request used to fetch the data:
-        </p>
-
-        <pre><code>{
-            "query": "soda",
-            "pageSize": 50,
-            "pageNumber": 1,
-            "api_key": "YOUR_API_KEY"
-        }</code></pre>
-
-        <p>
-            To ensure a diverse dataset, multiple food categories were queried, including soda, chips, cookies, candy, fast food, 
-            and other ultra-processed food items. Each query was executed with pagination to retrieve a comprehensive dataset, 
-            enabling deeper insights into food composition and processing levels.
-        </p>
-    </div>
-    
+        <div class="content-wrapper">
             <p>
-            Multiple food categories were queried, including soda, chips, cookies, candy, fast food, and other ultra-processed food items. Each query was executed with pagination to ensure a comprehensive dataset.
+                Data was collected using the USDA FoodData Central API, a trusted and comprehensive source of food and nutrition information. 
+                The USDA (United States Department of Agriculture) maintains an extensive repository of food composition data, making it a
+                reliable resource for health and nutrition analytics. The **USDA FoodData Central API** provides access to various datasets, 
+                including nutrient profiles, food descriptions, and product categories.
+            </p>
+
+            <div class="button-section">
+                <a href="https://www.usda.gov/" target="_blank" class="github-button">USDA Data Website</a>
+            </div>
+
+            <p>
+                For programmatic access, we used the **FoodData Central API**, which allows querying foods based on categories, brand names, and 
+                specific nutrient values. The core endpoint utilized for retrieving food data was:
+            </p>
+
+            <div class="button-section">
+                <a href="https://api.nal.usda.gov/fdc/v1/foods/search" target="_blank" class="github-button">Core Endpoint</a>
+            </div>
+
+            <p>
+                Example of a GET request used to fetch the data:
+            </p>
+
+            <pre><code>{
+                "query": "soda",
+                "pageSize": 50,
+                "pageNumber": 1,
+                "api_key": "YOUR_API_KEY"
+            }</code></pre>
+
+            <p>
+                To ensure a diverse dataset, multiple food categories were queried, including soda, chips, cookies, candy, fast food, 
+                and other ultra-processed food items. Each query was executed with pagination to retrieve a comprehensive dataset, 
+                enabling deeper insights into food composition and processing levels.
             </p>
         </div>
-    
-    <div class="content-wrapper">
+
         <h2>Raw and Cleaned Data</h2>
 
+        <div class="content-wrapper">
             <p>Below are snapshots of the raw and cleaned data, providing an overview of the transformation process:</p>
-        
-            <div class="content-section">
-                <!-- Raw Data -->
-                <div class="data-box">
-                    <h3>Raw Data</h3>
-                    <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot" class="data-image">
-                    <p>
-                        The raw data was fetched from the USDA FoodData Central API. Initially, the dataset contained multiple inconsistencies, 
-                        such as missing values, redundant columns, and unstructured nutrient information. Fetching the data involved sending 
-                        requests to the API using multiple food categories like **soda, chips, cookies, candy, fast food**, etc. 
-                    </p>
-                    <p>
-                        The script used for fetching raw data includes API calls, pagination handling, and structured storage in a CSV format. 
-                        You can view the script for fetching data from the USDA API below:
-                    </p>
-                    
-                    <div class="button-section">
-                        <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/src/fetch_data.py" target="_blank" class="github-button">
-                            Fetch Raw Data Script
-                        </a>
-                    </div>
-                </div>
-        
-                <!-- Cleaned Data -->
-                <div class="content_section">
-                    <h3>Cleaned Data</h3>
-                    <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="data-image">
-                    <p>
-                        After fetching the data, it underwent extensive **cleaning and transformation** to ensure consistency and accuracy. 
-                        The data cleaning process involved:
-                        <ul>
-                            <li>Removing unnecessary columns such as **metadata fields**.</li>
-                            <li>Handling **missing values** by imputing or removing incomplete entries.</li>
-                            <li>Standardizing **nutrient values** for better comparability.</li>
-                            <li>Generating additional features such as **Calories per Protein, Calories per Fat, and Calories per Carb**.</li>
-                            <li>Normalizing **key features** using `StandardScaler` for consistency in visualization.</li>
-                        </ul>
-                    </p>
-                    <p>
-                        The script used for cleaning and transforming the data can be accessed below:
-                    </p>
-        
-                    <div class="button-section">
-                        <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/USDA_FOOD_Website/src/clean_data.py" target="_blank" class="github-button">
-                            Data Cleaning & Transformation Script
-                        </a>
-                    </div>
-                </div>
-            </div>
-        
-            <!-- Data Visualization -->
-            <div class="content_section">
-                <h3>Data Visualization</h3>
-                <img src="assets/data_prep.jpeg" alt="Feature Engineering and Data Normalization" class="data-image">
+
+            <div class="content-wrapper">
+                <h3>Raw Data</h3>
+                <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot">
                 <p>
-                    Once the cleaned dataset was prepared, visualizations were generated to uncover insights. The visualization process included:
-                    <ul>
-                        <li>Exploring **nutrient distributions** across processed and unprocessed foods.</li>
-                        <li>Analyzing **calorie compositions** in different food groups.</li>
-                        <li>Creating **scatter plots, heatmaps, bar charts, and radar charts** for data interpretation.</li>
-                    </ul>
-                    The script responsible for generating visualizations and exploratory data analysis can be accessed below:
+                    The raw data was fetched from the USDA FoodData Central API. Initially, the dataset contained multiple inconsistencies, 
+                    such as missing values, redundant columns, and unstructured nutrient information. Fetching the data involved sending 
+                    requests to the API using multiple food categories like **soda, chips, cookies, candy, fast food**, etc. 
                 </p>
-        
+                <p>
+                    The script used for fetching raw data includes API calls, pagination handling, and structured storage in a CSV format. 
+                    You can view the script for fetching data from the USDA API below:
+                </p>
+
                 <div class="button-section">
-                    <a href="https://github.com/mrxxnal/USDA_FOODS/tree/main/src" target="_blank" class="github-button">
-                        Data Visualization Scripts
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/src/fetch_data.py" target="_blank" class="github-button">
+                        Fetch Raw Data Script
                     </a>
                 </div>
             </div>
-    </div>
-    
+
+            <div class="content-wrapper">
+                <h3>Cleaned Data</h3>
+                <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot">
+                <p>
+                    After fetching the data, it underwent extensive **cleaning and transformation** to ensure consistency and accuracy. 
+                    The data cleaning process involved:
+                </p>
+                <ul>
+                    <li>Removing unnecessary columns such as **metadata fields**.</li>
+                    <li>Handling **missing values** by imputing or removing incomplete entries.</li>
+                    <li>Standardizing **nutrient values** for better comparability.</li>
+                    <li>Generating additional features such as **Calories per Protein, Calories per Fat, and Calories per Carb**.</li>
+                    <li>Normalizing **key features** using `StandardScaler` for consistency in visualization.</li>
+                </ul>
+
+                <p>
+                    The script used for cleaning and transforming the data can be accessed below:
+                </p>
+
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/USDA_FOOD_Website/src/clean_data.py" target="_blank" class="github-button">
+                        Data Cleaning & Transformation Script
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <h2>Download the Data</h2>
+
         <div class="content-wrapper">
             <p>Explore the full datasets by downloading them using the links below:</p>
             <div class="button-section">
@@ -162,44 +135,8 @@
             </div>
         </div>
 
-        <div class="content-wrapper">
-            <h2>Data Transformation Process</h2>
-            <p>
-                After gathering and cleaning the data, we performed essential transformations to enhance its usability. This step ensures the data is structured correctly for modeling and visualization. Below is an overview of the key transformations applied:
-            </p>
-
-            <div class="content-section">
-                <div class="content-section">
-                    <h3>Feature Engineering and Data Normalization</h3>
-                    <img src="assets/data_prep.jpeg" alt="Feature Engineering and Normalization" class="data-image">
-                    <p>
-                        The transformation process included three major steps:
-                    </p>
-                    <ol>
-                        <li>
-                            <strong>Removing Unnecessary Columns:</strong> The dataset often contained an "Unnamed: 0" column, which was automatically added during certain processing steps. This column was removed to streamline the data structure.
-                        </li>
-                        <li>
-                            <strong>Feature Engineering:</strong> To derive deeper insights, we created three new features:
-                            <ul>
-                                <li><code>Calories_per_Protein</code> - The ratio of calories to protein content.</li>
-                                <li><code>Calories_per_Fat</code> - The ratio of calories to fat content.</li>
-                                <li><code>Calories_per_Carb</code> - The ratio of calories to carbohydrates.</li>
-                            </ul>
-                            To avoid division by zero, a small constant (1e-5) was added to the denominator.
-                        </li>
-                        <li>
-                            <strong>Data Normalization:</strong> We used the <code>StandardScaler</code> from <code>sklearn</code> to normalize the numerical features (<code>Calories, Protein, Fat, Carbs</code>). This process ensures that all features have a consistent scale, improving the performance of machine learning models.
-                        </li>
-                    </ol>
-                    <p>
-                        These transformations were critical for ensuring that our dataset was well-structured, free from inconsistencies, and ready for further analysis. The combination of feature engineering and normalization enables more effective pattern recognition in subsequent modeling steps.
-                    </p>
-                </div>
-            </div>
-        </div>
-    
         <h2>Why Health Analytics Matters</h2>
+
         <div class="content-wrapper">
             <p>
                 Health analytics plays a pivotal role in understanding the dietary factors contributing to global health crises. By analyzing food data, we can uncover critical insights into the consumption patterns of ultra-processed foods and their association with chronic diseases like obesity, diabetes, and cardiovascular conditions. This project is driven by the belief that data-driven insights can empower individuals, policymakers, and organizations to make informed decisions, paving the way for healthier societies and improved public health outcomes.
