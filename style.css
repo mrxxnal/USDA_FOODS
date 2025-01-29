@@ -168,6 +168,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px; /* Adds space between buttons */
+    padding-bottom: 10px; /* Adds padding at the bottom */
 }
 
 .github-button {
