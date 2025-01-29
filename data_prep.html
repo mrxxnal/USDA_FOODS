@@ -42,7 +42,7 @@
                 including nutrient profiles, food descriptions, and product categories.
             </p>
 
-                        <!-- USDA Image -->
+            <!-- USDA Image -->
             <div class="image-container">
                 <img src="assets/usda.webp" alt="USDA Data Source" class="topic-image">
             </div>
@@ -59,23 +59,6 @@
             <div class="button-section">
                 <a href="https://api.nal.usda.gov/fdc/v1/foods/search" target="_blank" class="github-button">Core Endpoint</a>
             </div>
-
-            <p>
-                Example of a GET request used to fetch the data:
-            </p>
-
-            <pre><code>{
-                "query": "soda",
-                "pageSize": 50,
-                "pageNumber": 1,
-                "api_key": "YOUR_API_KEY"
-            }</code></pre>
-
-            <p>
-                To ensure a diverse dataset, multiple food categories were queried, including soda, chips, cookies, candy, fast food, 
-                and other ultra-processed food items. Each query was executed with pagination to retrieve a comprehensive dataset, 
-                enabling deeper insights into food composition and processing levels.
-            </p>
         </div>
 
         <h2>Raw and Cleaned Data</h2>
@@ -88,75 +71,60 @@
                 <div class="image-container">
                     <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot" class="topic-image">
                 </div>
+
+                <!-- Button for Fetching Raw Data Script -->
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/src/fetch_data.py" target="_blank" class="github-button">
+                        Fetch Raw Data Script
+                    </a>
+                </div>
+
+                <!-- Button for Raw Data CSV -->
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/raw_data.csv" target="_blank" class="github-button">
+                        Raw Data Code
+                    </a>
+                </div>
             </div>
 
             <div class="content-wrapper">
                 <h3>Cleaned Data</h3>
                 <div class="image-container">
                     <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
-                </div>                
+                </div>    
+
+                <h3>Data Cleaning and Transformation Process</h3>
+                <p>
+                    After fetching the raw data, multiple preprocessing steps were carried out to clean and transform it for analysis:
+                </p>
+                <ul>
+                    <li><strong>Handling Missing Values:</strong> Missing values were replaced with default values to ensure completeness. Nutritional attributes were set to zero if missing, while categorical columns like 'Brand' and 'Category' were labeled as 'Unknown' or 'Uncategorized'.</li>
+                    <li><strong>Removing Duplicates:</strong> Duplicate rows were detected and removed to prevent redundancy in the dataset.</li>
+                    <li><strong>Outlier Removal:</strong> Statistical techniques (Interquartile Range - IQR) were applied to detect and remove extreme outliers in key numerical features such as 'Calories', 'Protein', 'Fat', and 'Carbs'.</li>
+                    <li><strong>Feature Engineering:</strong> New meaningful features were created, such as:
+                        <ul>
+                            <li>**Calories per Protein, Calories per Fat, and Calories per Carb** to analyze nutritional density.</li>
+                            <li>**Calories Binning (Low, Medium, High, Very High)** to categorize food items into calorie levels.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Data Normalization:</strong> StandardScaler was used to normalize the numerical features ('Calories', 'Protein', 'Fat', and 'Carbs') for better model performance.</li>
+                    <li><strong>Final Data Storage:</strong> The cleaned dataset was saved in CSV format for further analysis and visualization.</li>
+                </ul>
+
+                <!-- Button for Cleaning Data Script -->
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/USDA_FOOD_Website/src/clean_data.py" target="_blank" class="github-button">
+                        Clean Data Script
+                    </a>
+                </div>
+
+                <!-- Button for Cleaned Data CSV -->
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" target="_blank" class="github-button">
+                        Cleaned Data Code
+                    </a>
+                </div>            
             </div>
-        </div>
-
-        <h2>Exploratory Data Analysis (EDA)</h2>
-
-        <div class="content-wrapper">
-            <p>
-                Exploratory Data Analysis (EDA) is a crucial step in data science, where we examine datasets to uncover patterns, 
-                detect anomalies, and summarize key insights. In this project, EDA was carried out by creating 10 meaningful visualizations 
-                to explore trends in food composition and high-calorie foods.
-            </p>
-
-            <p>
-                Below is a snippet of Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
-            </p>
-
-            <pre><code>import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-# Load dataset
-df = pd.read_csv("../data/cleaned_data.csv")
-
-# Filter high-calorie products
-df['High_Calorie'] = df['Calories_Bin'].isin(['High', 'Very High'])
-
-# Group by Brand and compute stats
-brand_stats = df.groupby('Brand').agg(
-    total_products=('Calories', 'count'),
-    total_high_calorie=('High_Calorie', 'sum')
-).reset_index()
-
-# Sort and limit to top 20 brands
-brand_stats['proportion_high'] = brand_stats['total_high_calorie'] / brand_stats['total_products']
-top_brands = brand_stats.sort_values(by='proportion_high', ascending=False).head(20)
-</code></pre>
-
-            <p>
-                One of the key visualizations generated from EDA is the **Proportion of High-Calorie Products by Brand (Top 20)**, 
-                which helps in understanding which brands contribute the most to high-calorie consumption.
-            </p>
-
-            <div class="image-container">
-                <img src="assets/top_20_brands_high_calorie_filtered.png" alt="Top 20 High-Calorie Brands" class="topic-image">
-            </div>
-
-            <p>
-                This is just one of the 10 visualizations created to uncover meaningful insights. The complete EDA process, along with 
-                the remaining visualizations, can be explored in the GitHub repository below:
-            </p>
-
-            <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/tree/main/src" target="_blank" class="github-button">View Full EDA Code</a>
-            </div>
-        </div>
-
-        <h2>Why Health Analytics Matters</h2>
-
-        <div class="content-wrapper">
-            <p>
-                Health analytics plays a pivotal role in understanding the dietary factors contributing to global health crises. By analyzing food data, we can uncover critical insights into the consumption patterns of ultra-processed foods and their association with chronic diseases like obesity, diabetes, and cardiovascular conditions. This project is driven by the belief that data-driven insights can empower individuals, policymakers, and organizations to make informed decisions, paving the way for healthier societies and improved public health outcomes.
-            </p>
         </div>
     </div>
 </body>
