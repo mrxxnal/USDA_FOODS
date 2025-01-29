@@ -162,10 +162,12 @@ body {
     text-align: justify;
 }
 
-/* Button Section */
 .button-section {
     text-align: center;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Adds space between buttons */
 }
 
 .github-button {

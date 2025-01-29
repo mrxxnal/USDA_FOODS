@@ -140,7 +140,8 @@
                         Below is a snippet of Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
                     </p>
 
-                    <pre><code>import pandas as pd
+                    <pre><code>
+                        import pandas as pd
                         import matplotlib.pyplot as plt
                         import seaborn as sns
 
@@ -157,7 +158,8 @@
                         ).reset_index()
 
                         # Sort and limit to top 20 brands
-                        brand_stats['proportion_high'] = brand_stats['total_high_calorie'] / brand_stats['total_products']
+                        brand_stats['proportion_high'] = brand_stats['total_high_calorie'] 
+                        / brand_stats['total_products']
                         top_brands = brand_stats.sort_values(by='proportion_high', ascending=False).head(20)
                     </code></pre>
 
@@ -178,7 +180,7 @@
                 <div class="button-section">
                     <a href="https://github.com/mrxxnal/USDA_FOODS/tree/main/src" target="_blank" class="github-button">View Full EDA Code</a>
                 </div>
-                
+
                 <div class="content-wrapper">
                     <h2>Why Health Analytics Matters</h2>
                     <p>
