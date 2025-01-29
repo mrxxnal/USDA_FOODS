@@ -123,9 +123,69 @@
                     <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" target="_blank" class="github-button">
                         Cleaned Data Code
                     </a>
-                </div>            
-            </div>
+                </div>
+                
+                <div class="content-wrapper">
+                    <h2>Exploratory Data Analysis (EDA)</h2>
+
+                    <p>
+                        Exploratory Data Analysis (EDA) is a crucial step in data science, where we examine datasets to uncover patterns, 
+                        detect anomalies, and summarize key insights. In this project, EDA was carried out by creating 10 meaningful visualizations 
+                        to explore trends in food composition and high-calorie foods.
+                    </p>
+
+                    <p>
+                        Below is a snippet of Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
+                    </p>
+
+                    <pre><code>import pandas as pd
+                        import matplotlib.pyplot as plt
+                        import seaborn as sns
+
+                        # Load dataset
+                        df = pd.read_csv("../data/cleaned_data.csv")
+
+                        # Filter high-calorie products
+                        df['High_Calorie'] = df['Calories_Bin'].isin(['High', 'Very High'])
+
+                        # Group by Brand and compute stats
+                        brand_stats = df.groupby('Brand').agg(
+                            total_products=('Calories', 'count'),
+                            total_high_calorie=('High_Calorie', 'sum')
+                        ).reset_index()
+
+                        # Sort and limit to top 20 brands
+                        brand_stats['proportion_high'] = brand_stats['total_high_calorie'] / brand_stats['total_products']
+                        top_brands = brand_stats.sort_values(by='proportion_high', ascending=False).head(20)
+                    </code></pre>
+
+                    <p>
+                        One of the key visualizations generated from EDA is the **Proportion of High-Calorie Products by Brand (Top 20)**, 
+                        which helps in understanding which brands contribute the most to high-calorie consumption.
+                    </p>
+
+                <div class="image-container">
+                    <img src="assets/top_20_brands_high_calorie_filtered.png" alt="Top 20 High-Calorie Brands" class="topic-image">
+                </div>
+
+                    <p>
+                    This is just one of the 10 visualizations created to uncover meaningful insights. The complete EDA process, along with 
+                    the remaining visualizations, can be explored in the GitHub repository below:
+                </p>
+
+                <div class="button-section">
+                    <a href="https://github.com/mrxxnal/USDA_FOODS/tree/main/src" target="_blank" class="github-button">View Full EDA Code</a>
+                </div>
         </div>
+
+                <div class="content-wrapper">
+                    <h2>Why Health Analytics Matters</h2>
+                    <p>
+                        Health analytics plays a pivotal role in understanding the dietary factors contributing to global health crises. By analyzing food data, we can uncover critical insights into the consumption patterns of ultra-processed foods and their association with chronic diseases like obesity, diabetes, and cardiovascular conditions. This project is driven by the belief that data-driven insights can empower individuals, policymakers, and organizations to make informed decisions, paving the way for healthier societies and improved public health outcomes.
+                    </p>
+                </div>
+            </div>
+        </div>    
     </div>
 </body>
 </html>

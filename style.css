@@ -178,6 +178,8 @@ body {
     font-weight: bold;
     transition: background-color 0.3s;
     cursor: pointer;
+    display: inline-block; /* Ensures spacing applies properly */
+    margin-bottom: 10px; /* Adjust space between buttons */
 }
 
 .github-button:hover {
