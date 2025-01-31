@@ -207,4 +207,51 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow for better visual appeal */
     display: block;          /* Ensures proper alignment */
     margin: 0 auto;          /* Centers the image inside the container */
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+/* Zoom effect on hover */
+.topic-image:hover {
+    transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Responsive Design for Mobile Screens */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack menu items vertically */
+        align-items: center; /* Center-align navigation links */
+    }
+
+    .navbar a {
+        padding: 10px; /* Increase tap-friendly area */
+        text-align: center;
+        width: 100%; /* Make each link full-width */
+    }
+
+    .content-section {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    .image-container {
+        max-width: 100%; /* Ensure images don’t overflow */
+        padding: 10px; /* Add some breathing space */
+    }
+
+    .topic-image {
+        width: 100%; /* Make images responsive */
+        border-radius: 8px; /* Keep smooth rounded corners */
+    }
+
+    .button-section {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 10px; /* Space out buttons */
+    }
+
+    pre {
+        white-space: pre-wrap; /* Ensure code snippets wrap properly */
+        word-break: break-word;
+        font-size: 14px; /* Adjust font size for readability */
+    }
 }

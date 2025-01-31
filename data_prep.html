@@ -38,7 +38,7 @@
             <p>
                 Data was collected using the USDA FoodData Central API, a trusted and comprehensive source of food and nutrition information. 
                 The USDA (United States Department of Agriculture) maintains an extensive repository of food composition data, making it a
-                reliable resource for health and nutrition analytics. The **USDA FoodData Central API** provides access to various datasets, 
+                reliable resource for health and nutrition analytics. The <strong>USDA FoodData Central API</strong> provides access to various datasets, 
                 including nutrient profiles, food descriptions, and product categories.
             </p>
 
@@ -103,8 +103,8 @@
                     <li><strong>Outlier Removal:</strong> Statistical techniques (Interquartile Range - IQR) were applied to detect and remove extreme outliers in key numerical features such as 'Calories', 'Protein', 'Fat', and 'Carbs'.</li>
                     <li><strong>Feature Engineering:</strong> New meaningful features were created, such as:
                         <ul>
-                            <li>**Calories per Protein, Calories per Fat, and Calories per Carb** to analyze nutritional density.</li>
-                            <li>**Calories Binning (Low, Medium, High, Very High)** to categorize food items into calorie levels.</li>
+                            <li>Calories per Protein, Calories per Fat, and Calories per Carb** to analyze nutritional density.</li>
+                            <li>Calories Binning (Low, Medium, High, Very High)** to categorize food items into calorie levels.</li>
                         </ul>
                     </li>
                     <li><strong>Data Normalization:</strong> StandardScaler was used to normalize the numerical features ('Calories', 'Protein', 'Fat', and 'Carbs') for better model performance.</li>
