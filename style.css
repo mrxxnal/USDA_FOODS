@@ -22,7 +22,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh;
-    background: url('assets/USDA_FOODS.jpg') no-repeat center center fixed;
+    background: url('assets/USDA_FOODS1.jpg') no-repeat center center fixed;
     background-size: cover;
     filter: blur(2px); /* Softens image */
     animation: slowZoom 20s infinite alternate ease-in-out;
