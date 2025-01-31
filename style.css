@@ -1,61 +1,59 @@
-/* 🔹 Keyframes for Parallax & Floating Food Animation */
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* 🔹 Soft Background Animation */
+@keyframes slowZoom {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
-@keyframes floatFood {
-    0% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-    50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
-    100% { transform: translateY(0px) rotate(0deg); opacity: 0.8; }
-}
-
-/* 🔹 Animated Gradient Background */
+/* 🔹 Page Background */
 body {
-    background: linear-gradient(-45deg, #ff6b6b, #ff8c42, #feca57, #1dd1a1);
-    background-size: 400% 400%;
-    animation: gradientBG 12s ease infinite;
     font-family: 'Lato', sans-serif;
     margin: 0;
     padding: 0;
     color: #2c3e50;
+    background-color: #f7f1e3;
+    overflow-x: hidden;
 }
 
-/* 🔹 Parallax Effect for Background */
-.background-food {
+/* 🔹 Food-Themed Animated Background */
+.food-background {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
+    background: url('assets/USDA_FOODS.jpg') no-repeat center center fixed;
     background-size: cover;
-    opacity: 0.6;
-    z-index: -1;
+    filter: blur(2px); /* Softens image */
+    animation: slowZoom 20s infinite alternate ease-in-out;
+    z-index: -2;
 }
 
-/* 🔹 Floating Food Icons */
-.food-icons {
+/* 🔹 Moving Light Overlay */
+.light-overlay {
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    pointer-events: none;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+    animation: lightMove 15s infinite linear;
     z-index: -1;
 }
 
-/* Individual Floating Foods */
-.food-icons img {
-    position: absolute;
-    width: 80px;
-    opacity: 0.7;
-    animation: floatFood 6s ease-in-out infinite alternate;
+/* 🔹 Subtle Food Pattern */
+.food-pattern {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: url('assets/food-pattern.png') repeat;
+    background-size: 250px;
+    opacity: 0.1;
+    animation: lightMove 30s infinite alternate ease-in-out;
+    z-index: -1;
 }
-
-/* 🔹 Positioning Different Foods Randomly */
-.food-icons img:nth-child(1) { top: 10%; left: 5%; animation-duration: 7s; }
-.food-icons img:nth-child(2) { top: 40%; left: 80%; animation-duration: 9s; }
-.food-icons img:nth-child(3) { top: 70%; left: 30%; animation-duration: 8s; }
-.food-icons img:nth-child(4) { top: 20%; left: 60%; animation-duration: 6s; }
-.food-icons img:nth-child(5) { top: 80%; left: 10%; animation-duration: 10s; }
-.food-icons img:nth-child(6) { top: 50%; left: 50%; animation-duration: 9s; }
 
 /* Navbar styles */
 .navbar {
