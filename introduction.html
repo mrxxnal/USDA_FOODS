@@ -34,6 +34,37 @@
     <div class="content-section">
         <h1 id="typing-title"></h1>
         <div class="content-wrapper">
+
+            <h2>Ever wondered how processed your daily meals are? Take this fun, interactive quiz to discover where your diet stands and get insights on making better food choices!</h2>
+
+            <div class="quiz-container">
+                <h2">🍏 How Processed is Your Diet? 🍟</h2>
+            
+                <div id="quiz">
+                    <div class="question-container">
+                        <p id="question-text"></p>
+                        <div class="options">
+                            <button class="option" onclick="selectOption(0)"></button>
+                            <button class="option" onclick="selectOption(1)"></button>
+                            <button class="option" onclick="selectOption(2)"></button>
+                        </div>
+                    </div>
+            
+                    <div class="progress-bar">
+                        <div id="progress"></div>
+                    </div>
+            
+                    <button id="next-btn" onclick="nextQuestion()" disabled>Next ➡️</button>
+                </div>
+            
+                <div id="quiz-result" class="hidden">
+                    <h3>Your Diet Score: <span id="score"></span>/100</h3>
+                    <p id="result-text"></p>
+                    <img id="result-image" src="" alt="Diet Result">
+                    <button onclick="restartQuiz()">Try Again</button>
+                </div>
+            </div>
+
             <div class="image-container">
                 <img src="assets/processed_foods.jpeg" alt="Processed Foods Image" class="topic-image">
             </div>
@@ -76,35 +107,6 @@
 
         <!-- Impact of Ultra-Processed Foods in Our Diet -->
         <div class="content-wrapper">
-
-            <div class="quiz-container">
-                <h2 id="typing-title">🍏 How Processed is Your Diet? 🍟</h2>
-                <p>Answer these fun questions to find out if your diet is ultra-processed or healthy! 🚀</p>
-            
-                <div id="quiz">
-                    <div class="question-container">
-                        <p id="question-text"></p>
-                        <div class="options">
-                            <button class="option" onclick="selectOption(0)"></button>
-                            <button class="option" onclick="selectOption(1)"></button>
-                            <button class="option" onclick="selectOption(2)"></button>
-                        </div>
-                    </div>
-            
-                    <div class="progress-bar">
-                        <div id="progress"></div>
-                    </div>
-            
-                    <button id="next-btn" onclick="nextQuestion()" disabled>Next ➡️</button>
-                </div>
-            
-                <div id="quiz-result" class="hidden">
-                    <h3>Your Diet Score: <span id="score"></span>/100</h3>
-                    <p id="result-text"></p>
-                    <img id="result-image" src="" alt="Diet Result">
-                    <button onclick="restartQuiz()">Try Again</button>
-                </div>
-            </div>
 
             <h2 class="fade-in">Impact of Ultra-Processed Foods in Our Diet</h2>
 
@@ -230,20 +232,22 @@
                 function showResults() {
                     document.getElementById("quiz").classList.add("hidden");
                     document.getElementById("quiz-result").classList.remove("hidden");
-                    document.getElementById("score").innerText = totalScore;
+                    const maxPossibleScore = quizData.length * 50; // Maximum possible score
+                    const normalizedScore = Math.round((totalScore / maxPossibleScore) * 100); // Scale to 100
+                    document.getElementById("score").innerText = normalizedScore;
 
                     let resultText = document.getElementById("result-text");
                     let resultImage = document.getElementById("result-image");
 
                     if (totalScore >= 200) {
                         resultText.innerText = "🔥 Amazing! Your diet is super healthy!";
-                        resultImage.src = "assets/healthy.png";
+                        resultImage.src = "assets/healthy.jpeg";
                     } else if (totalScore >= 120) {
                         resultText.innerText = "👌 Pretty Good! You have a balanced diet but could improve.";
-                        resultImage.src = "assets/balanced.png";
+                        resultImage.src = "assets/balanced.jpeg";
                     } else {
                         resultText.innerText = "⚠️ Uh oh! Your diet is highly processed. Time to eat more whole foods!";
-                        resultImage.src = "assets/processed.png";
+                        resultImage.src = "assets/processed.jpeg";
                     }
                 }
 
