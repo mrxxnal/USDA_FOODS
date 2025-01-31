@@ -76,6 +76,36 @@
 
         <!-- Impact of Ultra-Processed Foods in Our Diet -->
         <div class="content-wrapper">
+
+            <div class="quiz-container">
+                <h2 id="typing-title">🍏 How Processed is Your Diet? 🍟</h2>
+                <p>Answer these fun questions to find out if your diet is ultra-processed or healthy! 🚀</p>
+            
+                <div id="quiz">
+                    <div class="question-container">
+                        <p id="question-text"></p>
+                        <div class="options">
+                            <button class="option" onclick="selectOption(0)"></button>
+                            <button class="option" onclick="selectOption(1)"></button>
+                            <button class="option" onclick="selectOption(2)"></button>
+                        </div>
+                    </div>
+            
+                    <div class="progress-bar">
+                        <div id="progress"></div>
+                    </div>
+            
+                    <button id="next-btn" onclick="nextQuestion()" disabled>Next ➡️</button>
+                </div>
+            
+                <div id="quiz-result" class="hidden">
+                    <h3>Your Diet Score: <span id="score"></span>/100</h3>
+                    <p id="result-text"></p>
+                    <img id="result-image" src="" alt="Diet Result">
+                    <button onclick="restartQuiz()">Try Again</button>
+                </div>
+            </div>
+
             <h2 class="fade-in">Impact of Ultra-Processed Foods in Our Diet</h2>
 
             <div class="image-container">
@@ -113,6 +143,122 @@
             typeWriter();
         });
     </script>
+
+        <!-- Your existing HTML content -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let text = "Does Ultra-Processed Food Fuel a Global Health Crisis?";
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        document.getElementById("typing-title1").innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                typeWriter();
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const quizData = [
+                    {
+                        question: "What do you usually have for breakfast?",
+                        options: ["🥞 Pancakes & Syrup", "🥑 Avocado Toast", "🍳 Eggs & Fruits"],
+                        scores: [10, 30, 50]
+                    },
+                    {
+                        question: "How often do you eat fast food per week?",
+                        options: ["🍔 More than 4 times", "🍕 1-3 times", "🥗 Rarely or Never"],
+                        scores: [5, 25, 50]
+                    },
+                    {
+                        question: "How do you hydrate?",
+                        options: ["🥤 Soda or Energy Drinks", "🧃 Store-bought Juices", "💧 Water or Herbal Tea"],
+                        scores: [5, 20, 50]
+                    },
+                    {
+                        question: "What do you snack on the most?",
+                        options: ["🍫 Candy & Chips", "🍿 Popcorn or Nuts", "🍎 Fresh Fruits"],
+                        scores: [10, 30, 50]
+                    },
+                    {
+                        question: "How often do you cook homemade meals?",
+                        options: ["🍕 Rarely, mostly processed meals", "🍳 A few times a week", "🥗 Almost daily!"],
+                        scores: [10, 30, 50]
+                    }
+                ];
+
+                let currentQuestionIndex = 0;
+                let totalScore = 0;
+
+                const questionText = document.getElementById("question-text");
+                const optionsButtons = document.querySelectorAll(".option");
+                const progress = document.getElementById("progress");
+                const nextButton = document.getElementById("next-btn");
+
+                function loadQuestion() {
+                    const currentQuestion = quizData[currentQuestionIndex];
+                    questionText.innerText = currentQuestion.question;
+                    optionsButtons.forEach((button, index) => {
+                        button.innerText = currentQuestion.options[index];
+                        button.dataset.score = currentQuestion.scores[index];
+                        button.classList.remove("selected");
+                    });
+                    nextButton.disabled = true;
+                }
+
+                window.selectOption = function (index) {
+                    optionsButtons.forEach(btn => btn.classList.remove("selected"));
+                    optionsButtons[index].classList.add("selected");
+                    nextButton.disabled = false;
+                    totalScore += parseInt(optionsButtons[index].dataset.score);
+                };
+
+                window.nextQuestion = function () {
+                    if (currentQuestionIndex < quizData.length - 1) {
+                        currentQuestionIndex++;
+                        loadQuestion();
+                        progress.style.width = `${(currentQuestionIndex / quizData.length) * 100}%`;
+                    } else {
+                        showResults();
+                    }
+                };
+
+                function showResults() {
+                    document.getElementById("quiz").classList.add("hidden");
+                    document.getElementById("quiz-result").classList.remove("hidden");
+                    document.getElementById("score").innerText = totalScore;
+
+                    let resultText = document.getElementById("result-text");
+                    let resultImage = document.getElementById("result-image");
+
+                    if (totalScore >= 200) {
+                        resultText.innerText = "🔥 Amazing! Your diet is super healthy!";
+                        resultImage.src = "assets/healthy.png";
+                    } else if (totalScore >= 120) {
+                        resultText.innerText = "👌 Pretty Good! You have a balanced diet but could improve.";
+                        resultImage.src = "assets/balanced.png";
+                    } else {
+                        resultText.innerText = "⚠️ Uh oh! Your diet is highly processed. Time to eat more whole foods!";
+                        resultImage.src = "assets/processed.png";
+                    }
+                }
+
+                window.restartQuiz = function () {
+                    currentQuestionIndex = 0;
+                    totalScore = 0;
+                    document.getElementById("quiz-result").classList.add("hidden");
+                    document.getElementById("quiz").classList.remove("hidden");
+                    progress.style.width = "0%";
+                    loadQuestion();
+                };
+
+                loadQuestion();
+            });
+        </script>
 
     <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
     <script>

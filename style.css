@@ -289,6 +289,86 @@ body {
     transform: scale(1.05); /* Slight zoom-in effect */
 }
 
+.quiz-container {
+    max-width: 600px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.question-container {
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    background: #ff6b6b;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.option:hover {
+    background: #ff8c42;
+}
+
+.option.selected {
+    background: #1dd1a1;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#progress {
+    height: 100%;
+    width: 0%;
+    background: #1dd1a1;
+    transition: width 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+#quiz-result {
+    margin-top: 20px;
+}
+
+#quiz-result img {
+    width: 150px;
+    margin-top: 10px;
+}
+
+button {
+    background: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #e67e22;
+}
+
 /* Responsive Design for Mobile Screens */
 @media (max-width: 768px) {
     /* 🔹 Navbar Styles */
