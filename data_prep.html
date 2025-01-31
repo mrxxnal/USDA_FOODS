@@ -136,36 +136,18 @@
                         to explore trends in food composition and high-calorie foods.
                     </p>
 
+                    <h2>All 10 visualizations can be explored in the EDA tab</h2>
+
                     <p>
-                        Below is a snippet of Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
+                        Below is an image of the Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
                     </p>
 
-                    <pre><code>
-                        import pandas as pd
-                        import matplotlib.pyplot as plt
-                        import seaborn as sns
-
-                        # Load dataset
-                        df = pd.read_csv("../data/cleaned_data.csv")
-
-                        # Filter high-calorie products
-                        df['High_Calorie'] = df['Calories_Bin'].isin(['High', 'Very High'])
-
-                        # Group by Brand and compute stats
-                        brand_stats = df.groupby('Brand').agg(
-                            total_products=('Calories', 'count'),
-                            total_high_calorie=('High_Calorie', 'sum')
-                        ).reset_index()
-
-                        # Sort and limit to top 20 brands
-                        brand_stats['proportion_high'] = brand_stats['total_high_calorie'] 
-                        / brand_stats['total_products']
-                        top_brands = brand_stats.sort_values(by='proportion_high', 
-                        ascending=False).head(20)
-                    </code></pre>
+                    <div class="image-container">
+                        <img src="assets/eda_code.jpeg" alt="EDA Code Snippet" class="topic-image">
+                    </div>
 
                     <p>
-                        One of the key visualizations generated from EDA is the **Proportion of High-Calorie Products by Brand (Top 20)**, 
+                        One of the key visualizations generated from EDA is the <strong>Proportion of High-Calorie Products by Brand (Top 20)</strong>, 
                         which helps in understanding which brands contribute the most to high-calorie consumption.
                     </p>
 
@@ -176,7 +158,7 @@
                     <p>
                     This is just one of the 10 visualizations created to uncover meaningful insights. The complete EDA process, along with 
                     the remaining visualizations, can be explored in the GitHub repository below:
-                </p>
+                    </p>
 
                 <div class="button-section">
                     <a href="https://github.com/mrxxnal/USDA_FOODS/tree/main/src" target="_blank" class="github-button">View Full EDA Code</a>
