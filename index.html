@@ -21,6 +21,12 @@
 </script>
 
 <body>
+
+    <!-- Elegant Animated Background -->
+    <div class="food-background"></div>
+    <div class="light-overlay"></div>
+    <div class="food-pattern"></div>
+
     <!-- 🔹 Hamburger Menu Icon -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
@@ -39,9 +45,26 @@
     </div>
 
     <div class="content-section">
-        <h1>Welcome to the USDA Food Analysis Project</h1>
-        <h2>Click on the tabs above to explore each section of our project.</h2>
+        <h1 id="typing-title"></h1>
+        <h2 class="fade-in">Click on the tabs above to explore each section of our project.</h2>
     </div>
+
+            <!-- Your existing HTML content -->
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let text = "Welcome to the USDA Food Analysis Project";
+                    let i = 0;
+                    function typeWriter() {
+                        if (i < text.length) {
+                            document.getElementById("typing-title").innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 50);
+                        }
+                    }
+                    typeWriter();
+                });
+            </script>
 
         <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
         <script>
