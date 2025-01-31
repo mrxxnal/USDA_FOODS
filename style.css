@@ -333,6 +333,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     margin-top: 10px;
+    margin-bottom: 15px; /* Adds space below the gray line */
 }
 
 #progress {
