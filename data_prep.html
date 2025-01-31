@@ -72,6 +72,8 @@
                     <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot" class="topic-image">
                 </div>
 
+                <p>The raw data consists of a list of various soda brands along with their respective nutritional information. Each row represents a soda product and includes attributes such as brand name, manufacturer, calorie content, protein, fat, carbohydrates, and other key nutritional values. The data appears structured but contains redundant entries, missing values, and inconsistencies that need cleaning for effective analysis. This dataset serves as the foundation for understanding the composition of ultra-processed beverages and their impact on health.</p>
+
                 <!-- Button for Fetching Raw Data Script -->
                 <div class="button-section">
                     <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/src/fetch_data.py" target="_blank" class="github-button">
@@ -88,10 +90,6 @@
             </div>
 
             <div class="content-wrapper">
-                <h3>Cleaned Data</h3>
-                <div class="image-container">
-                    <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
-                </div>    
 
                 <h3>Data Cleaning and Transformation Process</h3>
                 <p>
@@ -110,6 +108,14 @@
                     <li><strong>Data Normalization:</strong> StandardScaler was used to normalize the numerical features ('Calories', 'Protein', 'Fat', and 'Carbs') for better model performance.</li>
                     <li><strong>Final Data Storage:</strong> The cleaned dataset was saved in CSV format for further analysis and visualization.</li>
                 </ul>
+
+
+                <h3>Cleaned Data</h3>
+                <div class="image-container">
+                    <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
+                </div>    
+
+                <p>The cleaned data is now structured and ready for meaningful analysis. With missing values handled and duplicates removed, every entry is reliable and consistent. New features like calorie categories and nutrient ratios make it easier to compare and identify trends. Outliers no longer skew results, ensuring accurate insights. Now, the data is clear, organized, and optimized for drawing valuable conclusions about ultra-processed foods.</p>
 
                 <!-- Button for Cleaning Data Script -->
                 <div class="button-section">
