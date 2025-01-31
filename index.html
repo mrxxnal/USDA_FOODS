@@ -8,6 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
 </head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuIcon = document.querySelector(".menu-icon");
+        const navbar = document.querySelector(".navbar");
+
+        menuIcon.addEventListener("click", function() {
+            navbar.classList.toggle("active");
+        });
+    });
+</script>
+
 <body>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>

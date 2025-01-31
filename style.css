@@ -217,41 +217,76 @@ body {
 
 /* Responsive Design for Mobile Screens */
 @media (max-width: 768px) {
+    /* 🔹 Navbar Styles */
     .navbar {
-        flex-direction: column; /* Stack menu items vertically */
-        align-items: center; /* Center-align navigation links */
+        flex-direction: column;
+        align-items: center;
+        background-color: #333;
+        width: 100%;
+        position: fixed; /* Keeps it at the top */
+        top: 0;
+        left: 0;
+        height: auto;
+        z-index: 1000;
+        display: none; /* Hide navbar initially */
     }
 
     .navbar a {
-        padding: 10px; /* Increase tap-friendly area */
+        padding: 15px;
         text-align: center;
-        width: 100%; /* Make each link full-width */
+        width: 100%;
+        display: block; /* Stack menu items */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    /* 🔹 Hamburger Menu */
+    .menu-icon {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        cursor: pointer;
+        color: white;
+        background-color: #333;
+        padding: 8px 12px;
+        border-radius: 5px;
+        z-index: 1100;
+    }
+
+    /* Show navbar when active */
+    .navbar.active {
+        display: flex;
+    }
+
+    /* 🔹 Content Section */
     .content-section {
-        padding: 10px; /* Reduce padding for smaller screens */
+        padding: 60px 15px 20px; /* Add top padding to avoid overlap with navbar */
     }
 
+    /* 🔹 Image Responsiveness */
     .image-container {
-        max-width: 100%; /* Ensure images don’t overflow */
-        padding: 10px; /* Add some breathing space */
+        max-width: 100%;
+        padding: 10px;
     }
 
     .topic-image {
-        width: 100%; /* Make images responsive */
-        border-radius: 8px; /* Keep smooth rounded corners */
+        width: 100%;
+        border-radius: 8px;
     }
 
+    /* 🔹 Button Section */
     .button-section {
         text-align: center;
         display: flex;
         flex-direction: column;
-        gap: 10px; /* Space out buttons */
+        gap: 12px;
     }
 
+    /* 🔹 Code Snippet */
     pre {
-        white-space: pre-wrap; /* Ensure code snippets wrap properly */
+        white-space: pre-wrap;
         word-break: break-word;
-        font-size: 14px; /* Adjust font size for readability */
+        font-size: 14px;
     }
 }

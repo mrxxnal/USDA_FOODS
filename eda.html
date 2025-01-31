@@ -6,8 +6,39 @@
     <title>EDA</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
+<body>
+
+    <!-- 🔹 Chart Container -->
+    <div id="chart-container"></div>
+
+    <!-- 🔹 JavaScript for Interactive Chart -->
+    <script>
+        var data = [{
+            values: [65, 30, 5], // Example Data
+            labels: ['Ultra-Processed Foods', 'Minimally Processed Foods', 'Whole Foods'],
+            type: 'pie',
+            hoverinfo: 'label+percent',
+            marker: {
+                colors: ['#ff6b6b', '#feca57', '#1dd1a1']
+            }
+        }];
+
+        var layout = {
+            title: "Proportion of Food Categories",
+            height: 500,
+            width: 700,
+            font: { size: 16 },
+            showlegend: true
+        };
+
+        // Ensure the chart renders only after the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            Plotly.newPlot('chart-container', data, layout);
+        });
+    </script>
+
 <body>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>
@@ -37,29 +68,6 @@
                 </p>
             </div>
         </div>
-
-            <!-- 🔹 JavaScript for Interactive Chart -->
-    <script>
-        var data = [{
-            values: [65, 30, 5], // Example Data
-            labels: ['Ultra-Processed Foods', 'Minimally Processed Foods', 'Whole Foods'],
-            type: 'pie',
-            hoverinfo: 'label+percent',
-            marker: {
-                colors: ['#ff6b6b', '#feca57', '#1dd1a1']
-            }
-        }];
-
-        var layout = {
-            title: "Proportion of Food Categories",
-            height: 500,
-            width: 700,
-            font: { size: 16 },
-            showlegend: true
-        };
-
-        Plotly.newPlot('interactive-chart', data, layout);
-    </script>
 
         <!-- Visualization 1 -->
         <div class="visualization">
