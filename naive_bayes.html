@@ -9,6 +9,8 @@
 
 </head>
 <body>
+    <!-- 🔹 Hamburger Menu Icon -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>
         <a href="data_prep.html">Data Prep</a>
@@ -28,5 +30,11 @@
         <h1>[Page Heading]</h1>
         <p>[Page Content]</p>
     </div>
+    <script>
+        function toggleMenu() {
+            var navbar = document.querySelector(".navbar");
+            navbar.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>

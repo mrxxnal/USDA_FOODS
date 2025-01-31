@@ -21,6 +21,8 @@
 </script>
 
 <body>
+    <!-- 🔹 Hamburger Menu Icon -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>
         <a href="data_prep.html">Data Prep</a>
@@ -40,5 +42,11 @@
         <h1>Welcome to the USDA Food Analysis Project</h1>
         <h2>Click on the tabs above to explore each section of our project.</h2>
     </div>
+    <script>
+        function toggleMenu() {
+            var navbar = document.querySelector(".navbar");
+            navbar.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>

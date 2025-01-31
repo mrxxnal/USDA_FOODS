@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 🔹 Hamburger Menu Icon -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="introduction.html">Introduction</a>
         <a href="data_prep.html">Data Prep</a>
@@ -42,6 +44,11 @@
             <a href="https://github.com/mrxxnal" target="_blank" class="github-button">Visit My GitHub Profile</a>
         </div>
     </div>
-
+    <script>
+        function toggleMenu() {
+            var navbar = document.querySelector(".navbar");
+            navbar.classList.toggle("active");
+        }
+    </script>
 </body>
 </html>
