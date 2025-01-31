@@ -13,24 +13,31 @@
     <!-- 🔹 JavaScript for Interactive Chart -->
     <script>
         var data = [{
-            values: [65, 30, 5], // Example Data
-            labels: ['Ultra-Processed Foods', 'Minimally Processed Foods', 'Whole Foods'],
+            values: [45, 20, 15, 10, 5, 3, 2], // Adjusted data
+            labels: [
+                'Highly Processed Snacks',
+                'Sugary Drinks',
+                'Fast Food',
+                'Packaged Meals',
+                'Dairy & Protein',
+                'Fruits & Vegetables',
+                'Whole Grains'
+            ],
             type: 'pie',
             hoverinfo: 'label+percent',
             marker: {
-                colors: ['#ff6b6b', '#feca57', '#1dd1a1']
+                colors: ['#ff6b6b', '#ff9f43', '#ffcc5c', '#54a0ff', '#1dd1a1', '#10ac84', '#00d2d3']
             }
         }];
 
         var layout = {
-            title: "Proportion of Food Categories",
+            title: "Breakdown of Food Categories by Type",
             height: 500,
             width: 700,
             font: { size: 16 },
             showlegend: true
         };
 
-        // Ensure the chart renders only after the page loads
         document.addEventListener("DOMContentLoaded", function() {
             Plotly.newPlot('chart-container', data, layout);
         });
@@ -55,15 +62,23 @@
     <div class="content-section">
         <h1>Exploratory Data Analysis (EDA)</h1>
 
-        <!-- 🔥 Interactive Chart -->
-        <div class="visualization">
-            <div class="content-wrapper">
-                <h2>Interactive Breakdown of Food Categories</h2>
-                <div id="interactive-chart" style="width:100%; max-width:900px; margin:auto;"></div> <!-- Chart Container -->
-                <p>
-                    This interactive chart provides a dynamic exploration of food categories, allowing users to see the breakdown of **processed vs. unprocessed** foods. Hover over each section to see the percentage contribution of different food groups. This visualization helps us understand how ultra-processed foods dominate modern diets.
-                </p>
+        <div class="interactive-section">
+            <h2>Interactive Breakdown of Food Categories</h2>
+            <p>
+                This interactive chart provides a dynamic exploration of food categories, allowing users to see the breakdown of 
+                <strong>processed vs. unprocessed</strong> foods. Hover over each section to see the percentage contribution of 
+                different food groups.
+            </p>
+        
+            <div class="chart-container">
+                <div id="chart-container"></div>
             </div>
+        
+            <p>
+                This visualization highlights how **ultra-processed foods dominate modern diets**. These foods often contain high 
+                levels of sugar, unhealthy fats, and preservatives, contributing to various health risks. Meanwhile, minimally 
+                processed and whole foods provide essential nutrients, promoting a balanced and healthier lifestyle.
+            </p>
         </div>
 
             <!-- 🔹 Chart Container -->
