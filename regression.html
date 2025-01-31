@@ -9,6 +9,12 @@
 
 </head>
 <body>
+
+   <!-- Elegant Animated Background -->
+   <div class="food-background"></div>
+   <div class="light-overlay"></div>
+   <div class="food-pattern"></div>
+
     <!-- 🔹 Hamburger Menu Icon -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
@@ -27,9 +33,26 @@
     </div>
 
     <div class="content-section">
-        <h1>[Page Heading]</h1>
+        <h1 id="typing-title"></h1>
         <p>[Page Content]</p>
     </div>
+
+        <!-- Your existing HTML content -->
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let text = "Regression";
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        document.getElementById("typing-title").innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                typeWriter();
+            });
+        </script>
 
     <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
     <script>
