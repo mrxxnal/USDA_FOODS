@@ -26,18 +26,18 @@
     </div>
 
     <div class="content-section">
-        <h1>Data Preparation</h1>
+        <h1 id="typing-title">Data Preparation</h1>
 
         <div class="content-wrapper">
-            <p>
+            <p class="fade-in">
                 The data used in this project was sourced from the USDA FoodData Central API, a reliable and comprehensive repository of food and nutrient data. The decision to use USDA's database stems from its authoritative and up-to-date information on food composition, making it an ideal choice for a health analytics project. By gathering data directly from the USDA, we ensure a high level of accuracy and relevance for analyzing the impact of ultra-processed foods on public health. Health analytics is essential for uncovering critical trends and making informed decisions about dietary habits, addressing global health crises such as obesity and chronic diseases.
             </p>
         </div>
 
         <div class="content-wrapper">
-            <h2>How the Data Was Gathered</h2>
+            <h2 class="fade-in">How the Data Was Gathered</h2>
 
-            <p>
+            <p class="fade-in">
                 Data was collected using the USDA FoodData Central API, a trusted and comprehensive source of food and nutrition information. 
                 The USDA (United States Department of Agriculture) maintains an extensive repository of food composition data, making it a
                 reliable resource for health and nutrition analytics. The <strong>USDA FoodData Central API</strong> provides access to various datasets, 
@@ -53,7 +53,7 @@
                 <a href="https://www.usda.gov/" target="_blank" class="github-button">USDA Data Website</a>
             </div>
 
-            <p>
+            <p class="fade-in">
                 For programmatic access, we used the **FoodData Central API**, which allows querying foods based on categories, brand names, and 
                 specific nutrient values. The core endpoint utilized for retrieving food data was:
             </p>
@@ -64,17 +64,17 @@
         </div>
 
         <div class="content-wrapper">
-            <h2>Raw and Cleaned Data</h2>
+            <h2 class="fade-in">Raw and Cleaned Data</h2>
 
             <p>Below are snapshots of the raw and cleaned data, providing an overview of the transformation process:</p>
 
             <div class="content-wrapper">
-                <h3>Raw Data</h3>
+                <h3 class="fade-in">Raw Data</h3>
                 <div class="image-container">
                     <img src="assets/raw_data.jpeg" alt="Raw Data Snapshot" class="topic-image">
                 </div>
 
-                <p>The raw data consists of a list of various soda brands along with their respective nutritional information. Each row represents a soda product and includes attributes such as brand name, manufacturer, calorie content, protein, fat, carbohydrates, and other key nutritional values. The data appears structured but contains redundant entries, missing values, and inconsistencies that need cleaning for effective analysis. This dataset serves as the foundation for understanding the composition of ultra-processed beverages and their impact on health.</p>
+                <p class="fade-in">The raw data consists of a list of various soda brands along with their respective nutritional information. Each row represents a soda product and includes attributes such as brand name, manufacturer, calorie content, protein, fat, carbohydrates, and other key nutritional values. The data appears structured but contains redundant entries, missing values, and inconsistencies that need cleaning for effective analysis. This dataset serves as the foundation for understanding the composition of ultra-processed beverages and their impact on health.</p>
 
                 <!-- Button for Fetching Raw Data Script -->
                 <div class="button-section">
@@ -93,7 +93,7 @@
 
             <div class="content-wrapper">
 
-                <h3>Data Cleaning and Transformation Process</h3>
+                <h3 class="fade-in">Data Cleaning and Transformation Process</h3>
                 <p>
                     After fetching the raw data, multiple preprocessing steps were carried out to clean and transform it for analysis:
                 </p>
@@ -112,12 +112,12 @@
                 </ul>
 
 
-                <h3>Cleaned Data</h3>
+                <h3 class="fade-in">Cleaned Data</h3>
                 <div class="image-container">
                     <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
                 </div>    
 
-                <p>The cleaned data is now structured and ready for meaningful analysis. With missing values handled and duplicates removed, every entry is reliable and consistent. New features like calorie categories and nutrient ratios make it easier to compare and identify trends. Outliers no longer skew results, ensuring accurate insights. Now, the data is clear, organized, and optimized for drawing valuable conclusions about ultra-processed foods.</p>
+                <p class="fade-in">The cleaned data is now structured and ready for meaningful analysis. With missing values handled and duplicates removed, every entry is reliable and consistent. New features like calorie categories and nutrient ratios make it easier to compare and identify trends. Outliers no longer skew results, ensuring accurate insights. Now, the data is clear, organized, and optimized for drawing valuable conclusions about ultra-processed foods.</p>
 
                 <!-- Button for Cleaning Data Script -->
                 <div class="button-section">
@@ -136,17 +136,17 @@
             </div>    
                 
                 <div class="content-wrapper">
-                    <h2>Exploratory Data Analysis (EDA)</h2>
+                    <h2 class="fade-in">Exploratory Data Analysis (EDA)</h2>
 
-                    <p>
+                    <p class="fade-in">
                         Exploratory Data Analysis (EDA) is a crucial step in data science, where we examine datasets to uncover patterns, 
                         detect anomalies, and summarize key insights. In this project, EDA was carried out by creating 10 meaningful visualizations 
                         to explore trends in food composition and high-calorie foods.
                     </p>
 
-                    <h2>All 10 visualizations can be explored in the EDA tab</h2>
+                    <h2 class="fade-in">All 10 visualizations can be explored in the EDA tab</h2>
 
-                    <p>
+                    <p class="fade-in">
                         Below is an image of the Python code used for EDA, focusing on analyzing high-calorie food products across different brands:
                     </p>
 
@@ -154,7 +154,7 @@
                         <img src="assets/eda_code.jpeg" alt="EDA Code Snippet" class="topic-image">
                     </div>
 
-                    <p>
+                    <p class="fade-in">
                         One of the key visualizations generated from EDA is the <strong>Proportion of High-Calorie Products by Brand (Top 20)</strong>, 
                         which helps in understanding which brands contribute the most to high-calorie consumption.
                     </p>
@@ -163,7 +163,7 @@
                     <img src="visuals/top_20_brands_high_calorie_filtered.png" alt="Top 20 High-Calorie Brands" class="topic-image">
                 </div>
 
-                    <p>
+                    <p class="fade-in">
                     This is just one of the 10 visualizations created to uncover meaningful insights. The complete EDA process, along with 
                     the remaining visualizations, can be explored in the GitHub repository below:
                     </p>
@@ -173,14 +173,52 @@
                 </div>
 
                 <div class="content-wrapper">
-                    <h2>Why Health Analytics Matters</h2>
-                    <p>
+                    <h2 class="fade-in">Why Health Analytics Matters</h2>
+                    <p class="fade-in">
                         Health analytics plays a pivotal role in understanding the dietary factors contributing to global health crises. By analyzing food data, we can uncover critical insights into the consumption patterns of ultra-processed foods and their association with chronic diseases like obesity, diabetes, and cardiovascular conditions. This project is driven by the belief that data-driven insights can empower individuals, policymakers, and organizations to make informed decisions, paving the way for healthier societies and improved public health outcomes.
                     </p>
                 </div>
             </div>
         </div>    
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "Does Ultra-Processed Food Fuel a Global Health Crisis?";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+    </script>
+
+
+        <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let fadeInElements = document.querySelectorAll(".fade-in");
+    
+                function fadeInOnScroll() {
+                    fadeInElements.forEach(element => {
+                        let position = element.getBoundingClientRect().top;
+                        let screenHeight = window.innerHeight;
+    
+                        if (position < screenHeight - 100) {
+                            element.classList.add("visible");
+                        }
+                    });
+                }
+    
+                window.addEventListener("scroll", fadeInOnScroll);
+                fadeInOnScroll(); // Trigger on load
+            });
+        </script>
+
     <script>
         function toggleMenu() {
             var navbar = document.querySelector(".navbar");

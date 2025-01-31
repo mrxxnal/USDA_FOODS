@@ -26,24 +26,24 @@
     </div>
 
     <div class="content-section">
-        <h1>Does Ultra-Processed Food Fuel a Global Health Crisis?</h1>
+        <h1 id="typing-title">Does Ultra-Processed Food Fuel a Global Health Crisis?</h1>
         <div class="content-wrapper">
             <div class="image-container">
                 <img src="assets/processed_foods.jpeg" alt="Processed Foods Image" class="topic-image">
             </div>
-            <p>
+            <p class="fade-in">
                 The rise of ultra-processed foods has transformed our global food landscape, offering convenience, affordability, and addictive flavors. These foods, crafted to appeal to modern lifestyles, are laden with added sugars, unhealthy fats, and artificial ingredients that prioritize taste and shelf life over nutrition. For many, their accessibility surpasses that of fresh, whole foods, creating an alarming dependence on products that satisfy hunger but fall short of sustaining health.
             </p>
-            <p>
+            <p class="fade-in">
                 Over the past few decades, ultra-processed foods have become dietary staples, infiltrating communities from bustling cities to quiet villages. Their prevalence has coincided with escalating rates of obesity, diabetes, and cardiovascular diseases, raising red flags among health experts worldwide. Children, often the target of aggressive advertising campaigns, grow up consuming these foods, embedding lifelong habits that perpetuate cycles of poor health. These patterns not only strain individual well-being but also burden healthcare systems with rising treatment costs for preventable diseases.
             </p>
-            <p>
+            <p class="fade-in">
                 Public health initiatives have attempted to curb the influence of ultra-processed foods through policies like sugar taxes, clearer labeling, and education campaigns. Yet, progress remains fragmented, often hindered by the immense lobbying power of the food industry. Simultaneously, grassroots movements advocating for urban gardening, farmers' markets, and healthier school meals provide glimmers of hope, demonstrating the collective power of communities to resist the unhealthy tide.
             </p>
-            <p>
+            <p class="fade-in">
                 The implications of ultra-processed foods extend beyond health, affecting culture, economics, and the environment. Traditional diets, rich in whole grains, fresh produce, and lean proteins, are being replaced by calorie-dense, nutrient-poor options, particularly in developing nations. Economically, these foods exploit global supply chains and subsidies that make unhealthy options more affordable than nutritious ones. Environmentally, their mass production and excessive packaging contribute significantly to pollution and climate change, posing yet another challenge to sustainability.
             </p>
-            <p>
+            <p class="fade-in">
                 This project invites you to explore the multifaceted impact of ultra-processed foods on global health. By delving into their far-reaching effects, we aim to shed light on the systemic changes needed to create a healthier, more sustainable future. Whether it’s fostering awareness, empowering policymakers, or inspiring individuals to make informed dietary choices, the solutions lie in collective action. Together, we can challenge the status quo, bridging the gap between convenience and well-being, and charting a path toward a healthier, more conscious world.
             </p>
         </div>
@@ -52,7 +52,7 @@
         </div>
         <div class="questions-section">
             <div class="content-wrapper">
-                <h2>10 Questions Driving This Project</h2>
+                <h2 class="fade-in">10 Questions Driving This Project</h2>
                 <ol>
                     <li>What role do ultra-processed foods play in shaping modern dietary habits globally?</li>
                     <li>How do nutrient profiles, such as fat, protein, and carbohydrates, differ between food categories?</li>
@@ -70,16 +70,16 @@
 
         <!-- Impact of Ultra-Processed Foods in Our Diet -->
         <div class="content-wrapper">
-            <h2>Impact of Ultra-Processed Foods in Our Diet</h2>
+            <h2 class="fade-in">Impact of Ultra-Processed Foods in Our Diet</h2>
 
             <div class="image-container">
                 <img src="assets/obesity.jpg" alt="Obesity and Ultra-Processed Foods" class="topic-image">
             </div>
 
-            <p>
+            <p class="fade-in">
                 Ultra-processed foods have been linked to increased calorie intake and weight gain. A study by the **U.S. Department of Health & Human Services** found that individuals consuming ultra-processed diets gained weight significantly faster than those consuming unprocessed foods, even when nutrient content was controlled. This suggests that factors like additives, processing methods, and increased palatability encourage overeating.
             </p>
-            <p>
+            <p class="fade-in">
                 In a controlled study, participants on an ultra-processed diet consumed around **500 extra calories per day** compared to those eating unprocessed foods. This led to an average weight gain of **two pounds in just two weeks**. The study highlights how food processing, rather than nutrient composition alone, plays a major role in obesity. Reducing ultra-processed food intake could be a key strategy for maintaining a healthy weight and improving long-term metabolic health.
             </p>
 
@@ -90,6 +90,48 @@
             </div>
         </div>
     </div>
+
+    <!-- Your existing HTML content -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "Does Ultra-Processed Food Fuel a Global Health Crisis?";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+    </script>
+
+    <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fadeInElements = document.querySelectorAll(".fade-in");
+
+            function fadeInOnScroll() {
+                fadeInElements.forEach(element => {
+                    let position = element.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+
+                    if (position < screenHeight - 100) {
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", fadeInOnScroll);
+            fadeInOnScroll(); // Trigger on load
+        });
+    </script>
+
+</body>
+</html>
+
     <script>
         function toggleMenu() {
             var navbar = document.querySelector(".navbar");

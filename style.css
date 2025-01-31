@@ -1,11 +1,26 @@
 /* Global styles */
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    background: linear-gradient(-45deg, #ff6b6b, #ff8c42, #feca57, #1dd1a1);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+}
+
 body {
     font-family: 'Lato', sans-serif;
     margin: 0;
     padding: 0;
     color: #2c3e50;
     background: url('assets/USDA_FOODS.jpeg') no-repeat center center fixed;
-    background-size: cover;
+    background: linear-gradient(-45deg, #ff6b6b, #ff8c42, #feca57, #1dd1a1);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
 }
 
 /* Navbar styles */
@@ -90,6 +105,17 @@ body {
     background-color: #e67e22;
     color: white;
     border-radius: 5px;
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .about-container {

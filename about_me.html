@@ -26,18 +26,18 @@
     </div>
 
     <div class="content-section">
-        <h1>About Me</h1>
+        <h1 id="typing-title">About Me</h1>
         <div class="about-container">
             <div class="about-image">
                 <img src="assets/mrunal_pic.jpeg" alt="Mrunal Bhosale" class="profile-pic">
             </div>
             <div class="about-text">
-                <p>Hello! I'm <b>Mrunal Bhosale</b>, a passionate Data Science student with a strong interest in predictive analytics.</p>
+                <p class="fade-in">Hello! I'm <b>Mrunal Bhosale</b>, a passionate Data Science student with a strong interest in predictive analytics.</p>
                 
                 <!-- New "Why I Chose This Topic" Section -->
                 <h2>Why I Chose This Topic</h2>
-                <p>Food is something we all connect with daily, yet many of us don’t realize how ultra-processed foods impact our health. I’ve always been curious about what’s really inside the foods we consume and how they shape our well-being over time.</p>
-                <p>Through this project, I want to uncover the hidden patterns in food nutrition and help people make more informed dietary choices. By analyzing real-world data, I aim to highlight trends that could influence public health policies and personal nutrition habits.</p>
+                <p class="fade-in">Food is something we all connect with daily, yet many of us don’t realize how ultra-processed foods impact our health. I’ve always been curious about what’s really inside the foods we consume and how they shape our well-being over time.</p>
+                <p class="fade-in">Through this project, I want to uncover the hidden patterns in food nutrition and help people make more informed dietary choices. By analyzing real-world data, I aim to highlight trends that could influence public health policies and personal nutrition habits.</p>
             </div>
         </div>
         <div class="button-section">
@@ -47,6 +47,43 @@
             <a href="https://www.linkedin.com/in/mrunalb1/" target="_blank" class="github-button">Visit My LinkedIn</a>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "Does Ultra-Processed Food Fuel a Global Health Crisis?";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+    </script>
+
+    <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fadeInElements = document.querySelectorAll(".fade-in");
+
+            function fadeInOnScroll() {
+                fadeInElements.forEach(element => {
+                    let position = element.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+
+                    if (position < screenHeight - 100) {
+                        element.classList.add("visible");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", fadeInOnScroll);
+            fadeInOnScroll(); // Trigger on load
+        });
+    </script>
+
     <script>
         function toggleMenu() {
             var navbar = document.querySelector(".navbar");

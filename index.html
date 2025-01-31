@@ -42,6 +42,28 @@
         <h1>Welcome to the USDA Food Analysis Project</h1>
         <h2>Click on the tabs above to explore each section of our project.</h2>
     </div>
+
+        <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let fadeInElements = document.querySelectorAll(".fade-in");
+    
+                function fadeInOnScroll() {
+                    fadeInElements.forEach(element => {
+                        let position = element.getBoundingClientRect().top;
+                        let screenHeight = window.innerHeight;
+    
+                        if (position < screenHeight - 100) {
+                            element.classList.add("visible");
+                        }
+                    });
+                }
+    
+                window.addEventListener("scroll", fadeInOnScroll);
+                fadeInOnScroll(); // Trigger on load
+            });
+        </script>
+
     <script>
         function toggleMenu() {
             var navbar = document.querySelector(".navbar");
