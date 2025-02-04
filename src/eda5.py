@@ -29,7 +29,7 @@ if missing_columns:
     print(f"Error: Missing required columns: {missing_columns}")
     exit()
 
-# Remove specific brands
+# Remove specific brands if needed
 brands_to_exclude = ["Kyo Footwear", "Kyo Footwear L.P."]
 df = df[~df['Brand'].isin(brands_to_exclude)]
 
@@ -46,37 +46,39 @@ brand_stats = df.groupby('Brand').agg(
 # Calculate proportion of high-calorie products for each brand
 brand_stats['proportion_high'] = brand_stats['total_high_calorie'] / brand_stats['total_products']
 
-# Remove brands that have only one product (to focus on significant brands)
-brand_stats = brand_stats[brand_stats['total_products'] > 1]
+# Sort by proportion_high in descending order
+brand_stats = brand_stats.sort_values(by='proportion_high', ascending=False)
 
-# Sort by proportion_high and total_products for better visualization
-brand_stats = brand_stats.sort_values(by=['proportion_high', 'total_products'], ascending=[False, False])
-
-# Limit to top 20 brands for better readability
+# Limit to top 20 brands
 top_brands = brand_stats.head(20)
 
-# Plotting
+# Normalize bubble sizes for better visualization
+max_products = top_brands["total_products"].max()
+top_brands["bubble_size"] = (top_brands["total_products"] / max_products) * 1000  # Scale sizes
+
+# Create bubble chart
 plt.figure(figsize=(16, 10))
-ax = sns.barplot(
-    data=top_brands,
-    x='proportion_high',
-    y='Brand',
-    hue='total_products',  # Differentiating with number of products
-    palette='coolwarm',
-    dodge=False
+scatter = plt.scatter(
+    top_brands["proportion_high"],
+    top_brands["Brand"],
+    s=top_brands["bubble_size"],  # Bubble size represents the total number of products
+    c=top_brands["proportion_high"],  # Color based on proportion
+    cmap="coolwarm",
+    alpha=0.8,
+    edgecolors="black"
 )
 
-# Add values to bars
-for index, value in enumerate(top_brands['proportion_high']):
-    ax.text(value + 0.02, index, f"{value:.2f}", color='black', ha="left", fontsize=12)
+# Color bar
+cbar = plt.colorbar(scatter)
+cbar.set_label("Proportion of High-Calorie Products", fontsize=14)
 
-# Titles and labels
-plt.title("Proportion of High-Calorie Products by Brand (Top 20)", fontsize=20, weight='bold')
+# Labels & Formatting
+plt.title("Proportion of High-Calorie Products by Brand (Top 20)", fontsize=18, weight='bold')
 plt.xlabel("Proportion of High-Calorie Products", fontsize=14)
 plt.ylabel("Brand", fontsize=14)
 plt.xticks(fontsize=12)
 plt.yticks(fontsize=12)
-plt.grid(axis='x', linestyle='--', alpha=0.7)
+plt.grid(axis="x", linestyle="--", alpha=0.7)
 
 # Save the plot
 plot_path = os.path.join(visuals_path, "top_20_brands_high_calorie_filtered.png")
