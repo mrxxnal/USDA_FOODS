@@ -46,20 +46,31 @@ brand_stats = df.groupby('Brand').agg(
 # Calculate proportion of high-calorie products for each brand
 brand_stats['proportion_high'] = brand_stats['total_high_calorie'] / brand_stats['total_products']
 
-# Sort by proportion_high in descending order
-brand_stats = brand_stats.sort_values(by='proportion_high', ascending=False)
+# Remove brands that have only one product (to focus on significant brands)
+brand_stats = brand_stats[brand_stats['total_products'] > 1]
+
+# Sort by proportion_high and total_products for better visualization
+brand_stats = brand_stats.sort_values(by=['proportion_high', 'total_products'], ascending=[False, False])
 
 # Limit to top 20 brands for better readability
 top_brands = brand_stats.head(20)
 
 # Plotting
 plt.figure(figsize=(16, 10))
-sns.barplot(
+ax = sns.barplot(
     data=top_brands,
     x='proportion_high',
     y='Brand',
-    palette='viridis'
+    hue='total_products',  # Differentiating with number of products
+    palette='coolwarm',
+    dodge=False
 )
+
+# Add values to bars
+for index, value in enumerate(top_brands['proportion_high']):
+    ax.text(value + 0.02, index, f"{value:.2f}", color='black', ha="left", fontsize=12)
+
+# Titles and labels
 plt.title("Proportion of High-Calorie Products by Brand (Top 20)", fontsize=20, weight='bold')
 plt.xlabel("Proportion of High-Calorie Products", fontsize=14)
 plt.ylabel("Brand", fontsize=14)
