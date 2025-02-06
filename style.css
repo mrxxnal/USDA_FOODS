@@ -13,8 +13,6 @@ body {
     color: #2c3e50;
     background-color: #f7f1e3;
     overflow-x: hidden;
-    opacity: 0;
-    animation: fadeInBody 1.5s ease-in-out forwards;
 }
 
 /* 🔹 Food-Themed Animated Background */
@@ -412,22 +410,10 @@ button:hover, .option:hover {
     z-index: 9999;
 }
 
-@keyframes fadeInBody {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
 /* 🔹 3D Parallax Effect */
 .parallax {
     transform: translateZ(0);
     transition: transform 0.3s ease-out;
-}
-
-/* 🔹 Staggered Fade-In Effect */
-.fade-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
 
 /* 🔹 Blob Morphing Background */
