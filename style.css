@@ -13,6 +13,8 @@ body {
     color: #2c3e50;
     background-color: #f7f1e3;
     overflow-x: hidden;
+    opacity: 0;
+    animation: fadeInBody 1.5s ease-in-out forwards;
 }
 
 /* 🔹 Food-Themed Animated Background */
@@ -395,6 +397,70 @@ button, .option {
 }
 
 button:hover, .option:hover {
+    transform: scale(1.05);
+}
+
+/* 🔹 Fullscreen Page Transition Overlay */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #1a1a1a;
+    transform: scaleY(0);
+    z-index: 9999;
+}
+
+@keyframes fadeInBody {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* 🔹 3D Parallax Effect */
+.parallax {
+    transform: translateZ(0);
+    transition: transform 0.3s ease-out;
+}
+
+/* 🔹 Staggered Fade-In Effect */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+
+/* 🔹 Blob Morphing Background */
+@keyframes blobMorph {
+    0% { border-radius: 40% 60% 50% 50%; }
+    50% { border-radius: 60% 40% 30% 70%; }
+    100% { border-radius: 40% 60% 50% 50%; }
+}
+
+.blob {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8c42);
+    animation: blobMorph 12s infinite alternate ease-in-out;
+    filter: blur(90px);
+    z-index: -2;
+}
+
+/* 🔹 Magnetic Button Effect */
+.magnetic-button {
+    display: inline-block;
+    background: #1dd1a1;
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+}
+.magnetic-button:hover {
     transform: scale(1.05);
 }
 
