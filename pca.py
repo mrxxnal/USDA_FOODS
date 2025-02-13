@@ -95,30 +95,35 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
 # 🔹 Static 3D PCA Plot using Matplotlib (Full Dataset)
-fig = plt.figure(figsize=(12, 8))  # Slightly larger figure for better visibility
+fig = plt.figure(figsize=(10, 7))
 ax = fig.add_subplot(111, projection="3d")
 
-# Scatter plot with **full dataset**
+# Scatter plot with full dataset
 ax.scatter(
     df_pca_3D["PC1"], df_pca_3D["PC2"], df_pca_3D["PC3"], 
     alpha=0.6, s=5, color="navy"
 )
 
-# 🔹 Proper Axis Labels Based on PCA Loadings
-ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=14, labelpad=20)
-ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=14, labelpad=20)
-ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=14, labelpad=20)
-ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=16, pad=25)
+# 🔹 Set Proper Axis Labels Based on PCA Loadings
+ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=14, labelpad=15)
+ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=14, labelpad=15)
+ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=14, labelpad=15)
+ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=16, pad=20)
 
-# 🔹 Adjust margins & layout to prevent text from getting cut
-plt.subplots_adjust(left=0.2, right=0.8, top=0.85, bottom=0.2)
+# 🔹 Adjust Viewing Angle for Better Readability
+ax.view_init(elev=20, azim=45)  # Adjust elevation & azimuth angle
 
-# 🔹 Rotate axes slightly for better visibility
-ax.view_init(elev=25, azim=45)
+# 🔹 Rotate Axis Labels to Avoid Overlap
+ax.xaxis.label.set_rotation(15)
+ax.yaxis.label.set_rotation(-15)
+ax.zaxis.label.set_rotation(90)
 
-# 🔹 Save the 3D plot properly without cutting labels
+# 🔹 Modify Grid Appearance for Clarity
+ax.grid(color='gray', linestyle='dashed', linewidth=0.5)
+
+# 🔹 Save the 3D plot properly without label cutoff
 pca_3D_plot_path = os.path.join(visuals_folder, "PCA_3D_plot.png")
-plt.savefig(pca_3D_plot_path, dpi=300, bbox_inches="tight", bbox_extra_artists=[ax.xaxis.label, ax.yaxis.label, ax.zaxis.label, ax.title])
+plt.savefig(pca_3D_plot_path, dpi=300, bbox_inches="tight")
 
 # Display the final plot
 plt.show()
