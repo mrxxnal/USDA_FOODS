@@ -91,27 +91,11 @@ plt.savefig(pca_2D_plot_path)
 plt.show()
 
 # Plot 3D PCA
-import plotly.express as px
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
 # 🔹 Interactive 3D PCA Plot using Plotly (Better UI)
-fig = px.scatter_3d(
-    df_pca_3D, 
-    x="PC1", 
-    y="PC2", 
-    z="PC3", 
-    opacity=0.7, 
-    color_discrete_sequence=["blue"]
-)
-fig.update_layout(
-    title=f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)",
-    scene=dict(
-        xaxis_title="Calories & Macronutrient Contribution",
-        yaxis_title="Macronutrient Ratios & Distribution",
-        zaxis_title="Carbohydrate & Fat Energy Balance"
-    )
-)
-fig.show()
+import matplotlib.pyplot as plt
 
 # 🔹 Static 3D PCA Plot using Matplotlib (Full Dataset)
 fig = plt.figure(figsize=(10, 7))
@@ -124,10 +108,16 @@ ax.scatter(
 )
 
 # 🔹 Proper Axis Labels Based on PCA Loadings
-ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=12)
-ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=12)
-ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=12)
-ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=14)
+ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=12, labelpad=10)
+ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=12, labelpad=10)
+ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=12, labelpad=10)
+ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=14, pad=20)
+
+# 🔹 Adjust text visibility
+ax.xaxis.label.set_size(12)
+ax.yaxis.label.set_size(12)
+ax.zaxis.label.set_size(12)
+ax.title.set_size(14)
 
 # Save the 3D plot properly
 pca_3D_plot_path = os.path.join(visuals_folder, "PCA_3D_plot.png")
