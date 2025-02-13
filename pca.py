@@ -93,37 +93,41 @@ plt.show()
 # Plot 3D PCA
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+import os
 
-# 🔹 Static 3D PCA Plot using Matplotlib (Full Dataset)
-fig = plt.figure(figsize=(10, 7))
+# 🔹 Create Static 3D PCA Plot
+fig = plt.figure(figsize=(14, 10))  # Increased figure size for better spacing
 ax = fig.add_subplot(111, projection="3d")
 
-# Scatter plot with full dataset
+# 🔹 Scatter plot with the full dataset
 ax.scatter(
     df_pca_3D["PC1"], df_pca_3D["PC2"], df_pca_3D["PC3"], 
-    alpha=0.6, s=5, color="navy"
+    alpha=0.6, s=7, color="navy"
 )
 
 # 🔹 Set Proper Axis Labels Based on PCA Loadings
-ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=14, labelpad=15)
-ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=14, labelpad=15)
-ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=14, labelpad=15)
-ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=16, pad=20)
+ax.set_xlabel("Calories & Macronutrient Contribution", fontsize=14, labelpad=20)
+ax.set_ylabel("Macronutrient Ratios & Distribution", fontsize=14, labelpad=20)
+ax.set_zlabel("Carbohydrate & Fat Energy Balance", fontsize=14, labelpad=20)
+ax.set_title(f"PCA 3D Projection ({explained_variance_3D:.2f}% Variance Retained)", fontsize=16, pad=30)
 
-# 🔹 Adjust Viewing Angle for Better Readability
-ax.view_init(elev=20, azim=45)  # Adjust elevation & azimuth angle
+# 🔹 Adjust Viewing Angle for **Optimal Label Positioning**
+ax.view_init(elev=30, azim=45)  # Slightly better angle for clarity
 
-# 🔹 Rotate Axis Labels to Avoid Overlap
-ax.xaxis.label.set_rotation(15)
-ax.yaxis.label.set_rotation(-15)
-ax.zaxis.label.set_rotation(90)
+# 🔹 Fix Axis Label Rotation to Prevent Overlapping
+ax.xaxis.label.set_rotation(10)  # Adjusted X label rotation for clarity
+ax.yaxis.label.set_rotation(10)  # Adjusted Y label rotation for clarity
+ax.zaxis.label.set_rotation(90)  # Z-axis remains upright
 
-# 🔹 Modify Grid Appearance for Clarity
+# 🔹 Modify Grid Appearance for Better Clarity
 ax.grid(color='gray', linestyle='dashed', linewidth=0.5)
 
-# 🔹 Save the 3D plot properly without label cutoff
-pca_3D_plot_path = os.path.join(visuals_folder, "PCA_3D_plot.png")
-plt.savefig(pca_3D_plot_path, dpi=300, bbox_inches="tight")
+# 🔹 Fix **Cropping Issues** When Saving the Plot
+plt.subplots_adjust(left=0.25, right=0.95, top=0.90, bottom=0.25)  # Extra margins for left & bottom
 
-# Display the final plot
+# 🔹 Save the final **perfectly framed** plot
+pca_3D_plot_path = os.path.join(visuals_folder, "PCA_3D_plot.png")
+fig.savefig(pca_3D_plot_path, dpi=300, bbox_inches="tight", pad_inches=1.0)  # Added padding
+
+# 🔹 Display the final plot
 plt.show()
