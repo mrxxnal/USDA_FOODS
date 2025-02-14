@@ -74,21 +74,23 @@ print("\n🔹 PCA Loadings (Feature Contributions):")
 print(loadings.T)
 
 
-# Plot 2D PCA
+# 🔹 Create and Save PCA 2D Plot Properly
 plt.figure(figsize=(8, 6))
 sns.scatterplot(x=df_pca_2D["PC1"], y=df_pca_2D["PC2"], alpha=0.7, color="teal")
+
 plt.xlabel("Calories & Macronutrient Contribution")
 plt.ylabel("Macronutrient Ratios & Distribution")
 plt.title(f"PCA 2D Projection ({explained_variance_2D:.2f}% Variance Retained)")
 plt.grid(True)
-pca_2D_plot_path = os.path.join(base_path, "visuals", "PCA_2D_plot.png")
-plt.savefig(pca_2D_plot_path)
-plt.show()
 
-# Save 2D plot
+# 🔹 Define the save path correctly
 pca_2D_plot_path = os.path.join(visuals_folder, "PCA_2D_plot.png")
-plt.savefig(pca_2D_plot_path)
-plt.show()
+
+# 🔹 Save and properly close the figure
+plt.savefig(pca_2D_plot_path, dpi=300, bbox_inches="tight", pad_inches=0.5)
+plt.close()  # Properly close the figure to prevent issues
+
+print(f"✅ PCA 2D plot saved at: {pca_2D_plot_path}")
 
 # Plot 3D PCA
 import matplotlib.pyplot as plt
