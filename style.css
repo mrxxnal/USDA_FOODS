@@ -232,6 +232,23 @@ body {
     padding-bottom: 10px; /* Adds padding at the bottom */
 }
 
+.gif-section {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.gif-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gif-section img:hover {
+    transform: scale(1.05);
+}
+
 .github-button {
     text-decoration: none;
     background-color: #333;
