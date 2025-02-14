@@ -13,7 +13,6 @@
    <!-- Elegant Animated Background -->
    <div class="food-background"></div>
    <div class="light-overlay"></div>
-   <div class="food-pattern"></div>
 
     <!-- 🔹 Hamburger Menu Icon -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
@@ -37,7 +36,31 @@
 
         <div class="content-wrapper">
             <p class="fade-in">
-                We used Principal Component Analysis (PCA) to simplify our dataset, reducing complexity while preserving key nutritional patterns. This helped us uncover hidden relationships between ultra-processed and minimally processed foods, making trends clearer and visualizations more insightful.
+                Principal Component Analysis (PCA) is a dimensionality reduction technique that helps simplify complex datasets while retaining most of the meaningful variance. For our project, we applied PCA to uncover the key nutritional patterns and reduce redundancy among food attributes.
+            </p>
+
+            <p class="fade-in">
+                Our 2D PCA projection retained <b>64.78%</b> of the variance, allowing us to visualize how different food products cluster based on macronutrient contributions. The 3D PCA projection captured <b>80.71%</b> of the total variance, providing an even deeper insight into the relationships between calories, protein, fats, and carbohydrates.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/PCA_2D_plot.png" alt="PCA 2D Projection" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                The 2D visualization provides a clearer separation of different food categories, where principal components (PC1 and PC2) highlight key variations in macronutrient ratios and energy contributions.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/PCA_3D_plot.png" alt="PCA 3D Projection" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                The 3D PCA projection incorporates an additional principal component, revealing deeper relationships between food items. This visualization helped us retain more variance while reducing dimensions, making complex food patterns easier to analyze.
+            </p>
+
+            <p class="fade-in">
+                Additionally, we determined that at least <b>6 principal components</b> are needed to retain <b>95% of the total variance</b>. This insight guided us in selecting the optimal number of features for further analysis.
             </p>
         </div>    
     </div>
