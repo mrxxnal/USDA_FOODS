@@ -118,20 +118,39 @@
                         <li><strong>Final Data Storage:</strong> The cleaned dataset was saved in CSV format for further analysis and visualization.</li>
                     </ul>
                 
-                    <h3 class="fade-in">Raw Data Issues and Cleaning Impact</h3>
+                    <h3 class="fade-in">Visualization of Raw Data Issues</h3>
+                    
+                    <!-- Missing Values Visualization -->
+                    <h4 class="fade-in">Missing Values by Feature</h4>
                     <p class="fade-in">
-                        Below is a visualization of the raw data issues, showcasing missing values, duplicates, and outliers before preprocessing.
+                        The bar chart below highlights the distribution of missing values across different features. The 'Brand' column had the 
+                        most missing values, followed by nutritional attributes such as 'Calories', 'Protein', 'Fat', and 'Carbs'. Addressing these 
+                        gaps was crucial to maintaining data integrity.
                     </p>
-                
-                    <!-- Display the Dirty Data Image -->
                     <div class="image-container">
-                        <img src="assets/dirty_data.jpeg" alt="Raw Data Issues (Missing Values, Duplicates, Outliers)" class="topic-image">
+                        <img src="assets/missing_data_example.jpeg" alt="Missing Values by Feature" class="topic-image">
                     </div>
                 
+                    <!-- Duplicates Visualization -->
+                    <h4 class="fade-in">Examples of Duplicate Data</h4>
                     <p class="fade-in">
-                        The raw data contained several issues, including missing values, duplicate entries, and extreme outliers. These issues 
-                        were addressed using robust preprocessing techniques, transforming the dataset into a reliable and structured format.
+                        The table below showcases examples of duplicate rows found in the dataset. Duplicates can lead to biased analysis and 
+                        inaccurate insights. These entries were identified and removed during the preprocessing stage to ensure a reliable dataset.
                     </p>
+                    <div class="image-container">
+                        <img src="assets/duplicates_example.jpeg" alt="Examples of Duplicate Data" class="topic-image">
+                    </div>
+                
+                    <!-- Outliers Visualization -->
+                    <h4 class="fade-in">Violin & Strip Plot for Outliers</h4>
+                    <p class="fade-in">
+                        The visualization below utilizes a violin plot combined with a strip plot to showcase outliers in the dataset. The 
+                        'Calories' and 'Carbs' features exhibited the most extreme outliers. These were addressed using the Interquartile Range 
+                        (IQR) method to enhance the quality of our data analysis.
+                    </p>
+                    <div class="image-container">
+                        <img src="assets/outliers_example.jpeg" alt="Violin & Strip Plot for Outliers" class="topic-image">
+                    </div>
                 
                     <h3 class="fade-in">Cleaned Data</h3>
                     <div class="image-container">
