@@ -467,6 +467,98 @@ button:hover, .option:hover {
     transform: scale(1.05);
 }
 
+
+
+
+/* Section Styling */
+.content-section {
+    padding: 40px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 900px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+h1#typing-title {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+h2, h3 {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    color: #555;
+}
+
+p, ul {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: disc;
+    margin: 20px;
+    padding-left: 40px;
+    text-align: left;
+}
+
+/* Highlight Section */
+.highlight-section {
+    background-color: #fff;
+    padding: 30px;
+    margin: 40px 0;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    min-width: 250px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card h4 {
+    font-size: 1.6rem;
+    color: #333;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Divider */
+.section-divider {
+    background: linear-gradient(90deg, #6dd5ed, #2193b0);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 30px auto;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 /* Responsive Design for Mobile Screens */
 @media (max-width: 768px) {
     /* 🔹 Navbar Styles */
@@ -542,3 +634,5 @@ button:hover, .option:hover {
         font-size: 14px;
     }
 }
+
+
