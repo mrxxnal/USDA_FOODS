@@ -96,49 +96,70 @@
                 </div>
             </div>
 
-            <div class="content-wrapper">
+                <div class="content-wrapper">
 
-                <h3 class="fade-in">Data Cleaning and Transformation Process</h3>
-                <p>
-                    After fetching the raw data, multiple preprocessing steps were carried out to clean and transform it for analysis:
-                </p>
-                <ul>
-                    <li><strong>Handling Missing Values:</strong> Missing values were replaced with default values to ensure completeness. Nutritional attributes were set to zero if missing, while categorical columns like 'Brand' and 'Category' were labeled as 'Unknown' or 'Uncategorized'.</li>
-                    <li><strong>Removing Duplicates:</strong> Duplicate rows were detected and removed to prevent redundancy in the dataset.</li>
-                    <li><strong>Outlier Removal:</strong> Statistical techniques (Interquartile Range - IQR) were applied to detect and remove extreme outliers in key numerical features such as 'Calories', 'Protein', 'Fat', and 'Carbs'.</li>
-                    <li><strong>Feature Engineering:</strong> New meaningful features were created, such as:
-                        <ul>
-                            <li>Calories per Protein, Calories per Fat, and Calories per Carb** to analyze nutritional density.</li>
-                            <li>Calories Binning (Low, Medium, High, Very High)** to categorize food items into calorie levels.</li>
-                        </ul>
-                    </li>
-                    <li><strong>Data Normalization:</strong> StandardScaler was used to normalize the numerical features ('Calories', 'Protein', 'Fat', and 'Carbs') for better model performance.</li>
-                    <li><strong>Final Data Storage:</strong> The cleaned dataset was saved in CSV format for further analysis and visualization.</li>
-                </ul>
-
-
-                <h3 class="fade-in">Cleaned Data</h3>
-                <div class="image-container">
-                    <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
-                </div>    
-
-                <p class="fade-in">The cleaned data is now structured and ready for meaningful analysis. With missing values handled and duplicates removed, every entry is reliable and consistent. New features like calorie categories and nutrient ratios make it easier to compare and identify trends. Outliers no longer skew results, ensuring accurate insights. Now, the data is clear, organized, and optimized for drawing valuable conclusions about ultra-processed foods.</p>
-
-                <!-- Button for Cleaning Data Script -->
-                <div class="button-section">
-                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/USDA_FOOD_Website/src/clean_data.py" target="_blank" class="github-button">
-                        Clean Data Script
-                    </a>
+                    <h3 class="fade-in">Data Cleaning and Transformation Process</h3>
+                    <p>
+                        After fetching the raw data, multiple preprocessing steps were carried out to clean and transform it for analysis:
+                    </p>
+                    <ul>
+                        <li><strong>Handling Missing Values:</strong> Missing values were replaced with default values to ensure completeness. 
+                            Nutritional attributes were set to zero if missing, while categorical columns like 'Brand' and 'Category' were labeled as 'Unknown' or 'Uncategorized'.</li>
+                        <li><strong>Removing Duplicates:</strong> Duplicate rows were detected and removed to prevent redundancy in the dataset.</li>
+                        <li><strong>Outlier Removal:</strong> Statistical techniques (Interquartile Range - IQR) were applied to detect and remove 
+                            extreme outliers in key numerical features such as 'Calories', 'Protein', 'Fat', and 'Carbs'.</li>
+                        <li><strong>Feature Engineering:</strong> New meaningful features were created, such as:
+                            <ul>
+                                <li><strong>Calories per Protein, Calories per Fat, and Calories per Carb</strong> to analyze nutritional density.</li>
+                                <li><strong>Calories Binning (Low, Medium, High, Very High)</strong> to categorize food items into calorie levels.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Data Normalization:</strong> StandardScaler was used to normalize the numerical features ('Calories', 'Protein', 'Fat', and 'Carbs') for better model performance.</li>
+                        <li><strong>Final Data Storage:</strong> The cleaned dataset was saved in CSV format for further analysis and visualization.</li>
+                    </ul>
+                
+                    <h3 class="fade-in">Raw Data Issues and Cleaning Impact</h3>
+                    <p class="fade-in">
+                        Below is a visualization of the raw data issues, showcasing missing values, duplicates, and outliers before preprocessing.
+                    </p>
+                
+                    <!-- Display the Dirty Data Image -->
+                    <div class="image-container">
+                        <img src="assets/dirty_data.jpeg" alt="Raw Data Issues (Missing Values, Duplicates, Outliers)" class="topic-image">
+                    </div>
+                
+                    <p class="fade-in">
+                        The raw data contained several issues, including missing values, duplicate entries, and extreme outliers. These issues 
+                        were addressed using robust preprocessing techniques, transforming the dataset into a reliable and structured format.
+                    </p>
+                
+                    <h3 class="fade-in">Cleaned Data</h3>
+                    <div class="image-container">
+                        <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Snapshot" class="topic-image">
+                    </div>    
+                
+                    <p class="fade-in">
+                        The cleaned data is now structured and ready for meaningful analysis. With missing values handled and duplicates removed, 
+                        every entry is reliable and consistent. New features like calorie categories and nutrient ratios make it easier to 
+                        compare and identify trends. Outliers no longer skew results, ensuring accurate insights. Now, the data is clear, 
+                        organized, and optimized for drawing valuable conclusions about ultra-processed foods.
+                    </p>
+                
+                    <!-- Button for Cleaning Data Script -->
+                    <div class="button-section">
+                        <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/USDA_FOOD_Website/src/clean_data.py" target="_blank" class="github-button">
+                            Clean Data Script
+                        </a>
+                    </div>
+                
+                    <!-- Button for Cleaned Data CSV -->
+                    <div class="button-section">
+                        <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" target="_blank" class="github-button">
+                            Cleaned Data
+                        </a>
+                    </div>
+                
                 </div>
-
-                <!-- Button for Cleaned Data CSV -->
-                <div class="button-section">
-                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" target="_blank" class="github-button">
-                        Cleaned Data
-                    </a>
-                </div>
-
-            </div>    
                 
                 <div class="content-wrapper">
                     <h2 class="fade-in">Exploratory Data Analysis (EDA)</h2>
