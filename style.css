@@ -470,92 +470,111 @@ button:hover, .option:hover {
 
 
 
-/* Section Styling */
-.content-section {
-    padding: 40px 20px;
-    text-align: center;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    border-radius: 15px;
-    margin: 20px auto;
-    max-width: 900px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
+
 
 h1#typing-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
-    color: #333;
+    color: #2c3e50;
     margin-bottom: 10px;
 }
 
 h2, h3 {
-    font-size: 1.8rem;
+    font-size: 2rem;
     margin-top: 10px;
-    color: #555;
+    color: #34495e;
 }
 
 p, ul {
     font-size: 1.2rem;
-    color: #666;
+    color: #5d6d7e;
     line-height: 1.6;
-}
-
-ul {
-    list-style-type: disc;
-    margin: 20px;
-    padding-left: 40px;
-    text-align: left;
 }
 
 /* Highlight Section */
 .highlight-section {
-    background-color: #fff;
-    padding: 30px;
-    margin: 40px 0;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    padding: 40px;
+    margin: 50px 0;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
 }
 
+.highlight-section h3 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+/* Highlight Cards */
 .highlight-cards {
     display: flex;
     justify-content: space-around;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
 .card {
-    background-color: #f0f4f8;
-    padding: 20px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, #f5f7fa, #d7e1ec);
+    padding: 25px;
+    border-radius: 15px;
     width: 30%;
     min-width: 250px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .card h4 {
-    font-size: 1.6rem;
-    color: #333;
+    font-size: 1.8rem;
+    color: #2c3e50;
 }
 
 .card p {
-    font-size: 1rem;
-    color: #555;
+    font-size: 1.1rem;
+    color: #34495e;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    color: white;
+}
+
+.card::after {
+    content: attr(data-hover);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover::after {
+    opacity: 1;
 }
 
 /* Section Divider */
 .section-divider {
-    background: linear-gradient(90deg, #6dd5ed, #2193b0);
+    background: linear-gradient(90deg, #ff758c, #ff7eb3);
     color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    margin: 30px auto;
-    font-size: 1.5rem;
+    margin: 40px auto;
+    font-size: 1.8rem;
     font-weight: bold;
 }
 
