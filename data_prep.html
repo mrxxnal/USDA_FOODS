@@ -100,8 +100,19 @@
 
                     <h3 class="fade-in">Data Cleaning and Transformation Process</h3>
                     <p>
-                        After fetching the raw data, multiple preprocessing steps were carried out to clean and transform it for analysis:
+                        Before diving into the preprocessing steps, here is a snapshot of the raw, dirty data highlighting the challenges we addressed:
                     </p>
+                
+                    <!-- Display the Dirty Data Snapshot -->
+                    <div class="image-container">
+                        <img src="assets/dirty_data.jpeg" alt="Snapshot of Dirty Data" class="topic-image">
+                    </div>
+                
+                    <p>
+                        The raw data exhibited several issues, including missing values, duplicate rows, and extreme outliers. These challenges 
+                        necessitated a robust data cleaning and transformation process to ensure data quality and reliability.
+                    </p>
+                    
                     <ul>
                         <li><strong>Handling Missing Values:</strong> Missing values were replaced with default values to ensure completeness. 
                             Nutritional attributes were set to zero if missing, while categorical columns like 'Brand' and 'Category' were labeled as 'Unknown' or 'Uncategorized'.</li>
