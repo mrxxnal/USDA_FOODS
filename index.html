@@ -3,32 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USDA Food Analysis Project</title>
+    <title>USDA Food Analysis Project - Nutrient Galaxy</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
+    <!-- GSAP & D3.js Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const menuIcon = document.querySelector(".menu-icon");
-        const navbar = document.querySelector(".navbar");
-
-        menuIcon.addEventListener("click", function() {
-            navbar.classList.toggle("active");
-        });
-    });
-</script>
 
 <body>
 
-    <!-- Elegant Animated Background -->
+    <!-- Animated Background for Immersion -->
     <div class="food-background"></div>
     <div class="light-overlay"></div>
 
-    <!-- 🔹 Hamburger Menu Icon -->
+    <!-- Navigation Bar -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="index.html">Home</a>
@@ -46,87 +36,69 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-            <div class="content-section">
+    <!-- Hero Section with Typing Effect -->
+    <div class="content-section">
+        <h1 id="typing-title"></h1>
+        <p class="fade-in">Explore deep insights into food data, nutrition, and health trends.</p>
+        <button class="cta-button fade-in">Get Started</button>
+    </div>
 
-                <!-- Animated Title -->
-                <h1 id="typing-title"></h1>
-            
-                <!-- Highlighted Features Section -->
-                <div class="highlight-section fade-in">
-                    <h3>Why Explore Our Dashboard?</h3>
-                    <div class="highlight-cards">
-                        <div class="card" data-hover="Explore Data">
-                            <h4>In-Depth Analysis</h4>
-                            <p>Granular insights with dynamic visualizations and analytics.</p>
-                        </div>
-                        <div class="card" data-hover="Discover Patterns">
-                            <h4>Data-Driven Insights</h4>
-                            <p>Predictive models reveal hidden nutritional patterns.</p>
-                        </div>
-                        <div class="card" data-hover="Enjoy the Experience">
-                            <h4>User-Friendly Interface</h4>
-                            <p>Smooth navigation with interactive and informative visuals.</p>
-                        </div>
-                    </div>
-                </div>
-            
-                <!-- Aesthetic Section Divider -->
-                <div class="section-divider">
-                    <h2>Ready to Dive In? Click the Tabs Above to Get Started!</h2>
-                </div>
-            
-            </div>
+    <!-- Nutrient Galaxy Visualization -->
+    <section id="data-art" class="fade-in">
+        <h2>Data as Art: The Nutrient Galaxy</h2>
+        <p>Experience how complex food data transforms into a mesmerizing nutrient galaxy.</p>
+    </section>
 
-            <script src="js/gsap.js"></script>
+    <!-- Tooltip for Visualization -->
+    <div id="tooltip" class="tooltip"></div>
 
+    <!-- Animation and Interaction Scripts -->
+    <script src="js/gsap.js"></script>
+    <script type="module" src="animations.js"></script>
 
-            <!-- Your existing HTML content -->
-
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    let text = "Welcome to the USDA Food Analysis Project";
-                    let i = 0;
-                    function typeWriter() {
-                        if (i < text.length) {
-                            document.getElementById("typing-title").innerHTML += text.charAt(i);
-                            i++;
-                            setTimeout(typeWriter, 50);
-                        }
-                    }
-                    typeWriter();
-                });
-            </script>
-
-        <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let fadeInElements = document.querySelectorAll(".fade-in");
-    
-                function fadeInOnScroll() {
-                    fadeInElements.forEach(element => {
-                        let position = element.getBoundingClientRect().top;
-                        let screenHeight = window.innerHeight;
-    
-                        if (position < screenHeight - 100) {
-                            element.classList.add("visible");
-                        }
-                    });
+    <!-- Typing Effect for Title -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const text = "Welcome to the USDA Food Analysis Project - Nutrient Galaxy";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
                 }
-    
-                window.addEventListener("scroll", fadeInOnScroll);
-                fadeInOnScroll(); // Trigger on load
-            });
-        </script>
+            }
+            typeWriter();
+        });
+    </script>
 
+    <!-- Menu Toggle Script -->
     <script>
         function toggleMenu() {
-            var navbar = document.querySelector(".navbar");
-            navbar.classList.toggle("active");
+            document.querySelector(".navbar").classList.toggle("active");
         }
     </script>
 
-    <script type="module" src="animations.js"></script>
+    <!-- Smooth Fade-In Effect on Scroll -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeInElements = document.querySelectorAll(".fade-in");
+            function fadeInOnScroll() {
+                fadeInElements.forEach(element => {
+                    const position = element.getBoundingClientRect().top;
+                    const screenHeight = window.innerHeight;
+                    if (position < screenHeight - 100) {
+                        element.classList.add("visible");
+                    }
+                });
+            }
+            window.addEventListener("scroll", fadeInOnScroll);
+            fadeInOnScroll();
+        });
+    </script>
+
+    <!-- Overlay for Smooth Page Transitions -->
     <div class="transition-overlay"></div>
-    <script type="module" src="animations.js"></script>
+
 </body>
 </html>
