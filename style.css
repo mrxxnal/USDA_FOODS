@@ -578,6 +578,24 @@ p, ul {
     font-weight: bold;
 }
 
+#nutrient-galaxy {
+    background: radial-gradient(circle, rgba(20,20,20,1) 0%, rgba(30,30,30,1) 100%);
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 10;
+}
+
 /* Responsive Design for Mobile Screens */
 @media (max-width: 768px) {
     /* 🔹 Navbar Styles */

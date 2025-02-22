@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Load the GSAP and D3.js Libraries -->
+    <!-- Load GSAP & D3.js Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" defer></script>
     <script src="https://d3js.org/d3.v7.min.js" defer></script>
-
-    <!-- Link to Your Custom Script -->
-    <script src="jsap.js" defer></script>
+    
+    <!-- Custom JS for Nutrient Galaxy -->
+    <script src="nutrient_galaxy.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Animated Background for Immersion -->
+    <!-- Animated Background -->
     <div class="food-background"></div>
     <div class="light-overlay"></div>
 
@@ -39,40 +39,18 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-    <!-- Hero Section with Typing Effect -->
+    <!-- Hero Section -->
     <div class="content-section">
-        <h1 id="typing-title"></h1>
-        <p class="fade-in">Explore deep insights into food data, nutrition, and health trends.</p>
-        <button class="cta-button fade-in">Get Started</button>
-
-                <!-- Nutrient Galaxy Visualization -->
-        <section id="data-art" class="fade-in">
-            <h2>Data as Art: The Nutrient Galaxy</h2>
-            <p>Experience how complex food data transforms into a mesmerizing nutrient galaxy.</p>
-        </section>
-
+        <h1 id="typing-title">Welcome to the Nutrient Galaxy</h1>
+        <p>Explore how food data transforms into an interactive 3D universe of nutrients.</p>
     </div>
 
-    <!-- Tooltip for Visualization -->
+    <section id="nutrient-galaxy" class="fade-in" style="height: 600px; border: 1px solid #fff;">
+        <p>Loading Nutrient Galaxy...</p>
+    </section>
+
+    <!-- Tooltip for Hover Information -->
     <div id="tooltip" class="tooltip"></div>
-
-    <script type="module" src="animations.js"></script>
-
-    <!-- Typing Effect for Title -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const text = "Welcome to the USDA Food Analysis Project - Nutrient Galaxy";
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    document.getElementById("typing-title").innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            }
-            typeWriter();
-        });
-    </script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -80,27 +58,6 @@
             document.querySelector(".navbar").classList.toggle("active");
         }
     </script>
-
-    <!-- Smooth Fade-In Effect on Scroll -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const fadeInElements = document.querySelectorAll(".fade-in");
-            function fadeInOnScroll() {
-                fadeInElements.forEach(element => {
-                    const position = element.getBoundingClientRect().top;
-                    const screenHeight = window.innerHeight;
-                    if (position < screenHeight - 100) {
-                        element.classList.add("visible");
-                    }
-                });
-            }
-            window.addEventListener("scroll", fadeInOnScroll);
-            fadeInOnScroll();
-        });
-    </script>
-
-    <!-- Overlay for Smooth Page Transitions -->
-    <div class="transition-overlay"></div>
 
 </body>
 </html>
