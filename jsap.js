@@ -10,23 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "power3.out"
     });
 
-    // Nutrient Galaxy Visualization
+    // Nutrient Galaxy Visualization (Simplified)
     d3.csv("data/cleaned_data.csv").then(data => {
         console.log("📂 Data loaded successfully:", data);
-        
+
+        // Limit data to 100 items for faster rendering
+        const sampleData = data.slice(0, 100);
+
         const svg = d3.select("#data-art")
                       .append("svg")
                       .attr("width", "100%")
                       .attr("height", "500px");
-        
+
         console.log("✅ SVG Element Created:", svg.node());
 
-        // Prepare Data for Visualization
-        const nodes = data.map((d, i) => ({
+        // Prepare Data for Basic Visualization
+        const nodes = sampleData.map((d, i) => ({
             id: i,
             name: d.description,
             category: d.category,
-            value: +d.calories, // Using calories as an example
+            value: +d.calories,
             protein: +d.protein,
             fat: +d.fat,
             carbs: +d.carbs
@@ -37,17 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const simulation = d3.forceSimulation(nodes)
             .force("charge", d3.forceManyBody().strength(5))
             .force("center", d3.forceCenter(window.innerWidth / 2, 250))
-            .force("collision", d3.forceCollide().radius(d => d.value * 0.05))
+            .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.value) * 0.5))
             .on("tick", () => {
-                svg.selectAll("circle")
+                const circles = svg.selectAll("circle")
                     .data(nodes)
                     .join("circle")
-                    .attr("r", d => Math.sqrt(d.value) * 1.5)
+                    .attr("r", d => Math.sqrt(d.value) * 0.7) // Smaller size for quicker render
                     .attr("cx", d => d.x)
                     .attr("cy", d => d.y)
                     .attr("fill", "#ff6f61")
                     .attr("stroke", "#fff")
-                    .attr("stroke-width", 2)
+                    .attr("stroke-width", 1.5)
                     .on("mouseover", (event, d) => {
                         const tooltip = document.getElementById("tooltip");
                         tooltip.style.display = "block";
