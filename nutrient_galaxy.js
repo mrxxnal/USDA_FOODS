@@ -11,12 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const svg = d3.select("#nutrient-galaxy")
             .append("svg")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .style("background-color", "rgba(0, 0, 0, 0.8)");
 
         // Scales for Positioning and Colors
         const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.calories)]).range([50, width - 50]);
         const yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.protein)]).range([height - 50, 50]);
-        const colorScale = d3.scaleOrdinal(d3.schemeSet3);
+        const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
         // Create Data Circles
         const circles = svg.selectAll("circle")
@@ -43,11 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     Fat: ${d.fat}<br>
                     Carbs: ${d.carbs}
                 `;
-                gsap.to(event.target, { scale: 1.5, duration: 0.3 });
             })
-            .on("mouseout", (event) => {
+            .on("mouseout", () => {
                 document.getElementById("tooltip").style.display = "none";
-                gsap.to(event.target, { scale: 1, duration: 0.3 });
             });
 
         // GSAP Animation
@@ -60,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("❌ Error loading data:", error);
     });
 });
+

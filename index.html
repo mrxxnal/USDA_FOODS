@@ -3,55 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USDA Food Analysis Project - Nutrient Galaxy</title>
+    <title>Nutrient Galaxy</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Load GSAP & D3.js Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" defer></script>
     <script src="https://d3js.org/d3.v7.min.js" defer></script>
-    
-    <!-- Custom JS for Nutrient Galaxy -->
     <script src="nutrient_galaxy.js" defer></script>
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="food-background"></div>
-    <div class="light-overlay"></div>
-
-    <!-- Navigation Bar -->
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-    <div class="navbar">
-        <a href="index.html">Home</a>
-        <a href="introduction.html">Introduction</a>
-        <a href="data_prep.html">Data Prep</a>
-        <a href="eda.html">EDA</a>
-        <a href="pca.html">PCA</a>
-        <a href="clustering.html">Clustering</a>
-        <a href="arm.html">ARM</a>
-        <a href="decision_trees.html">Decision Trees</a>
-        <a href="naive_bayes.html">Naive Bayes</a>
-        <a href="svm.html">SVM</a>
-        <a href="regression.html">Regression</a>
-        <a href="conclusions.html">Conclusions</a>
-        <a href="about_me.html">About Me</a>
-    </div>
-
-    <!-- Hero Section -->
     <div class="content-section">
         <h1>Welcome to the Nutrient Galaxy</h1>
-        <p>Explore how food data transforms into an interactive 3D universe of nutrients.</p>
+        <p>Explore an interactive 3D universe of nutrients and food data.</p>
     </div>
 
-    <!-- Nutrient Galaxy Section -->
-    <section id="nutrient-galaxy" class="fade-in"></section>
+    <!-- Galaxy Visualization Section -->
+    <section id="nutrient-galaxy"></section>
 
     <!-- Tooltip for Hover Information -->
     <div id="tooltip" class="tooltip"></div>
-
 </body>
 </html>
+
 
 
 

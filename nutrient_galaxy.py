@@ -5,7 +5,7 @@ import os
 # Load the cleaned data
 df = pd.read_csv('data/cleaned_data.csv')
 
-# Limit the data to 25 rows for performance and visualization clarity
+# Limit the data to 25 rows for a clear visualization
 df = df.head(25)
 
 # Select relevant columns for the Nutrient Galaxy

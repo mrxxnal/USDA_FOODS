@@ -15,6 +15,21 @@ body {
     overflow-x: hidden;
 }
 
+#nutrient-galaxy svg {
+    border: 1px solid white;
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+    pointer-events: none;
+    font-size: 14px;
+    z-index: 10;
+}
+
 /* 🔹 Food-Themed Animated Background */
 .food-background {
     position: fixed;
@@ -576,22 +591,6 @@ p, ul {
     margin: 40px auto;
     font-size: 1.8rem;
     font-weight: bold;
-}
-
-#nutrient-galaxy svg {
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid white;
-}
-
-.tooltip {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px;
-    border-radius: 5px;
-    pointer-events: none;
-    font-size: 14px;
-    z-index: 10;
 }
 
 /* Responsive Design for Mobile Screens */
