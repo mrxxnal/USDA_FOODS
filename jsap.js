@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("🛠️ GSAP & D3 Loaded Successfully!");
 
-    // Initial Fade-In Animation for All Elements with .fade-in Class
+    // Initial Fade-In Animation
     gsap.from(".fade-in", {
         duration: 1.2,
         opacity: 0,
@@ -9,78 +10,64 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "power3.out"
     });
 
-    // 🌌 Nutrient Galaxy Visualization
-    const width = 800;
-    const height = 500;
-
-    const svg = d3.select("#data-art").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .style("background", "rgba(0,0,0,0.1)")
-        .style("border", "2px solid red"); // Visualize the SVG boundary
-
-    // Load and visualize data
+    // Nutrient Galaxy Visualization
     d3.csv("data/cleaned_data.csv").then(data => {
-        console.log("Data loaded successfully:", data); // Check if data loads correctly
+        console.log("📂 Data loaded successfully:", data);
+        
+        const svg = d3.select("#data-art")
+                      .append("svg")
+                      .attr("width", "100%")
+                      .attr("height", "500px");
+        
+        console.log("✅ SVG Element Created:", svg.node());
 
-        const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
-        const tooltip = d3.select("#tooltip")
-            .style("opacity", 0)
-            .attr("class", "tooltip");
-
-        const nodes = data.map(d => ({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.sqrt(d.calories) * 0.8,
-            color: colorScale(d.category),
-            description: d.description,
-            calories: d.calories,
-            brand: d.brand
+        // Prepare Data for Visualization
+        const nodes = data.map((d, i) => ({
+            id: i,
+            name: d.description,
+            category: d.category,
+            value: +d.calories, // Using calories as an example
+            protein: +d.protein,
+            fat: +d.fat,
+            carbs: +d.carbs
         }));
 
-        svg.selectAll("circle")
-            .data(nodes)
-            .enter().append("circle")
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .attr("r", d => d.radius)
-            .attr("fill", d => d.color)
-            .attr("opacity", 0.8)
-            .on("mouseover", (event, d) => {
-                tooltip.transition().duration(200).style("opacity", 1);
-                tooltip.html(`<strong>${d.description}</strong><br>Calories: ${d.calories}<br>Brand: ${d.brand}`)
-                    .style("left", (event.pageX + 10) + "px")
-                    .style("top", (event.pageY - 20) + "px");
-                gsap.to(event.target, { scale: 1.5, duration: 0.3, ease: "power2.out" });
-            })
-            .on("mouseout", (event) => {
-                tooltip.transition().duration(500).style("opacity", 0);
-                gsap.to(event.target, { scale: 1, duration: 0.3, ease: "power2.out" });
-            });
+        console.log("🌐 Nodes for Visualization:", nodes);
 
+        const simulation = d3.forceSimulation(nodes)
+            .force("charge", d3.forceManyBody().strength(5))
+            .force("center", d3.forceCenter(window.innerWidth / 2, 250))
+            .force("collision", d3.forceCollide().radius(d => d.value * 0.05))
+            .on("tick", () => {
+                svg.selectAll("circle")
+                    .data(nodes)
+                    .join("circle")
+                    .attr("r", d => Math.sqrt(d.value) * 1.5)
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("fill", "#ff6f61")
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 2)
+                    .on("mouseover", (event, d) => {
+                        const tooltip = document.getElementById("tooltip");
+                        tooltip.style.display = "block";
+                        tooltip.style.left = `${event.pageX + 10}px`;
+                        tooltip.style.top = `${event.pageY + 10}px`;
+                        tooltip.innerHTML = `
+                            <strong>${d.name}</strong><br>
+                            Category: ${d.category}<br>
+                            Calories: ${d.value}<br>
+                            Protein: ${d.protein}<br>
+                            Fat: ${d.fat}<br>
+                            Carbs: ${d.carbs}
+                        `;
+                    })
+                    .on("mouseout", () => {
+                        const tooltip = document.getElementById("tooltip");
+                        tooltip.style.display = "none";
+                    });
+            });
     }).catch(error => {
-        console.error("Error loading data:", error);
+        console.error("❌ Error loading data:", error);
     });
-
-    // Add Button Hover Animation for GitHub Buttons
-    document.querySelectorAll('.github-button').forEach(button => {
-        button.addEventListener('mouseenter', () => {
-            gsap.to(button, {
-                backgroundColor: "#e67e22",
-                scale: 1.05,
-                duration: 0.2,
-                ease: "power1.out"
-            });
-        });
-        button.addEventListener('mouseleave', () => {
-            gsap.to(button, {
-                backgroundColor: "#333",
-                scale: 1,
-                duration: 0.2,
-                ease: "power1.out"
-            });
-        });
-    });
-
 });
