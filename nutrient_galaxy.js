@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("🌌 Nutrient Galaxy Script Initialized!");
 
-    // Load Data from JSON
     d3.json("data/nutrient_data.json").then(data => {
         console.log("✅ Data loaded:", data);
 
@@ -13,8 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
             .append("svg")
             .attr("width", width)
             .attr("height", height);
-
-        console.log("🖼️ SVG Element Created:", svg.node());
 
         // Scales for Positioning and Colors
         const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.calories)]).range([50, width - 50]);
@@ -28,10 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             .append("circle")
             .attr("cx", d => xScale(d.calories))
             .attr("cy", d => yScale(d.protein))
-            .attr("r", d => Math.sqrt(d.fat) * 5)
+            .attr("r", d => Math.max(10, Math.sqrt(d.fat) * 5))
             .attr("fill", d => colorScale(d.category))
             .attr("stroke", "white")
-            .attr("stroke-width", 1)
+            .attr("stroke-width", 1.5)
             .style("opacity", 0.8)
             .on("mouseover", (event, d) => {
                 const tooltip = document.getElementById("tooltip");
@@ -53,12 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 gsap.to(event.target, { scale: 1, duration: 0.3 });
             });
 
-        console.log("🌠 Circles Rendered:", circles.nodes().length);
-
         // GSAP Animation
         gsap.fromTo(circles.nodes(), 
             { opacity: 0, y: -50 },
-            { opacity: 0.8, y: 0, duration: 1.5, stagger: 0.02, ease: "power2.out" }
+            { opacity: 0.8, y: 0, duration: 1.5, stagger: 0.05, ease: "power2.out" }
         );
 
     }).catch(error => {
