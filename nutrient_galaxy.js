@@ -1,72 +1,88 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("🌌 Nutrient Galaxy Script Initialized!");
+// Import necessary modules
+import 'style.css';
+import React, { useState, useEffect } from 'react';
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import axios from 'axios';
 
-    d3.json("data/nutrient_data.json").then(data => {
-        console.log("✅ Data loaded:", data);
+const UltimateNutrientGalaxy = () => {
+    const [data, setData] = useState([]);
+    const planetTextures = [
+        '/assets/makemake.png',
+        '/assets/jupiter.png',
+        '/assets/mercury.png',
+        '/assets/mars.png',
+        '/assets/pluto.png'
+    ];
 
+    useEffect(() => {
+        axios.get('data/nutrient_data.json')
+            .then((response) => {
+                setData(response.data.slice(0, 30)); // Limit to 30 planets
+                console.log('✅ Data loaded:', response.data);
+                initThreeJS(response.data.slice(0, 30));
+            })
+            .catch((error) => {
+                console.error('❌ Error loading data:', error);
+            });
+    }, []);
+
+    const initThreeJS = (data) => {
         const width = window.innerWidth;
         const height = window.innerHeight;
 
-        // Create a Three.js scene
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-        camera.position.z = 200;
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
+        camera.position.z = 1000;
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(width, height);
         renderer.setClearColor(0x1a1a1a, 1);
         document.getElementById('nutrient-galaxy').appendChild(renderer.domElement);
 
-        // Add light to the scene
-        const light = new THREE.PointLight(0xffffff, 1);
-        light.position.set(100, 100, 100);
-        scene.add(light);
-
-        const ambientLight = new THREE.AmbientLight(0x404040);
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0x888888, 1.5);
         scene.add(ambientLight);
 
-        // Procedural planet textures using Three.js MeshStandardMaterial
-        const planetColors = ['#3a3a3a', '#6b8e23', '#4682b4', '#8b4513', '#d2691e', '#708090', '#2e8b57', '#b22222'];
+        const light = new THREE.PointLight(0xffffff, 1);
+        light.position.set(500, 500, 500);
+        scene.add(light);
 
+        const textureLoader = new THREE.TextureLoader();
         const planets = [];
 
-        data.slice(0, 30).forEach((d, i) => {
-            const geometry = new THREE.SphereGeometry(Math.max(20, Math.sqrt(d.calories) * 10), 64, 64);
+        data.forEach((d, i) => {
+            const radius = Math.max(80, Math.sqrt(d.calories) * 10);
+            const geometry = new THREE.SphereGeometry(radius, 64, 64);
+            const texture = textureLoader.load(planetTextures[i % planetTextures.length]);
             const material = new THREE.MeshStandardMaterial({
-                color: planetColors[i % planetColors.length],
-                roughness: 0.5,
-                metalness: 0.3
+                map: texture,
+                roughness: 0.8,
+                metalness: 0.2
             });
+
             const planet = new THREE.Mesh(geometry, material);
 
-            planet.position.x = (Math.random() - 0.5) * 800;
-            planet.position.y = (Math.random() - 0.5) * 800;
-            planet.position.z = (Math.random() - 0.5) * 800;
-
-            planet.userData = {
-                description: d.description,
-                category: d.category,
-                calories: d.calories,
-                protein: d.protein,
-                fat: d.fat,
-                carbs: d.carbs
-            };
+            planet.position.x = (Math.random() - 0.5) * 2000;
+            planet.position.y = (Math.random() - 0.5) * 1000;
+            planet.position.z = (Math.random() - 0.5) * 2000;
 
             scene.add(planet);
             planets.push(planet);
         });
 
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
 
+        const animate = () => {
+            requestAnimationFrame(animate);
             planets.forEach(planet => {
                 planet.rotation.y += 0.005;
                 planet.rotation.x += 0.002;
             });
-
+            controls.update();
             renderer.render(scene, camera);
-        }
+        };
 
         animate();
 
@@ -77,42 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
         });
+    };
 
-        // Tooltip for displaying planet info
-        window.addEventListener('mousemove', (event) => {
-            const mouse = new THREE.Vector2(
-                (event.clientX / window.innerWidth) * 2 - 1,
-                - (event.clientY / window.innerHeight) * 2 + 1
-            );
+    return (
+        <div>
+            <h2 className="galaxy-header">Ultimate Nutrient Galaxy</h2>
+            <div id="nutrient-galaxy" style={{ width: '100%', height: '100vh' }}></div>
+        </div>
+    );
+};
 
-            const raycaster = new THREE.Raycaster();
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObjects(planets);
-
-            const tooltip = document.getElementById('tooltip');
-
-            if (intersects.length > 0) {
-                const { description, category, calories, protein, fat, carbs } = intersects[0].object.userData;
-                tooltip.style.display = 'block';
-                tooltip.style.left = `${event.pageX + 10}px`;
-                tooltip.style.top = `${event.pageY + 10}px`;
-                tooltip.innerHTML = `
-                    <strong>${description}</strong><br>
-                    Category: ${category}<br>
-                    Calories: ${calories}<br>
-                    Protein: ${protein}<br>
-                    Fat: ${fat}<br>
-                    Carbs: ${carbs}
-                `;
-            } else {
-                tooltip.style.display = 'none';
-            }
-        });
-
-    }).catch(error => {
-        console.error("❌ Error loading data:", error);
-    });
-});
-
-
+export default UltimateNutrientGalaxy;
 
