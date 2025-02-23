@@ -5,58 +5,114 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("✅ Data loaded:", data);
 
         const width = window.innerWidth;
-        const height = 600;
+        const height = window.innerHeight;
 
-        // SVG Container
-        const svg = d3.select("#nutrient-galaxy")
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .style("background-color", "rgba(0, 0, 0, 0.8)");
+        // Create a Three.js scene
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+        camera.position.z = 200;
 
-        // Scales for Positioning and Colors
-        const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.calories)]).range([50, width - 50]);
-        const yScale = d3.scaleLinear().domain([0, d3.max(data, d => d.protein)]).range([height - 50, 50]);
-        const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(width, height);
+        renderer.setClearColor(0x1a1a1a, 1);
+        document.getElementById('nutrient-galaxy').appendChild(renderer.domElement);
 
-        // Create Data Circles
-        const circles = svg.selectAll("circle")
-            .data(data)
-            .enter()
-            .append("circle")
-            .attr("cx", d => xScale(d.calories))
-            .attr("cy", d => yScale(d.protein))
-            .attr("r", d => Math.max(10, Math.sqrt(d.fat) * 5))
-            .attr("fill", d => colorScale(d.category))
-            .attr("stroke", "white")
-            .attr("stroke-width", 1.5)
-            .style("opacity", 0.8)
-            .on("mouseover", (event, d) => {
-                const tooltip = document.getElementById("tooltip");
-                tooltip.style.display = "block";
+        // Add light to the scene
+        const light = new THREE.PointLight(0xffffff, 1);
+        light.position.set(100, 100, 100);
+        scene.add(light);
+
+        const ambientLight = new THREE.AmbientLight(0x404040);
+        scene.add(ambientLight);
+
+        // Procedural planet textures using Three.js MeshStandardMaterial
+        const planetColors = ['#3a3a3a', '#6b8e23', '#4682b4', '#8b4513', '#d2691e', '#708090', '#2e8b57', '#b22222'];
+
+        const planets = [];
+
+        data.slice(0, 30).forEach((d, i) => {
+            const geometry = new THREE.SphereGeometry(Math.max(20, Math.sqrt(d.calories) * 10), 64, 64);
+            const material = new THREE.MeshStandardMaterial({
+                color: planetColors[i % planetColors.length],
+                roughness: 0.5,
+                metalness: 0.3
+            });
+            const planet = new THREE.Mesh(geometry, material);
+
+            planet.position.x = (Math.random() - 0.5) * 800;
+            planet.position.y = (Math.random() - 0.5) * 800;
+            planet.position.z = (Math.random() - 0.5) * 800;
+
+            planet.userData = {
+                description: d.description,
+                category: d.category,
+                calories: d.calories,
+                protein: d.protein,
+                fat: d.fat,
+                carbs: d.carbs
+            };
+
+            scene.add(planet);
+            planets.push(planet);
+        });
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            planets.forEach(planet => {
+                planet.rotation.y += 0.005;
+                planet.rotation.x += 0.002;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        // Tooltip for displaying planet info
+        window.addEventListener('mousemove', (event) => {
+            const mouse = new THREE.Vector2(
+                (event.clientX / window.innerWidth) * 2 - 1,
+                - (event.clientY / window.innerHeight) * 2 + 1
+            );
+
+            const raycaster = new THREE.Raycaster();
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(planets);
+
+            const tooltip = document.getElementById('tooltip');
+
+            if (intersects.length > 0) {
+                const { description, category, calories, protein, fat, carbs } = intersects[0].object.userData;
+                tooltip.style.display = 'block';
                 tooltip.style.left = `${event.pageX + 10}px`;
                 tooltip.style.top = `${event.pageY + 10}px`;
                 tooltip.innerHTML = `
-                    <strong>${d.description}</strong><br>
-                    Category: ${d.category}<br>
-                    Calories: ${d.calories}<br>
-                    Protein: ${d.protein}<br>
-                    Fat: ${d.fat}<br>
-                    Carbs: ${d.carbs}
+                    <strong>${description}</strong><br>
+                    Category: ${category}<br>
+                    Calories: ${calories}<br>
+                    Protein: ${protein}<br>
+                    Fat: ${fat}<br>
+                    Carbs: ${carbs}
                 `;
-            })
-            .on("mouseout", () => {
-                document.getElementById("tooltip").style.display = "none";
-            });
-
-        // GSAP Animation
-        gsap.fromTo(circles.nodes(), 
-            { opacity: 0, y: -50 },
-            { opacity: 0.8, y: 0, duration: 1.5, stagger: 0.05, ease: "power2.out" }
-        );
+            } else {
+                tooltip.style.display = 'none';
+            }
+        });
 
     }).catch(error => {
         console.error("❌ Error loading data:", error);
     });
 });
+
+
 

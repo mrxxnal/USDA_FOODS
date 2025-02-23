@@ -2,14 +2,14 @@ import pandas as pd
 import json
 import os
 
-# Load the cleaned data
-df = pd.read_csv('data/cleaned_data.csv')
+# Load the cleaned normalized data CSV
+df = pd.read_csv('data/clean_normalized_data.csv')
 
-# Limit the data to 25 rows for a clear visualization
-df = df.head(25)
+# Drop duplicate descriptions while keeping the first occurrence
+df_unique = df.drop_duplicates(subset=['description'])
 
 # Select relevant columns for the Nutrient Galaxy
-galaxy_data = df[[
+galaxy_data = df_unique[[
     'description', 'category', 'brand',
     'calories', 'protein', 'fat', 'carbs',
     'calories_per_protein', 'calories_per_fat', 'calories_per_carb'
@@ -26,4 +26,4 @@ json_path = 'data/nutrient_data.json'
 with open(json_path, 'w', encoding='utf-8') as f:
     json.dump(data_dict, f, ensure_ascii=False, indent=4)
 
-print(f'✅ JSON data generated and saved as {json_path}')
+print(f'✅ JSON data with unique descriptions generated and saved as {json_path}')

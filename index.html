@@ -3,29 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutrient Galaxy</title>
+    <title>Ultimate Nutrient Galaxy</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Load GSAP & D3.js Libraries -->
+    <!-- Load GSAP, D3.js, and Three.js Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js" defer></script>
     <script src="https://d3js.org/d3.v7.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
     <script src="nutrient_galaxy.js" defer></script>
 </head>
 
 <body>
-    <div class="content-section">
-        <h1>Welcome to the Nutrient Galaxy</h1>
-        <p>Explore an interactive 3D universe of nutrients and food data.</p>
+    <!-- Animated Space Background -->
+    <div class="space-background"></div>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="introduction.html">Introduction</a>
+        <a href="data_prep.html">Data Prep</a>
+        <a href="eda.html">EDA</a>
+        <a href="pca.html">PCA</a>
+        <a href="clustering.html">Clustering</a>
+        <a href="arm.html">ARM</a>
+        <a href="decision_trees.html">Decision Trees</a>
+        <a href="naive_bayes.html">Naive Bayes</a>
+        <a href="svm.html">SVM</a>
+        <a href="regression.html">Regression</a>
+        <a href="conclusions.html">Conclusions</a>
+        <a href="about_me.html">About Me</a>
     </div>
 
-    <!-- Galaxy Visualization Section -->
-    <section id="nutrient-galaxy"></section>
+    <!-- Hero Section -->
+    <div class="content-section">
+        <h1>Welcome to the Ultimate Nutrient Galaxy</h1>
+        <p>Explore an interactive 3D universe of nutrients, complete with rotating planets and a cosmic ambiance.</p>
+    </div>
+
+    <!-- Nutrient Galaxy Section -->
+    <section id="nutrient-galaxy" class="fade-in"></section>
 
     <!-- Tooltip for Hover Information -->
     <div id="tooltip" class="tooltip"></div>
+
+    <!-- Starry Overlay for Galaxy Feel -->
+    <div class="stars"></div>
+
 </body>
 </html>
+
 
 
 

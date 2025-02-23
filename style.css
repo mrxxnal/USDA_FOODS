@@ -15,20 +15,49 @@ body {
     overflow-x: hidden;
 }
 
-#nutrient-galaxy svg {
-    border: 1px solid white;
+/* Space Background Animation */
+.space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, #000, #1a1a1a, #000);
+    z-index: -2;
+    animation: star-twinkle 50s infinite linear;
+    overflow: hidden;
 }
 
+/* Starry effect */
+@keyframes star-twinkle {
+    0%, 100% { background-position: 0 0; }
+    50% { background-position: 1000px 1000px; }
+}
+
+/* Three.js Renderer Container */
+#nutrient-galaxy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+/* Tooltip Styles */
 .tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 8px;
+    padding: 10px;
     border-radius: 5px;
     pointer-events: none;
     font-size: 14px;
     z-index: 10;
+    max-width: 200px;
 }
+
+
 
 /* 🔹 Food-Themed Animated Background */
 .food-background {
