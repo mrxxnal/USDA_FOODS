@@ -16,23 +16,41 @@ body {
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
-/* Space Background Animation */
+/* Space Background */
 .space-background {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, #000, #1a1a1a, #000);
-    z-index: -1;
-    animation: star-twinkle 50s infinite linear;
     overflow: hidden;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #000, #343434, #000);
 }
 
-/* Starry effect */
-@keyframes star-twinkle {
-    0%, 100% { background-position: 0 0; }
-    50% { background-position: 1000px 1000px; }
+/* Glowing Star Effect */
+.star {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 2s infinite alternate;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+/* Intense Twinkle Animation */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.1;
+        transform: scale(0.8);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 
+                    0 0 30px rgba(0, 153, 255, 0.6);
+    }
 }
 
 /* Container for the Nutrient Galaxy */
@@ -77,30 +95,108 @@ body {
 }
 
 /* Info Box */
+/* Info Box */
 .info-box {
     position: absolute;
     max-width: 270px;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(25, 25, 112, 0.8), rgba(0, 0, 0, 0.8));
     color: white;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 
+                0 0 20px rgba(0, 153, 255, 0.6); /* Soft blue glow */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 10;
-    transition: transform 0.3s, opacity 0.3s;
-    transform: translateY(-20px); /* Adjusted offset */
-    opacity: 3;
+    opacity: 0;
+    transform: translateX(-50px); /* Start from the left */
+    animation: slideInFromLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* Smooth Slide-In Animation */
+@keyframes slideInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translateX(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Floating animation */
+@keyframes floatInfoBox {
+    0%, 100% {
+        transform: translateY(10px);
+    }
+    50% {
+        transform: translateY(0px);
+    }
+}
+
+.info-box h2::before {
+    content: "🌌";
+    margin-right: 8px;
+    font-size: 1.2em;
 }
 
 /* Info Box Content */
 .info-box h2 {
     margin: 0;
-    font-size: 22px;
+    font-size: 24px;
     color: #ffcc00;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
 }
 
+/* Highlight specific terms */
+.info-box p strong {
+    color: #80dfff;
+    text-shadow: 0 0 5px rgba(128, 223, 255, 0.8);
+}
+
+/* Enhanced text styling */
 .info-box p {
     margin: 8px 0;
     line-height: 1.4;
+    font-size: 15px;
+}
+
+.galaxy-header {
+    font-size: 4rem;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, #ffcc00, #80dfff, #ff80ab);
+    background-clip: text; /* Standard property */
+    -webkit-background-clip: text; /* Vendor prefix for Safari/older browsers */
+    color: transparent;
+    text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.6), 
+                 0 0 20px rgba(128, 223, 255, 0.8),
+                 0 0 30px rgba(255, 128, 171, 0.6);
+    animation: cosmicGlow 5s infinite alternate;
+    letter-spacing: 2px;
+}
+
+/* Shimmering Animation */
+@keyframes cosmicGlow {
+    0% {
+        text-shadow: 2px 2px 15px rgba(255, 255, 255, 0.6), 
+                     0 0 20px rgba(128, 223, 255, 0.8),
+                     0 0 30px rgba(255, 128, 171, 0.6);
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 4px 4px 25px rgba(255, 255, 255, 0.8), 
+                     0 0 30px rgba(128, 223, 255, 1),
+                     0 0 40px rgba(255, 128, 171, 0.8);
+        transform: scale(1.05);
+    }
 }
 
 
@@ -604,68 +700,6 @@ p, ul {
     justify-content: space-around;
     gap: 30px;
     flex-wrap: wrap;
-}
-
-.card {
-    background: linear-gradient(135deg, #f5f7fa, #d7e1ec);
-    padding: 25px;
-    border-radius: 15px;
-    width: 30%;
-    min-width: 250px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s, background 0.5s;
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.card h4 {
-    font-size: 1.8rem;
-    color: #2c3e50;
-}
-
-.card p {
-    font-size: 1.1rem;
-    color: #34495e;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
-    color: white;
-}
-
-.card::after {
-    content: attr(data-hover);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.card:hover::after {
-    opacity: 1;
-}
-
-/* Section Divider */
-.section-divider {
-    background: linear-gradient(90deg, #ff758c, #ff7eb3);
-    color: white;
-    padding: 25px;
-    border-radius: 10px;
-    margin: 40px auto;
-    font-size: 1.8rem;
-    font-weight: bold;
 }
 
 /* Responsive Design for Mobile Screens */

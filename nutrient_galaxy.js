@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("🌌 Super Simple Nutrient Galaxy Initialized!");
 
+    // Generate Twinkling Stars in the Background
+    generateStars(150); // Number of stars to create
+
     // Load the JSON data
     fetch('data/planet_data.json')
         .then(response => {
@@ -107,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
 
-            // Populate info box content
             const planetData = planetInfo[d.description] || {
                 orbitFact: "A unique planet in our nutrient galaxy! Enjoy it mindfully to keep your health in orbit.",
                 cosmicTip: "Balance your intake with fresh fruits and water to stay stellar! 🚀"
@@ -125,6 +127,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log(`🪐 Added planet: ${d.description} at (${x}, ${y})`);
         });
+    }
+
+    // Generate glowing stars in the background
+    function generateStars(count) {
+        const spaceBackground = document.querySelector('.space-background');
+
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            const size = Math.random() * 2 + 1; // Star size between 1px and 3px
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.animationDuration = `${Math.random() * 1.5 + 1}s`; // Twinkle faster (1s to 2.5s)
+            spaceBackground.appendChild(star);
+        }
     }
 });
 
