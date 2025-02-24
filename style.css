@@ -25,7 +25,7 @@ body {
     height: 100%;
     overflow: hidden;
     z-index: -1;
-    background: radial-gradient(circle at 50% 50%, #000000, #040524, #000);
+    background: radial-gradient(circle at 50% 50%, #000000, #300505, #000);
 }
 
 /* Milky Way Container */
