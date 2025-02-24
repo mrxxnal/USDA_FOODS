@@ -28,6 +28,53 @@ body {
     background: radial-gradient(circle at 50% 50%, #000, #343434, #000);
 }
 
+/* Milky Way Container */
+.milky-way-container {
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none; /* Prevent interaction */
+    z-index: 0;
+}
+
+/* Twinkling Animation */
+@keyframes milkyTwinkle {
+    0%, 100% {
+        opacity: 0.2;
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.5);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+}
+
+/* Rotation Animation */
+@keyframes milkyRotate {
+    0% {
+        transform: rotate(0deg) translateX(50px);
+    }
+    100% {
+        transform: rotate(360deg) translateX(50px);
+    }
+}
+
+/* Milky Way Stars */
+.milky-star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 5s infinite ease-in-out;
+}
+
 /* Glowing Star Effect */
 .star {
     position: absolute;
@@ -103,23 +150,23 @@ body {
     color: white;
     border-radius: 12px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 
-                0 0 20px rgba(0, 153, 255, 0.6); /* Soft blue glow */
+                0 0 20px rgba(0, 153, 255, 0.9); /* Soft blue glow */
     border: 1px solid rgba(255, 255, 255, 0.2);
     z-index: 10;
     opacity: 0;
-    transform: translateX(-50px); /* Start from the left */
-    animation: slideInFromLeft 1.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    transform: translateX(-80px); /* Start from the left */
+    
+    /* Combine slide-in and floating animation */
+    animation: 
+        slideInFromLeft 2s linear forwards, /* Slide-in with constant speed */
+        floatInfoBox 4s ease-in-out infinite; /* Gentle floating effect */
 }
 
-/* Smooth Slide-In Animation */
+/* Slide-in Animation */
 @keyframes slideInFromLeft {
     0% {
         opacity: 0;
-        transform: translateX(-50px);
-    }
-    50% {
-        opacity: 0.6;
-        transform: translateX(-20px);
+        transform: translateX(-80px);
     }
     100% {
         opacity: 1;
@@ -127,7 +174,7 @@ body {
     }
 }
 
-/* Floating animation */
+/* Floating Animation */
 @keyframes floatInfoBox {
     0%, 100% {
         transform: translateY(10px);

@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Generate Twinkling Stars in the Background
     generateStars(150); // Number of stars to create
+    generateMilkyWay(100); // Number of stars in the Milky Way
+
 
     // Load the JSON data
     fetch('data/planet_data.json')
@@ -23,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         galaxyContainer.innerHTML = ''; // Clear any existing elements
 
         const planetImages = {
-            'SODA': 'assets/makemake.png',
+            'SODA': 'assets/mercury.png',
             'CHIPS': 'assets/jupiter.png',
             'CANDY': 'assets/moon.png',
             'SNACKS': 'assets/mars.png',
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Create an info box next to each planet and make it always visible
             const infoBox = document.createElement('div');
             infoBox.className = 'info-box';
-            infoBox.style.left = (index % 2 === 0) ? '35%' : '75%';
+            infoBox.style.left = (index % 2 === 0) ? '30%' : '70%';
             infoBox.style.top = `calc(${y} + 50px)`;
 
             // Define custom info for each planet
@@ -129,7 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Generate glowing stars in the background
     function generateStars(count) {
         const spaceBackground = document.querySelector('.space-background');
 
@@ -137,14 +138,42 @@ document.addEventListener('DOMContentLoaded', () => {
             const star = document.createElement('div');
             star.className = 'star';
             
-            const size = Math.random() * 2 + 1; // Star size between 1px and 3px
+            const size = Math.random() * 2 + 1; 
             star.style.width = `${size}px`;
             star.style.height = `${size}px`;
             star.style.top = `${Math.random() * 100}vh`;
             star.style.left = `${Math.random() * 100}vw`;
-            star.style.animationDuration = `${Math.random() * 1.5 + 1}s`; // Twinkle faster (1s to 2.5s)
+            star.style.animationDuration = `${Math.random() * 1.5 + 1}s`; 
             spaceBackground.appendChild(star);
         }
+    }
+
+    function generateMilkyWay(count) {
+        const milkyWayContainer = document.querySelector('.milky-way-container');
+
+        if (!milkyWayContainer) {
+            console.error("❌ Milky Way container not found.");
+            return;
+        }
+
+        for (let i = 0; i < count; i++) {
+            const star = document.createElement('div');
+            star.className = 'milky-star';
+
+            const size = Math.random() * 2 + 1;
+            const delay = Math.random() * 3;
+
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.left = `${70 + Math.random() * 25}vw`; // Confine to the right side
+            star.style.animationDelay = `${delay}s`;
+            star.style.animationDuration = `${Math.random() * 2 + 2}s`; 
+
+            milkyWayContainer.appendChild(star);
+        }
+
+        console.log("🌠 Milky Way generated with", count, "stars");
     }
 });
 
