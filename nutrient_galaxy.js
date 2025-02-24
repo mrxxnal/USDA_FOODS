@@ -48,14 +48,32 @@ document.addEventListener('DOMContentLoaded', () => {
                 planet.src = 'assets/default.png'; // Fallback to default
             };
 
-            // Randomly position the planets within the container
-            const x = Math.random() * (window.innerWidth - 150);
-            const y = Math.random() * (window.innerHeight - 150);
-            planet.style.left = `${x}px`;
-            planet.style.top = `${y}px`;
+            // Alternate left and right positioning with structured vertical spacing
+            const index = data.indexOf(d);
+            const x = (index % 2 === 0) ? '10%' : '60%'; // Alternate between left and right
+            const y = `${10 + index * 20}%`; // Vertically space planets evenly
+
+            planet.style.left = x;
+            planet.style.top = y;
+
+            // Create an info box next to each planet
+            const infoBox = document.createElement('div');
+            infoBox.className = 'info-box';
+            infoBox.style.left = (index % 2 === 0) ? '30%' : '80%';
+            infoBox.style.top = y;
+
+            galaxyContainer.appendChild(infoBox);
 
             // Add a simple tooltip on hover
+            // Keep the hover tooltip with nutritional info
             planet.title = `${d.description}\nCategory: ${d.category}\nBrand: ${d.brand}`;
+
+            // Show custom content in the info box
+            planet.addEventListener('click', () => {
+                infoBox.innerHTML = `<h2>${d.description} Planet</h2>
+                    <p><strong>Did you know?</strong> This planet is part of our Ultimate Nutrient Galaxy and represents the food category of ${d.category}. Explore more to learn about its unique properties and benefits!</p>`;
+                infoBox.style.display = 'block';
+            });
 
             galaxyContainer.appendChild(planet);
 
