@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // Alternate left and right positioning with structured vertical spacing
-            const x = (index % 2 === 0) ? '10%' : '50%'; // Alternate between left and right
+            const x = (index % 2 === 0) ? '5%' : '45%'; // Alternate between left and right
             const y = `${0 + index * 25}%`; // Vertically space planets evenly
 
             planet.style.left = x;
@@ -64,8 +64,12 @@ document.addEventListener('DOMContentLoaded', () => {
             infoBox.style.top = `calc(${y} + 50px)`;
 
             // Populate info box content
-            infoBox.innerHTML = `<h2>${d.description} Planet</h2>
-                <p><strong>Did you know?</strong> This planet is part of our Ultimate Nutrient Galaxy and represents the food category of ${d.category}. Explore more to learn about its unique properties and benefits!</p>`;
+            infoBox.innerHTML = `
+            <h2>${d.description} Planet 🌠</h2>
+            <p><strong>Category:</strong> ${d.category}</p>
+            <p><strong>Orbit Fact:</strong> The ${d.description} planet is a true taste supernova! Enjoy its boost but don't let your cravings pull you into a black hole.</p>
+            <p><strong>Cosmic Tip:</strong> Keep your nutrition in orbit—balance ${d.description.toLowerCase()} with fresh fruits and water! 🚀</p>
+        `;
 
             galaxyContainer.appendChild(planet);
             galaxyContainer.appendChild(infoBox);

@@ -12,7 +12,7 @@ body {
     padding: 0;
     color: #2c3e50;
     background-color: #f7f1e3;
-    overflow-x: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
@@ -35,79 +35,63 @@ body {
     50% { background-position: 1000px 1000px; }
 }
 
-/* Three.js Renderer Container */
+/* Container for the Nutrient Galaxy */
 #nutrient-galaxy {
     position: relative;
-    top: 200px; /* Shifted down to avoid overlapping the heading */
+    top: 20px; /* Add space below the header */
     left: 0;
     width: 100%;
     overflow-y: visible;
     z-index: 1;
-    min-height: 200vh; /* Ensure enough vertical space */
-
+    min-height: 90vh; /* Ensure enough vertical space */
+    padding-bottom: 70vh; /* Extra space at the bottom */
 }
 
-.galaxy-header {
-    color: white;
-    font-size: 3rem;
-    text-align: center;
-    margin-top: 20px;
-    font-family: 'Lato', sans-serif;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s, color 0.3s;
-}
-
-.galaxy-header:hover {
-    transform: scale(1.1);
-    color: #ffcc00;
-}
-
-.galaxy-container {
-    position: relative;
-    width: 100vw;
-    height: 90vh;
-    overflow: hidden;
-}
-
+/* Planets */
 .planet {
     position: absolute;
-    width: 450px; /* Make the planets 3x bigger */
+    width: 550px; /* Large planets */
     height: 450px;
-    transition: transform 0.2s;
-    object-fit: contain; /* Maintain the aspect ratio */
+    transition: transform 0.3s;
+    object-fit: contain;
+    animation: rotatePlanet 20s infinite linear;
+    transform-origin: center;
+    backface-visibility: hidden;
 }
 
+/* Define the rotation animation */
+@keyframes rotatePlanet {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hover Effect with Spherical Glow */
 .planet:hover {
     transform: scale(1.2);
     z-index: 10;
+
 }
 
-/* Tooltip */
-.tooltip {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 8px;
-    border-radius: 5px;
-    pointer-events: none;
-    font-size: 14px;
-    z-index: 10;
-}
-
-/* Info box for custom content */
+/* Info Box */
 .info-box {
     position: absolute;
+    max-width: 270px;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 10px;
-    border-radius: 8px;
-    max-width: 250px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 10;
-    display: block;
-    transition: all 0.3s ease;
+    transition: transform 0.3s, opacity 0.3s;
+    transform: translateY(-20px); /* Adjusted offset */
+    opacity: 3;
 }
 
+/* Info Box Content */
 .info-box h2 {
     margin: 0;
     font-size: 22px;
