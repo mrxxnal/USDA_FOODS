@@ -2,11 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log("🌌 Super Basic Nutrient Galaxy Initialized!");
 
     // Load the JSON data
-    fetch('data/nutrient_data.json')
+    fetch('data/planet_data.json')
         .then(response => response.json())
         .then(data => {
             console.log("✅ Data loaded:", data);
-            createNutrientGalaxy(data.slice(0, 5)); // Limit to 20 planets for simplicity
+            createNutrientGalaxy(data); 
         })
         .catch(error => console.error("❌ Error loading data:", error));
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
         camera.position.z = 1000;
 
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(width, height);
         document.getElementById('nutrient-galaxy').appendChild(renderer.domElement);
 
@@ -27,29 +27,28 @@ document.addEventListener('DOMContentLoaded', () => {
         light.position.set(500, 500, 500);
         scene.add(light);
 
-        const textureLoader = new THREE.TextureLoader();
-        const planetTextures = [
-            'assets/makemake.png',
-            'assets/jupiter.png',
-            'assets/mercury.png',
-            'assets/mars.png',
-            'assets/pluto.png'
-        ];
+        const planetImages = {
+            'SODA': 'assets/moon.png',
+            'CHIPS': 'assets/jupiter.png',
+            'CANDY': 'assets/makemake.png',
+            'SNACKS': 'assets/mars.png',
+            'PIZZA': 'assets/mercury.png',
+            'BURGER': 'assets/makemake.png',
+            'ICE CREAM': 'assets/moon.png',
+            'ENERGY DRINKS': 'assets/jupiter.png',
+            'SANDWICH': 'assets/mercury.png',
+            'FRIES': 'assets/mars.png'
+        };
 
         data.forEach((d, i) => {
-            const radius = 150; // Fixed size for simplicity
-            const geometry = new THREE.SphereGeometry(radius, 32, 32);
-            const texture = textureLoader.load(planetTextures[i % planetTextures.length]);
-            const material = new THREE.MeshStandardMaterial({
-                map: texture,
-                roughness: 0.8,
-                metalness: 0.2
-            });
+            const texture = new THREE.TextureLoader().load(planetImages[d.description]);
+            const material = new THREE.SpriteMaterial({ map: texture });
+            const planet = new THREE.Sprite(material);
 
-            const planet = new THREE.Mesh(geometry, material);
+            planet.scale.set(200, 200, 1); // Set size of the planet
 
-            planet.position.x = (Math.random() - 0.5) * 1000;
-            planet.position.y = (Math.random() - 0.5) * 500;
+            planet.position.x = (Math.random() - 0.5) * 1500;
+            planet.position.y = (Math.random() - 0.5) * 800;
             planet.position.z = (Math.random() - 0.5) * 1000;
 
             scene.add(planet);
@@ -71,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
 
 
 
