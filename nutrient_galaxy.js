@@ -1,31 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("🌌 Super Basic Nutrient Galaxy Initialized!");
+    console.log("🌌 Super Simple Nutrient Galaxy Initialized!");
 
     // Load the JSON data
     fetch('data/planet_data.json')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
             console.log("✅ Data loaded:", data);
-            createNutrientGalaxy(data); 
+            createNutrientGalaxy(data.slice(0, 10));
         })
         .catch(error => console.error("❌ Error loading data:", error));
 
     function createNutrientGalaxy(data) {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
-        camera.position.z = 1000;
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(width, height);
-        document.getElementById('nutrient-galaxy').appendChild(renderer.domElement);
-
-        // Basic white light
-        const light = new THREE.PointLight(0xffffff, 1);
-        light.position.set(500, 500, 500);
-        scene.add(light);
+        const galaxyContainer = document.getElementById('nutrient-galaxy');
+        galaxyContainer.innerHTML = ''; // Clear any existing elements
 
         const planetImages = {
             'SODA': 'assets/moon.png',
@@ -40,33 +32,34 @@ document.addEventListener('DOMContentLoaded', () => {
             'FRIES': 'assets/mars.png'
         };
 
-        data.forEach((d, i) => {
-            const texture = new THREE.TextureLoader().load(planetImages[d.description]);
-            const material = new THREE.SpriteMaterial({ map: texture });
-            const planet = new THREE.Sprite(material);
+        data.forEach((d) => {
+            const planet = document.createElement('img');
+            const imgSrc = planetImages[d.description] || 'assets/default.png';
+            planet.src = imgSrc;
+            planet.alt = d.description;
+            planet.className = 'planet';
 
-            planet.scale.set(200, 200, 1); // Set size of the planet
+            const planetSize = 450; // Make the planets 3x bigger (150px * 3)
 
-            planet.position.x = (Math.random() - 0.5) * 1500;
-            planet.position.y = (Math.random() - 0.5) * 800;
-            planet.position.z = (Math.random() - 0.5) * 1000;
 
-            scene.add(planet);
-        });
+            // Check if the image loads correctly
+            planet.onerror = () => {
+                console.error(`❌ Image failed to load: ${imgSrc}`);
+                planet.src = 'assets/default.png'; // Fallback to default
+            };
 
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
+            // Randomly position the planets within the container
+            const x = Math.random() * (window.innerWidth - 150);
+            const y = Math.random() * (window.innerHeight - 150);
+            planet.style.left = `${x}px`;
+            planet.style.top = `${y}px`;
 
-        animate();
+            // Add a simple tooltip on hover
+            planet.title = `${d.description}\nCategory: ${d.category}\nBrand: ${d.brand}`;
 
-        window.addEventListener('resize', () => {
-            const width = window.innerWidth;
-            const height = window.innerHeight;
-            renderer.setSize(width, height);
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
+            galaxyContainer.appendChild(planet);
+
+            console.log(`🪐 Added planet: ${d.description} at (${x}, ${y})`);
         });
     }
 });
