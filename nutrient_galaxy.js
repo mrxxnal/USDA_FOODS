@@ -23,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
         galaxyContainer.innerHTML = ''; // Clear any existing elements
 
         const planetImages = {
-            'SODA': 'assets/moon.png',
+            'SODA': 'assets/makemake.png',
             'CHIPS': 'assets/jupiter.png',
-            'CANDY': 'assets/makemake.png',
+            'CANDY': 'assets/moon.png',
             'SNACKS': 'assets/mars.png',
             'PIZZA': 'assets/mercury.png',
             'BURGER': 'assets/makemake.png',
