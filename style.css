@@ -45,6 +45,34 @@ body {
     z-index: 1;
 }
 
+.galaxy-header {
+    color: white;
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Lato', sans-serif;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s, color 0.3s;
+}
+
+.galaxy-header:hover {
+    transform: scale(1.1);
+    color: #ffcc00;
+}
+
+.planet {
+    position: absolute;
+    width: 100px; /* Increase or decrease as needed */
+    height: 100px;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+
+.planet:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 .tooltip {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.8);

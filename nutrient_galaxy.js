@@ -1,33 +1,16 @@
-// Import necessary modules
-import 'style.css';
-import React, { useState, useEffect } from 'react';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import axios from 'axios';
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("🌌 Super Basic Nutrient Galaxy Initialized!");
 
-const UltimateNutrientGalaxy = () => {
-    const [data, setData] = useState([]);
-    const planetTextures = [
-        '/assets/makemake.png',
-        '/assets/jupiter.png',
-        '/assets/mercury.png',
-        '/assets/mars.png',
-        '/assets/pluto.png'
-    ];
+    // Load the JSON data
+    fetch('data/nutrient_data.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log("✅ Data loaded:", data);
+            createNutrientGalaxy(data.slice(0, 5)); // Limit to 20 planets for simplicity
+        })
+        .catch(error => console.error("❌ Error loading data:", error));
 
-    useEffect(() => {
-        axios.get('data/nutrient_data.json')
-            .then((response) => {
-                setData(response.data.slice(0, 30)); // Limit to 30 planets
-                console.log('✅ Data loaded:', response.data);
-                initThreeJS(response.data.slice(0, 30));
-            })
-            .catch((error) => {
-                console.error('❌ Error loading data:', error);
-            });
-    }, []);
-
-    const initThreeJS = (data) => {
+    function createNutrientGalaxy(data) {
         const width = window.innerWidth;
         const height = window.innerHeight;
 
@@ -37,23 +20,25 @@ const UltimateNutrientGalaxy = () => {
 
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(width, height);
-        renderer.setClearColor(0x1a1a1a, 1);
         document.getElementById('nutrient-galaxy').appendChild(renderer.domElement);
 
-        // Lighting
-        const ambientLight = new THREE.AmbientLight(0x888888, 1.5);
-        scene.add(ambientLight);
-
+        // Basic white light
         const light = new THREE.PointLight(0xffffff, 1);
         light.position.set(500, 500, 500);
         scene.add(light);
 
         const textureLoader = new THREE.TextureLoader();
-        const planets = [];
+        const planetTextures = [
+            'assets/makemake.png',
+            'assets/jupiter.png',
+            'assets/mercury.png',
+            'assets/mars.png',
+            'assets/pluto.png'
+        ];
 
         data.forEach((d, i) => {
-            const radius = Math.max(80, Math.sqrt(d.calories) * 10);
-            const geometry = new THREE.SphereGeometry(radius, 64, 64);
+            const radius = 150; // Fixed size for simplicity
+            const geometry = new THREE.SphereGeometry(radius, 32, 32);
             const texture = textureLoader.load(planetTextures[i % planetTextures.length]);
             const material = new THREE.MeshStandardMaterial({
                 map: texture,
@@ -63,26 +48,17 @@ const UltimateNutrientGalaxy = () => {
 
             const planet = new THREE.Mesh(geometry, material);
 
-            planet.position.x = (Math.random() - 0.5) * 2000;
-            planet.position.y = (Math.random() - 0.5) * 1000;
-            planet.position.z = (Math.random() - 0.5) * 2000;
+            planet.position.x = (Math.random() - 0.5) * 1000;
+            planet.position.y = (Math.random() - 0.5) * 500;
+            planet.position.z = (Math.random() - 0.5) * 1000;
 
             scene.add(planet);
-            planets.push(planet);
         });
 
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-
-        const animate = () => {
+        function animate() {
             requestAnimationFrame(animate);
-            planets.forEach(planet => {
-                planet.rotation.y += 0.005;
-                planet.rotation.x += 0.002;
-            });
-            controls.update();
             renderer.render(scene, camera);
-        };
+        }
 
         animate();
 
@@ -93,15 +69,11 @@ const UltimateNutrientGalaxy = () => {
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
         });
-    };
+    }
+});
 
-    return (
-        <div>
-            <h2 className="galaxy-header">Ultimate Nutrient Galaxy</h2>
-            <div id="nutrient-galaxy" style={{ width: '100%', height: '100vh' }}></div>
-        </div>
-    );
-};
 
-export default UltimateNutrientGalaxy;
+
+
+
 
