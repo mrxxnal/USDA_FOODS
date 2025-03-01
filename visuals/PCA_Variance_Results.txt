@@ -1,0 +1,2 @@
+Number of Components for 95% Variance: 5
+Top 3 Eigenvalues: [2.28325806 2.25146677 1.11530116]

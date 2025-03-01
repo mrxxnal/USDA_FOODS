@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Page Title]</title>
+    <title>Principal Component Analysis (PCA)</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
-   <!-- Elegant Animated Background -->
+   <!-- Animated Background -->
    <div class="food-background"></div>
    <div class="light-overlay"></div>
 
-    <!-- 🔹 Hamburger Menu Icon -->
+    <!-- Navigation Bar -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="introduction.html">Introduction</a>
         <a href="data_prep.html">Data Prep</a>
         <a href="eda.html">EDA</a>        
-        <a href="pca.html"class="active">PCA</a>
+        <a href="pca.html" class="active">PCA</a>
         <a href="clustering.html">Clustering</a>
         <a href="arm.html">ARM</a>
         <a href="decision_trees.html">Decision Trees</a>
@@ -32,93 +31,79 @@
         <a href="about_me.html">About Me</a>
     </div>
 
+    <!-- Hero Section -->
     <div class="content-section">
         <h1 id="typing-title"></h1>
 
         <div class="content-wrapper">
+            <h2>Overview</h2>
             <p class="fade-in">
-                Principal Component Analysis (PCA) is a dimensionality reduction technique that helps simplify complex datasets while retaining most of the meaningful variance. For our project, we applied PCA to uncover the key nutritional patterns and reduce redundancy among food attributes.
+                Principal Component Analysis (PCA) is a dimensionality reduction technique that simplifies complex datasets while preserving most of the meaningful variance. It is used in this project to identify key nutritional patterns and reduce redundancy among food attributes.
             </p>
 
             <div class="gif-section">
                 <img src="assets/pca.gif" alt="PCA Process Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
 
+            <h2>Data Preprocessing</h2>
             <p class="fade-in">
-                Data preprocessing is a crucial step in our analysis, ensuring that raw food data is clean, structured, and ready for meaningful insights. Before applying PCA, we refined the dataset by handling missing values, standardizing numerical features, and selecting the most relevant attributes.
-            </p>
-            
-            <p class="fade-in">
-                The cleaned dataset serves as the foundation for our study, capturing essential nutritional details while eliminating inconsistencies. By refining this data, we enhance the accuracy of our machine learning models and ensure reliable pattern recognition in food classification.
-            </p>
-            
-            <p class="fade-in">
-                Our preprocessing pipeline prepares the data for Principal Component Analysis (PCA), a technique that reduces dimensionality while preserving key nutritional patterns. This process allows us to uncover hidden relationships, simplify analysis, and enhance visualization without losing critical information.
-            </p>
-            
-            <p class="fade-in">
-                Explore the cleaned dataset below to see how we structured our data before diving into PCA.
+                Before applying PCA, the dataset was cleaned and standardized to ensure optimal performance. This involved handling missing values, ensuring all features were numerical, and using Sklearn’s StandardScaler to normalize values.
             </p>
 
-            <!-- Display the dataset screenshot -->
             <div class="image-section">
                 <img src="assets/cleaned_data.jpeg" alt="Cleaned Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
-            
+
             <div class="button-section">
-                <!-- Button to access the cleaned dataset -->
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/cleaned_data.csv" target="_blank" class="github-button">
                     View Cleaned Data
                 </a>
+            </div>
 
-                <p class="fade-in">
-                    Once the cleaned dataset was prepared, we further processed it specifically for Principal Component Analysis (PCA). This involved standardizing numerical features, normalizing data distributions, and selecting relevant variables to optimize dimensionality reduction.
-                </p>
+            <h2>PCA Preprocessing</h2>
+            <p class="fade-in">
+                The dataset was further processed specifically for PCA. Standardization was applied to ensure a mean of zero and a standard deviation of one for all features, making PCA more effective.
+            </p>
 
-                <p class="fade-in">
-                    This code efficiently prepares our dataset for Principal Component Analysis (PCA). It begins by loading and cleaning the data, ensuring that only numerical features are used. Standardization is then applied to scale all values, making PCA more effective.
-                </p>
-                
-                <p class="fade-in">
-                    The script extracts the most important patterns in the data by reducing its dimensionality to both 2D and 3D representations. The transformed datasets are then saved for further analysis, while the explained variance is computed to measure how much of the original information is retained.
-                </p>
-                
-                <p class="fade-in">
-                    Here’s a snippet of the code we used to preprocess our data for PCA.
-                </p>
-                
-                <!-- Display the PCA preprocessing code as an image -->
-                <div class="image-section">
-                    <img src="assets/pca_preprocessed_code.jpeg" alt="PCA Preprocessing Code" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
-                </div>
+            <div class="image-section">
+                <img src="assets/pca_preprocessed_code.jpeg" alt="PCA Preprocessing Code" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
 
-                <!-- Button to access the preprocessing script -->
+            <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/pca_preprocessing.py" target="_blank" class="github-button">
                     View Preprocessing Script
                 </a>
-                
-                <p class="fade-in">
-                    The PCA-preprocessed dataset is now structured for efficient analysis, ensuring that key patterns are preserved while minimizing redundancy. This transformation enhances the performance of machine learning models and simplifies complex relationships in the data.
-                </p>
-                
-                <p class="fade-in">
-                    Explore the final preprocessed dataset below, which is now ready for PCA.
-                </p>
+            </div>
 
-                <!-- Display the PCA preprocessed dataset screenshot -->
-                <div class="image-section">
-                    <img src="assets/pca_preprocessed_data.jpeg" alt="PCA Preprocessed Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
-                </div>
-                
-                <div class="button-section">
-                    <!-- Button to access the PCA preprocessed dataset -->
-                    <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/pca_preprocessed_data.csv" target="_blank" class="github-button">
-                        View PCA Preprocessed Data
-                    </a>
-                </div>
-      
+            <h2>PCA Variance Retention</h2>
             <p class="fade-in">
-                Our 2D PCA projection retained <b>64.78%</b> of the variance, allowing us to visualize how different food products cluster based on macronutrient contributions. The 3D PCA projection captured <b>80.71%</b> of the total variance, providing an even deeper insight into the relationships between calories, protein, fats, and carbohydrates.
+                To determine the number of components required to retain most of the variance, cumulative variance analysis was performed. The plot below shows the number of principal components needed to retain 95% of the total variance.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/PCA_Variance_Analysis.png" alt="PCA Variance Retention Plot" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                The results indicate that five principal components are required to retain at least 95% of the variance. This reduces the complexity of the dataset while maintaining essential information.
+            </p>
+
+            <h2>Eigenvalues of the Principal Components</h2>
+            <p class="fade-in">
+                Eigenvalues represent the amount of variance captured by each principal component. The top three eigenvalues, which correspond to the three most significant components, are displayed below.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/Eigenvalues_pca.png" alt="Top 3 Eigenvalues from PCA" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                These values provide insight into which components hold the most variance and contribute the most to distinguishing patterns in the dataset.
+            </p>
+
+            <h2>PCA Visualizations</h2>
+            <p class="fade-in">
+                The following plots illustrate how the data is represented after PCA transformation in both two-dimensional and three-dimensional space.
             </p>
 
             <div class="image-container">
@@ -126,7 +111,7 @@
             </div>
 
             <p class="fade-in">
-                The 2D visualization provides a clearer separation of different food categories, where principal components (PC1 and PC2) highlight key variations in macronutrient ratios and energy contributions.
+                The 2D projection retains 64.78% of the variance, allowing for basic clustering and pattern recognition based on macronutrient composition.
             </p>
 
             <div class="image-container">
@@ -134,53 +119,49 @@
             </div>
 
             <p class="fade-in">
-                The 3D PCA projection incorporates an additional principal component, revealing deeper relationships between food items. This visualization helped us retain more variance while reducing dimensions, making complex food patterns easier to analyze.
+                The 3D PCA projection retains 80.71% of the variance, providing a more detailed visualization of how different food products relate to one another based on their attributes.
             </p>
 
+            <h2>Key Findings</h2>
             <p class="fade-in">
-                Additionally, we determined that at least <b>6 principal components</b> are needed to retain <b>95% of the total variance</b>. This insight guided us in selecting the optimal number of features for further analysis.
+                Based on the cumulative variance analysis, at least five components are required to retain 95% of the total variance in the dataset. This ensures that the majority of important patterns remain intact while reducing dimensionality.
             </p>
         </div>    
     </div>
 
-        <!-- Your existing HTML content -->
+    <!-- Typing Animation for Header -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "Principal Component Analysis (PCA)";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+    </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let text = "Principal Component Analysis (PCM)";
-                let i = 0;
-                function typeWriter() {
-                    if (i < text.length) {
-                        document.getElementById("typing-title").innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
+    <!-- Scroll-Based Fade-In Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fadeInElements = document.querySelectorAll(".fade-in");
+            function fadeInOnScroll() {
+                fadeInElements.forEach(element => {
+                    let position = element.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+                    if (position < screenHeight - 100) {
+                        element.classList.add("visible");
                     }
-                }
-                typeWriter();
-            });
-        </script>
-
-
-        <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let fadeInElements = document.querySelectorAll(".fade-in");
-    
-                function fadeInOnScroll() {
-                    fadeInElements.forEach(element => {
-                        let position = element.getBoundingClientRect().top;
-                        let screenHeight = window.innerHeight;
-    
-                        if (position < screenHeight - 100) {
-                            element.classList.add("visible");
-                        }
-                    });
-                }
-    
-                window.addEventListener("scroll", fadeInOnScroll);
-                fadeInOnScroll(); // Trigger on load
-            });
-        </script>
+                });
+            }
+            window.addEventListener("scroll", fadeInOnScroll);
+            fadeInOnScroll();
+        });
+    </script>
 
     <script>
         function toggleMenu() {
@@ -188,8 +169,6 @@
             navbar.classList.toggle("active");
         }
     </script>
-    <script type="module" src="animations.js"></script>
-    <div class="transition-overlay"></div>
-    <script type="module" src="animations.js"></script>
+
 </body>
 </html>
