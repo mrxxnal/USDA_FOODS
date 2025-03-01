@@ -146,6 +146,22 @@
             <p class="fade-in">
                 The visualization above illustrates how K-Means successfully grouped similar data points. The algorithm effectively separated different patterns, though it assumes that clusters are spherical and evenly distributed. This can sometimes be a limitation when working with irregularly shaped or varying-density clusters.
             </p>
+
+            <h3>Why These K Values?</h3>
+                <p class="fade-in">
+                    The Silhouette Score analysis helped in determining the best number of clusters for K-Means.  
+                    The peaks in the graph indicate the optimal values of **k**, where clusters are **compact and well-separated**.
+                </p>
+
+                <ul class="fade-in">
+                    <li><strong>k = X</strong>: Highest silhouette score, indicating a well-separated structure.</li>
+                    <li><strong>k = Y</strong>: Close second, providing a balance between compactness and generalization.</li>
+                    <li><strong>k = Z</strong>: A strong alternative that captures different clustering patterns.</li>
+                </ul>
+
+                <p class="fade-in">
+                    These three k-values were used to perform clustering, ensuring that the **most stable and meaningful clusters were identified.**
+                </p>
             
             <h3>Observations</h3>
             <p class="fade-in">
@@ -231,6 +247,17 @@
                         <li>DBSCAN (red bar) achieved the highest Silhouette Score, making it the best-performing method for this dataset.</li>
                     </ul>
                 </p>
+
+                <h3>Comparing Clusters with Original Labels</h3>
+                <p class="fade-in">
+                    After clustering, the results were compared to the **original labels** stored before preprocessing.  
+                    Here are key observations:
+                </p>
+
+                <ul class="fade-in">
+                    <li>Some clusters strongly correspond to original food categories (e.g., high-protein foods forming a distinct cluster).</li>
+                    <li>Other clusters highlight hidden relationships between certain food items that were not evident in the labeled dataset.</li>
+                </ul>
 
                 <h3>Key Observations</h3>
                 <p class="fade-in">
