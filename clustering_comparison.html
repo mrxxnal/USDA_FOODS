@@ -1,0 +1,34 @@
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Clustering Method</th>
+      <th>Concept</th>
+      <th>Advantages</th>
+      <th>Limitations</th>
+      <th>Best Use Cases</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>K-Means</td>
+      <td>Partitions data into k clusters by minimizing variance within clusters.</td>
+      <td>✔️ Efficient for large datasets.\n✔️ Works well for well-separated clusters.\n✔️ Computationally fast.</td>
+      <td>❌ Assumes spherical clusters.\n❌ Sensitive to outliers.\n❌ Requires specifying k.</td>
+      <td>📌 When clusters are compact and well-separated.\n📌 When a fast and scalable solution is needed.</td>
+    </tr>
+    <tr>
+      <td>Hierarchical Clustering</td>
+      <td>Builds a nested hierarchy of clusters by merging or splitting groups based on distance.</td>
+      <td>✔️ No need to specify k.\n✔️ Produces dendrograms for visualization.\n✔️ Captures hierarchical relationships.</td>
+      <td>❌ Computationally expensive for large datasets.\n❌ Can be sensitive to minor data variations.\n❌ Difficult to scale.</td>
+      <td>📌 When understanding relationships between clusters is important.\n📌 Works well for small datasets.</td>
+    </tr>
+    <tr>
+      <td>DBSCAN</td>
+      <td>Groups points based on density, marking outliers as noise.</td>
+      <td>✔️ Automatically determines clusters.\n✔️ Detects arbitrary-shaped clusters.\n✔️ Identifies outliers.</td>
+      <td>❌ Requires careful tuning of epsilon &amp; minPts.\n❌ Struggles with varying densities.\n❌ May classify dense noise as clusters.</td>
+      <td>📌 When outlier detection is needed.\n📌 When clusters have irregular shapes.\n📌 When the number of clusters is unknown.</td>
+    </tr>
+  </tbody>
+</table>

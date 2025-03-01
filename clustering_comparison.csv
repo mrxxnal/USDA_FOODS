@@ -1,0 +1,20 @@
+Clustering Method,Concept,Advantages,Limitations,Best Use Cases
+K-Means,Partitions data into k clusters by minimizing variance within clusters.,"✔️ Efficient for large datasets.
+✔️ Works well for well-separated clusters.
+✔️ Computationally fast.","❌ Assumes spherical clusters.
+❌ Sensitive to outliers.
+❌ Requires specifying k.","📌 When clusters are compact and well-separated.
+📌 When a fast and scalable solution is needed."
+Hierarchical Clustering,Builds a nested hierarchy of clusters by merging or splitting groups based on distance.,"✔️ No need to specify k.
+✔️ Produces dendrograms for visualization.
+✔️ Captures hierarchical relationships.","❌ Computationally expensive for large datasets.
+❌ Can be sensitive to minor data variations.
+❌ Difficult to scale.","📌 When understanding relationships between clusters is important.
+📌 Works well for small datasets."
+DBSCAN,"Groups points based on density, marking outliers as noise.","✔️ Automatically determines clusters.
+✔️ Detects arbitrary-shaped clusters.
+✔️ Identifies outliers.","❌ Requires careful tuning of epsilon & minPts.
+❌ Struggles with varying densities.
+❌ May classify dense noise as clusters.","📌 When outlier detection is needed.
+📌 When clusters have irregular shapes.
+📌 When the number of clusters is unknown."
