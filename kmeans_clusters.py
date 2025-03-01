@@ -47,19 +47,30 @@ for i, k in enumerate(best_k_values, 1):
     kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
     df_pca[f'Cluster_k{k}'] = kmeans.fit_predict(df_pca)
 
+    # Get centroid positions
+    centroids = kmeans.cluster_centers_
+
+    # Create 3D subplot
     ax = fig.add_subplot(1, 3, i, projection='3d')
-    ax.scatter(df_pca['PC1'], df_pca['PC2'], df_pca['PC3'], c=df_pca[f'Cluster_k{k}'], cmap='viridis')
+    scatter = ax.scatter(df_pca['PC1'], df_pca['PC2'], df_pca['PC3'], 
+                         c=df_pca[f'Cluster_k{k}'], cmap='viridis', alpha=0.7)
+    
+    # Plot centroids
+    ax.scatter(centroids[:, 0], centroids[:, 1], centroids[:, 2], 
+               c='red', marker='X', s=200, label='Centroids')
+
     ax.set_title(f"K-Means Clustering (k={k})")
     ax.set_xlabel("PC1")
     ax.set_ylabel("PC2")
     ax.set_zlabel("PC3")
+    ax.legend()
 
-# Save the 3D clustering visualization
+# Save the 3D clustering visualization with centroids
 kmeans_plot_path = os.path.join(visuals_path, "KMeans_Clusters_3D.png")
 plt.savefig(kmeans_plot_path, dpi=300, bbox_inches="tight")
 plt.show()
 
-print(f"✅ K-Means 3D Clusters plot saved at: {kmeans_plot_path}")
+print(f"✅ K-Means 3D Clusters plot with centroids saved at: {kmeans_plot_path}")
 
 # Save clustered data for later comparison
 df_pca.to_csv("data/kmeans_clusters.csv", index=False)
