@@ -8,7 +8,7 @@ import os
 
 # Define Paths
 base_path = os.path.dirname(__file__)  # Get current file path
-data_path = "/Users/mrunal/USDA_FOOD/data/cleaned_data.csv"
+data_path = "/Users/mrunal/USDA_FOOD/data/cleaned_normalized_data.csv"
 data_folder = os.path.join(base_path, "data")  # Target 'data' folder
 visuals_folder = os.path.join(base_path, "visuals")  # Folder for visualizations
 

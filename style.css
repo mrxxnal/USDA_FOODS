@@ -108,7 +108,7 @@ body {
     width: 100%;
     overflow-y: visible;
     z-index: 1;
-    min-height: 90vh; /* Ensure enough vertical space */
+    min-height: 40vh; /* Ensure enough vertical space */
     padding-bottom: 70vh; /* Extra space at the bottom */
 }
 
