@@ -31,14 +31,15 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-    <!-- Hero Section -->
+    <!-- Main Content Section -->
     <div class="content-section">
         <h1 id="typing-title"></h1>
 
         <div class="content-wrapper">
-            <h2>Overview</h2>
+            <h2>Principal Component Analysis (PCA): Dimensionality Reduction & Insights</h2>
             <p class="fade-in">
-                Principal Component Analysis (PCA) is a dimensionality reduction technique that simplifies complex datasets while preserving most of the meaningful variance. It is used in this project to identify key nutritional patterns and reduce redundancy among food attributes.
+                <strong>Principal Component Analysis (PCA)</strong> is a powerful technique used for dimensionality reduction. It transforms high-dimensional data into a smaller set of uncorrelated components while retaining the most significant variance. 
+                In this project, PCA was applied to identify patterns in food nutritional attributes and to reduce redundancy among features, making the dataset more interpretable for further analysis.
             </p>
 
             <div class="gif-section">
@@ -47,8 +48,13 @@
 
             <h2>Data Preprocessing</h2>
             <p class="fade-in">
-                Before applying PCA, the dataset was cleaned and standardized to ensure optimal performance. This involved handling missing values, ensuring all features were numerical, and using Sklearn’s StandardScaler to normalize values.
+                Before applying PCA, the dataset underwent thorough preprocessing to ensure optimal results. Key steps included:
             </p>
+            <ul class="fade-in">
+                <li><strong>Handling Missing Values:</strong> Missing numerical values were filled with column means, while categorical attributes were assigned a placeholder category.</li>
+                <li><strong>Feature Scaling:</strong> Since PCA is sensitive to feature magnitude, all numerical variables were standardized using <strong>Sklearn’s StandardScaler</strong> to ensure a mean of zero and a standard deviation of one.</li>
+                <li><strong>Feature Selection:</strong> Only numerical attributes related to macronutrient composition were retained, eliminating redundant categorical variables.</li>
+            </ul>
 
             <div class="image-section">
                 <img src="assets/clean_normalized_data.png" alt="Cleaned Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
@@ -62,8 +68,13 @@
 
             <h2>PCA Preprocessing</h2>
             <p class="fade-in">
-                The dataset was further processed specifically for PCA. Standardization was applied to ensure a mean of zero and a standard deviation of one for all features, making PCA more effective.
+                After standardization, the dataset was transformed into its principal components. The key steps in PCA preprocessing included:
             </p>
+            <ul class="fade-in">
+                <li><strong>Covariance Matrix Calculation:</strong> Understanding how different features vary with respect to one another.</li>
+                <li><strong>Eigen Decomposition:</strong> Extracting the most significant principal components.</li>
+                <li><strong>Projection:</strong> Transforming the original dataset into the newly computed principal component space.</li>
+            </ul>
 
             <div class="image-section">
                 <img src="assets/pca_preprocessed_code.jpeg" alt="PCA Preprocessing Code" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
@@ -75,9 +86,9 @@
                 </a>
             </div>
 
-            <h2>PCA Variance Retention</h2>
+            <h2>PCA Variance Retention Analysis</h2>
             <p class="fade-in">
-                To determine the number of components required to retain most of the variance, cumulative variance analysis was performed. The plot below shows the number of principal components needed to retain 95% of the total variance.
+                To determine the optimal number of components, cumulative variance analysis was conducted. The plot below demonstrates the number of principal components required to retain at least <strong>95% of the total variance</strong>.
             </p>
 
             <div class="image-container">
@@ -85,46 +96,65 @@
             </div>
 
             <p class="fade-in">
-                The results indicate that five principal components are required to retain at least 95% of the variance. This reduces the complexity of the dataset while maintaining essential information.
+                The analysis shows that <strong>five principal components</strong> are needed to retain <strong>95% of the variance</strong>. This allows us to significantly reduce the dimensionality while preserving the most relevant information.
             </p>
 
             <h2>Eigenvalues of the Principal Components</h2>
             <p class="fade-in">
-                Eigenvalues represent the amount of variance captured by each principal component. The top three eigenvalues, which correspond to the three most significant components, are displayed below.
+                Eigenvalues represent the amount of variance captured by each principal component. The larger the eigenvalue, the more significant the component. The top three eigenvalues are:
             </p>
+            
+            <ul class="fade-in">
+                <li><strong>First Principal Component:</strong> 2.283</li>
+                <li><strong>Second Principal Component:</strong> 2.251</li>
+                <li><strong>Third Principal Component:</strong> 1.115</li>
+            </ul>
 
             <div class="image-container">
                 <img src="visuals/Eigenvalues_pca.png" alt="Top 3 Eigenvalues from PCA" class="topic-image">
             </div>
 
             <p class="fade-in">
-                These values provide insight into which components hold the most variance and contribute the most to distinguishing patterns in the dataset.
+                These values indicate that the first two components capture the majority of variance, making them highly valuable for feature reduction.
             </p>
 
             <h2>PCA Visualizations</h2>
             <p class="fade-in">
-                The following plots illustrate how the data is represented after PCA transformation in both two-dimensional and three-dimensional space.
+                The following visualizations show how the dataset was transformed into principal component space:
             </p>
 
+            <h3>PCA 2D Projection</h3>
             <div class="image-container">
                 <img src="visuals/PCA_2D_plot.png" alt="PCA 2D Projection" class="topic-image">
             </div>
 
             <p class="fade-in">
-                The 2D projection retains 64.78% of the variance, allowing for basic clustering and pattern recognition based on macronutrient composition.
+                The 2D projection retains <strong>64.78% of the variance</strong>. This visualization helps in identifying natural clusters of food items based on their macronutrient distribution.
             </p>
 
+            <h3>PCA 3D Projection</h3>
             <div class="image-container">
                 <img src="visuals/PCA_3D_plot.png" alt="PCA 3D Projection" class="topic-image">
             </div>
 
             <p class="fade-in">
-                The 3D PCA projection retains 80.71% of the variance, providing a more detailed visualization of how different food products relate to one another based on their attributes.
+                The 3D PCA projection retains <strong>80.71% of the variance</strong>. This higher-dimensional representation provides better clarity on how different foods relate based on their nutritional attributes.
             </p>
 
-            <h2>Key Findings</h2>
+            <h2>Key Findings and Conclusions</h2>
             <p class="fade-in">
-                Based on the cumulative variance analysis, at least five components are required to retain 95% of the total variance in the dataset. This ensures that the majority of important patterns remain intact while reducing dimensionality.
+                The PCA analysis revealed several important insights about food classification based on nutritional attributes:
+            </p>
+
+            <ul class="fade-in">
+                <li><strong>Dimensionality Reduction:</strong> Reducing the number of features from the original dataset to <strong>five principal components</strong> allowed us to preserve 95% of the total variance while eliminating redundancy.</li>
+                <li><strong>Macronutrient Clustering:</strong> Foods naturally group together based on their energy composition, with clear distinctions between <strong>high-carb, high-protein, and high-fat foods</strong>.</li>
+                <li><strong>Feature Importance:</strong> The first two principal components contain the majority of the variance, highlighting their dominant role in differentiating food categories.</li>
+                <li><strong>Interpretability:</strong> The PCA projections (2D & 3D) provide a structured visualization of food nutritional content, helping to uncover hidden patterns in food data.</li>
+            </ul>
+
+            <p class="fade-in">
+                Overall, PCA has proven to be a highly effective tool for analyzing large food datasets by reducing dimensionality without losing critical information. The transformed data can now be used for further analysis, such as clustering or predictive modeling, with greater efficiency and interpretability.
             </p>
         </div>    
     </div>

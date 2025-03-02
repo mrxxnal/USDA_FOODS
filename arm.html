@@ -207,6 +207,7 @@
             </a>
         </div>
 
+        <!-- 🔹 Extracting Insights -->
         <h3>Extracting Insights</h3>
         <p class="fade-in">
             We computed and sorted the <strong>top 15 association rules</strong> based on three fundamental metrics:
@@ -217,30 +218,231 @@
             <li><strong>Lift:</strong> Evaluates the strength of the rule by comparing it to random chance.</li>
         </ul>
 
+        <!-- 🔹 Generated Association Rules -->
         <h3>Generated Association Rules</h3>
         <p class="fade-in">
-            Below are the top association rules extracted based on <strong>support, confidence, and lift</strong>:
+            The following visualizations highlight the most significant association rules based on <strong>Support, Confidence, and Lift</strong>. 
+            These metrics help uncover hidden patterns in food consumption behaviors, enabling strategic recommendations for dietary analysis and menu planning.
         </p>
 
-        <div class="image-section">
-            <img src="assets/arm_top15_support.jpg" alt="Top 15 Rules by Support" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        <!-- 🔹 Top 15 Rules by Support -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Support</h2>
+                <img src="assets/arm_top15_support.jpg" alt="Top 15 Rules by Support" style="width:100%; max-width:800px; display:block; margin:auto; border-radius: 8px; margin-top: 20px;">
+                <p class="fade-in">
+                    <strong>Support</strong> measures how frequently an itemset appears in the dataset. Higher support values indicate food items that are 
+                    <strong>consistently associated</strong> with one another.
+                </p>
+                <ul class="fade-in">
+                    <li>The most frequently occurring rule is <strong>{High-Calorie} → {High-Carbs}</strong>, which suggests that foods categorized as <strong>high-calorie</strong> are strongly linked with <strong>high-carbohydrate</strong> content.</li>
+                    <li>Similarly, <strong>High-Fat</strong> and <strong>High-Protein</strong> are frequently associated, indicating a pattern in <strong>protein-rich and fatty food consumption</strong>.</li>
+                    <li>The high support values of these rules suggest a <strong>dominant trend in nutrient compositions</strong>, reinforcing common dietary patterns.</li>
+                </ul>
+            </div>
         </div>
-        <p class="fade-in"><strong>Support:</strong> Measures how frequently an itemset appears in the dataset. Higher support indicates more common item relationships.</p>
 
-        <div class="image-section">
-            <img src="assets/arm_top15_confidence.jpg" alt="Top 15 Rules by Confidence" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        <!-- 🔹 Top 15 Rules by Confidence -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Confidence</h2>
+                <img src="assets/arm_top15_confidence.jpg" alt="Top 15 Rules by Confidence" style="width:100%; max-width:800px; display:block; margin:auto; border-radius: 8px; margin-top: 20px;">
+                <p class="fade-in">
+                    <strong>Confidence</strong> measures the likelihood that item <strong>B is purchased when item A is purchased</strong>. 
+                    A higher confidence value means a <strong>strong predictive relationship</strong> between food items.
+                </p>
+                <ul class="fade-in">
+                    <li>Rules like <strong>{Fruit & Vegetable Juice} → {Nectars & Fruit Drinks}</strong> and <strong>{Salts} → {Seasoning Mixes}</strong> have a confidence value of nearly <strong>1.0 (100%)</strong>, meaning these items are <strong>almost always consumed together</strong>.</li>
+                    <li>The strong confidence in <strong>Salts and Marinades & Tenderizers</strong> suggests that these food categories are <strong>heavily interconnected</strong> in dietary patterns.</li>
+                    <li>Higher confidence values indicate <strong>dependable relationships</strong>, useful for meal planning and food pairings in restaurants or diet recommendations.</li>
+                </ul>
+            </div>
         </div>
-        <p class="fade-in"><strong>Confidence:</strong> Measures how often item B is purchased when item A is purchased. High confidence suggests a strong predictive relationship.</p>
 
-        <div class="image-section">
-            <img src="assets/arm_top15_lift.jpg" alt="Top 15 Rules by Lift" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        <!-- 🔹 Top 15 Rules by Lift -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Lift</h2>
+                <img src="assets/arm_top15_lift.jpg" alt="Top 15 Rules by Lift" style="width:100%; max-width:800px; display:block; margin:auto; border-radius: 8px; margin-top: 20px;">
+                <p class="fade-in">
+                    <strong>Lift</strong> determines how much more likely items are bought together compared to random chance. A <strong>lift value greater than 1</strong> indicates a strong positive association.
+                </p>
+                <ul class="fade-in">
+                    <li>The rule <strong>{Salts} → {Seasoning Mixes}</strong> has an exceptionally high lift value (~94), suggesting that <strong>these items are highly dependent on each other</strong>.</li>
+                    <li>Rules involving <strong>Peppers & Relishes, Olives, and Pickles</strong> have high lift values, meaning these items have <strong>strong interdependencies in food consumption</strong>.</li>
+                    <li>Lift values above <strong>70</strong> indicate <strong>highly correlated items</strong>, making them prime candidates for strategic menu recommendations or grocery bundling.</li>
+                </ul>
+            </div>
         </div>
-        <p class="fade-in"><strong>Lift:</strong> Determines how much more likely items are bought together compared to random chance. A lift greater than 1 suggests a strong association.</p>
 
-        <p class="fade-in">
-            These association rules provide valuable insights into how different food items are related. Businesses and researchers can utilize this information 
-            for <strong>menu recommendations, dietary analysis, and consumer purchasing behavior predictions</strong>.
-        </p>
+        <!-- 🔹 Conclusion -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Conclusion</h2>
+                <p class="fade-in">
+                    These <strong>association rules provide valuable insights</strong> into the relationships between food items based on their <strong>nutritional profiles and consumption patterns</strong>. 
+                    The high-confidence and high-lift rules suggest <strong>strong dependencies</strong>, useful for:
+                </p>
+                <ul class="fade-in">
+                    <li><strong>Menu Recommendations:</strong> Optimizing restaurant menus by suggesting highly associated food items.</li>
+                    <li><strong>Dietary Analysis:</strong> Understanding common nutritional groupings for better meal planning.</li>
+                    <li><strong>Consumer Behavior Predictions:</strong> Forecasting food consumption trends for marketing strategies in the food industry.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 🔹 Chart Container -->
+        <div id="chart-container"></div>
+
+        <!-- Visualization 1: Item Frequency Plot -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Frequent Items in Transactions</h2>
+                <img src="visuals/item_frequency_plot.png" alt="Item Frequency Plot" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    The item frequency plot presents the <strong>top 15 most frequently occurring items</strong> in the dataset. It highlights dominant food attributes such as <strong>High-Carbs, High-Protein, High-Fat, and No-Fat</strong>, which appear frequently in transactions. This suggests that dietary habits are diverse, with distinct patterns in macronutrient consumption. Identifying frequent items helps in understanding the clustering of food attributes and their potential applications in dietary analysis and recommendation systems.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 2: Support vs Confidence Scatter Plot -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Support vs Confidence Scatter Plot (Shaded by Lift)</h2>
+                <img src="visuals/scatter_plot.png" alt="Support vs Confidence Scatter Plot" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    This scatter plot visualizes the relationship between <strong>support</strong> and <strong>confidence</strong> across association rules. The shading intensity corresponds to the <strong>lift</strong> value, where darker shades indicate stronger item associations. The plot helps in filtering out rules that have both high support and high confidence, which are more actionable for insights into consumer behavior and food pairings.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 3: Network Visualization of Top 10 Rules -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Association Rule Network Visualization</h2>
+                <img src="visuals/network_plot.png" alt="Network Visualization of Top 10 Rules" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    This network graph illustrates the <strong>top 10 association rules</strong>, with nodes representing food items and edges denoting strong co-occurrences. Notably, clusters around <strong>Seasoning Mixes, Marinades & Tenderizers, and Salts</strong> indicate strong associative patterns. This suggests that these items frequently appear together in recipes or purchasing behaviors. The visualization aids in detecting product bundling opportunities and consumer preferences.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 4: Matrix Plot of Association Rules -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Matrix Plot: Item Associations</h2>
+                <img src="visuals/matrix_plot.png" alt="Matrix Plot of Association Rules" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    The matrix plot provides a structured visualization of item associations, with <strong>color intensity representing the strength of relationships</strong>. Darker shades indicate stronger associations between items, allowing us to quickly pinpoint the most relevant food groupings. This type of visualization is particularly useful in analyzing how different items are frequently purchased together, leading to actionable insights for retailers and dietary planners.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 5: Grouped Matrix Plot -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Grouped Matrix of Top Association Rules</h2>
+                <img src="visuals/grouped_matrix.png" alt="Grouped Matrix of Top Association Rules" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    The grouped matrix plot categorizes rules based on <strong>antecedents (LHS) and consequents (RHS)</strong>. It allows for an intuitive understanding of item relationships by grouping frequently occurring pairs. Items appearing in close proximity are more likely to be purchased together, making it easier to detect meaningful associations in food consumption trends.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 6: Top 15 Rules by Support -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Support</h2>
+                <img src="visuals/bar_plot_support.png" alt="Top 15 Rules by Support" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    Support quantifies how frequently an itemset appears in the dataset. The bar chart reveals that combinations such as <strong>High-Calorie → High-Carbs</strong> and <strong>High-Fat → High-Protein</strong> are among the most commonly occurring. These high-support rules suggest patterns that are critical in understanding consumer choices, aiding in targeted product placements and personalized diet recommendations.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 7: Top 15 Rules by Confidence -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Confidence</h2>
+                <img src="visuals/bar_plot_confidence.png" alt="Top 15 Rules by Confidence" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    Confidence measures the likelihood that an item is purchased given the presence of another. The visualization highlights <strong>rules with a confidence close to 1.0</strong>, indicating near-certain co-purchases. For instance, <strong>Seasoning Mixes → Salts</strong> has a high confidence score, suggesting a strong conditional dependency between these two items, valuable for targeted promotions and pricing strategies.
+                </p>
+            </div>   
+        </div>
+
+        <!-- Visualization 8: Top 15 Rules by Lift -->
+        <div class="visualization">
+            <div class="content-wrapper">
+                <h2 class="fade-in">Top 15 Rules by Lift</h2>
+                <img src="visuals/bar_plot_lift.png" alt="Top 15 Rules by Lift" style="width:100%; max-width:800px; display:block; margin:auto;">
+                <p class="fade-in">
+                    Lift evaluates how much more likely items are bought together compared to random chance. A <strong>lift greater than 1</strong> indicates a strong positive relationship. The highest lift values are observed in rules involving <strong>Seasoning Mixes, Salts, and Marinades & Tenderizers</strong>, emphasizing their strong interdependence. These findings are crucial for product placement strategies and designing promotional offers.
+                </p>
+            </div>   
+        </div>
+
+       <!-- 🔹 Conclusion Section -->
+        <div class="content-wrapper">
+            <h2 class="fade-in">Conclusions</h2>
+            <p class="fade-in">
+                The findings from the <strong>Association Rule Mining (ARM)</strong> analysis provide valuable insights into <strong>food consumption patterns, nutrient associations, and purchasing behaviors</strong>. 
+                By identifying frequently occurring item relationships, this study enables better <strong>dietary recommendations, strategic food pairings, and consumer behavior analysis</strong>.
+            </p>
+
+            <h3 class="fade-in">Key Findings</h3>
+            <ul class="fade-in">
+                <li>
+                    <strong>High-Carbohydrate and High-Calorie Foods Are Strongly Linked:</strong>  
+                    The most frequent rules indicate that <strong>high-calorie foods</strong> are commonly associated with <strong>high-carbohydrate content</strong>.  
+                    This trend suggests that consumers often choose <strong>energy-dense food combinations</strong>, which is crucial for <strong>dietary monitoring and nutritional guidance</strong>.
+                </li>
+
+                <li>
+                    <strong>High-Protein and High-Fat Foods Often Co-Exist:</strong>  
+                    A strong correlation was found between <strong>high-protein and high-fat food items</strong>.  
+                    This insight is valuable for <strong>meal planning</strong> and <strong>food processing industries</strong>, where understanding these relationships can help design balanced dietary options.
+                </li>
+
+                <li>
+                    <strong>Seasoning Mixes, Salts, and Marinades Have Strong Associations:</strong>  
+                    The <strong>network visualization</strong> highlights that <strong>seasoning mixes, salts, and marinades & tenderizers</strong> frequently appear together.  
+                    This finding suggests that these items are <strong>commonly used together in food preparation</strong>, making them ideal for <strong>grocery bundling and personalized product recommendations</strong>.
+                </li>
+
+                <li>
+                    <strong>Lift Values Confirm Strong Non-Random Food Associations:</strong>  
+                    High <strong>lift values</strong> indicate that many food items are <strong>consistently consumed together at much higher rates than random chance</strong>.  
+                    This confirms that consumer choices follow <strong>structured dietary patterns</strong>, which businesses can leverage for <strong>strategic product placement and marketing strategies</strong>.
+                </li>
+
+                <li>
+                    <strong>Predictive Insights for Personalized Recommendations:</strong>  
+                    Rules with <strong>high confidence values (close to 100%)</strong> indicate that when certain food items are selected, others are almost always included.  
+                    This insight is highly relevant for <strong>AI-driven personalized meal planning, smart grocery recommendations, and targeted nutrition strategies</strong>.
+                </li>
+            </ul>
+
+            <h3 class="fade-in">Relevance to Our Topic</h3>
+            <p class="fade-in">
+                These insights play a critical role in understanding <strong>dietary behaviors, nutrition trends, and purchasing habits</strong>.  
+                The identified associations between food attributes can be applied in various areas, including:
+            </p>
+
+            <ul class="fade-in">
+                <li><strong>Dietary Planning:</strong> Helping individuals and dietitians optimize food choices based on nutrient pairings.</li>
+                <li><strong>Consumer Behavior Predictions:</strong> Understanding purchasing patterns to enhance grocery store arrangements and restaurant menus.</li>
+                <li><strong>Health and Nutrition Applications:</strong> Identifying unhealthy food combinations for targeted dietary interventions.</li>
+                <li><strong>Retail and Marketing Strategies:</strong> Using high-lift associations for bundled product promotions and cross-selling in food retail.</li>
+            </ul>
+
+            <h3 class="fade-in">Final Thoughts</h3>
+            <p class="fade-in">
+                The application of <strong>Association Rule Mining</strong> has revealed <strong>valuable insights</strong> into food consumption behaviors, enabling better <strong>product recommendations, targeted marketing, and personalized nutrition plans</strong>.  
+                The high-confidence and high-lift rules suggest <strong>strong dependencies</strong>, which can be used for strategic decision-making in food and retail industries.  
+                Future studies could enhance these insights by incorporating <strong>real-time food consumption data, price sensitivity analysis, and dietary restrictions</strong> for even more precise recommendations.
+            </p>
+        </div> 
 
     <!-- Typing Animation for Title -->
     <script>
