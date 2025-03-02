@@ -9,7 +9,7 @@
 </head>
 <body>
 
-    <!-- Elegant Animated Background -->
+    <!-- Background Effects -->
     <div class="food-background"></div>
     <div class="light-overlay"></div>
 
@@ -31,103 +31,218 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-    <div class="content-section">
-        <h1 id="typing-title"></h1>
+<!-- Main Content Section -->
+<div class="content-section">
+    <h1 id="typing-title"></h1>
 
-        <div class="content-wrapper">
-            <h2>Introduction to Association Rule Mining (ARM)</h2>
-            <p class="fade-in">
-                Association Rule Mining (ARM) is a powerful machine learning technique used to uncover hidden patterns and relationships 
-                within large datasets. It is widely applied in **market basket analysis, fraud detection, recommendation systems, 
-                and medical diagnostics.** The goal is to identify items that frequently occur together and derive actionable insights.
-            </p>
-
-            <div class="image-container">
-                <img src="assets/ARM_Concept.png" alt="ARM Concept" class="topic-image">
-            </div>
-
-            <h2>Key Concepts in ARM</h2>
-            <p class="fade-in">
-                ARM is based on three fundamental concepts:
-            </p>
-
-            <ul class="fade-in">
-                <li><strong>Support:</strong> Measures how frequently an itemset appears in the dataset.</li>
-                <li><strong>Confidence:</strong> Evaluates how often item B is purchased when item A is purchased.</li>
-                <li><strong>Lift:</strong> Measures how much more likely items are bought together compared to random chance.</li>
+    <div class="content-wrapper">
+        <h2>Unveiling Patterns with Association Rule Mining (ARM)</h2>
+        <p class="fade-in">
+            <strong>Association Rule Mining (ARM)</strong> is a powerful data mining technique designed to uncover hidden patterns, relationships, 
+            and dependencies within large datasets. By analyzing co-occurrences of items, ARM allows businesses and researchers 
+            to extract meaningful insights that can influence strategic decision-making. 
+            <br><br>
+            It is widely utilized in various fields, including:
+            <ul>
+                <li><strong>Market Basket Analysis:</strong> Identifying items frequently bought together in retail stores.</li>
+                <li><strong>Recommendation Systems:</strong> Powering personalized product and content suggestions (e.g., Amazon, Netflix).</li>
+                <li><strong>Fraud Detection:</strong> Recognizing unusual transaction patterns in banking and cybersecurity.</li>
+                <li><strong>Medical Diagnostics:</strong> Finding correlations between symptoms, diseases, and treatments.</li>
             </ul>
+        </p>
 
-            <h3>Support</h3>
-            <p class="fade-in">
-                Support measures how often a set of items appears in transactions. A high support value indicates a frequent pattern.
-                <br><br>
-                <strong>Formula:</strong>
-                <br>
-                Support(A) = (Number of transactions containing A) / (Total transactions)
-            </p>
-
-            <h3>Confidence</h3>
-            <p class="fade-in">
-                Confidence tells us how likely item B is to be purchased when item A is purchased.
-                <br><br>
-                <strong>Formula:</strong>
-                <br>
-                Confidence(A → B) = Support(A ∪ B) / Support(A)
-            </p>
-
-            <h3>Lift</h3>
-            <p class="fade-in">
-                Lift measures the strength of an association rule relative to the expected frequency if A and B were independent.
-                <br><br>
-                <strong>Formula:</strong>
-                <br>
-                Lift(A → B) = Support(A ∪ B) / (Support(A) × Support(B))
-            </p>
-
-            <h2>Association Rules</h2>
-            <p class="fade-in">
-                Association rules help identify relationships between items in a dataset. A rule is written as:
-            </p>
-
-            <blockquote class="fade-in">
-                <strong>A → B</strong> (If A is purchased, then B is likely to be purchased)
-            </blockquote>
-
-            <p class="fade-in">
-                **Example:**  
-                If a customer buys **milk and bread**, they are **likely to buy butter**.  
-                <br>
-                Rule: **{Milk, Bread} → {Butter}**
-            </p>
-
-            <h2>The Apriori Algorithm</h2>
-            <p class="fade-in">
-                The **Apriori Algorithm** is a widely used method for mining association rules. It identifies frequent itemsets 
-                and derives rules based on support, confidence, and lift values.
-            </p>
-
-            <div class="image-container">
-                <img src="assets/Apriori_Algorithm.jpg" alt="Apriori Algorithm Process" class="topic-image">
-            </div>
-
-            <h3>How Apriori Works</h3>
-            <p class="fade-in">
-                1. Scan the dataset and calculate **support** for individual items.  
-                2. Remove items that do not meet the **minimum support threshold**.  
-                3. Generate **larger itemsets** iteratively and filter based on support.  
-                4. Generate **association rules** from the frequent itemsets.  
-            </p>
-
-            <h2>Why Use Apriori?</h2>
-            <p class="fade-in">
-                - Efficiently finds frequent itemsets in large datasets.  
-                - Helps businesses optimize product placement and marketing strategies.  
-                - Useful in **fraud detection, medical diagnosis, and bioinformatics.**  
-            </p>
+        <div class="image-container">
+            <img src="assets/ARM_Concept.png" alt="ARM Concept" class="topic-image">
         </div>
-    </div>
 
-    <!-- Typing Animation -->
+        <h2>Core Components of ARM</h2>
+        <p class="fade-in">
+            ARM operates using three fundamental statistical metrics, each playing a crucial role in determining 
+            the strength and validity of associations:
+        </p>
+
+        <div class="image-container">
+            <img src="assets/ARM_3.png" alt="ARM Metrics" class="topic-image">
+        </div>
+
+        <ul class="fade-in">
+            <li><strong>Support:</strong> Measures how frequently an itemset appears in the dataset. Higher support indicates greater relevance.</li>
+            <li><strong>Confidence:</strong> Represents the probability that item B is purchased when item A is bought, serving as a measure of rule reliability.</li>
+            <li><strong>Lift:</strong> Evaluates the strength of the association by comparing the co-occurrence of items to what would be expected by chance. A lift value greater than 1 indicates a strong positive correlation.</li>
+        </ul>
+
+        <h3>Mathematical Formulation</h3>
+        <p class="fade-in">
+            The following formulas define the key measures used in ARM:
+        </p>
+
+        <div class="image-container">
+            <img src="assets/ARM_formulas.png" alt="ARM Formulas" class="topic-image">
+        </div>
+
+        <h2>Understanding Association Rules</h2>
+        <p class="fade-in">
+            Association rules define relationships between items in a dataset using the general form:
+        </p>
+
+        <blockquote class="fade-in">
+            <strong>A → B</strong> (If A is purchased, then B is likely to be purchased)
+        </blockquote>
+
+        <div class="image-container">
+            <img src="assets/ARM_association.png" alt="ARM Association Rules" class="topic-image">
+        </div>
+
+        <p class="fade-in">
+            <strong>Example:</strong>  
+            Consider a supermarket scenario where the system detects the following pattern:  
+            <br>
+            Customers who purchase <strong>milk and bread</strong> frequently buy <strong>butter</strong> as well.  
+            <br>
+            This results in the association rule:  
+            <strong>{Milk, Bread} → {Butter}</strong>
+        </p>
+
+        <h2>The Apriori Algorithm: Mining Strong Rules</h2>
+        <p class="fade-in">
+            The <strong>Apriori Algorithm</strong> is one of the most widely used techniques for mining association rules. 
+            It efficiently discovers frequent itemsets and derives strong rules using support, confidence, and lift measures.
+        </p>
+
+        <div class="image-container">
+            <img src="assets/Apriori_Algorithm.jpg" alt="Apriori Algorithm Process" class="topic-image">
+        </div>
+
+        <h3>Step-by-Step Breakdown of Apriori</h3>
+        <p class="fade-in">
+            The Apriori algorithm follows an iterative process to extract meaningful rules:
+        </p>
+        <ol class="fade-in">
+            <li><strong>Step 1:</strong> Scan the dataset and calculate support for each individual item.</li>
+            <li><strong>Step 2:</strong> Remove items that do not meet the minimum support threshold, eliminating infrequent patterns.</li>
+            <li><strong>Step 3:</strong> Generate larger itemsets by combining frequent items and filter them based on the support threshold.</li>
+            <li><strong>Step 4:</strong> Extract association rules from the frequent itemsets and evaluate their confidence and lift values.</li>
+        </ol>
+
+        <h2>Why is Apriori So Effective?</h2>
+        <p class="fade-in">
+            The Apriori algorithm is widely preferred for pattern recognition and association discovery due to its efficiency and scalability. 
+            Key advantages include:
+        </p>
+
+        <ul class="fade-in">
+            <li><strong>Scalability:</strong> Can process large datasets efficiently by pruning irrelevant itemsets early.</li>
+            <li><strong>Real-World Applications:</strong> Used in retail, finance, healthcare, cybersecurity, and bioinformatics to detect behavioral patterns and anomalies.</li>
+            <li><strong>Enhanced Decision-Making:</strong> Helps businesses optimize product placement, inventory management, marketing campaigns, and targeted recommendations.</li>
+        </ul>
+
+        <!-- Data Preparation for Association Rule Mining (ARM) -->
+        <h2>Data Preparation for Association Rule Mining</h2>
+        <p class="fade-in">
+            Association Rule Mining (ARM) requires data in a <strong>transactional format</strong>, where each row represents a set of items that frequently appear together. 
+            Unlike supervised learning models, ARM does not rely on labeled data. Instead, it uncovers <strong>patterns and relationships</strong> based on item co-occurrences.
+        </p>
+
+        <h3>Raw Data Overview</h3>
+        <p class="fade-in">
+            The raw dataset consists of food items with attributes such as <strong>description, category, calories, protein, fat, and carbohydrates</strong>. 
+            However, this raw format is not directly usable for ARM since it contains <strong>numerical values and metadata</strong> that do not conform to a transaction-based structure.
+        </p>
+
+        <div class="image-section">
+            <img src="assets/raw_data.jpeg" alt="Raw Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/raw_data.csv" target="_blank" class="github-button">
+                View Raw Data CSV
+            </a>
+        </div>
+
+        <h3>Data Processing Steps</h3>
+        <p class="fade-in">
+            To transform the raw dataset into a format suitable for ARM, we followed these structured steps:
+        </p>
+        <ul class="fade-in">
+            <li><strong>Selected Relevant Columns:</strong> Removed unnecessary attributes such as brand names and retained only meaningful nutritional and categorical data.</li>
+            <li><strong>Handled Missing Values:</strong> Filled missing values in <strong>numeric attributes with 0</strong> and categorical attributes with <strong>"Unknown"</strong> to prevent data loss.</li>
+            <li><strong>Converted Numeric Values into Categories:</strong> Transformed <strong>calories, protein, fat, and carbohydrate</strong> values into labeled categories (e.g., "High-Fat", "Low-Carbs").</li>
+            <li><strong>Formatted Data as Transactions:</strong> Removed the <strong>description column</strong> and combined the categorical attributes into a <strong>single transaction row</strong>, ensuring compatibility with ARM models.</li>
+            <li><strong>Eliminated Duplicates:</strong> Removed redundant transactions to improve the accuracy of generated rules.</li>
+            <li><strong>Saved Preprocessed Data:</strong> The cleaned dataset was stored as <strong>arm_prepared_data.csv</strong>.</li>
+        </ul>
+
+        <div class="image-section">
+            <img src="assets/arm_data.jpg" alt="ARM Preprocessed Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/arm_prepared_data.csv" target="_blank" class="github-button">
+                View ARM Preprocessed Data
+            </a>
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/arm_dataprep.R" target="_blank" class="github-button">
+                View Data Preparation Script
+            </a>
+        </div>
+
+        <!-- ARM Analysis -->
+        <h2>Association Rule Mining Analysis</h2>
+        <p class="fade-in">
+            After preparing the dataset, we applied <strong>Association Rule Mining (ARM)</strong> using the <strong>Apriori Algorithm</strong> to uncover meaningful relationships between food items.
+        </p>
+
+        <h3>Applying the Apriori Algorithm</h3>
+        <p class="fade-in">
+            The Apriori Algorithm was implemented with the following parameters:
+        </p>
+        <ul class="fade-in">
+            <li><strong>Support Threshold:</strong> 1% (Items appearing in at least 1% of transactions are considered frequent).</li>
+            <li><strong>Confidence Threshold:</strong> 50% (Rules are generated only if they hold true at least 50% of the time).</li>
+            <li><strong>Minimum Rule Length:</strong> 2 (Each rule must contain at least two items).</li>
+        </ul>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/arm_analysis.R" target="_blank" class="github-button">
+                View ARM Analysis Script
+            </a>
+        </div>
+
+        <h3>Extracting Insights</h3>
+        <p class="fade-in">
+            We computed and sorted the <strong>top 15 association rules</strong> based on three fundamental metrics:
+        </p>
+        <ul class="fade-in">
+            <li><strong>Support:</strong> Measures how frequently an itemset appears in transactions.</li>
+            <li><strong>Confidence:</strong> Indicates how often the rule is correct.</li>
+            <li><strong>Lift:</strong> Evaluates the strength of the rule by comparing it to random chance.</li>
+        </ul>
+
+        <h3>Generated Association Rules</h3>
+        <p class="fade-in">
+            Below are the top association rules extracted based on <strong>support, confidence, and lift</strong>:
+        </p>
+
+        <div class="image-section">
+            <img src="assets/arm_top15_support.jpg" alt="Top 15 Rules by Support" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+        <p class="fade-in"><strong>Support:</strong> Measures how frequently an itemset appears in the dataset. Higher support indicates more common item relationships.</p>
+
+        <div class="image-section">
+            <img src="assets/arm_top15_confidence.jpg" alt="Top 15 Rules by Confidence" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+        <p class="fade-in"><strong>Confidence:</strong> Measures how often item B is purchased when item A is purchased. High confidence suggests a strong predictive relationship.</p>
+
+        <div class="image-section">
+            <img src="assets/arm_top15_lift.jpg" alt="Top 15 Rules by Lift" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+        <p class="fade-in"><strong>Lift:</strong> Determines how much more likely items are bought together compared to random chance. A lift greater than 1 suggests a strong association.</p>
+
+        <p class="fade-in">
+            These association rules provide valuable insights into how different food items are related. Businesses and researchers can utilize this information 
+            for <strong>menu recommendations, dietary analysis, and consumer purchasing behavior predictions</strong>.
+        </p>
+
+    <!-- Typing Animation for Title -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let text = "Association Rule Mining (ARM)";
@@ -170,5 +285,6 @@
             navbar.classList.toggle("active");
         }
     </script>
+
 </body>
 </html>
