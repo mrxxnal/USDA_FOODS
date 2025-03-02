@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Page Title]</title>
+    <title>Association Rule Mining (ARM)</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -14,7 +13,7 @@
     <div class="food-background"></div>
     <div class="light-overlay"></div>
 
-    <!-- 🔹 Hamburger Menu Icon -->
+    <!-- Navigation Bar -->
     <div class="menu-icon" onclick="toggleMenu()">☰</div>
     <div class="navbar">
         <a href="index.html">Home</a>
@@ -23,7 +22,7 @@
         <a href="eda.html">EDA</a>
         <a href="pca.html">PCA</a>
         <a href="clustering.html">Clustering</a>
-        <a href="arm.html"class="active">ARM</a>
+        <a href="arm.html" class="active">ARM</a>
         <a href="decision_trees.html">Decision Trees</a>
         <a href="naive_bayes.html">Naive Bayes</a>
         <a href="svm.html">SVM</a>
@@ -34,46 +33,136 @@
 
     <div class="content-section">
         <h1 id="typing-title"></h1>
-        <p>[Page Content]</p>
+
+        <div class="content-wrapper">
+            <h2>Introduction to Association Rule Mining (ARM)</h2>
+            <p class="fade-in">
+                Association Rule Mining (ARM) is a powerful machine learning technique used to uncover hidden patterns and relationships 
+                within large datasets. It is widely applied in **market basket analysis, fraud detection, recommendation systems, 
+                and medical diagnostics.** The goal is to identify items that frequently occur together and derive actionable insights.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/ARM_Concept.png" alt="ARM Concept" class="topic-image">
+            </div>
+
+            <h2>Key Concepts in ARM</h2>
+            <p class="fade-in">
+                ARM is based on three fundamental concepts:
+            </p>
+
+            <ul class="fade-in">
+                <li><strong>Support:</strong> Measures how frequently an itemset appears in the dataset.</li>
+                <li><strong>Confidence:</strong> Evaluates how often item B is purchased when item A is purchased.</li>
+                <li><strong>Lift:</strong> Measures how much more likely items are bought together compared to random chance.</li>
+            </ul>
+
+            <h3>Support</h3>
+            <p class="fade-in">
+                Support measures how often a set of items appears in transactions. A high support value indicates a frequent pattern.
+                <br><br>
+                <strong>Formula:</strong>
+                <br>
+                Support(A) = (Number of transactions containing A) / (Total transactions)
+            </p>
+
+            <h3>Confidence</h3>
+            <p class="fade-in">
+                Confidence tells us how likely item B is to be purchased when item A is purchased.
+                <br><br>
+                <strong>Formula:</strong>
+                <br>
+                Confidence(A → B) = Support(A ∪ B) / Support(A)
+            </p>
+
+            <h3>Lift</h3>
+            <p class="fade-in">
+                Lift measures the strength of an association rule relative to the expected frequency if A and B were independent.
+                <br><br>
+                <strong>Formula:</strong>
+                <br>
+                Lift(A → B) = Support(A ∪ B) / (Support(A) × Support(B))
+            </p>
+
+            <h2>Association Rules</h2>
+            <p class="fade-in">
+                Association rules help identify relationships between items in a dataset. A rule is written as:
+            </p>
+
+            <blockquote class="fade-in">
+                <strong>A → B</strong> (If A is purchased, then B is likely to be purchased)
+            </blockquote>
+
+            <p class="fade-in">
+                **Example:**  
+                If a customer buys **milk and bread**, they are **likely to buy butter**.  
+                <br>
+                Rule: **{Milk, Bread} → {Butter}**
+            </p>
+
+            <h2>The Apriori Algorithm</h2>
+            <p class="fade-in">
+                The **Apriori Algorithm** is a widely used method for mining association rules. It identifies frequent itemsets 
+                and derives rules based on support, confidence, and lift values.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/Apriori_Algorithm.png" alt="Apriori Algorithm Process" class="topic-image">
+            </div>
+
+            <h3>How Apriori Works</h3>
+            <p class="fade-in">
+                1. Scan the dataset and calculate **support** for individual items.  
+                2. Remove items that do not meet the **minimum support threshold**.  
+                3. Generate **larger itemsets** iteratively and filter based on support.  
+                4. Generate **association rules** from the frequent itemsets.  
+            </p>
+
+            <h2>Why Use Apriori?</h2>
+            <p class="fade-in">
+                - Efficiently finds frequent itemsets in large datasets.  
+                - Helps businesses optimize product placement and marketing strategies.  
+                - Useful in **fraud detection, medical diagnosis, and bioinformatics.**  
+            </p>
+        </div>
     </div>
 
-        <!-- Your existing HTML content -->
+    <!-- Typing Animation -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "Association Rule Mining (ARM)";
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    document.getElementById("typing-title").innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            typeWriter();
+        });
+    </script>
 
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let text = "Association Rule Mining (ARM)";
-                let i = 0;
-                function typeWriter() {
-                    if (i < text.length) {
-                        document.getElementById("typing-title").innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
+    <!-- Scroll-Based Fade-In Effect -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let fadeInElements = document.querySelectorAll(".fade-in");
+
+            function fadeInOnScroll() {
+                fadeInElements.forEach(element => {
+                    let position = element.getBoundingClientRect().top;
+                    let screenHeight = window.innerHeight;
+
+                    if (position < screenHeight - 100) {
+                        element.classList.add("visible");
                     }
-                }
-                typeWriter();
-            });
-        </script>
+                });
+            }
 
-        <!-- 🔹 JavaScript for Scroll-Based Fade-In Effect -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let fadeInElements = document.querySelectorAll(".fade-in");
-    
-                function fadeInOnScroll() {
-                    fadeInElements.forEach(element => {
-                        let position = element.getBoundingClientRect().top;
-                        let screenHeight = window.innerHeight;
-    
-                        if (position < screenHeight - 100) {
-                            element.classList.add("visible");
-                        }
-                    });
-                }
-    
-                window.addEventListener("scroll", fadeInOnScroll);
-                fadeInOnScroll(); // Trigger on load
-            });
-        </script>
+            window.addEventListener("scroll", fadeInOnScroll);
+            fadeInOnScroll();
+        });
+    </script>
 
     <script>
         function toggleMenu() {
@@ -81,8 +170,5 @@
             navbar.classList.toggle("active");
         }
     </script>
-    <script type="module" src="animations.js"></script>
-    <div class="transition-overlay"></div>
-    <script type="module" src="animations.js"></script>
 </body>
 </html>
