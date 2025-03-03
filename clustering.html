@@ -31,63 +31,82 @@
         <a href="about_me.html">About Me</a>
     </div>
 
-    <!-- Hero Section -->
     <div class="content-section">
         <h1 id="typing-title"></h1>
-
+    
         <div class="content-wrapper">
-            <!-- Overview -->
-                <h2>Introduction to Clustering</h2>
+            <!-- Introduction to Clustering -->
+            <h2>Introduction to Clustering</h2>
             <p class="fade-in">
-                Clustering is an essential unsupervised machine learning technique that groups similar data points based on their characteristics. 
-                It helps reveal hidden structures within data and is widely used in pattern recognition, customer segmentation, and anomaly detection. 
-                In this project, we explore three widely used clustering algorithms—K-Means, Hierarchical Clustering, and DBSCAN.
+                <strong>Clustering</strong> is a fundamental unsupervised machine learning technique that groups similar data points based on their characteristics. 
+                It is widely used in applications such as <strong>customer segmentation</strong>, <strong>anomaly detection</strong>, and <strong>biological data analysis</strong>. 
+                In this project, clustering is applied to categorize food items based on their <strong>nutritional attributes</strong>, allowing us to uncover meaningful patterns in dietary habits.
             </p>
 
             <div class="gif-section">
                 <img src="assets/kmeans.gif" alt="K-Means Clustering Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
-
+    
             <p class="fade-in">
-                Each clustering method operates differently, making it essential to compare their strengths, weaknesses, and best use cases before applying them to our dataset. 
-                The table below provides an overview of these three clustering techniques.
+                The three clustering techniques implemented in this project are:
             </p>
-
-            <!-- Clustering Comparison Table -->
+    
+            <ul class="fade-in">
+                <li><strong>K-Means Clustering:</strong> A partition-based clustering algorithm that divides data into a predefined number of clusters.</li>
+                <li><strong>Hierarchical Clustering:</strong> An agglomerative approach that builds a dendrogram to visualize relationships between clusters.</li>
+                <li><strong>DBSCAN (Density-Based Clustering):</strong> A density-based method that identifies clusters of varying shapes and detects outliers.</li>
+            </ul>
+    
             <div class="image-container">
                 <img src="assets/comparison_clusters.png" alt="Comparison of Clustering Methods" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
-
+    
             <p class="fade-in">
-                From the table above, we see that:
-                <ul>
-                    <li><strong>K-Means</strong> is best suited for structured, well-separated clusters but struggles with outliers.</li>
-                    <li><strong>Hierarchical Clustering</strong> provides an insightful dendrogram to analyze relationships but is computationally expensive.</li>
-                    <li><strong>DBSCAN</strong> is excellent for identifying arbitrary-shaped clusters and detecting outliers but requires fine-tuning parameters.</li>
-                </ul>
+                The table above highlights the characteristics of each clustering method:
             </p>
-
-            <h2>Overview of Clustering Implementation</h2>
+    
+            <ul class="fade-in">
+                <li><strong>K-Means</strong>: Efficient and scalable but assumes clusters are spherical.</li>
+                <li><strong>Hierarchical Clustering</strong>: Provides a hierarchical structure but is computationally expensive.</li>
+                <li><strong>DBSCAN</strong>: Detects arbitrary-shaped clusters and handles noise but requires careful parameter tuning.</li>
+            </ul>
+    
+            <h2>Clustering Implementation: Dataset Overview</h2>
             <p class="fade-in">
-                Now that we have an understanding of the different clustering methods, we will apply them to our dataset to discover meaningful patterns. 
-                The dataset consists of various food items with nutritional attributes. The clustering models will help us analyze different food groups based on their nutrient composition.
+                The dataset used for clustering consists of various <strong>food items</strong> with multiple <strong>nutritional attributes</strong>, such as macronutrient composition, vitamin content, and caloric density. 
+                The goal is to identify natural groupings within the dataset that reflect dietary patterns and food classifications.
             </p>
-
+    
+            <h3>Feature Selection</h3>
+            <p class="fade-in">
+                To ensure the clustering algorithms work effectively, only numerical attributes were retained. The following transformations were applied:
+            </p>
+    
+            <ul class="fade-in">
+                <li><strong>Removal of categorical attributes:</strong> Non-numeric data such as food brand names were excluded.</li>
+                <li><strong>Selection of key nutritional metrics:</strong> Macronutrient composition (carbohydrates, proteins, fats) and energy content were prioritized.</li>
+            </ul>
+    
             <!-- Data Preparation -->
             <h2>Data Preparation</h2>
             <p class="fade-in">
-                The dataset was preprocessed to ensure high-quality input for clustering models. The following steps were taken:
+                Before applying clustering algorithms, the dataset underwent rigorous preprocessing. This step is critical to ensure that clustering methods operate efficiently and accurately. The preprocessing steps included:
             </p>
+    
             <ul class="fade-in">
-                <li>Removed categorical attributes (e.g., brand names).</li>
-                <li>Standardized numerical features using StandardScaler.</li>
-                <li>Handled missing values through imputation.</li>
+                <li><strong>Handling Missing Values:</strong> Missing numerical values were imputed using the median or mean, ensuring consistency.</li>
+                <li><strong>Feature Scaling:</strong> StandardScaler was applied to normalize features, preventing attributes with larger ranges from dominating the clustering process.</li>
+                <li><strong>Dimensionality Reduction:</strong> Principal Component Analysis (PCA) was used to reduce redundant information and optimize computation.</li>
             </ul>
-
-            <div class="image-section">
-                <img src="assets/clean_normalized_data.png" alt="Clean Normalized Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+    
+            <div class="image-container">
+                <img src="assets/clean_normalized_data.png" alt="Clean and Normalized Data Preview" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
-
+    
+            <p class="fade-in">
+                The visualization above shows the dataset after normalization. Scaling ensures that all features contribute equally to distance calculations used in clustering.
+            </p>
+    
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">
                     View Clean Normalized Data
@@ -96,16 +115,31 @@
                     View Clustering Data Preparation Script
                 </a>
             </div>
-
+    
+            <!-- Generated Clustering Data -->
             <h2>Generated Clustering Data</h2>
             <p class="fade-in">
-                The preprocessed dataset used for clustering is shown below. This data contains only numerical attributes after normalization.
+                After preprocessing, the dataset was structured in a format suitable for clustering. The processed dataset contains only <strong>numerical values</strong> for clustering algorithms to analyze effectively.
             </p>
-
-            <div class="image-section">
-                <img src="assets/clustering_data.png" alt="Clustering Data Preview" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+    
+            <p class="fade-in">
+                The table below provides a preview of the cleaned dataset, ready for clustering:
+            </p>
+    
+            <div class="image-container">
+                <img src="assets/clustering_data.png" alt="Clustering Data Preview" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
             </div>
-
+    
+            <p class="fade-in">
+                Key transformations applied to this dataset:
+            </p>
+    
+            <ul class="fade-in">
+                <li><strong>Feature Scaling:</strong> Standardized all numerical attributes to have zero mean and unit variance.</li>
+                <li><strong>Dimensionality Reduction:</strong> Reduced the dataset to key components that explain most of the variance.</li>
+                <li><strong>Cluster Compatibility:</strong> Removed outliers and ensured that all remaining features were suitable for clustering analysis.</li>
+            </ul>
+    
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clustering_data.csv" target="_blank" class="github-button">
                     View Clustering Data
@@ -114,177 +148,295 @@
                     View Original Labels
                 </a>
             </div>
+    
+            <h2>Summary of Data Preparation</h2>
+            <p class="fade-in">
+                The data preprocessing steps were crucial in ensuring high-quality input for clustering. The key takeaways from this process are:
+            </p>
+    
+            <ul class="fade-in">
+                <li>All <strong>categorical variables</strong> were removed to ensure clustering algorithms work optimally.</li>
+                <li><strong>Missing values</strong> were handled efficiently, preventing any data bias.</li>
+                <li><strong>Feature scaling</strong> ensured that numerical attributes contributed equally to clustering.</li>
+                <li><strong>PCA transformation</strong> helped reduce dimensionality while retaining the most important information.</li>
+            </ul>
+    
+            <p class="fade-in">
+                With the dataset now optimized for clustering, we proceed to apply the K-Means, Hierarchical, and DBSCAN clustering methods to uncover patterns in food classification.
+            </p>
 
             <!-- K-Means Clustering -->
             <h2>K-Means Clustering</h2>
+
+            <div class="gif-section">
+                <img src="assets/k_means_clustering.gif" alt="K-Means Clustering Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
             <p class="fade-in">
-                K-Means is a clustering algorithm that groups data points into a predefined number of clusters, aiming to minimize the variance within each cluster. It works by initializing a set of cluster centroids and iteratively reassigning points to the nearest centroid while updating the centroids until convergence. This method is efficient for partitioning datasets into well-separated groups.
+                <strong>K-Means</strong> is a widely used clustering algorithm that partitions data into a predefined number of clusters (<strong>k</strong>).
+                It operates iteratively to assign data points to the nearest cluster centroid while updating the centroids until convergence. 
+                The objective is to minimize intra-cluster variance, ensuring that data points within the same cluster are as similar as possible.
             </p>
-            
+
             <h3>Determining the Optimal Number of Clusters</h3>
             <p class="fade-in">
-                Choosing the right number of clusters (k) is crucial for meaningful clustering. The Silhouette Score was used to evaluate the compactness and separation of clusters for different values of k. This metric measures how similar each point is to its assigned cluster compared to other clusters. Higher scores indicate well-defined clusters.
+                Selecting the appropriate number of clusters (<strong>k</strong>) is crucial for achieving meaningful clustering. 
+                A poorly chosen k-value can lead to underfitting (too few clusters) or overfitting (too many clusters). 
+                To determine the optimal number of clusters, we used the <strong>Silhouette Score</strong>, 
+                which measures the compactness of clusters and their separation from other clusters. A higher silhouette score indicates well-defined clusters.
             </p>
-            
+
+            <!-- Silhouette Score Graph -->
             <div class="image-container">
                 <img src="visuals/KMeans_Silhouette_Scores.png" alt="Silhouette Scores for K-Means" class="topic-image">
             </div>
-            
+
             <p class="fade-in">
-                The graph above shows how the silhouette score varies for different values of k. The peaks in the graph represent the best choices for k, as they indicate optimal separation between clusters. After analysis, the three best values for k were selected for clustering.
+                The plot above illustrates how the silhouette score varies across different values of k. The peaks in the graph represent the most suitable choices for k, 
+                as they indicate the best balance between cluster compactness and separation. Based on this analysis, the three most effective k-values were selected for clustering.
             </p>
-            
+
             <h3>3D K-Means Clustering Visualization</h3>
             <p class="fade-in">
-                Once the optimal values of k were identified, K-Means was applied to the dataset using the top three k values. The PCA-transformed data (PC1, PC2, PC3) was used to visualize the clusters in three-dimensional space. Each color represents a different cluster.
+                After determining the optimal k-values, <strong>K-Means clustering</strong> was applied to the dataset. 
+                To better visualize how the clusters are formed, we used <strong>Principal Component Analysis (PCA)</strong> to reduce the dataset to three principal components (PC1, PC2, PC3), 
+                which allowed for a clear 3D representation of the clustering results.
             </p>
-            
+
+            <!-- 3D K-Means Clustering Visualization -->
             <div class="image-container">
                 <img src="visuals/KMeans_Clusters_3D.png" alt="3D K-Means Clustering" class="topic-image">
             </div>
-            
+
             <p class="fade-in">
-                The visualization above illustrates how K-Means successfully grouped similar data points. The algorithm effectively separated different patterns, though it assumes that clusters are spherical and evenly distributed. This can sometimes be a limitation when working with irregularly shaped or varying-density clusters.
+                The visualization above represents K-Means clustering for three different values of k. Each color represents a distinct cluster, and the red markers indicate cluster centroids. 
+                The plots highlight how increasing k influences cluster separation. Some key observations:
             </p>
+
+            <ul class="fade-in">
+                <li>For <strong>k=2</strong>, the algorithm splits the data into two large groups, which may be too broad to capture nuanced structures.</li>
+                <li>For <strong>k=6</strong>, the clusters become more refined, but some smaller clusters may not have strong differentiation.</li>
+                <li>For <strong>k=5</strong>, the balance between compactness and meaningful separation appears optimal.</li>
+            </ul>
 
             <h3>Why These K Values?</h3>
-                <p class="fade-in">
-                    The Silhouette Score analysis helped in determining the best number of clusters for K-Means.  
-                    The peaks in the graph indicate the optimal values of **k**, where clusters are **compact and well-separated**.
-                </p>
+            <p class="fade-in">
+                The <strong>Silhouette Score analysis</strong> was instrumental in determining the most suitable k-values. 
+                The highest peaks in the silhouette score plot indicate the values of k where clusters are <strong>most well-defined</strong> and <strong>least overlapping</strong>.
+            </p>
 
-                <ul class="fade-in">
-                    <li><strong>k = X</strong>: Highest silhouette score, indicating a well-separated structure.</li>
-                    <li><strong>k = Y</strong>: Close second, providing a balance between compactness and generalization.</li>
-                    <li><strong>k = Z</strong>: A strong alternative that captures different clustering patterns.</li>
-                </ul>
+            <ul class="fade-in">
+                <li><strong>k = 2</strong>: Simpler division but lacks specificity in distinguishing different groups.</li>
+                <li><strong>k = 5</strong>: Strikes a balance between cluster cohesion and interpretability.</li>
+                <li><strong>k = 6</strong>: Offers more refined groupings but may introduce unnecessary complexity.</li>
+            </ul>
 
-                <p class="fade-in">
-                    These three k-values were used to perform clustering, ensuring that the **most stable and meaningful clusters were identified.**
-                </p>
-            
+            <p class="fade-in">
+                These selected k-values provided the most <strong>stable and interpretable clusters</strong> while avoiding over-segmentation of the data.
+            </p>
+
             <h3>Observations</h3>
             <p class="fade-in">
-                - K-Means effectively identified meaningful clusters in the dataset.  
-                - The silhouette score analysis helped in selecting the most appropriate number of clusters.  
-                - Some overlap between clusters suggests that alternative clustering methods like DBSCAN might be useful for detecting varying densities.  
+                The application of K-Means clustering to the dataset led to the following observations:
             </p>
+
+            <ul class="fade-in">
+                <li><strong>K-Means effectively identified meaningful patterns</strong> in the dataset, separating different food categories based on nutritional composition.</li>
+                <li>The <strong>Silhouette Score guided the selection of optimal k-values</strong>, ensuring compact and well-separated clusters.</li>
+                <li>Some clusters exhibit slight overlaps, indicating that alternative clustering methods like <strong>DBSCAN</strong> might be more effective in identifying varying densities.</li>
+            </ul>
 
             <!-- Hierarchical Clustering -->
-            <h2>Hierarchical Clustering</h2>
-            <p class="fade-in">
-                Hierarchical Clustering is a technique that builds a hierarchy of clusters using a bottom-up approach. Unlike K-Means, it does not require specifying the number of clusters beforehand. Instead, it creates a tree-like structure known as a dendrogram, which helps in understanding how data points are grouped together at different levels of similarity.
-            </p>
-            
-            <div class="image-container">
-                <img src="visuals/hierarchical_dendrogram.png" alt="Hierarchical Clustering Dendrogram" class="topic-image">
-            </div>
-            
-            <p class="fade-in">
-                The dendrogram above represents the hierarchical clustering structure of the dataset. Each merge in the tree signifies a step where two clusters are combined based on their similarity. The height of each merge indicates the distance (or dissimilarity) between clusters. A higher merge means that the clusters being joined are less similar.
-            </p>
-            
-            <p class="fade-in">
-                By cutting the dendrogram at a particular height, we can obtain different numbers of clusters. This approach allows flexibility in choosing how many clusters best represent the data. It also helps in identifying sub-groups that may not be easily detected using traditional methods like K-Means.
-            </p>
-            
-            <div class="image-container">
-                <img src="visuals/hierarchical_clustering.png" alt="3D Hierarchical Clustering" class="topic-image">
-            </div>
-            
-            <p class="fade-in">
-                The 3D visualization of hierarchical clustering above provides a clearer understanding of how different data points are grouped. Unlike K-Means, which assigns every point to a fixed cluster, hierarchical clustering enables a more organic view of relationships between data points. It is particularly useful when the dataset exhibits nested structures or varying densities.
-            </p>
-            
-            <p class="fade-in">
-                Hierarchical clustering is computationally more expensive than K-Means, making it less practical for very large datasets. However, its ability to retain the structure of data and provide an interpretable dendrogram makes it valuable for understanding complex datasets.
-            </p>
+                <h2>Hierarchical Clustering</h2>
 
-            <h2>DBSCAN Clustering</h2>
-            <p class="fade-in">
-                DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a density-based clustering algorithm that groups data points based on their proximity to each other. Unlike K-Means or Hierarchical Clustering, DBSCAN does not require specifying the number of clusters beforehand. Instead, it detects dense regions of data and considers low-density points as noise or outliers.
-            </p>
-            
-            <div class="image-container">
-                <img src="visuals/dbscan_clustering.png" alt="DBSCAN Clustering Results" class="topic-image">
-            </div>
-            
-            <p class="fade-in">
-                The visualization above shows how DBSCAN clusters data in three-dimensional space. Unlike K-Means, which assigns each point to a cluster, DBSCAN leaves certain points unclassified if they are not close to any dense cluster. These unclassified points, often called "outliers," are displayed as separate points in the visualization.
-            </p>
-            
-            <p class="fade-in">
-                DBSCAN operates by defining two key parameters:
-                - Epsilon (ε): The maximum distance between two points for them to be considered in the same neighborhood.
-                - Minimum Points (minPts): The minimum number of points required to form a dense cluster.
-            </p>
-            
-            <p class="fade-in">
-                If a point has at least `minPts` neighbors within a radius of `ε`, it becomes a "core point" and expands a cluster. Points that are within `ε` distance of a core point but do not have enough neighbors to form their own cluster are considered "border points." Any point that does not fit into these categories is labeled as noise.
-            </p>
-            
-            <p class="fade-in">
-                The 3D visualization of DBSCAN clustering provides insights into how this algorithm groups similar data points while effectively handling outliers. This makes it a valuable tool for clustering tasks where the number of clusters is unknown, and data may not conform to simple geometric shapes.
-            </p>
-
-            <h2>Comparison of Clustering Performance</h2>
-                <p class="fade-in">
-                    The Silhouette Score was used to evaluate and compare the effectiveness of each clustering method. 
-                    This metric measures how similar each data point is to its assigned cluster compared to other clusters.
-                    A higher Silhouette Score indicates better separation between clusters, meaning the clustering method is more effective.
-                </p>
-
-                <div class="image-container">
-                    <img src="visuals/clustering_performance_comparison.png" alt="Clustering Performance Comparison" class="topic-image">
+                <div class="gif-section">
+                    <img src="assets/hierarchial.gif" alt="K-Means Clustering Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
                 </div>
 
                 <p class="fade-in">
-                    The bar chart above provides a direct comparison of Silhouette Scores across the three clustering methods:
-                    <ul>
-                        <li>K-Means (blue bar) achieved a moderate score, indicating that it formed well-defined clusters, 
-                            but struggled slightly with irregularly shaped or overlapping clusters.</li>
-                        <li>Hierarchical Clustering (green bar) performed similarly to K-Means, showing strong relationships within clusters but with slightly more flexibility.</li>
-                        <li>DBSCAN (red bar) achieved the highest Silhouette Score, making it the best-performing method for this dataset.</li>
-                    </ul>
+                    <strong>Hierarchical Clustering</strong> is a bottom-up clustering technique that builds a hierarchy of clusters by progressively merging smaller clusters into larger ones. 
+                    Unlike K-Means, it does <strong>not require a predefined number of clusters</strong>. Instead, it generates a tree-like structure called a <strong>dendrogram</strong>, which 
+                    visually represents how data points are grouped at various levels of similarity.
                 </p>
 
-                <h3>Comparing Clusters with Original Labels</h3>
+                <!-- Dendrogram -->
+                <h3>Dendrogram Analysis</h3>
                 <p class="fade-in">
-                    After clustering, the results were compared to the **original labels** stored before preprocessing.  
-                    Here are key observations:
+                    A <strong>dendrogram</strong> is a visual representation of the clustering hierarchy. Each point in the tree represents a cluster, and the height at which two clusters merge 
+                    indicates their similarity. The higher the merge, the greater the difference between clusters.
+                </p>
+
+                <div class="image-container">
+                    <img src="visuals/hierarchical_dendrogram.png" alt="Hierarchical Clustering Dendrogram" class="topic-image">
+                </div>
+
+                <p class="fade-in">
+                    The <strong>above dendrogram</strong> helps in determining the optimal number of clusters. By cutting the dendrogram at different heights, we can analyze different levels 
+                    of cluster granularity. This flexibility allows us to explore relationships between food groups without a strict assumption about the number of clusters.
+                </p>
+
+                <!-- 3D Hierarchical Clustering -->
+                <h3>3D Visualization of Hierarchical Clustering</h3>
+                <p class="fade-in">
+                    To better understand how hierarchical clustering grouped our dataset, we visualized the clusters using a <strong>3D PCA transformation</strong>. This allows us to observe 
+                    how food items are distributed based on their nutrient compositions.
+                </p>
+
+                <div class="image-container">
+                    <img src="visuals/hierarchical_clustering.png" alt="3D Hierarchical Clustering" class="topic-image">
+                </div>
+
+                <p class="fade-in">
+                    In the visualization above, different colors represent distinct clusters identified by hierarchical clustering. Unlike K-Means, which forces each data point into a cluster, 
+                    <strong>hierarchical clustering preserves the underlying structure</strong> and allows us to observe relationships between different groups at varying levels of similarity.
+                </p>
+
+                <!-- Key Advantages -->
+                <h3>Why Choose Hierarchical Clustering?</h3>
+                <p class="fade-in">
+                    Hierarchical Clustering offers several advantages compared to traditional clustering methods like K-Means:
                 </p>
 
                 <ul class="fade-in">
-                    <li>Some clusters strongly correspond to original food categories (e.g., high-protein foods forming a distinct cluster).</li>
-                    <li>Other clusters highlight hidden relationships between certain food items that were not evident in the labeled dataset.</li>
+                    <li><strong>No need to predefine the number of clusters:</strong> Unlike K-Means, which requires choosing k in advance, hierarchical clustering allows us to explore the dataset naturally.</li>
+                    <li><strong>Provides a complete hierarchy:</strong> The dendrogram gives a detailed visualization of how clusters are formed at different levels.</li>
+                    <li><strong>Works well for small to medium-sized datasets:</strong> Since it calculates all pairwise distances, it is computationally expensive for very large datasets but excellent for detailed analysis.</li>
+                    <li><strong>Identifies nested structures:</strong> It is useful when clusters have sub-clusters within them, allowing a more refined categorization.</li>
                 </ul>
 
-                <h3>Key Observations</h3>
+                <!-- Limitations -->
+                <h3>Limitations of Hierarchical Clustering</h3>
                 <p class="fade-in">
-                    - DBSCAN outperformed the other methods, demonstrating its ability to detect clusters of varying shapes and densities while effectively handling noise and outliers.  
-                    - K-Means and Hierarchical Clustering produced similar scores, indicating that while both methods structured the data well, they may have struggled with non-spherical clusters or varying densities.  
-                    - The high score of DBSCAN suggests that the dataset contains complex cluster structures that do not conform to the strict assumptions made by K-Means and Hierarchical Clustering.  
+                    Despite its strengths, hierarchical clustering has some limitations:
                 </p>
 
-                <script>
-                    // Read the clustering results from the saved file and update the best method and score dynamically
-                    fetch('visuals/clustering_results.txt')
-                        .then(response => response.text())
-                        .then(text => {
-                            const lines = text.split("\n");
-                            document.getElementById("best-method").textContent = lines[lines.length - 2].split(":")[1].trim();
-                            document.getElementById("best-score").textContent = lines[lines.length - 1].split("with a score of")[1].trim();
-                        });
-                </script>
+                <ul class="fade-in">
+                    <li><strong>Computationally expensive:</strong> The algorithm has a complexity of O(n²), making it inefficient for very large datasets.</li>
+                    <li><strong>Sensitive to noise and outliers:</strong> Since it considers all data points in a distance matrix, outliers can distort the clustering structure.</li>
+                    <li><strong>Inflexibility after clustering:</strong> Once the hierarchy is built, it cannot be modified without recalculating the entire dendrogram.</li>
+                </ul>
 
-            <!-- Conclusion -->
-            <h2>Conclusions</h2>
-            <p class="fade-in">
-                The choice of clustering method depends on dataset characteristics and objectives. K-Means is efficient for large, structured datasets, Hierarchical Clustering provides relationship insights, and DBSCAN is ideal for irregularly shaped clusters and noise detection.
-            </p>
+                <!-- Observations -->
+                <h3>Observations and Key Insights</h3>
+                <p class="fade-in">
+                    - Hierarchical clustering successfully captured <strong>distinct food groupings</strong> based on their nutritional attributes.  
+                    - The dendrogram provided insights into <strong>nested structures</strong>, revealing how certain food types share similar characteristics at different hierarchical levels.  
+                    - This method is particularly useful when we <strong>do not know the exact number of clusters</strong> in advance, allowing for a more flexible approach to categorizing food items.  
+                </p>
+
+                <h2>DBSCAN Clustering</h2>
+
+                <div class="gif-section">
+                    <img src="assets/dbscan.gif" alt="K-Means Clustering Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+                </div>
+
+                <p class="fade-in">
+                    <strong>DBSCAN</strong> (Density-Based Spatial Clustering of Applications with Noise) is a density-based clustering algorithm that groups data points based on their proximity to each other. Unlike <strong>K-Means</strong> or <strong>Hierarchical Clustering</strong>, DBSCAN does not require specifying the number of clusters beforehand. Instead, it detects dense regions of data and considers low-density points as noise or outliers.
+                </p>
+                
+                <div class="image-container">
+                    <img src="visuals/dbscan_clustering.png" alt="DBSCAN Clustering Results" class="topic-image">
+                </div>
+                
+                <p class="fade-in">
+                    The visualization above illustrates how <strong>DBSCAN</strong> clusters data in three-dimensional space. Unlike <strong>K-Means</strong>, which assigns every data point to a cluster, DBSCAN allows certain points to remain unclassified if they are too far from any dense cluster. These unclassified points, often labeled as "outliers," are displayed separately in the visualization.
+                </p>
+
+
+                <!-- DBSCAN -->
+                
+                <h3>DBSCAN Algorithm Parameters</h3>
+                <p class="fade-in">
+                    DBSCAN operates by defining two critical parameters:
+                    <ul>
+                        <li><strong>Epsilon (ε)</strong>: The maximum distance between two points for them to be considered in the same neighborhood.</li>
+                        <li><strong>Minimum Points (minPts)</strong>: The minimum number of points required to form a dense cluster.</li>
+                    </ul>
+                </p>
+                
+                <p class="fade-in">
+                    If a point has at least <strong>minPts</strong> neighbors within a radius of <strong>ε</strong>, it becomes a "core point" and expands a cluster. Points that are within <strong>ε</strong> distance of a core point but do not have enough neighbors to form their own cluster are considered "border points." Any point that does not fit into these categories is labeled as noise.
+                </p>
+                
+                <h3>Advantages of DBSCAN</h3>
+                <p class="fade-in">
+                    <ul>
+                        <li><strong>Does not require the number of clusters to be specified</strong>, unlike K-Means.</li>
+                        <li><strong>Can identify clusters of arbitrary shape</strong>, which makes it more flexible than K-Means.</li>
+                        <li><strong>Effectively detects outliers</strong> as noise, reducing the impact of anomalies on clustering results.</li>
+                    </ul>
+                </p>
+                
+                <h3>Limitations of DBSCAN</h3>
+                <p class="fade-in">
+                    <ul>
+                        <li><strong>Sensitive to parameter selection</strong>: The choice of ε and minPts can significantly impact results.</li>
+                        <li><strong>Not ideal for varying-density clusters</strong>: When clusters have different densities, DBSCAN might not perform optimally.</li>
+                        <li><strong>Computationally expensive for large datasets</strong>: DBSCAN has a higher time complexity compared to K-Means.</li>
+                    </ul>
+                </p>
+                
+                <h2>Comparison of Clustering Performance</h2>
+                    <p class="fade-in">
+                        The <strong>Silhouette Score</strong> was used to evaluate and compare the effectiveness of each clustering method. This metric measures how similar each data point is to its assigned cluster compared to other clusters. A higher <strong>Silhouette Score</strong> indicates better separation between clusters, meaning the clustering method is more effective.
+                    </p>
+                    
+                    <div class="image-container">
+                        <img src="visuals/clustering_performance_comparison.png" alt="Clustering Performance Comparison" class="topic-image">
+                    </div>
+                    
+                    <p class="fade-in">
+                        The bar chart above provides a direct comparison of <strong>Silhouette Scores</strong> across the three clustering methods:
+                        <ul>
+                            <li><strong>K-Means</strong> (blue bar) achieved a moderate score, indicating that it formed well-defined clusters, but struggled slightly with irregularly shaped or overlapping clusters.</li>
+                            <li><strong>Hierarchical Clustering</strong> (green bar) performed similarly to K-Means, showing strong relationships within clusters but with slightly more flexibility.</li>
+                            <li><strong>DBSCAN</strong> (red bar) achieved the highest <strong>Silhouette Score</strong>, making it the <strong>best-performing method</strong> for this dataset.</li>
+                        </ul>
+                    </p>
+    
+                    <h3>Comparing Clusters with Original Labels</h3>
+                    <p class="fade-in">
+                        After clustering, the results were compared to the <strong>original labels</strong> stored before preprocessing. Here are key observations:
+                    </p>
+                    
+                    <ul class="fade-in">
+                        <li>Some clusters strongly correspond to original food categories (e.g., high-protein foods forming a distinct cluster).</li>
+                        <li>Other clusters highlight hidden relationships between certain food items that were not evident in the labeled dataset.</li>
+                    </ul>
+                    
+                    <h3>Key Observations</h3>
+                    <p class="fade-in">
+                        <ul>
+                            <li><strong>DBSCAN</strong> outperformed the other methods, demonstrating its ability to detect clusters of varying shapes and densities while effectively handling noise and outliers.</li>
+                            <li><strong>K-Means</strong> and <strong>Hierarchical Clustering</strong> produced similar scores, indicating that while both methods structured the data well, they may have struggled with non-spherical clusters or varying densities.</li>
+                            <li>The high score of <strong>DBSCAN</strong> suggests that the dataset contains complex cluster structures that do not conform to the strict assumptions made by <strong>K-Means</strong> and <strong>Hierarchical Clustering</strong>.</li>
+                        </ul>
+                    </p>
+
+                    <h2>Conclusion</h2>
+
+                    <p class="fade-in">
+                        Understanding <strong>food composition</strong> is crucial for making informed dietary choices. By utilizing clustering techniques, we can uncover <strong>hidden patterns</strong> within food data that provide valuable insights into <strong>nutritional similarities and differences</strong>. These insights can help in <strong>designing healthier meal plans</strong>, improving food recommendations, and identifying potentially misleading food classifications.
+                    </p>
+                    
+                    <p class="fade-in">
+                        The study of food clustering showcases how different items relate to one another based on their <strong>macronutrient distribution</strong>. Traditional methods of categorizing food by name or brand often fail to reflect their true nutritional composition. However, through clustering, we can <strong>identify groups of foods that share similar characteristics</strong>, regardless of how they are marketed or labeled.
+                    </p>
+                    
+                    <!-- Clustering Conclusion Image -->
+                    <div class="image-container">
+                        <img src="assets/clustering_conclusion.png" alt="Clustering Conclusion Insights" class="topic-image">
+                    </div>
+                    
+                    <p class="fade-in">
+                        Moreover, this approach enables <strong>better consumer awareness</strong>. For example, individuals looking to <strong>reduce sugar intake</strong> can use these clusters to find alternatives that match their dietary goals without being misled by branding. Similarly, athletes or those focusing on <strong>high-protein diets</strong> can identify food groups that meet their nutritional needs more effectively.
+                    </p>
+                    
+                    <p class="fade-in">
+                        From a broader perspective, <strong>clustering techniques in food data analysis</strong> have the potential to assist policymakers in <strong>creating better food labeling regulations</strong>, improving <strong>public health nutrition strategies</strong>, and even addressing concerns about <strong>ultra-processed food consumption</strong>. As food choices continue to evolve, <strong>data-driven methods</strong> like clustering offer a pathway to a <strong>deeper, more accurate understanding</strong> of what we consume and how it impacts our well-being.
+                    </p>
         </div>
     </div>
-
     <!-- Typing Animation -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
