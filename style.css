@@ -750,27 +750,30 @@ p, ul {
     flex-wrap: wrap;
 }
 
-/* Responsive Design for Mobile Screens */
+/* 🔹 Responsive Design for Mobile Screens */
 @media (max-width: 768px) {
+    
     /* 🔹 Navbar Styles */
     .navbar {
+        display: none; /* Initially hidden */
         flex-direction: column;
         align-items: center;
-        background-color: #333;
         width: 100%;
-        position: fixed; /* Keeps it at the top */
+        position: fixed;
         top: 0;
         left: 0;
-        height: auto;
+        background-color: #333;
         z-index: 1000;
-        display: none; /* Hide navbar initially */
+        height: auto;
     }
 
     .navbar a {
+        width: 100%;
         padding: 15px;
         text-align: center;
-        width: 100%;
-        display: block; /* Stack menu items */
+        display: block;
+        color: white;
+        text-decoration: none;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
@@ -796,7 +799,8 @@ p, ul {
 
     /* 🔹 Content Section */
     .content-section {
-        padding: 60px 15px 20px; /* Add top padding to avoid overlap with navbar */
+        padding: 70px 15px 20px; /* Extra top padding to avoid overlap with navbar */
+        text-align: center; /* Improves readability on smaller screens */
     }
 
     /* 🔹 Image Responsiveness */
@@ -818,12 +822,31 @@ p, ul {
         gap: 12px;
     }
 
+    .github-button {
+        padding: 10px 15px;
+        font-size: 16px;
+        color: white;
+        background-color: #007BFF;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .github-button:hover {
+        background-color: #0056b3;
+    }
+
     /* 🔹 Code Snippet */
     pre {
         white-space: pre-wrap;
         word-break: break-word;
         font-size: 14px;
+        background-color: #222;
+        color: #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
     }
 }
-
-
