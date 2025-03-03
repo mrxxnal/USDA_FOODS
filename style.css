@@ -16,6 +16,11 @@ body {
     overflow-y: auto; /* Enable vertical scrolling */
 }
 
+p {
+    font-size: 18px;
+    display: block !important;
+}
+
 /* Space Background */
 .space-background {
     position: fixed;
@@ -698,9 +703,6 @@ button:hover, .option:hover {
 .magnetic-button:hover {
     transform: scale(1.05);
 }
-
-
-
 
 
 
