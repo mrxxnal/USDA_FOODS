@@ -70,6 +70,55 @@
                 <li><strong>Hierarchical Clustering</strong>: Provides a hierarchical structure but is computationally expensive.</li>
                 <li><strong>DBSCAN</strong>: Detects arbitrary-shaped clusters and handles noise but requires careful parameter tuning.</li>
             </ul>
+
+            <!-- Distance Metrics in Clustering -->
+            <h2>Understanding Distance Metrics in Clustering</h2>
+            <p class="fade-in">
+                Clustering algorithms rely on <strong>distance metrics</strong> to measure how similar or different data points are. 
+                The choice of metric impacts cluster formation and overall accuracy. Below are common distance measures used in <strong>K-Means</strong>, <strong>Hierarchical Clustering</strong>, and <strong>DBSCAN</strong>.
+            </p>
+
+            <!-- Image Representation -->
+            <div class="image-container">
+                <img src="assets/distance_metrics.png" alt="Comparison of Distance Metrics" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <h3>Common Distance Metrics</h3>
+
+            <ul class="fade-in">
+                <li><strong>Euclidean Distance:</strong> Measures the straight-line distance between two points. Used in <strong>K-Means</strong> and <strong>DBSCAN</strong> for clustering in continuous space.</li>
+
+                <li><strong>Cosine Similarity:</strong> Measures the cosine of the angle between two vectors. Often used in <strong>text clustering</strong> and <strong>hierarchical clustering</strong> for high-dimensional data.</li>
+
+                <li><strong>Hamming Distance:</strong> Measures the number of positions where two binary strings differ. Applied in clustering categorical and text-based data.</li>
+
+                <li><strong>Manhattan Distance:</strong> Computes the sum of absolute differences between coordinates. Suitable for grid-like structured data and <strong>K-Means</strong> when features are not continuous.</li>
+
+                <li><strong>Minkowski Distance:</strong> A generalization of Euclidean and Manhattan distances. <strong>P=1</strong> corresponds to Manhattan, <strong>P=2</strong> to Euclidean.</li>
+
+                <li><strong>Chebyshev Distance:</strong> Measures the greatest absolute difference between feature values. Useful in applications where extreme feature differences define cluster separations.</li>
+
+                <li><strong>Jaccard Similarity:</strong> Measures the similarity between sets. Frequently used in clustering text documents and gene sequence analysis.</li>
+
+                <li><strong>Haversine Distance:</strong> Calculates the shortest distance between two points on a sphere. Essential for <strong>geo-spatial clustering</strong> applications like mapping and transportation.</li>
+
+                <li><strong>Sørensen-Dice Coefficient:</strong> Similar to Jaccard but gives more weight to common elements. Used for string similarity and bioinformatics clustering.</li>
+            </ul>
+
+            <h3>Impact of Distance Metrics on Clustering</h3>
+            <p class="fade-in">
+                Different clustering methods work best with specific distance metrics:
+            </p>
+
+            <ul class="fade-in">
+                <li><strong>K-Means:</strong> Primarily uses <strong>Euclidean distance</strong>, forming spherical clusters.</li>
+                <li><strong>Hierarchical Clustering:</strong> Supports multiple metrics, including <strong>cosine similarity</strong> and <strong>Jaccard distance</strong>, depending on the dataset.</li>
+                <li><strong>DBSCAN:</strong> Typically employs <strong>Euclidean distance</strong> but can be adapted to other metrics for non-linear clusters.</li>
+            </ul>
+
+            <p class="fade-in">
+                Choosing the right distance metric is crucial for obtaining meaningful clusters. For datasets with high-dimensional features, <strong>cosine similarity</strong> is often more effective, while for continuous numerical data, <strong>Euclidean distance</strong> remains a standard choice.
+            </p>
     
             <h2>Clustering Implementation: Dataset Overview</h2>
             <p class="fade-in">
