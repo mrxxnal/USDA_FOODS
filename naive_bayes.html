@@ -36,12 +36,21 @@
             <p class="fade-in">
                 Naïve Bayes (NB) is a family of probabilistic classifiers grounded in Bayes’ Theorem. Despite assuming feature independence, these models often outperform more sophisticated algorithms on small to medium-sized datasets. NB classifiers are particularly effective in text classification, spam filtering, sentiment analysis, and here—nutritional food classification.
             </p>
-
+            
+            <p class="fade-in">
+                The equation below illustrates the fundamental principle of Naïve Bayes: it calculates the posterior probability of a class given the input features by combining prior knowledge and likelihood under the assumption of feature independence.
+            </p>
+            
             <div class="image-container">
                 <img src="assets/naive_bayes_formula.png" alt="Naive Bayes Formula" class="topic-image">
             </div>
 
             <h2>Variants of Naïve Bayes Explored</h2>
+
+            <div class="image-container">
+                <img src="assets/nb_types.jpg" alt="Naive Bayes Formula" class="topic-image">
+            </div>
+
             <ul class="fade-in">
                 <li><strong>Gaussian Naïve Bayes (GNB)</strong>: Assumes continuous features follow a Gaussian distribution. Suitable for numeric data like fat, sugar, or protein grams.</li>
                 <li><strong>Multinomial Naïve Bayes (MNB)</strong>: Models count-based or frequency features. Applied to scaled and integer-rounded nutrition values.</li>
@@ -74,22 +83,59 @@
             </div>
 
             <h2>Model Codebase</h2>
-            <p class="fade-in">All Naïve Bayes models were coded in separate scripts with shared preprocessing logic in <code>nb_data_prep.py</code>. The complete implementation includes:</p>
-
+            <p class="fade-in">
+                Each Naïve Bayes model in this project was implemented through a dedicated Python script. These scripts are tailored to the assumptions and requirements of each model type—Gaussian, Multinomial, Bernoulli, and Categorical. All models build upon a unified preprocessing step to ensure clean, well-structured data. Below is a breakdown of each modeling component and its role in this project.
+            </p>
+            
+            <!-- Data Preparation -->
+            <h3 class="fade-in">📦 Data Preparation Script</h3>
+            <p class="fade-in">
+                The preprocessing workflow loads the cleaned USDA dataset and prepares data in four specific formats. It filters out underrepresented categories, applies a stratified 70-30 train-test split, and tailors the features to match each NB variant:
+            </p>
+            <ul class="fade-in">
+                <li>Continuous features for Gaussian NB</li>
+                <li>Scaled, count-like integers for Multinomial NB</li>
+                <li>Binary presence/absence indicators for Bernoulli NB</li>
+                <li>Discretized categorical bins for Categorical NB</li>
+            </ul>
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_gnb.py" target="_blank" class="github-button">GNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_data_prep.py" target="_blank" class="github-button">View Data Preparation Script</a>
             </div>
-
+            
+            <!-- Gaussian Naive Bayes -->
+            <h3 class="fade-in">📊 Gaussian Naïve Bayes (GNB)</h3>
+            <p class="fade-in">
+                This model was trained using raw continuous features like calories, fat, protein, and carbohydrate ratios. The goal was to assess how well GNB could classify foods when the input distribution is assumed to be Gaussian. The model demonstrated strong separation in well-behaved, unimodal classes (like "Soda"), but struggled when class boundaries overlapped or distributions were skewed, as seen in categories like "Pizza" and "Frozen Patties."
+            </p>
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_mnb.py" target="_blank" class="github-button">MNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_gnb.py" target="_blank" class="github-button">View GNB Model Script</a>
             </div>
-
+            
+            <!-- Multinomial Naive Bayes -->
+            <h3 class="fade-in">📈 Multinomial Naïve Bayes (MNB)</h3>
+            <p class="fade-in">
+                This implementation used MinMax-scaled nutritional data converted to non-negative integer-like counts. It was ideal for evaluating frequency-based learning and performed impressively on categories with distinct nutrient patterns. The model achieved high accuracy on items like “Pizza” and “Candy,” demonstrating that MNB is well-suited for structured and evenly distributed nutritional data.
+            </p>
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/bnb_model.py" target="_blank" class="github-button">BNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_mnb.py" target="_blank" class="github-button">View MNB Model Script</a>
             </div>
-
+            
+            <!-- Bernoulli Naive Bayes -->
+            <h3 class="fade-in">⚪ Bernoulli Naïve Bayes (BNB)</h3>
+            <p class="fade-in">
+                This model converted all nutritional values into binary flags—indicating whether a nutrient is present or absent. BNB proved effective in highlighting extreme categories, especially those characterized by nutrient presence (like “Candy” or “Cookies”). However, it oversimplified the dataset, which led to misclassifications in more nuanced categories due to lost feature granularity.
+            </p>
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_cnb.py" target="_blank" class="github-button">CNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/bnb_model.py" target="_blank" class="github-button">View BNB Model Script</a>
+            </div>
+            
+            <!-- Categorical Naive Bayes -->
+            <h3 class="fade-in">🧩 Categorical Naïve Bayes (CNB)</h3>
+            <p class="fade-in">
+                CNB used discretized categorical bins (via KBinsDiscretizer) to group continuous values into 10 distinct ranges. While this model is ideal for unordered nominal features, its performance was limited on our structured dataset. Many categories collapsed into a single prediction (e.g., excessive classification as "Soda") due to binning distortion. Nevertheless, this model offered insight into how coarse quantization impacts classification.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_cnb.py" target="_blank" class="github-button">View CNB Model Script</a>
             </div>
 
             <h2>Confusion Matrix Analysis</h2>
