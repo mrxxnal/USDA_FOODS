@@ -34,7 +34,45 @@
 
     <div class="content-section">
         <h1 id="typing-title"></h1>
-        <p>[Page Content]</p>
+        <div class="content-wrapper">
+    
+            <h2 class="fade-in">Overview: Understanding Naïve Bayes in Food Classification</h2>
+            <p class="fade-in">
+                Naïve Bayes classifiers are a foundational component in the machine learning ecosystem—particularly admired for their simplicity, scalability, and interpretability. These classifiers apply Bayes' Theorem to perform classification tasks by calculating the posterior probability of a class given input features, under the strong (but often effective) assumption that the features are conditionally independent.
+            </p>
+
+            <p class="fade-in">
+                Mathematically, this is expressed as:
+                <div class="image-container">
+                    <img src="assets/naive_bayes_formula.png" alt="Naive bayes formula" class="topic-image">
+                </div>
+            </p>
+
+            <p class="fade-in">
+                Despite the "naïve" assumption of feature independence, Naïve Bayes often performs remarkably well in real-world problems—especially in text classification, spam detection, and medical diagnostics. For this project, we explore how different variants of Naïve Bayes can classify food items based on their nutritional profiles.
+            </p>
+    
+            <h3 class="fade-in">🧠 Types of Naïve Bayes Models</h3>
+            <ul class="fade-in">
+                <li><strong>Gaussian Naïve Bayes (GNB):</strong> Assumes that the features follow a normal distribution. Ideal for continuous data like nutrient measurements (e.g., protein, fat, carbohydrate grams).</li>
+                <li><strong>Multinomial Naïve Bayes (MNB):</strong> Designed for discrete frequency data—commonly used in text classification, but also applicable for count-based food attributes.</li>
+                <li><strong>Bernoulli Naïve Bayes (BNB):</strong> Operates on binary data and models feature presence or absence. Useful when representing data as 0/1 (e.g., high/low sodium, sugar-free or not).</li>
+                <li><strong>Categorical Naïve Bayes (CNB):</strong> Designed to handle discrete, non-ordinal features—ideal when working with purely categorical food labels or groups.</li>
+            </ul>
+    
+            <p class="fade-in">
+                Each of these models comes with trade-offs. GNB is most effective when the assumption of normally distributed features holds. MNB performs well when features represent term counts or quantities, while BNB is suitable for binary inputs. CNB, although less common, is powerful in categorical classification tasks where no numeric structure exists.
+            </p>
+    
+            <p class="fade-in">
+                In the context of this project, where food items are described by nutritional values and categories, we’ll experiment with three distinct flavors—Gaussian, Multinomial, and Bernoulli Naïve Bayes. This will help determine which classifier best separates food types based on macro- and micronutrient profiles.
+            </p>
+    
+            <p class="fade-in">
+                The goal is not just to build models—but to analyze how Naïve Bayes handles structured, health-related data. Does it generalize well when features are interdependent (e.g., fat and calories)? How does performance vary when binarizing inputs for BNB or aggregating categories for MNB? Through experimentation and visualization, we’ll explore these questions.
+            </p>
+    
+        </div>
     </div>
 
             <!-- Your existing HTML content -->
