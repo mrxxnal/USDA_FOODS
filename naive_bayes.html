@@ -107,6 +107,39 @@
             <p class="fade-in">
                 This model was trained using raw continuous features like calories, fat, protein, and carbohydrate ratios. The goal was to assess how well GNB could classify foods when the input distribution is assumed to be Gaussian. The model demonstrated strong separation in well-behaved, unimodal classes (like "Soda"), but struggled when class boundaries overlapped or distributions were skewed, as seen in categories like "Pizza" and "Frozen Patties."
             </p>
+
+            <!-- Dataset Explanation -->
+            <h4 class="fade-in">🧪 GNB Dataset Split and Why Disjoint Sets Are Crucial</h4>
+            <p class="fade-in">
+                For effective supervised learning, the dataset was split into a <strong>training set</strong> and a <strong>testing set</strong> using a 70:30 stratified split. This ensures that the classifier learns on a subset of labeled data and is then evaluated on previously unseen examples, offering a genuine test of generalization. 
+                Disjoint sets are essential because reusing data between training and testing can lead to <strong>data leakage</strong>, where the model memorizes instead of learning general patterns. This results in overestimated accuracy and poor real-world performance. Below are actual screenshots of the prepared GNB feature matrices and target labels.
+            </p>
+
+            <!-- X Train -->
+
+            <h4 class="fade-in">📁 GNB_X_Train: Feature matrix used for training</h4>
+            <div class="image-container">
+                <img src="assets/GNB_X_Train.jpg" alt="GNB X Train Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+
+            <!-- Y Train -->
+            <h4 class="fade-in">🏷️ GNB_Y_Train: Corresponding food categories for training set</h4>
+            <div class="image-container">
+                <img src="assets/GNB_Y_Train.jpg" alt="GNB Y Train Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+
+            <!-- X Test -->
+            <h4 class="fade-in">📁 GNB_X_Test: Feature matrix used for evaluating performance</h4>
+            <div class="image-container">
+                <img src="assets/GNB_X_Test.jpg" alt="GNB X Test Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+
+            <!-- Y Test -->
+            <h4 class="fade-in">🏷️ GNB_Y_Test: True food labels used to validate predictions</h4>
+            <div class="image-container">
+                <img src="assets/GNB_Y_Test.jpg" alt="GNB Y Test Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_gnb.py" target="_blank" class="github-button">View GNB Model Script</a>
             </div>
@@ -114,8 +147,24 @@
             <!-- Multinomial Naive Bayes -->
             <h3 class="fade-in">📈 Multinomial Naïve Bayes (MNB)</h3>
             <p class="fade-in">
-                This implementation used MinMax-scaled nutritional data converted to non-negative integer-like counts. It was ideal for evaluating frequency-based learning and performed impressively on categories with distinct nutrient patterns. The model achieved high accuracy on items like “Pizza” and “Candy,” demonstrating that MNB is well-suited for structured and evenly distributed nutritional data.
+                This implementation used MinMax-scaled nutritional data converted into non-negative integer-like values by multiplying and rounding. This transformation preserved the relative frequencies of features such as calories, protein, fat, and carbohydrate ratios—making the dataset well-suited for frequency-based classifiers like MNB.
             </p>
+            <p class="fade-in">
+                The training and test sets were created using a stratified 70/30 split to maintain balanced representation across food categories. Ensuring these sets are <strong>disjoint</strong> is critical: it prevents data leakage, which would inflate performance metrics by allowing the model to "memorize" parts of the test set during training. Below are small snapshots of the <code>X_train</code> and <code>X_test</code> datasets used for MNB.
+            </p>
+
+            <div class="image-container">
+                <img src="assets/MNB_X_Train.jpg" alt="MNB Training Set (X_train)" class="topic-image">
+            </div>
+
+            <div class="image-container">
+                <img src="assets/MNB_X_Test.jpg" alt="MNB Test Set (X_test)" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                As seen above, both datasets contain the same feature columns but different samples—ensuring that evaluation is performed fairly on unseen data. The MNB classifier trained on these disjoint sets performed exceptionally well on classes with strong, distinct patterns like <strong>Pizza</strong> and <strong>Candy</strong>. This highlights the strength of MNB when applied to structured, integer-based nutritional data where feature frequencies act as strong class signals.
+            </p>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_mnb.py" target="_blank" class="github-button">View MNB Model Script</a>
             </div>
