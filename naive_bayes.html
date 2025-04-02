@@ -172,8 +172,26 @@
             <!-- Bernoulli Naive Bayes -->
             <h3 class="fade-in">⚪ Bernoulli Naïve Bayes (BNB)</h3>
             <p class="fade-in">
-                This model converted all nutritional values into binary flags—indicating whether a nutrient is present or absent. BNB proved effective in highlighting extreme categories, especially those characterized by nutrient presence (like “Candy” or “Cookies”). However, it oversimplified the dataset, which led to misclassifications in more nuanced categories due to lost feature granularity.
+                Bernoulli Naïve Bayes is best suited for binary/boolean feature data—where each feature is either present (1) or absent (0). For this implementation, all continuous nutritional values were converted into binary flags using a threshold: if a nutrient was greater than zero, it was encoded as 1; otherwise, it was marked as 0.
             </p>
+            <p class="fade-in">
+                This model is particularly useful when the presence of a feature matters more than its magnitude. In our food dataset, it performed well in distinguishing categories like <strong>“Candy”</strong> and <strong>“Cookies & Biscuits”</strong>, where specific nutrients (e.g., sugar, fat) are either consistently present or absent.
+            </p>
+            <p class="fade-in">
+                However, Bernoulli NB comes with significant limitations when applied to nuanced datasets like nutrition profiles. By binarizing the data, we lose valuable detail—such as how much sugar or fat is present. This leads to overclassification, where many distinct items get mapped to the same label (e.g., “Cookies”) simply because they share similar binary nutrient presence. As a result, categories with overlapping 0/1 patterns were frequently misclassified, reducing the model’s overall accuracy.
+            </p>
+            <p class="fade-in">
+                Below are snapshots of the training and testing datasets used for BNB. As shown, the data has been reduced to binary format, discarding numeric ranges in favor of presence/absence indicators. This format aligns with BNB’s assumptions but also introduces a trade-off between simplicity and predictive resolution.
+            </p>
+
+            <div class="image-container fade-in">
+                <img src="assets/BNB_X_Train.jpg" alt="BNB Training Set" class="topic-image">
+            </div>
+
+            <div class="image-container fade-in">
+                <img src="assets/BNB_X_Test.jpg" alt="BNB Testing Set" class="topic-image">
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/bnb_model.py" target="_blank" class="github-button">View BNB Model Script</a>
             </div>
@@ -181,8 +199,18 @@
             <!-- Categorical Naive Bayes -->
             <h3 class="fade-in">🧩 Categorical Naïve Bayes (CNB)</h3>
             <p class="fade-in">
-                CNB used discretized categorical bins (via KBinsDiscretizer) to group continuous values into 10 distinct ranges. While this model is ideal for unordered nominal features, its performance was limited on our structured dataset. Many categories collapsed into a single prediction (e.g., excessive classification as "Soda") due to binning distortion. Nevertheless, this model offered insight into how coarse quantization impacts classification.
+                Categorical Naïve Bayes is specifically designed to handle discrete, unordered categories—making it appropriate for cases like customer types, weather labels, or survey responses. However, since our nutritional data was continuous in nature, we applied <code>KBinsDiscretizer</code> to convert each feature into 10 equally spaced bins. This transformation effectively grouped nutrient values (e.g., calories, fat) into distinct integer labels, simulating a categorical structure.
             </p>
+            <p class="fade-in">
+                The CNB model was trained and tested using the exact same data splits used for Gaussian Naïve Bayes (GNB)—specifically, <code>nb_GNB_X_train.csv</code> and <code>nb_GNB_X_test.csv</code>—but with each feature bin-assigned to fall within a discrete category. This ensured a consistent comparison across models while adapting the data format to suit CNB’s assumptions.
+            </p>
+            <p class="fade-in">
+                While the conversion allowed us to apply CNB, the results were suboptimal. The discretization process introduced distortion by forcing continuous values into arbitrary bins, removing the natural ordering and subtle differences between data points. As a result, the model consistently overpredicted “Soda” as the target class, failing to distinguish most other food types. This behavior highlights the risks of applying CNB to datasets where numeric ranges hold significant meaning—especially in contexts like nutrient-based classification where gradations in sugar, fat, or protein are vital.
+            </p>
+            <p class="fade-in">
+                Nonetheless, CNB served as a valuable contrast to the other Naïve Bayes flavors by illustrating how binning affects model behavior. Its poor performance underscores the importance of aligning preprocessing strategies with the assumptions of the model being used.
+            </p>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_cnb.py" target="_blank" class="github-button">View CNB Model Script</a>
             </div>
