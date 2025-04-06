@@ -260,6 +260,56 @@
                 The model appeared to latch onto a dominant bin signature corresponding to “Soda” and consequently predicted that label across most categories. This behavior underscores how <strong>categorical binning, when applied to non-categorical data, can create artificial similarities</strong> that mislead the learning algorithm. CNB is best reserved for naturally categorical inputs, such as discrete choices (e.g., flavor type, packaging style), rather than numerical nutrition data. In this context, CNB’s poor performance reinforces the importance of choosing models that align with the true nature of the features.
             </p>
 
+            <h3 class="fade-in">Model Accuracy Snapshots</h3>
+            <p class="fade-in">
+                Below are final accuracy snapshots for each Naive Bayes variant trained using the top-10 most frequent food categories.
+                Each model type uses a unique assumption about feature distributions, leading to varying prediction performance.
+                The classification reports highlight class-wise precision, recall, and F1-scores, helping assess the suitability of each approach.
+            </p>
+
+            <!-- Gaussian Naive Bayes -->
+            <div class="image-container">
+                <img src="assets/gnb_accuracy.png" alt="Gaussian Naive Bayes Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Gaussian Naive Bayes (GNB)</strong> assumes features follow a normal distribution. Despite this, the model achieved a modest accuracy of <strong>4.11%</strong>—suggesting that the continuous-valued nutritional data does not align well with Gaussian assumptions.
+                However, certain classes like <em>Baby food: vegetables</em> (Precision: 0.07, Recall: 0.86) and <em>Baked Products</em> (Precision: 0.19, Recall: 0.27) were identified reasonably well.
+                This model exposes how continuous features can dilute predictive power when distributions are non-Gaussian.
+            </p>
+
+            <!-- Multinomial Naive Bayes -->
+            <div class="image-container">
+                <img src="assets/mnb_accuracy.png" alt="Multinomial Naive Bayes Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Multinomial Naive Bayes (MNB)</strong> works well with count-like features. After preprocessing and normalization, this model yielded an accuracy of <strong>29.11%</strong>.
+                Standout performance includes <em>Bacon, Sausages & Ribs</em> with high precision (0.67) and <em>Breads & Buns</em> with strong recall (0.59).
+                The model struggled with diverse and ambiguous food items like <em>Biscuits</em> and <em>Cookies</em>, likely due to overlapping nutritional profiles.
+                Overall, MNB offered balanced performance on the most frequent food categories and proved useful in this discrete feature setting.
+            </p>
+
+            <!-- Bernoulli Naive Bayes -->
+            <div class="image-container">
+                <img src="assets/bnb_accuracy.png" alt="Bernoulli Naive Bayes Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Bernoulli Naive Bayes (BNB)</strong> simplifies input to binary form—indicating the presence or absence of features.
+                It delivered a fair accuracy of <strong>35.15%</strong>, outperforming Gaussian and Categorical variants.
+                The best predictions were for <em>American Indian/Alaska Native Foods</em> (Precision: 0.52, Recall: 0.13).
+                BNB is well-suited when feature occurrence is more informative than its magnitude, but can miss nuance in varied nutritional scales.
+            </p>
+
+            <!-- Categorical Naive Bayes -->
+            <div class="image-container">
+                <img src="assets/cnb_accuracy.png" alt="Categorical Naive Bayes Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Categorical Naive Bayes (CNB)</strong> uses discretized numerical features converted into categorical bins.
+                It had the lowest accuracy among all models at <strong>15.78%</strong>.
+                This poor performance likely stems from information loss during binning and a mismatch between discretized values and true class boundaries.
+                While theoretically appealing, CNB requires precise bin tuning to be effective—especially when features like calories and fat span wide ranges.
+            </p>
+
             <h2>Conclusions & Takeaways</h2>
             <ul class="fade-in">
                 <li>
