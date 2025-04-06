@@ -6,7 +6,6 @@
     <title>Decision Trees</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
-
 </head>
 <body>
 
@@ -34,8 +33,154 @@
 
     <div class="content-section">
         <h1 id="typing-title"></h1>
-        <p>[Page Content]</p>
+        <div class="content-wrapper">
+            
+            <!-- (a) Overview -->
+            <h2>Introduction to Decision Trees for Food Classification</h2>
+            <p class="fade-in">
+                Decision Trees (DTs) are supervised machine learning models used for both classification and regression tasks. These models split the data recursively based on feature values to form a tree-like structure where each internal node represents a decision rule, each branch an outcome, and each leaf node a predicted class label.
+            </p>
+
+            <p class="fade-in">
+                Decision Trees are widely used due to their interpretability, ability to handle mixed data types, and low data preprocessing requirements. However, they are prone to overfitting and can grow very deep if not pruned. Below are two visual illustrations to help understand their structure and functioning:
+            </p>
+
+            <div class="image-container">
+                <img src="assets/DT_structure.png" alt="Decision Tree Structure" class="topic-image">
+            </div>
+
+            <div class="image-container">
+                <img src="assets/infogain.jpg" alt="Information Gain Illustration" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                <strong>Impurity Metrics:</strong> Decision Trees evaluate potential splits using impurity metrics. Two widely used ones are:
+                <ul class="fade-in">
+                    <li><strong>Entropy</strong> Measures uncertainty or disorder in the data.</li>
+                    <li><strong>Gini Index:</strong> Measures the probability of incorrectly classifying a random element.</li>
+                </ul>
+            </p>
+
+            <div class="image-container">
+                <img src="assets/impurity_metrics.jpeg" alt="Impurity Metrics" class="topic-image">
+            </div>
+
+            <p class="fade-in">
+                <strong>Information Gain</strong> is the reduction in impurity after a split:
+                <br>
+                <code>Information Gain = Impurity (Parent Node) − Weighted Average Impurity (Children Nodes)</code>
+            </p>
+
+            <p class="fade-in">
+                <strong>Example:</strong> Suppose we have a dataset of 10 food items: 5 "Healthy" and 5 "Unhealthy."  
+                Entropy before any split is:  
+                $H = -0.5\log_2(0.5) - 0.5\log_2(0.5) = 1$  
+                A split based on “Calories” results in subsets with entropy of 0.7 and 0.3 respectively.  
+                Information Gain = 1 − (0.5 × 0.7 + 0.5 × 0.3) = 1 − 0.5 = **0.5**  
+                <br>
+                This shows that the split improved class purity and should be selected.
+            </p>
+
+            <p class="fade-in">
+                Since features can continue splitting data with slightly better information gain, it is theoretically possible to generate infinite trees. This is why Decision Trees must be pruned or constrained (e.g., with max depth, min samples per leaf) to ensure generalization and prevent overfitting.
+            </p>
+
+            <!-- (b) Data Preparation -->
+            <h2>Data Preparation</h2>
+            <p class="fade-in">
+                We used the same cleaned and preprocessed nutritional dataset from Multinomial Naïve Bayes for consistency. The feature matrices were taken from <code>nb_MNB_X_train.csv</code> and <code>nb_MNB_X_test.csv</code>, while the corresponding labels were pulled from <code>nb_GNB_y_train.csv</code> and <code>nb_GNB_y_test.csv</code>.
+            </p>
+
+            <p class="fade-in">
+                A 70:30 stratified train-test split was applied to maintain proportional class distribution across both sets. Ensuring these sets are disjoint is critical to avoid data leakage—where knowledge of the test set contaminates the training process, leading to inflated accuracy and poor real-world generalization.
+            </p>
+
+            <!-- X_train -->
+            <h4 class="fade-in">📁 X_train: Feature matrix for training</h4>
+            <div class="image-container">
+                <img src="assets/MNB_X_Train.jpg" alt="Decision Tree X_train" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_MNB_X_train.csv" target="_blank" class="github-button">View X_train CSV</a>
+            </div>
+
+            <!-- y_train -->
+            <h4 class="fade-in">🏷️ y_train: Labels for training</h4>
+            <div class="image-container">
+                <img src="assets/GNB_Y_Train.jpg" alt="Decision Tree y_train" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_y_train.csv" target="_blank" class="github-button">View y_train CSV</a>
+            </div>
+
+            <!-- X_test -->
+            <h4 class="fade-in">📁 X_test: Feature matrix for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/MNB_X_Test.jpg" alt="Decision Tree X_test" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_MNB_X_test.csv" target="_blank" class="github-button">View X_test CSV</a>
+            </div>
+
+            <!-- y_test -->
+            <h4 class="fade-in">🏷️ y_test: Ground truth labels for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/GNB_Y_Test.jpg" alt="Decision Tree y_test" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_y_test.csv" target="_blank" class="github-button">View y_test CSV</a>
+            </div>
+
+            <!-- (c) Code -->
+            <h2>Model Codebase</h2>
+            <p class="fade-in">
+                The Decision Tree models were implemented using Scikit-learn’s <code>DecisionTreeClassifier</code>. Three separate trees were trained using different root nodes by customizing <code>max_features</code> or manually selecting feature importance to control splitting. Evaluation was performed on the test set.
+            </p>
+
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/dt_model.py" target="_blank" class="github-button">View DT Model Code</a>
+            </div>
+
+            <!-- (d) Results -->
+            <h2>Results and Visualizations</h2>
+            <p class="fade-in">
+                Below are confusion matrices and decision tree diagrams showing different root splits. Each tree was constrained by max depth and minimum samples to prevent overfitting.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/DT_confusion_matrix.png" alt="DT Confusion Matrix" class="topic-image">
+            </div>
+
+            <div class="image-container">
+                <img src="visuals/tree_root_calories.png" alt="Decision Tree - Root: Calories" class="topic-image">
+                <img src="visuals/tree_root_protein.png" alt="Decision Tree - Root: Protein" class="topic-image">
+                <img src="visuals/tree_root_fat.png" alt="Decision Tree - Root: Fat" class="topic-image">
+            </div>
+
+            <!-- (e) Conclusions -->
+            <h2>Conclusions & Takeaways</h2>
+            <ul class="fade-in">
+                <li>
+                    Decision Trees provide clear interpretability and are easy to implement on structured datasets like food nutrition.
+                </li>
+                <li>
+                    Entropy and Gini both worked well, but Entropy-based splits yielded higher Information Gain for our dataset.
+                </li>
+                <li>
+                    Tree depth control is vital; unregulated trees tend to overfit. Simpler, pruned trees had better generalization.
+                </li>
+                <li>
+                    Root node selection significantly influenced classification accuracy, with "Calories" and "Fat" yielding the most distinct branches.
+                </li>
+            </ul>
+
+            <p class="fade-in">
+                Overall, Decision Tree modeling helped uncover key nutrient features that contribute most to food category classification, offering both prediction capability and nutritional insight.
+            </p>
+
+        </div>
     </div>
+
 
            <!-- Your existing HTML content -->
 
