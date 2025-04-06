@@ -8,8 +8,9 @@ from sklearn.metrics import accuracy_score, confusion_matrix, classification_rep
 
 print("✅ Multinomial Naive Bayes Execution Started...")
 
-# 🔹 Ensure visuals directory exists
+# 🔹 Ensure visuals and data directories exist
 os.makedirs("visuals", exist_ok=True)
+os.makedirs("data", exist_ok=True)
 
 # 🔹 Load MNB-specific features (integer-like)
 X_train = pd.read_csv("data/nb_MNB_X_train.csv")
@@ -24,8 +25,15 @@ y_pred = model.predict(X_test)
 
 # 🔹 Accuracy and Classification Report
 acc = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
 print(f"\n✅ MNB Accuracy: {acc:.4f}")
-print("\n📋 Classification Report:\n", classification_report(y_test, y_pred))
+print("\n📋 Classification Report:\n", report)
+
+# 🔹 Save accuracy report to data folder
+with open("data/mnb_accuracy.txt", "w") as f:
+    f.write(f"Multinomial Naive Bayes Accuracy: {acc*100:.2f}%\n\n")
+    f.write(report)
 
 # 🔹 Confusion Matrix
 cm = confusion_matrix(y_test, y_pred, labels=model.classes_)

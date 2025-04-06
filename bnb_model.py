@@ -10,6 +10,7 @@ print("✅ Bernoulli Naive Bayes Execution Started...")
 
 # Create visuals dir if missing
 os.makedirs("visuals", exist_ok=True)
+os.makedirs("data", exist_ok=True)  # ensure data dir exists for saving results
 
 # Load BNB binary features and labels (labels same as GNB)
 X_train = pd.read_csv("data/nb_BNB_X_train.csv")
@@ -24,8 +25,15 @@ y_pred = model.predict(X_test)
 
 # Accuracy and report
 acc = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
 print(f"\n✅ BNB Accuracy: {acc:.4f}")
-print("\n📋 Classification Report:\n", classification_report(y_test, y_pred))
+print("\n📋 Classification Report:\n", report)
+
+# Save accuracy + report to file
+with open("data/bnb_accuracy.txt", "w") as f:
+    f.write(f"Bernoulli Naive Bayes Accuracy: {acc*100:.2f}%\n\n")
+    f.write(report)
 
 # Confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=model.classes_)

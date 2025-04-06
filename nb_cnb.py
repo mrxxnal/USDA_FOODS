@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 
 print("✅ CNB Execution Started...")
 
-# Create visuals directory if not exists
+# Create visuals and data directories if not exist
 os.makedirs("visuals", exist_ok=True)
+os.makedirs("data", exist_ok=True)
 
 # Load original GNB train/test
 X_train = pd.read_csv("data/nb_GNB_X_train.csv")
@@ -30,8 +31,15 @@ y_pred = model.predict(X_test_cnb)
 
 # Evaluate
 acc = accuracy_score(y_test, y_pred)
+report = classification_report(y_test, y_pred)
+
 print(f"✅ CNB Accuracy: {acc:.4f}")
-print("\n📋 Classification Report:\n", classification_report(y_test, y_pred))
+print("\n📋 Classification Report:\n", report)
+
+# Save to data folder
+with open("data/cnb_accuracy.txt", "w") as f:
+    f.write(f"Categorical Naive Bayes Accuracy: {acc*100:.2f}%\n\n")
+    f.write(report)
 
 # Confusion matrix
 cm = confusion_matrix(y_test, y_pred, labels=model.classes_)

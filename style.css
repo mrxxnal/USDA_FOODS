@@ -167,6 +167,12 @@ p {
         floatInfoBox 4s ease-in-out infinite; /* Gentle floating effect */
 }
 
+.math-block {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 16px 0;
+  }
+
 /* Slide-in Animation */
 @keyframes slideInFromLeft {
     0% {

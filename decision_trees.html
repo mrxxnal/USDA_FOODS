@@ -6,6 +6,9 @@
     <title>Decision Trees</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </head>
 <body>
 
@@ -37,12 +40,17 @@
             
             <!-- (a) Overview -->
             <h2>Introduction to Decision Trees for Food Classification</h2>
+
             <p class="fade-in">
-                Decision Trees (DTs) are supervised machine learning models used for both classification and regression tasks. These models split the data recursively based on feature values to form a tree-like structure where each internal node represents a decision rule, each branch an outcome, and each leaf node a predicted class label.
+                Decision Trees (DTs) are one of the most foundational and interpretable machine learning models. They operate by recursively partitioning the input data into smaller subsets based on feature values, ultimately forming a tree-like graph. Each internal node corresponds to a feature-based decision rule, each branch corresponds to the outcome of that rule, and each leaf node represents a final prediction—often a class label in classification tasks or a numerical value in regression tasks.
             </p>
 
             <p class="fade-in">
-                Decision Trees are widely used due to their interpretability, ability to handle mixed data types, and low data preprocessing requirements. However, they are prone to overfitting and can grow very deep if not pruned. Below are two visual illustrations to help understand their structure and functioning:
+                These models are used across a variety of domains such as medical diagnosis, fraud detection, and of course, nutritional analysis—where the relationships between features like calories, fat, sugar, and sodium can help predict food categories or healthiness levels. Decision Trees are favored because they are easy to visualize and interpret. Unlike black-box models, DTs allow us to track every decision and understand why a certain prediction was made.
+            </p>
+
+            <p class="fade-in">
+                However, this flexibility comes at a cost. Decision Trees are prone to overfitting, especially if allowed to grow indefinitely. This is why regularization parameters such as <code>max_depth</code>, <code>min_samples_split</code>, and <code>min_samples_leaf</code> are essential—they prevent the tree from memorizing the training data and failing to generalize to unseen samples.
             </p>
 
             <div class="image-container">
@@ -54,35 +62,54 @@
             </div>
 
             <p class="fade-in">
-                <strong>Impurity Metrics:</strong> Decision Trees evaluate potential splits using impurity metrics. Two widely used ones are:
-                <ul class="fade-in">
-                    <li><strong>Entropy</strong> Measures uncertainty or disorder in the data.</li>
-                    <li><strong>Gini Index:</strong> Measures the probability of incorrectly classifying a random element.</li>
-                </ul>
+                <strong>Impurity Metrics:</strong> At the core of decision tree construction lies the concept of impurity, which measures the degree of heterogeneity in a node. Two of the most popular impurity measures are:
             </p>
+
+            <ul class="fade-in">
+                <li><strong>Entropy:</strong> A concept borrowed from information theory, entropy measures the unpredictability or impurity in a dataset.</li>
+                <div class="math-block">\[ H = - \sum p(x) \log_2 p(x) \]</div>
+                <li><strong>Gini Index:</strong> A measure of impurity that evaluates the probability of a misclassification.</li>
+                <div class="math-block">\[ G = 1 - \sum p(x)^2 \]</div>
+            </ul>
 
             <div class="image-container">
                 <img src="assets/impurity_metrics.jpeg" alt="Impurity Metrics" class="topic-image">
             </div>
 
             <p class="fade-in">
-                <strong>Information Gain</strong> is the reduction in impurity after a split:
-                <br>
-                <code>Information Gain = Impurity (Parent Node) − Weighted Average Impurity (Children Nodes)</code>
+                <strong>Information Gain</strong> quantifies the effectiveness of a split by measuring the reduction in impurity. If splitting a node leads to purer subsets, that split is considered valuable. The formula is:
+            </p>
+
+            <div class="math-block">
+                \[ \text{Information Gain} = \text{Impurity(Parent)} - \text{Weighted Avg Impurity(Children)} \]
+            </div>
+
+            <p class="fade-in">
+                <strong>Illustrative Example:</strong> Consider a dataset with 10 food items: 5 are labeled as "Healthy" and 5 as "Unhealthy". The entropy at the root node is:
+            </p>
+
+            <div class="math-block">
+                \[ H = -0.5 \log_2(0.5) - 0.5 \log_2(0.5) = 1 \]
+            </div>
+
+            <p class="fade-in">
+                Now, imagine splitting based on the feature "Calories" yields two subsets: one with 4 Healthy and 1 Unhealthy (entropy = 0.72), and one with 1 Healthy and 4 Unhealthy (entropy = 0.72). Weighted average entropy of children = 0.72.
+            </p>
+
+            <div class="math-block">
+                \[ \text{Information Gain} = 1 - 0.72 = 0.28 \]
+            </div>
+
+            <p class="fade-in">
+                This means the split reduced impurity and added predictive power.
             </p>
 
             <p class="fade-in">
-                <strong>Example:</strong> Suppose we have a dataset of 10 food items: 5 "Healthy" and 5 "Unhealthy."  
-                Entropy before any split is:  
-                $H = -0.5\log_2(0.5) - 0.5\log_2(0.5) = 1$  
-                A split based on “Calories” results in subsets with entropy of 0.7 and 0.3 respectively.  
-                Information Gain = 1 − (0.5 × 0.7 + 0.5 × 0.3) = 1 − 0.5 = **0.5**  
-                <br>
-                This shows that the split improved class purity and should be selected.
+                It's also important to understand that Decision Trees can grow indefinitely. At every level, the algorithm tries to further split the data to gain slightly more information. If unchecked, it could result in a tree with one leaf per training example. This is known as overfitting. To avoid it, tree growth is constrained using pruning or limiting parameters like <code>max_depth</code>. Thus, although infinite trees are possible, they’re rarely desirable.
             </p>
 
             <p class="fade-in">
-                Since features can continue splitting data with slightly better information gain, it is theoretically possible to generate infinite trees. This is why Decision Trees must be pruned or constrained (e.g., with max depth, min samples per leaf) to ensure generalization and prevent overfitting.
+                In food classification tasks, Decision Trees serve as a powerful baseline because they reflect intuitive patterns in nutrition. For example, high sugar and low protein might signal Candy or Soda, while moderate calories and high fat could point to Pizza or Burgers. These models allow for both interpretability and feature-based hypothesis generation, making them a valuable tool in exploratory and predictive food analysis.
             </p>
 
             <!-- (b) Data Preparation -->
