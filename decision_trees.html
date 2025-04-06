@@ -144,18 +144,60 @@
             <!-- (d) Results -->
             <h2>Results and Visualizations</h2>
             <p class="fade-in">
-                Below are confusion matrices and decision tree diagrams showing different root splits. Each tree was constrained by max depth and minimum samples to prevent overfitting.
+                This section presents classification results using multiple variants of the Decision Tree model. The analysis explores how different nutrient-related root splits—namely <strong>calories</strong>, <strong>protein</strong>, and <strong>fat</strong>—impact the prediction of food categories. A normalized confusion matrix and accuracy visuals are also included to support the model evaluation.
+            </p>
+
+            <h3 class="fade-in">Normalized Confusion Matrix</h3>
+            <p class="fade-in">
+                The matrix below shows the model’s performance on the top-10 most active food categories. Rows represent the true labels and columns the predicted ones. By normalizing values, we can better compare performance across classes.
             </p>
 
             <div class="image-container">
-                <img src="visuals/DT_confusion_matrix.png" alt="DT Confusion Matrix" class="topic-image">
+                <img src="visuals/confusion_matrix_simplified_top10_active.png" alt="Decision Tree Confusion Matrix" class="topic-image">
             </div>
 
+            <p class="fade-in">
+                The model demonstrates strong accuracy for categories like <strong>Soda</strong>, <strong>Pizza</strong>, and <strong>Ice Cream & Frozen Yogurt</strong>, with over 90% correct predictions. However, overlapping nutrient profiles lead to confusion between <strong>Cookies & Biscuits</strong>, <strong>Chocolate</strong>, and <strong>Chips & Pretzels</strong>. These confusions suggest a need for finer-grained features or ensemble methods in future modeling.
+            </p>
+
+            <h3 class="fade-in">Tree Variant 1 – Root: <code>calories</code></h3>
+            <p class="fade-in">
+                The first decision tree variant uses <code>calories</code> as its root feature. It divides the data into low- and high-calorie items, leading to a dominant first split for <strong>Soda</strong>. Subsequent branches focus on <code>protein</code> to separate categories like <strong>Frozen Patties & Burgers</strong> and <strong>Ice Cream</strong>. This tree is the most balanced in terms of generalization and interpretability.
+            </p>
+
             <div class="image-container">
-                <img src="visuals/tree_root_calories.png" alt="Decision Tree - Root: Calories" class="topic-image">
-                <img src="visuals/tree_root_protein.png" alt="Decision Tree - Root: Protein" class="topic-image">
-                <img src="visuals/tree_root_fat.png" alt="Decision Tree - Root: Fat" class="topic-image">
+                <img src="visuals/tree_variant1_simplified.png" alt="Tree Variant 1 - Root: Calories" class="topic-image">
             </div>
+
+            <h3 class="fade-in">Tree Variant 2 – Root: <code>protein</code></h3>
+            <p class="fade-in">
+                This variant begins with <code>protein</code> as the root node, isolating high-protein and low-protein foods early. Notably, <strong>Candy</strong> and <strong>Soda</strong> are separated efficiently at shallow depths due to their distinct low-protein content. However, this tree becomes more complex in mid-level branches and may be prone to misclassifying high-carb desserts such as <strong>Cookies</strong> and <strong>Chocolate</strong>.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/tree_variant2_simplified.png" alt="Tree Variant 2 - Root: Protein" class="topic-image">
+            </div>
+
+            <h3 class="fade-in">Tree Variant 3 – Root: <code>fat</code></h3>
+            <p class="fade-in">
+                The third variant explores <code>fat</code> as the root splitting criterion. This leads to early separation of <strong>Breads & Buns</strong> and <strong>Cookies & Biscuits</strong>. Although visually deeper, the tree reveals clearer clustering for <strong>Pizza</strong> and <strong>Candy</strong> in later splits. This variant offers a unique view into how fat-related nutrient structure contributes to classification.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/tree_variant3_simplified.png" alt="Tree Variant 3 - Root: Fat" class="topic-image">
+            </div>
+
+            <h3 class="fade-in">Model Accuracy Snapshots</h3>
+            <p class="fade-in">
+                Below are placeholders for individual decision tree variant performance metrics. Accuracy values and classification reports will be added here once finalized.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/DT_accuracy_default_placeholder.png" alt="DT Accuracy Variant 1" class="topic-image">
+                <img src="visuals/DT_accuracy_variant2_placeholder.png" alt="DT Accuracy Variant 2" class="topic-image">
+                <img src="visuals/DT_accuracy_variant3_placeholder.png" alt="DT Accuracy Variant 3" class="topic-image">
+            </div>
+
 
             <!-- (e) Conclusions -->
             <h2>Conclusions & Takeaways</h2>
