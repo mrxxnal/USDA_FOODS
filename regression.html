@@ -97,29 +97,114 @@
               Instead of minimizing squared error (like linear regression), it maximizes the log-likelihood—a measure of how likely the observed labels are, given the model predictions. This optimization enables robust probability-based classification.
             </p>
 
-            <!-- (f) Model Accuracy Comparison -->
-            <h2 class="fade-in">📌 Comparing All Models</h2>
-
+            <!-- (a) Dataset Overview -->
+            <h2>Dataset Overview</h2>
             <p class="fade-in">
-                In this section, we performed a comprehensive comparison between six supervised learning algorithms to determine which model best classifies food categories based on their nutrient compositions. Using the same target labels and disjoint train-test splits, each model was trained on its optimal data format—continuous, binary, or discretized. The classifiers evaluated include: Decision Tree, Gaussian Naïve Bayes, Multinomial Naïve Bayes, Bernoulli Naïve Bayes, Categorical Naïve Bayes, and Logistic Regression. All models used a shared USDA nutrition dataset where features such as calories, protein, fat, and sugar values were normalized and preprocessed accordingly. Each model’s accuracy was computed on the test set and visually summarized in the chart below.
+                The dataset used for this binary classification task is <code>clean_normalized_data.csv</code>, consisting of nutritional information for thousands of food items. For this analysis, we filtered the dataset to retain only two categories: <strong>Candy</strong> and <strong>Cookies &amp; Biscuits</strong>. These were labeled as 0 and 1 respectively, forming the basis for binary classification.
             </p>
-
-            <div class="image-container fade-in">
-                <img src="visuals/model_accuracy_comparison.png" alt="Model Accuracy Bar Chart" class="topic-image" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            <div class="image-container">
+                <img src="visuals/clean_normalized_data_preview.png" alt="Clean Normalized Data Preview" class="topic-image">
             </div>
-
-            <p class="fade-in">
-                The Decision Tree classifier clearly outperformed all other models, reaching an accuracy of 52.45%. This result is not surprising given that decision trees can capture complex, nonlinear interactions between nutrients—something probabilistic models like Naïve Bayes typically overlook due to their independence assumptions. Bernoulli Naïve Bayes followed with 35.15% accuracy, performing well because many food categories differ primarily based on the presence or absence of key nutrients. Multinomial Naïve Bayes (29.11%) also delivered solid results by modeling scaled count-like nutrient values, especially for distinct categories like Pizza and Candy. On the other hand, Gaussian NB (4.11%) and Categorical NB (15.78%) underperformed significantly due to mismatched assumptions: GNB presumes normal distributions, and CNB relies on discretized data which led to considerable information loss.
-            </p>
-
-            <p class="fade-in">
-                Logistic Regression achieved only 23.70% accuracy—lower than expected for a multiclass problem—due to the complex overlap between food categories that linear models struggle to separate. This comparison highlights the critical importance of choosing models aligned with the nature of the data. While probabilistic models offer speed and interpretability, tree-based models like Decision Trees can capture deeper interactions at the cost of interpretability. Ultimately, this visual and numerical comparison confirms that Decision Trees are best suited for nutrient-based food classification in this dataset, balancing accuracy, interpretability, and adaptability.
-            </p>
-
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/compare_models.py" target="_blank" class="github-button">🔗 View Comparison Code</a>
-                <a href="visuals/model_accuracy_comparison.png" target="_blank" class="github-button">📊 View Accuracy Chart</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">View Dataset</a>
             </div>
+
+            <!-- (b) Data Preparation -->
+            <h2>Data Preparation</h2>
+            <p class="fade-in">
+                Features and labels were extracted after filtering the dataset. Three columns — <code>description</code>, <code>category</code>, and <code>brand</code> — were dropped to retain only numeric features. The dataset was then split into training and testing sets using an 80:20 stratified split to maintain class balance.
+            </p>
+
+            <h4 class="fade-in">📁 X_test: Feature matrix for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/logreg_X_test.png" alt="logreg_X_test Preview" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_X_test.csv" target="_blank" class="github-button">View logreg_X_test.csv</a>
+            </div>
+
+            <h4 class="fade-in">📁 X_train: Feature matrix for training</h4>
+            <div class="image-container">
+                <img src="assets/logreg_X_train.png" alt="logreg_X_train Preview" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_X_train.csv" target="_blank" class="github-button">View logreg_X_train.csv</a>
+            </div>
+
+            <h4 class="fade-in">🏷️ y_test: Ground truth labels for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/logreg_Y_test.png" alt="logreg_Y_test Preview" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_y_test.csv" target="_blank" class="github-button">View logreg_y_test.csv</a>
+            </div>
+
+            <h4 class="fade-in">🏷️ y_train: Labels for training</h4>
+            <div class="image-container">
+                <img src="assets/logreg_Y_train.png" alt="logreg_Y_train Preview" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_y_train.csv" target="_blank" class="github-button">View logreg_y_train.csv</a>
+            </div>
+
+            <!-- (c) Code -->
+            <h2>Modeling Code</h2>
+            <p class="fade-in">
+                Both models were implemented using Scikit-learn. The Logistic Regression model was trained on the raw normalized features, while the Multinomial Naive Bayes model required shifting the features to ensure non-negative values. Confusion matrices and classification reports were generated and saved.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/logreg_vs_mnb_compare.py" target="_blank" class="github-button">View Modeling Script</a>
+            </div>
+
+            <!-- (d) Results & Visualizations -->
+            <h2>Results & Visualizations</h2>
+            <h3 class="fade-in">Logistic Regression</h3>
+            <div class="image-container">
+                <img src="visuals/logreg_confusion.png" alt="Logistic Regression Confusion Matrix" class="topic-image">
+            </div>
+            <div class="image-container">
+                <img src="visuals/logreg_report.png" alt="Logistic Regression Report" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_report.txt" target="_blank" class="github-button">View Logistic Report</a>
+            </div>
+
+            <h3 class="fade-in">Multinomial Naive Bayes</h3>
+            <div class="image-container">
+                <img src="visuals/mnb_confusion.png" alt="MNB Confusion Matrix" class="topic-image">
+            </div>
+            <div class="image-container">
+                <img src="visuals/mnb_report.png" alt="MNB Report" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/mnb_report.txt" target="_blank" class="github-button">View MNB Report</a>
+            </div>
+
+            <!-- (e) Comparison & Interpretation -->
+            <h2>Model Comparison & Interpretation</h2>
+            <p class="fade-in">
+                Both models performed well in classifying Candy vs Cookies & Biscuits. Multinomial Naive Bayes achieved slightly higher accuracy (0.8852) compared to Logistic Regression (0.8840). While both models had high recall for class 1 (Cookies & Biscuits), recall for class 0 (Candy) was slightly better in MNB. 
+            </p>
+            <p class="fade-in">
+                These results show that while Logistic Regression is robust and interpretable, Multinomial Naive Bayes performs exceptionally well on high-dimensional, sparse, or count-like feature data — especially when values are scaled non-negatively. The confusion matrices also reveal the models misclassify more Candy items than Cookies.
+            </p>
+            <p class="fade-in">
+                Based on accuracy and f1-score, Multinomial Naive Bayes has a marginal edge in this task.
+            </p>
+
+            <!-- (f) Conclusion -->
+            <h2>Conclusion</h2>
+            <ul class="fade-in">
+                <li>The dataset was successfully filtered for binary classification using two meaningful categories: Candy and Cookies & Biscuits.</li>
+                <li>Logistic Regression and Multinomial Naive Bayes models were implemented, visualized, and compared side by side.</li>
+                <li>Multinomial Naive Bayes outperformed slightly, making it more suitable for this nutrient-based classification problem.</li>
+                <li>All visuals and code files were linked and saved for reproducibility.</li>
+            </ul>
+            <p class="fade-in">
+                This task demonstrated effective end-to-end binary classification using classical machine learning models on real-world nutritional data.
+            </p>
+
+
     </div>
 
         <!-- Your existing HTML content -->
