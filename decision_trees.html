@@ -189,14 +189,54 @@
 
             <h3 class="fade-in">Model Accuracy Snapshots</h3>
             <p class="fade-in">
-                Below are placeholders for individual decision tree variant performance metrics. Accuracy values and classification reports will be added here once finalized.
+                Below are final accuracy snapshots for each Decision Tree variant trained using the top-10 most frequent categories in the dataset.
+                Each model varies in terms of its splitting strategy or root feature selection. The classification reports highlight class-wise precision, recall, and F1-scores.
             </p>
-
+            
+            <!-- Variant 1 -->
             <div class="image-container">
-                <img src="visuals/DT_accuracy_default_placeholder.png" alt="DT Accuracy Variant 1" class="topic-image">
-                <img src="visuals/DT_accuracy_variant2_placeholder.png" alt="DT Accuracy Variant 2" class="topic-image">
-                <img src="visuals/DT_accuracy_variant3_placeholder.png" alt="DT Accuracy Variant 3" class="topic-image">
+                <img src="assets/tree1_accuracy.png" alt="Tree Variant 1 Accuracy" class="topic-image">
             </div>
+            <p class="fade-in">
+                <strong>Tree Variant 1</strong> employed a Gini-based criterion with a shallow depth and fewer splits, making it the simplest of the three trees.
+                This model achieved an overall accuracy of <strong>45.01%</strong>, with outstanding performance in identifying <em>Soda</em> (Precision: 0.95, Recall: 0.99) and <em>Cookies & Biscuits</em>.
+                However, categories like <em>Pizza</em>, <em>Chips, Pretzels & Snacks</em>, and <em>Chocolate</em> had extremely poor recall and were often misclassified.
+                This model seems to favor high-frequency, high-contrast categories while ignoring those with ambiguous features.
+                The macro average F1-score is just <strong>0.22</strong>, reflecting low generalizability.
+                Despite its simplicity, this model shows how tree-based models can struggle when class imbalance and feature similarity are high.
+                Tree Variant 1 is good for interpretability but not optimal for high accuracy.
+                It demonstrates how a dominant class like Soda can influence decision boundaries disproportionately.
+            </p>
+            
+            <!-- Variant 2 -->
+            <div class="image-container">
+                <img src="assets/tree2_accuracy.png" alt="Tree Variant 2 Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Tree Variant 2</strong> uses <code>entropy</code> as the splitting criterion, along with a slightly deeper structure and stricter leaf size conditions.
+                This change led to a significant boost in performance, achieving <strong>62.26%</strong> overall accuracy.
+                Categories like <em>Candy</em>, <em>Ice Cream & Frozen Yogurt</em>, <em>Cookies & Biscuits</em>, and <em>Soda</em> were predicted well.
+                Precision for <em>Candy</em> was 0.88 and recall was 0.61, indicating a reliable but not perfect boundary.
+                However, <em>Pizza</em> and <em>Chips, Pretzels & Snacks</em> still faced misclassification issues.
+                The macro average F1-score increased to <strong>0.42</strong>, and the weighted average reached <strong>0.55</strong>, showing improved model stability.
+                This variant shows the value of entropy-based information gain in dealing with class overlap.
+                It balances performance across more classes than Variant 1, making it a better fit for datasets with moderate complexity.
+            </p>
+            
+            <!-- Variant 3 -->
+            <div class="image-container">
+                <img src="assets/tree3_accuracy.png" alt="Tree Variant 3 Accuracy" class="topic-image">
+            </div>
+            <p class="fade-in">
+                <strong>Tree Variant 3</strong> incorporates feature restriction (<code>max_features=2</code>) to increase diversity and prevent overfitting.
+                It achieved a respectable <strong>52.20%</strong> accuracy, better than the Gini-based variant but lower than the entropy model.
+                Notably, <em>Breads & Buns</em> had high precision (0.83) and recall (0.63), and <em>Candy</em> also performed well (Precision: 0.85, Recall: 0.68).
+                The model struggled with <em>Cookies & Biscuits</em>, showing 0 values across all metrics — likely due to being overshadowed by similar categories.
+                This variant also improves generalizability while sacrificing some recall for minority classes.
+                The macro F1-score stood at <strong>0.36</strong>, and the weighted F1 was <strong>0.43</strong>.
+                It’s a great example of how controlled randomness in feature selection can reduce overfitting but needs fine-tuning for nuanced classes.
+                Tree Variant 3 gives an alternative look into how diversity in decision paths impacts model outcomes.
+            </p>
 
 
             <!-- (e) Conclusions -->
