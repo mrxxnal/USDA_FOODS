@@ -1,0 +1,17 @@
+🔎 Multinomial Naive Bayes Evaluation
+
+Confusion Matrix:
+[[304  88]
+ [ 12 467]]
+
+Classification Report:
+              precision    recall  f1-score   support
+
+           0     0.9620    0.7755    0.8588       392
+           1     0.8414    0.9749    0.9033       479
+
+    accuracy                         0.8852       871
+   macro avg     0.9017    0.8752    0.8810       871
+weighted avg     0.8957    0.8852    0.8832       871
+
+Accuracy: 0.8852

@@ -1,62 +1,70 @@
 import pandas as pd
-import numpy as np
-from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 
-# 🚀 Load preprocessed data
-X_train = pd.read_csv("data/logreg_X_train.csv")
-X_test = pd.read_csv("data/logreg_X_test.csv")
-y_train = pd.read_csv("data/logreg_y_train.csv").squeeze()
-y_test = pd.read_csv("data/logreg_y_test.csv").squeeze()
+# Load preprocessed data
+X_train = pd.read_csv('data/logreg_X_train.csv')
+X_test = pd.read_csv('data/logreg_X_test.csv')
+y_train = pd.read_csv('data/logreg_y_train.csv').squeeze()
+y_test = pd.read_csv('data/logreg_y_test.csv').squeeze()
 
-# === Logistic Regression ===
-lr_model = LogisticRegression(max_iter=1000)
-lr_model.fit(X_train, y_train)
-y_pred_lr = lr_model.predict(X_test)
-acc_lr = accuracy_score(y_test, y_pred_lr)
-print(f"📈 Logistic Regression Accuracy: {acc_lr:.4f}")
-print(classification_report(y_test, y_pred_lr))
-
-# === Multinomial Naive Bayes ===
-mnb_model = MultinomialNB()
-mnb_model.fit(X_train, y_train)
-y_pred_mnb = mnb_model.predict(X_test)
-acc_mnb = accuracy_score(y_test, y_pred_mnb)
-print(f"📊 Multinomial NB Accuracy: {acc_mnb:.4f}")
-print(classification_report(y_test, y_pred_mnb))
-
-# === Confusion Matrices ===
-cm_lr = confusion_matrix(y_test, y_pred_lr)
-cm_mnb = confusion_matrix(y_test, y_pred_mnb)
-
-# ✅ Save confusion matrices
-pd.DataFrame(cm_lr).to_csv("data/cm_logreg.csv", index=False)
-pd.DataFrame(cm_mnb).to_csv("data/cm_mnb.csv", index=False)
-
-# ✅ Save accuracies
-with open("data/binary_logreg_accuracy.txt", "w") as f:
-    f.write(f"{acc_lr:.4f}")
-
-with open("data/binary_mnb_accuracy.txt", "w") as f:
-    f.write(f"{acc_mnb:.4f}")
-
-# 🎨 Visualization
-plt.figure(figsize=(10, 4))
-plt.subplot(1, 2, 1)
-sns.heatmap(cm_lr, annot=True, fmt='d', cmap="Blues", xticklabels=["Cookies", "Candy"], yticklabels=["Cookies", "Candy"])
-plt.title("Logistic Regression")
-plt.xlabel("Predicted"); plt.ylabel("Actual")
-
-plt.subplot(1, 2, 2)
-sns.heatmap(cm_mnb, annot=True, fmt='d', cmap="Greens", xticklabels=["Cookies", "Candy"], yticklabels=["Cookies", "Candy"])
-plt.title("Multinomial Naive Bayes")
-plt.xlabel("Predicted"); plt.ylabel("Actual")
-
+# Ensure folders exist
 os.makedirs("visuals", exist_ok=True)
-plt.tight_layout()
-plt.savefig("visuals/logreg_vs_mnb_confusion.png")
-plt.show()
+os.makedirs("data", exist_ok=True)  # NEW: ensure 'data' folder exists for saving reports
+
+# -------------------------------------
+# 🔍 Evaluation Function with Save Option
+# -------------------------------------
+def evaluate_model(name, y_true, y_pred, img_filename, txt_filename):
+    cm = confusion_matrix(y_true, y_pred)
+    report = classification_report(y_true, y_pred, digits=4)
+    acc = accuracy_score(y_true, y_pred)
+
+    # Print
+    print(f"\n🔎 Evaluation for {name}")
+    print("Confusion Matrix:\n", cm)
+    print("\nClassification Report:\n", report)
+    print(f"Accuracy: {acc:.4f}")
+
+    # Save Confusion Matrix as Image
+    plt.figure(figsize=(5, 4))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.title(f'{name} - Confusion Matrix')
+    plt.xlabel('Predicted')
+    plt.ylabel('Actual')
+    plt.savefig(os.path.join("visuals", img_filename))
+    plt.close()
+    print(f"📁 Saved confusion matrix to visuals/{img_filename}")
+
+    # NEW: Save metrics as text
+    with open(os.path.join("data", txt_filename), "w") as f:
+        f.write(f"🔎 {name} Evaluation\n\n")
+        f.write("Confusion Matrix:\n")
+        f.write(str(cm) + "\n\n")
+        f.write("Classification Report:\n")
+        f.write(report + "\n")
+        f.write(f"Accuracy: {acc:.4f}\n")
+    print(f"📄 Saved report to data/{txt_filename}")
+
+# -------------------------------------
+# 🔹 Logistic Regression
+# -------------------------------------
+logreg_model = LogisticRegression(max_iter=1000)
+logreg_model.fit(X_train, y_train)
+y_pred_logreg = logreg_model.predict(X_test)
+evaluate_model("Logistic Regression", y_test, y_pred_logreg, "logreg_confusion.png", "logreg_report.txt")
+
+# -------------------------------------
+# 🔹 Multinomial Naive Bayes
+# -------------------------------------
+X_train_mnb = X_train - X_train.min()
+X_test_mnb = X_test - X_train.min()
+
+mnb_model = MultinomialNB()
+mnb_model.fit(X_train_mnb, y_train)
+y_pred_mnb = mnb_model.predict(X_test_mnb)
+evaluate_model("Multinomial Naive Bayes", y_test, y_pred_mnb, "mnb_confusion.png", "mnb_report.txt")
