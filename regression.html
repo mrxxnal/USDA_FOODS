@@ -96,6 +96,30 @@
             <p class="fade-in">
               Instead of minimizing squared error (like linear regression), it maximizes the log-likelihood—a measure of how likely the observed labels are, given the model predictions. This optimization enables robust probability-based classification.
             </p>
+
+            <!-- (f) Model Accuracy Comparison -->
+            <h2 class="fade-in">📌 Comparing All Models</h2>
+
+            <p class="fade-in">
+                In this section, we performed a comprehensive comparison between six supervised learning algorithms to determine which model best classifies food categories based on their nutrient compositions. Using the same target labels and disjoint train-test splits, each model was trained on its optimal data format—continuous, binary, or discretized. The classifiers evaluated include: Decision Tree, Gaussian Naïve Bayes, Multinomial Naïve Bayes, Bernoulli Naïve Bayes, Categorical Naïve Bayes, and Logistic Regression. All models used a shared USDA nutrition dataset where features such as calories, protein, fat, and sugar values were normalized and preprocessed accordingly. Each model’s accuracy was computed on the test set and visually summarized in the chart below.
+            </p>
+
+            <div class="image-container fade-in">
+                <img src="visuals/model_accuracy_comparison.png" alt="Model Accuracy Bar Chart" class="topic-image" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+            </div>
+
+            <p class="fade-in">
+                The Decision Tree classifier clearly outperformed all other models, reaching an accuracy of 52.45%. This result is not surprising given that decision trees can capture complex, nonlinear interactions between nutrients—something probabilistic models like Naïve Bayes typically overlook due to their independence assumptions. Bernoulli Naïve Bayes followed with 35.15% accuracy, performing well because many food categories differ primarily based on the presence or absence of key nutrients. Multinomial Naïve Bayes (29.11%) also delivered solid results by modeling scaled count-like nutrient values, especially for distinct categories like Pizza and Candy. On the other hand, Gaussian NB (4.11%) and Categorical NB (15.78%) underperformed significantly due to mismatched assumptions: GNB presumes normal distributions, and CNB relies on discretized data which led to considerable information loss.
+            </p>
+
+            <p class="fade-in">
+                Logistic Regression achieved only 23.70% accuracy—lower than expected for a multiclass problem—due to the complex overlap between food categories that linear models struggle to separate. This comparison highlights the critical importance of choosing models aligned with the nature of the data. While probabilistic models offer speed and interpretability, tree-based models like Decision Trees can capture deeper interactions at the cost of interpretability. Ultimately, this visual and numerical comparison confirms that Decision Trees are best suited for nutrient-based food classification in this dataset, balancing accuracy, interpretability, and adaptability.
+            </p>
+
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/compare_models.py" target="_blank" class="github-button">🔗 View Comparison Code</a>
+                <a href="visuals/model_accuracy_comparison.png" target="_blank" class="github-button">📊 View Accuracy Chart</a>
+            </div>
     </div>
 
         <!-- Your existing HTML content -->

@@ -1,10 +1,12 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, classification_report
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.naive_bayes import GaussianNB, MultinomialNB, BernoulliNB, CategoricalNB
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import KBinsDiscretizer, MinMaxScaler
+import os
 
 print("🚀 Model Comparison Script Initiated...\n")
 
@@ -94,3 +96,24 @@ for model_name, acc in sorted(results.items(), key=lambda x: x[1], reverse=True)
 # 🔍 Identify best model
 best_model = max(results, key=results.get)
 print(f"\n✅ Best Performing Model: {best_model} with Accuracy: {results[best_model]:.2%}")
+
+# === Generate and Save Accuracy Comparison Plot ===
+os.makedirs("visuals", exist_ok=True)
+
+model_names = list(results.keys())
+accuracies = [results[name] * 100 for name in model_names]  # Convert to percentages
+
+plt.figure(figsize=(12, 6))
+bars = plt.barh(model_names, accuracies, color='skyblue', edgecolor='black')
+plt.xlabel("Accuracy (%)")
+plt.title("Model Accuracy Comparison")
+plt.xlim(0, 100)
+
+# Add value labels
+for bar in bars:
+    plt.text(bar.get_width() + 1, bar.get_y() + bar.get_height() / 2,
+             f"{bar.get_width():.2f}%", va='center', fontsize=9)
+
+plt.tight_layout()
+plt.savefig("visuals/model_accuracy_comparison.png")
+print("📊 Accuracy comparison visual saved ➜ visuals/model_accuracy_comparison.png")
