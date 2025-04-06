@@ -1,0 +1,18 @@
+Tree Variant 3 Accuracy: 52.2%
+
+                            precision    recall  f1-score   support
+
+             Breads & Buns       0.83      0.63      0.72       787
+                     Candy       0.85      0.68      0.75       980
+  Chips, Pretzels & Snacks       0.00      0.00      0.00       438
+                 Chocolate       0.00      0.00      0.00       303
+        Cookies & Biscuits       0.00      0.00      0.00      1195
+Frozen Patties and Burgers       0.00      0.00      0.00       581
+ Ice Cream & Frozen Yogurt       0.38      0.94      0.54      1089
+              Other Snacks       0.00      0.00      0.00       535
+                     Pizza       0.27      0.91      0.42       689
+                      Soda       0.86      0.99      0.92      1370
+
+                  accuracy                           0.52      7967
+                 macro avg       0.32      0.41      0.33      7967
+              weighted avg       0.41      0.52      0.43      7967
