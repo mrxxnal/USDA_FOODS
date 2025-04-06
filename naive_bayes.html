@@ -216,48 +216,53 @@
             </div>
 
             <h2>Confusion Matrix Analysis</h2>
+
             <h3>Gaussian Naïve Bayes (GNB)</h3>
             <div class="image-container">
                 <img src="visuals/GNB_confusion_matrix_top10_rich.png" alt="GNB Confusion Matrix" class="topic-image">
             </div>
-            <p class="fade-in">
-                The GNB classifier struggled with significant class overlap, largely due to its core assumption that features are normally (Gaussian) distributed and independent given the class label. While this assumption holds well in some domains, it falls short in complex food datasets where nutrients like sugar, fat, and protein often have correlated patterns. As observed in the confusion matrix, only a few categories such as <strong>“Soda”</strong>, <strong>“Cookies & Biscuits”</strong>, and <strong>“Breads & Buns”</strong> achieved near-perfect classification. These categories likely exhibit distinct nutritional signatures (e.g., very high sugar for soda, consistent carb profiles for baked goods), which align well with the Gaussian assumption. 
+            <p class="fade-in"><em>
+                ✅ GNB classified "Soda" and "Cookies & Biscuits" reliably, but struggled with overlapping nutrient profiles like those in "Pizza" and "Frozen Patties."
+            </em></p>
             
-                However, other categories such as <strong>“Frozen Patties and Burgers”</strong> and <strong>“Pizza”</strong> were frequently misclassified. These items contain overlapping distributions of fat, protein, and sodium, which violate the independence and normality assumptions, leading to noisy decision boundaries. As a result, GNB is prone to assigning these classes to incorrect categories with similar nutrient profiles. This demonstrates that while GNB offers simplicity and fast computation, it may not generalize well for real-world nutrition data where relationships between nutrients are complex and intertwined.
+            <p class="fade-in">
+                The GNB classifier struggled with significant class overlap, largely due to its core assumption that features are normally (Gaussian) distributed and independent given the class label...
             </p>
-
+            
             <h3>Multinomial Naïve Bayes (MNB)</h3>
             <div class="image-container">
                 <img src="visuals/MNB_confusion_matrix_top10_rich.png" alt="MNB Confusion Matrix" class="topic-image">
             </div>
-            <p class="fade-in">
-                The Multinomial Naïve Bayes (MNB) classifier demonstrated strong performance across multiple food categories, particularly excelling in <strong>“Pizza”</strong> with a remarkable <strong>92% classification accuracy</strong>. This suggests that pizza products in the dataset possess a distinct nutritional fingerprint—likely a unique combination of high fat, sodium, and carbohydrate values—that separates them clearly from other food groups when modeled using frequency-like nutritional features. Similarly, <strong>“Candy”</strong> showed a solid classification accuracy of <strong>68%</strong>, reflecting its identifiable sugar-heavy profile.
+            <p class="fade-in"><em>
+                ✅ MNB showed excellent performance on "Pizza" and "Candy", indicating strong separation with count-like nutritional patterns.
+            </em></p>
             
-                However, the model faced challenges differentiating between <strong>“Cookies & Biscuits”</strong> and <strong>“Ice Cream & Frozen Yogurt”</strong>. Both of these categories share overlapping nutritional patterns, such as high sugar and moderate fat content, leading to significant misclassifications. Despite this, MNB was the <strong>best-performing classifier overall</strong>, benefiting from the count-like nature of our scaled and discretized feature set. It effectively captured the relative frequencies and intensity of nutritional attributes, which made it particularly suitable for balanced categorical distinctions in this dataset. Its performance reinforces MNB’s suitability for structured nutritional analysis, especially when features are transformed into non-negative integers resembling term frequency distributions.
+            <p class="fade-in">
+                The Multinomial Naïve Bayes (MNB) classifier demonstrated strong performance across multiple food categories...
             </p>
-
+            
             <h3>Bernoulli Naïve Bayes (BNB)</h3>
             <div class="image-container">
                 <img src="visuals/BNB_confusion_matrix_top10.png" alt="BNB Confusion Matrix" class="topic-image">
             </div>
+            <p class="fade-in"><em>
+                ✅ BNB accurately classified "Candy" and "Cookies & Biscuits" using binary nutrient flags, but struggled to differentiate other categories due to oversimplification.
+            </em></p>
+            
             <p class="fade-in">
-                The Bernoulli Naïve Bayes (BNB) model yielded notably high classification accuracy for categories such as <strong>“Cookies & Biscuits”</strong> and <strong>“Candy”</strong>, each achieving over <strong>88%</strong> accuracy. This success suggests that these food groups have a clear binary signature—i.e., distinct patterns in whether certain nutrients are present or absent above the binarization threshold (e.g., presence of sugar or fat).
-            
-                However, the model’s performance was less impressive across other categories. A recurring issue was its tendency to <strong>overclassify</strong> diverse food items as “Cookies & Biscuits,” indicating that many food types shared similar binary profiles, which BNB could not distinguish due to its simplistic input format. By converting continuous nutritional values into binary indicators (present or not), <strong>much of the granularity and variability within the data was lost</strong>. For example, foods with slightly different calorie or fat levels might be treated identically if both values were simply flagged as “present.” 
-            
-                This lack of nuance led to <strong>blurred boundaries</strong> between nutritionally similar categories. While BNB can be effective for high-dimensional binary classification, it <strong>underperforms when the dataset requires understanding subtle differences</strong> in nutrient magnitudes—something continuous or count-based models like GNB or MNB handle better. Overall, BNB delivered interpretable yet limited results, highlighting the trade-off between simplicity and accuracy in binary modeling.
+                The Bernoulli Naïve Bayes (BNB) model yielded notably high classification accuracy for categories such as "Cookies & Biscuits" and "Candy"...
             </p>
-
+            
             <h3>Categorical Naïve Bayes (CNB)</h3>
             <div class="image-container">
                 <img src="visuals/CNB_confusion_matrix_top10.png" alt="CNB Confusion Matrix" class="topic-image">
             </div>
+            <p class="fade-in"><em>
+                ⚠️ CNB misclassified most categories as "Soda", revealing its incompatibility with discretized continuous data in this context.
+            </em></p>
+            
             <p class="fade-in">
-                The Categorical Naïve Bayes (CNB) model struggled significantly in this task, with <strong>over 90% of samples from diverse categories being misclassified as “Soda.”</strong> This extreme mislabeling highlights a critical flaw in applying CNB to this dataset: the underlying data, which consists of continuous nutritional values, is not inherently categorical. To make CNB compatible, the features had to be discretized using <code>KBinsDiscretizer</code>, converting continuous values (e.g., protein grams or calories) into fixed categorical bins.
-            
-                While this binning allowed for CNB to process the data, it also introduced a considerable <strong>loss of distributional integrity</strong>. Small differences between items were erased when grouped into the same bin, and crucial statistical variability was replaced by broad categorical labels. This likely led to high intra-bin similarity across distinct food categories, making it difficult for the model to distinguish them meaningfully.
-            
-                The model appeared to latch onto a dominant bin signature corresponding to “Soda” and consequently predicted that label across most categories. This behavior underscores how <strong>categorical binning, when applied to non-categorical data, can create artificial similarities</strong> that mislead the learning algorithm. CNB is best reserved for naturally categorical inputs, such as discrete choices (e.g., flavor type, packaging style), rather than numerical nutrition data. In this context, CNB’s poor performance reinforces the importance of choosing models that align with the true nature of the features.
+                The Categorical Naïve Bayes (CNB) model struggled significantly in this task, with over 90% of samples from diverse categories being misclassified as “Soda.”...
             </p>
 
             <h3 class="fade-in">Model Accuracy Snapshots</h3>
