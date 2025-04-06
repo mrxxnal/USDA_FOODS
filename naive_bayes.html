@@ -63,6 +63,13 @@
                 Our input dataset, <code>clean_normalized_data.csv</code>, was divided into stratified training (70%) and testing (30%) sets. Different preprocessing strategies were applied:
             </p>
 
+            <div class="image-container">
+                <img src="assets/clean_normalized_data.png" alt="Clean Normalized Data Preview" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">View Dataset</a>
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_data_prep.py" target="_blank" class="github-button">Naive Bayes Script</a>
             </div>
@@ -73,14 +80,6 @@
                 <li><strong>BNB</strong>: Binarized data with thresholding (value &gt; 0 = 1, else 0).</li>
                 <li><strong>CNB</strong>: Used KBinsDiscretizer to convert features into 10 categorical bins.</li>
             </ul>
-
-            <div class="image-container">
-                <img src="assets/nb_data.jpg" alt="Sample of prepared Naive Bayes dataset" class="topic-image">
-            </div>
-
-            <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_BNB_X_test.csv" target="_blank" class="github-button">Naive Bayes Datasets</a>
-            </div>
 
             <h2>Model Codebase</h2>
             <p class="fade-in">
@@ -98,9 +97,6 @@
                 <li>Binary presence/absence indicators for Bernoulli NB</li>
                 <li>Discretized categorical bins for Categorical NB</li>
             </ul>
-            <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_data_prep.py" target="_blank" class="github-button">View Data Preparation Script</a>
-            </div>
             
             <!-- Gaussian Naive Bayes -->
             <h3 class="fade-in">📊 Gaussian Naïve Bayes (GNB)</h3>
@@ -116,10 +112,12 @@
             </p>
 
             <!-- X Train -->
-
             <h4 class="fade-in">📁 GNB_X_Train: Feature matrix used for training</h4>
             <div class="image-container">
                 <img src="assets/GNB_X_Train.jpg" alt="GNB X Train Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_X_train.csv" target="_blank" class="github-button">View GNB_X_Train.csv</a>
             </div>
 
             <!-- Y Train -->
@@ -127,11 +125,17 @@
             <div class="image-container">
                 <img src="assets/GNB_Y_Train.jpg" alt="GNB Y Train Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
             </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_y_train.csv" target="_blank" class="github-button">View GNB_Y_Train.csv</a>
+            </div>
 
             <!-- X Test -->
             <h4 class="fade-in">📁 GNB_X_Test: Feature matrix used for evaluating performance</h4>
             <div class="image-container">
                 <img src="assets/GNB_X_Test.jpg" alt="GNB X Test Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_X_test.csv" target="_blank" class="github-button">View GNB_X_Test.csv</a>
             </div>
 
             <!-- Y Test -->
@@ -139,9 +143,8 @@
             <div class="image-container">
                 <img src="assets/GNB_Y_Test.jpg" alt="GNB Y Test Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
             </div>
-
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/nb_gnb.py" target="_blank" class="github-button">View GNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_y_test.csv" target="_blank" class="github-button">View GNB_Y_Test.csv</a>
             </div>
             
             <!-- Multinomial Naive Bayes -->
@@ -156,9 +159,15 @@
             <div class="image-container">
                 <img src="assets/MNB_X_Train.jpg" alt="MNB Training Set (X_train)" class="topic-image">
             </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_MNB_X_train.csv" target="_blank" class="github-button">View MNB_X_Train.csv</a>
+            </div>
 
             <div class="image-container">
                 <img src="assets/MNB_X_Test.jpg" alt="MNB Test Set (X_test)" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_MNB_X_test.csv" target="_blank" class="github-button">View MNB_X_Test.csv</a>
             </div>
 
             <p class="fade-in">
@@ -183,18 +192,21 @@
             <p class="fade-in">
                 Below are snapshots of the training and testing datasets used for BNB. As shown, the data has been reduced to binary format, discarding numeric ranges in favor of presence/absence indicators. This format aligns with BNB’s assumptions but also introduces a trade-off between simplicity and predictive resolution.
             </p>
-
+            
             <div class="image-container fade-in">
                 <img src="assets/BNB_X_Train.jpg" alt="BNB Training Set" class="topic-image">
             </div>
-
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_BNB_X_train.csv" target="_blank" class="github-button">View BNB_X_Train.csv</a>
+            </div>
+            
             <div class="image-container fade-in">
                 <img src="assets/BNB_X_Test.jpg" alt="BNB Testing Set" class="topic-image">
             </div>
-
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/bnb_model.py" target="_blank" class="github-button">View BNB Model Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_BNB_X_test.csv" target="_blank" class="github-button">View BNB_X_Test.csv</a>
             </div>
+
             
             <!-- Categorical Naive Bayes -->
             <h3 class="fade-in">🧩 Categorical Naïve Bayes (CNB)</h3>
@@ -204,6 +216,25 @@
             <p class="fade-in">
                 The CNB model was trained and tested using the exact same data splits used for Gaussian Naïve Bayes (GNB)—specifically, <code>nb_GNB_X_train.csv</code> and <code>nb_GNB_X_test.csv</code>—but with each feature bin-assigned to fall within a discrete category. This ensured a consistent comparison across models while adapting the data format to suit CNB’s assumptions.
             </p>
+
+                        <!-- X Train -->
+                        <h4 class="fade-in">📁 GNB_X_Train: Feature matrix used for training</h4>
+                        <div class="image-container">
+                            <img src="assets/GNB_X_Train.jpg" alt="GNB X Train Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+                        </div>
+                        <div class="button-section">
+                            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_X_train.csv" target="_blank" class="github-button">View GNB_X_Train.csv</a>
+                        </div> 
+
+                        <!-- X Test -->
+                        <h4 class="fade-in">📁 GNB_X_Test: Feature matrix used for evaluating performance</h4>
+                        <div class="image-container">
+                            <img src="assets/GNB_X_Test.jpg" alt="GNB X Test Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+                        </div>
+                        <div class="button-section">
+                            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/nb_GNB_X_test.csv" target="_blank" class="github-button">View GNB_X_Test.csv</a>
+                        </div>
+
             <p class="fade-in">
                 While the conversion allowed us to apply CNB, the results were suboptimal. The discretization process introduced distortion by forcing continuous values into arbitrary bins, removing the natural ordering and subtle differences between data points. As a result, the model consistently overpredicted “Soda” as the target class, failing to distinguish most other food types. This behavior highlights the risks of applying CNB to datasets where numeric ranges hold significant meaning—especially in contexts like nutrient-based classification where gradations in sugar, fat, or protein are vital.
             </p>
