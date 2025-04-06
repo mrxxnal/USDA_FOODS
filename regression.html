@@ -103,7 +103,7 @@
                 The dataset used for this binary classification task is <code>clean_normalized_data.csv</code>, consisting of nutritional information for thousands of food items. For this analysis, we filtered the dataset to retain only two categories: <strong>Candy</strong> and <strong>Cookies &amp; Biscuits</strong>. These were labeled as 0 and 1 respectively, forming the basis for binary classification.
             </p>
             <div class="image-container">
-                <img src="visuals/clean_normalized_data_preview.png" alt="Clean Normalized Data Preview" class="topic-image">
+                <img src="assets/clean_normalized_data.png" alt="Clean Normalized Data Preview" class="topic-image">
             </div>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">View Dataset</a>
@@ -148,60 +148,147 @@
             </div>
 
             <!-- (c) Code -->
-            <h2>Modeling Code</h2>
+            <h2> Modeling Code</h2>
+
             <p class="fade-in">
-                Both models were implemented using Scikit-learn. The Logistic Regression model was trained on the raw normalized features, while the Multinomial Naive Bayes model required shifting the features to ensure non-negative values. Confusion matrices and classification reports were generated and saved.
+                The modeling script brings together the full classification workflow using <strong>Scikit-learn</strong> — one of the most widely used Python libraries for machine learning. We implemented and compared two classic supervised learning algorithms: <strong>Logistic Regression</strong> and <strong>Multinomial Naive Bayes</strong>, specifically tailored for a binary classification task between <code>Candy</code> and <code>Cookies & Biscuits</code>.
             </p>
+
+            <p class="fade-in">
+                The dataset was first split into training and testing subsets using an <code>80:20 stratified split</code> to preserve class balance across both sets. The features were already normalized, but since <strong>Multinomial Naive Bayes (MNB)</strong> requires all input features to be non-negative, we applied a <strong>feature-wise shift</strong> (i.e., subtracting the minimum of each feature from all rows) before feeding it into MNB. <strong>Logistic Regression</strong> did not require any such adjustment and was trained directly on the original normalized data.
+            </p>
+
+            <p class="fade-in">
+                After training both models on the processed data:
+                <ul class="fade-in">
+                    <li>We predicted labels for the test set using each model</li>
+                    <li>Generated <strong>confusion matrices</strong> to visualize prediction vs actual performance</li>
+                    <li>Created <strong>classification reports</strong> summarizing precision, recall, F1-score, and support</li>
+                    <li>Saved visualizations as PNGs and reports as TXT files for documentation</li>
+                </ul>
+            </p>
+
             <div class="button-section">
-                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/logreg_vs_mnb_compare.py" target="_blank" class="github-button">View Modeling Script</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/logreg_vs_mnb_compare.py" target="_blank" class="github-button">🔍 View Modeling Script</a>
             </div>
 
             <!-- (d) Results & Visualizations -->
             <h2>Results & Visualizations</h2>
+
             <h3 class="fade-in">Logistic Regression</h3>
+            <p class="fade-in">
+                The Logistic Regression model was trained on normalized nutrient values and performed well in classifying food items as either <strong>Candy (0)</strong> or <strong>Cookies & Biscuits (1)</strong>. The confusion matrix below shows that the model correctly predicted 303 out of 392 Candy items and 467 out of 479 Cookie items.
+            </p>
+            <p class="fade-in">
+                However, the model misclassified 89 Candy items as Cookies and only 12 Cookies as Candy, indicating a slight imbalance in precision for class 0. This suggests the model has a stronger tendency to predict Cookies over Candy, possibly due to overlapping nutrient profiles.
+            </p>
+
+            <!-- Logistic Confusion Matrix -->
             <div class="image-container">
                 <img src="visuals/logreg_confusion.png" alt="Logistic Regression Confusion Matrix" class="topic-image">
             </div>
+
+            <!-- Logistic Report Image -->
             <div class="image-container">
-                <img src="visuals/logreg_report.png" alt="Logistic Regression Report" class="topic-image">
+                <img src="assets/logreg_report.png" alt="Logistic Regression Report" class="topic-image">
             </div>
+
+            <!-- Logistic Report Button -->
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/logreg_report.txt" target="_blank" class="github-button">View Logistic Report</a>
             </div>
 
             <h3 class="fade-in">Multinomial Naive Bayes</h3>
+            <p class="fade-in">
+                The Multinomial Naive Bayes (MNB) model was trained on the same features after applying a shift to ensure all values were positive (as required by MNB). The confusion matrix shows that MNB slightly outperforms Logistic Regression — correctly classifying 304 Candy items and 467 Cookie items, with only 12 misclassified Cookies and 88 misclassified Candies.
+            </p>
+            <p class="fade-in">
+                The classification report reveals that the model maintains strong precision and recall across both classes, achieving an overall accuracy of <strong>88.52%</strong> compared to Logistic Regression’s <strong>88.40%</strong>. The improvement, although marginal, highlights MNB’s effectiveness on this type of categorical data with normalized counts.
+            </p>
+
+            <!-- MNB Confusion Matrix -->
             <div class="image-container">
                 <img src="visuals/mnb_confusion.png" alt="MNB Confusion Matrix" class="topic-image">
             </div>
+
+            <!-- MNB Report Image -->
             <div class="image-container">
-                <img src="visuals/mnb_report.png" alt="MNB Report" class="topic-image">
+                <img src="assets/mnb_report.png" alt="MNB Report" class="topic-image">
             </div>
+
+            <!-- MNB Report Button -->
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/mnb_report.txt" target="_blank" class="github-button">View MNB Report</a>
             </div>
 
-            <!-- (e) Comparison & Interpretation -->
-            <h2>Model Comparison & Interpretation</h2>
+            <!-- (e) Model Comparison & Interpretation -->
+            <h2>📊 Model Comparison & Interpretation</h2>
+
             <p class="fade-in">
-                Both models performed well in classifying Candy vs Cookies & Biscuits. Multinomial Naive Bayes achieved slightly higher accuracy (0.8852) compared to Logistic Regression (0.8840). While both models had high recall for class 1 (Cookies & Biscuits), recall for class 0 (Candy) was slightly better in MNB. 
+                After training both <strong>Logistic Regression</strong> and <strong>Multinomial Naive Bayes</strong> (MNB) models on the same cleaned and normalized dataset, we evaluated their performance using confusion matrices, classification reports, and accuracy metrics. Both models demonstrated strong classification capabilities for distinguishing between <strong>Candy</strong> and <strong>Cookies & Biscuits</strong> based on nutrient profiles.
             </p>
+
             <p class="fade-in">
-                These results show that while Logistic Regression is robust and interpretable, Multinomial Naive Bayes performs exceptionally well on high-dimensional, sparse, or count-like feature data — especially when values are scaled non-negatively. The confusion matrices also reveal the models misclassify more Candy items than Cookies.
+                The <strong>Multinomial Naive Bayes</strong> model achieved an overall accuracy of <code>88.52%</code>, slightly outperforming <strong>Logistic Regression</strong>, which reached <code>88.40%</code>. This difference, while subtle, reflects how MNB benefits from its probabilistic structure — especially when working with nutrient data that resembles frequency or scaled count distributions. Since MNB assumes feature independence and handles skewed distributions well, it's particularly effective in nutrition-related datasets where certain macro-nutrients (e.g., carbs or fats) dominate.
             </p>
+
             <p class="fade-in">
-                Based on accuracy and f1-score, Multinomial Naive Bayes has a marginal edge in this task.
+                In both models, <strong>recall for class 1 (Cookies & Biscuits)</strong> was excellent (0.97), indicating the models almost always correctly identify Cookie items. However, the <strong>recall for class 0 (Candy)</strong> was notably lower, especially in Logistic Regression (0.7730) compared to MNB (0.7755). This suggests that <strong>Candy items were more likely to be misclassified</strong>, likely due to feature overlaps with other sugary items like certain biscuits or chocolate-covered snacks.
+            </p>
+
+            <p class="fade-in">
+                From the confusion matrices:
+                <ul class="fade-in">
+                    <li>Logistic Regression misclassified 89 Candy items as Cookies</li>
+                    <li>Multinomial Naive Bayes misclassified 88 Candy items</li>
+                    <li>Both models misclassified only 12 Cookie items</li>
+                </ul>
+                These numbers highlight that <strong>class 0 (Candy)</strong> was harder to identify correctly. This may be due to more variance in nutrient values within Candy, or an imbalance in distribution even after stratified splitting.
+            </p>
+
+            <p class="fade-in">
+                Overall, while <strong>Logistic Regression</strong> is known for its interpretability and stability, especially in linearly separable problems, <strong>MNB</strong> proves to be more effective here because:
+                <ul class="fade-in">
+                    <li>It handles high-dimensional data better</li>
+                    <li>Performs well with positively scaled normalized values</li>
+                    <li>Is less sensitive to multicollinearity and more efficient in memory</li>
+                </ul>
+            </p>
+
+            <p class="fade-in">
+                Both models have strengths, but in this specific case of binary food classification using nutrient values, <strong>Multinomial Naive Bayes offers a performance edge</strong> while maintaining simplicity and speed.
             </p>
 
             <!-- (f) Conclusion -->
-            <h2>Conclusion</h2>
-            <ul class="fade-in">
-                <li>The dataset was successfully filtered for binary classification using two meaningful categories: Candy and Cookies & Biscuits.</li>
-                <li>Logistic Regression and Multinomial Naive Bayes models were implemented, visualized, and compared side by side.</li>
-                <li>Multinomial Naive Bayes outperformed slightly, making it more suitable for this nutrient-based classification problem.</li>
-                <li>All visuals and code files were linked and saved for reproducibility.</li>
-            </ul>
+            <h2>🧠 Final Conclusion & Takeaways</h2>
             <p class="fade-in">
-                This task demonstrated effective end-to-end binary classification using classical machine learning models on real-world nutritional data.
+                This section summarizes the learnings and outcomes of this binary classification task using real-world nutritional data sourced from the USDA database. Here are the key highlights:
+            </p>
+
+            <ul class="fade-in">
+                <li>
+                    ✅ The dataset was successfully filtered to contain only two relevant and nutritionally distinct food categories: <strong>Candy</strong> and <strong>Cookies & Biscuits</strong>, allowing for a well-defined binary classification problem.
+                </li>
+                <li>
+                    🔁 Feature preparation involved dropping non-numeric identifiers like <code>description</code>, <code>brand</code>, and <code>category</code>, followed by normalization to ensure model compatibility and fair scaling.
+                </li>
+                <li>
+                    🧪 Both <strong>Logistic Regression</strong> and <strong>Multinomial Naive Bayes</strong> were implemented using <code>Scikit-learn</code>. Confusion matrices and classification reports provided deep insights into precision, recall, and model confidence.
+                </li>
+                <li>
+                    📈 <strong>MNB showed a slight accuracy advantage</strong> and better performance in handling feature variability, making it the recommended model for future deployment in similar nutrition-centric classification tasks.
+                </li>
+                <li>
+                    🔗 All visuals (confusion matrices, performance reports) and raw CSV data splits were preserved and linked through GitHub, ensuring full transparency and reproducibility of the modeling process.
+                </li>
+            </ul>
+
+            <p class="fade-in">
+                In conclusion, this task exemplifies a full-cycle machine learning pipeline: from dataset curation and transformation to model selection, training, and evaluation. The project highlights the real-world value of classic models like Logistic Regression and Naive Bayes — and how they can be leveraged effectively for health and nutrition analytics.
+            </p>
+
+            <p class="fade-in">
+                With minimal tuning, interpretable features, and a strong understanding of model assumptions, such approaches can enable smarter food classification, better consumer health recommendations, and scalable decision-making systems in dietary tech.
             </p>
 
 
