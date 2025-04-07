@@ -1,0 +1,11 @@
+SVM Kernel: poly, C: 1
+Accuracy: 0.8718
+
+              precision    recall  f1-score   support
+
+           0       0.86      1.00      0.93        31
+           1       1.00      0.38      0.55         8
+
+    accuracy                           0.87        39
+   macro avg       0.93      0.69      0.74        39
+weighted avg       0.89      0.87      0.85        39

@@ -1,0 +1,11 @@
+SVM Kernel: linear, C: 10
+Accuracy: 0.8718
+
+              precision    recall  f1-score   support
+
+           0       0.88      0.97      0.92        31
+           1       0.80      0.50      0.62         8
+
+    accuracy                           0.87        39
+   macro avg       0.84      0.73      0.77        39
+weighted avg       0.87      0.87      0.86        39
