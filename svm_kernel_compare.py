@@ -19,6 +19,8 @@ os.makedirs("data", exist_ok=True)
 
 # 📄 Master log file for terminal output
 master_log_path = "data/svm_terminal_output.txt"
+accuracies = []  # to track kernel, C, and accuracy
+
 with open(master_log_path, "w") as master_log:
 
     # 📊 Kernels and costs to test
@@ -40,6 +42,13 @@ with open(master_log_path, "w") as master_log:
             acc = accuracy_score(y_test, y_pred)
             report = classification_report(y_test, y_pred)
             cm = confusion_matrix(y_test, y_pred)
+
+            # Log accuracy for visualization
+            accuracies.append({
+                "kernel": kernel,
+                "C": C,
+                "accuracy": acc
+            })
 
             summary = f"✅ Accuracy: {acc:.4f}\nClassification Report:\n{report}"
             print(summary)
@@ -64,3 +73,15 @@ with open(master_log_path, "w") as master_log:
             fig_path = f"visuals/svm_conf_matrix_{kernel}_C{C}.png"
             plt.savefig(fig_path)
             plt.close()
+
+# 📈 Generate accuracy comparison bar chart
+acc_df = pd.DataFrame(accuracies)
+plt.figure(figsize=(10, 6))
+sns.barplot(x="accuracy", y="kernel", hue="C", data=acc_df, palette="viridis")
+plt.title("SVM Kernel Accuracy Comparison")
+plt.xlabel("Accuracy")
+plt.ylabel("Kernel")
+plt.xlim(0, 1)
+plt.tight_layout()
+plt.savefig("visuals/svm_kernel_accuracy_comparison.png")
+plt.close()
