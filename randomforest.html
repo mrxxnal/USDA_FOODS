@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Principal Component Analysis (PCA)</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+   <!-- Animated Background -->
+   <div class="food-background"></div>
+   <div class="light-overlay"></div>
+
+    <!-- Navigation Bar -->
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="introduction.html">Introduction</a>
+        <a href="data_prep.html">Data Prep</a>
+        <a href="eda.html">EDA</a>        
+        <a href="pca.html" class="active">PCA</a>
+        <a href="clustering.html">Clustering</a>
+        <a href="arm.html">ARM</a>
+        <a href="decision_trees.html">Decision Trees</a>
+        <a href="naive_bayes.html">Naive Bayes</a>
+        <a href="svm.html">SVM</a>
+        <a href="regression.html">Regression</a>
+        <a href="randomforest.html"class="active"></a>>Random Forest</a>
+        <a href="conclusions.html">Conclusions</a>
+        <a href="about_me.html">About Me</a>
+    </div>
+
+        <!-- Typing Animation for Header -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let text = "Principal Component Analysis (PCA)";
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        document.getElementById("typing-title").innerHTML += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                typeWriter();
+            });
+        </script>
+    
+        <!-- Scroll-Based Fade-In Effect -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let fadeInElements = document.querySelectorAll(".fade-in");
+                function fadeInOnScroll() {
+                    fadeInElements.forEach(element => {
+                        let position = element.getBoundingClientRect().top;
+                        let screenHeight = window.innerHeight;
+                        if (position < screenHeight - 100) {
+                            element.classList.add("visible");
+                        }
+                    });
+                }
+                window.addEventListener("scroll", fadeInOnScroll);
+                fadeInOnScroll();
+            });
+        </script>
+    
+        <script>
+            function toggleMenu() {
+                var navbar = document.querySelector(".navbar");
+                navbar.classList.toggle("active");
+            }
+        </script>
+    
+    </body>
+    </html>

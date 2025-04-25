@@ -28,13 +28,386 @@
         <a href="naive_bayes.html">Naive Bayes</a>
         <a href="svm.html"class="active">SVM</a>
         <a href="regression.html">Regression</a>
+        <a href="randomforest.html">Random Forest</a>
         <a href="conclusions.html">Conclusions</a>
         <a href="about_me.html">About Me</a>
     </div>
 
     <div class="content-section">
         <h1 id="typing-title"></h1>
-        <p>[Page Content]</p>
+        <div class="content-wrapper">
+            <!-- 📚 Introduction to Support Vector Machines -->
+            <h2>What Are Support Vector Machines (SVMs)?</h2>
+            <p class="fade-in">
+                <strong>Support Vector Machines (SVMs)</strong> are among the most robust and versatile supervised learning models, widely applied in both classification and regression scenarios. 
+                Their central objective is to identify the <strong>optimal hyperplane</strong>—a boundary that not only separates classes but does so with the maximum possible margin between the closest data points of each class.
+                This margin maximization principle is fundamental, as it enhances the model’s ability to generalize to unseen data and resist overfitting.
+                In two-dimensional space, this optimal hyperplane is a straight line; in higher dimensions, it extends to planes or hyperplanes.
+                The beauty of SVMs lies in how they rely on a handful of pivotal data points—called <strong>support vectors</strong>—to determine this decision boundary.
+                These vectors lie precisely at the margin’s edge and hold all the information needed to define the hyperplane.
+                By focusing only on these key examples, SVMs create a decision boundary that is both mathematically elegant and computationally efficient, making them especially valuable in high-dimensional feature spaces.
+            </p>
+        
+            <div class="gif-section">
+                <img src="assets/svm.gif" alt="SVM Process Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+        
+            <p class="fade-in">
+                However, real-world data is often <strong>not linearly separable</strong>. To handle such cases, SVMs use <strong>kernel functions</strong> to transform data into higher dimensions where it may become linearly separable.
+                This technique is called the <strong>kernel trick</strong>. A kernel function implicitly computes the dot product in the transformed feature space, without ever computing the transformation explicitly.
+                This not only increases computational efficiency but also unlocks the ability to learn complex, non-linear patterns.
+            </p>
+        
+            <h2>How Do Kernels Work?</h2>
+            <p class="fade-in">
+                The kernel plays a pivotal role in SVM modeling, serving as a bridge to project data into higher-dimensional spaces where complex relationships become easier to separate. 
+                Instead of explicitly computing this transformation, SVMs rely on the <strong>kernel trick</strong>, which calculates the dot product of the data points in the transformed space directly—saving immense computational effort.
+                For instance, a <strong>polynomial kernel</strong> of degree 2 can take two-dimensional input data and implicitly map it into a three-dimensional or higher space, allowing the model to draw curved boundaries in the original plane that could not have been achieved otherwise.
+                This kernel is defined by the formula: <code>K(x, y) = (x ⋅ y + r)<sup>d</sup></code>, where <code>r</code> is a free constant (commonly set to 1) and <code>d</code> is the degree of the polynomial expansion.
+                Another widely used choice is the <strong>Radial Basis Function (RBF)</strong> kernel, expressed as 
+                <code>K(x, y) = exp(-γ||x - y||<sup>2</sup>)</code>, which transforms data by creating smooth, flexible decision boundaries.
+                The RBF kernel is especially powerful when classes are not linearly separable even after polynomial transformations, enabling SVMs to handle intricate and non-linear classification problems with remarkable precision.
+            </p>
+        
+            <div class="image-container">
+                <img src="assets/svm_kernel_example.png" alt="SVM Kernel Transformation" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <p class="fade-in">
+                The image above perfectly captures the essence of the <strong>kernel trick</strong> in SVMs. On the left, we see a dataset in its original two-dimensional space, where the two classes (represented as red squares and green circles) are clearly not linearly separable—no straight line can divide them without error. This is a common scenario in real-world datasets.
+            </p>
+            
+            <p class="fade-in">
+                By applying a kernel function, such as the <strong>Radial Basis Function (RBF)</strong> or a <strong>polynomial kernel</strong>, we project the data into a higher-dimensional space (illustrated on the right). Here, the separation becomes feasible: the red class has been elevated into a different spatial region than the green class. In this transformed space, a simple flat plane—called a <strong>decision surface</strong>—can now cleanly divide the two categories.
+            </p>
+            
+            <p class="fade-in">
+                This transformation is the power of SVM kernels: they allow the model to learn <strong>non-linear decision boundaries</strong> without ever explicitly computing the new dimensions. The surface that separates the classes is learned implicitly using the kernel's dot product calculations. This enables SVMs to perform exceptionally well even when the data is entangled in complex, curved, or spiral-shaped structures in its original form.
+            </p>
+        
+            <h2>🔍 Casting to Higher Dimensions – A Concrete Example</h2>
+            <p class="fade-in">
+                Suppose we have two points in 2D space: <code>a = (a₁, a₂)</code> and <code>b = (b₁, b₂)</code>. A polynomial kernel with <code>r = 1</code> and <code>d = 2</code> transforms the dot product as follows:
+            </p>
+            <pre class="fade-in"><code>(a ⋅ b + 1)² = (a₁b₁ + a₂b₂ + 1)²</code></pre>
+            <p class="fade-in">
+                This expands algebraically to: 
+                <code>a₁²b₁² + 2a₁a₂b₁b₂ + a₂²b₂² + 2a₁b₁ + 2a₂b₂ + 1</code>,
+                revealing that a simple dot product between transformed vectors results in terms that include not only the original features but also their squared values and cross-products. 
+                In practical terms, this means that each original 2D input vector is effectively cast into a <strong>six-dimensional feature space</strong>, incorporating linear terms (<code>a₁b₁</code>, <code>a₂b₂</code>), interaction terms (<code>a₁a₂b₁b₂</code>), and second-order polynomials (<code>a₁²b₁²</code>, <code>a₂²b₂²</code>). 
+                This transformation allows the model to draw nonlinear boundaries in the original space by learning linear separators in this enriched space. 
+                The elegance of the kernel trick lies in the fact that these expanded features are never manually computed or stored. 
+                Instead, the SVM operates entirely through kernel evaluations, maintaining efficiency while reaping the benefits of working in higher dimensions. 
+                This approach enables SVMs to model intricate decision surfaces that adapt to complex data patterns, all without compromising computational performance.
+            </p>
+        
+            <p class="fade-in">
+                In essence, kernel functions empower Support Vector Machines (SVMs) to handle complex, non-linearly separable data by implicitly mapping it into higher-dimensional spaces where linear separation becomes feasible. This technique—known as the "kernel trick"—eliminates the computational burden of actually transforming the data, allowing SVMs to operate efficiently even in infinite-dimensional feature spaces. Whether the data is arranged in concentric circles, intricate spirals, or tangled clusters, kernels such as the radial basis function (RBF) or polynomial kernel provide the mathematical flexibility to define nuanced decision boundaries. By focusing on dot products in transformed space, kernels let SVMs identify optimal margins that would be impossible in the original feature space. This mechanism unlocks the true power of SVMs, extending their applicability far beyond simple problems and enabling robust performance in real-world domains like image recognition, bioinformatics, and nutritional data classification. In short, kernels make SVMs a formidable tool by drawing complex boundaries—without explicitly computing complex transformations.
+            </p>
+
+            <!-- SVM Data Preparation -->
+            <h2>Data Preparation for Support Vector Machines (SVM)</h2>
+            <p class="fade-in">
+                Support Vector Machines are supervised learning models that rely on <strong>labeled, numeric data</strong>. 
+                For our SVM analysis, we began with the <code>clean_normalized_data.csv</code> file. This file contains nutritional attributes such as 
+                <strong>calories, protein, fat, carbohydrates, and derived ratios</strong> for each food item. These continuous variables were already normalized,
+                making the dataset ideal for distance-based algorithms like SVMs.
+            </p>
+
+            <div class="image-container">
+                <img src="assets/clean_normalized_data.png" alt="Clean Normalized Data Preview" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">View Dataset</a>
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/svm_binary_data.py" target="_blank" class="github-button">View Preprocessing Script</a>
+            </div>
+
+            <h3>Selected Categories for Binary Classification</h3>
+            <p class="fade-in">
+                For this SVM modeling task, we focused on two nutritionally dense and clearly distinguishable ultra-processed food categories: 
+                <strong>Potato Chips</strong> and <strong>Cookies and Brownies</strong>. 
+                These categories were selected due to their distinct nutrient profiles—<em>Potato Chips</em> are typically high in sodium and fats, 
+                while <em>Cookies and Brownies</em> tend to be rich in sugars and carbohydrates. The nutritional divergence between these classes 
+                makes them an excellent candidate pair for binary classification using SVM, where a clear margin between the classes can be learned effectively.
+            </p>
+            
+            <h3>Train-Test Splitting and Feature Handling</h3>
+            <p class="fade-in">
+                After filtering the dataset to include only the two selected categories, we isolated the numeric features relevant to modeling, 
+                such as <strong>calories, protein, fat, carbohydrates</strong>, and engineered ratios like <code>calories_per_fat</code> and <code>calories_per_protein</code>. 
+                Non-numeric columns like food <code>description</code>, <code>category</code>, and <code>brand</code> were intentionally removed 
+                to comply with the input requirements of SVMs, which operate purely on numeric vectors in multi-dimensional space.
+            </p>
+            
+            <p class="fade-in">
+                To maintain the proportional representation of each class, we applied a <strong>stratified 70-30 split</strong> using 
+                <code>train_test_split(..., stratify=y)</code>. This ensures that both the training and testing datasets contain an equal distribution 
+                of samples from each class. Stratification is critical in binary classification problems with imbalanced data, as it prevents the model from 
+                being biased toward the majority class.
+            </p>
+            
+            <p class="fade-in">
+                Importantly, the training and testing sets are <strong>disjoint</strong>, meaning there is zero overlap in rows between the two sets. 
+                This is essential in supervised machine learning to avoid <em>data leakage</em>—a condition where the model inadvertently gains access 
+                to information from the test set during training, leading to unrealistically high accuracy. By ensuring that the test set remains unseen 
+                during the training process, we allow for an authentic evaluation of how well the model can generalize to new, unseen data.
+            </p>
+            
+            <p class="fade-in">
+                Prior to modeling, the features were passed through a <strong>MinMaxScaler</strong> to rescale all values to a uniform [0,1] range. 
+                This normalization step ensures that features with larger numerical ranges (e.g., calorie count) do not dominate those with smaller 
+                ranges (e.g., protein ratios) during the distance calculations used in kernel functions. Without this step, the SVM’s decision boundary 
+                could be skewed, resulting in suboptimal performance.
+            </p>
+
+            <!-- X Train -->
+            <h4 class="fade-in">📁 SVM_X_Train: Feature matrix used for training</h4>
+            <div class="image-container">
+                <img src="assets/svm_X_train.jpg" alt="SVM X Train Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/svm_X_train.csv" target="_blank" class="github-button">View SVM_X_Train.csv</a>
+            </div>
+
+            <!-- Y Train -->
+            <h4 class="fade-in">🏷️ SVM_Y_Train: Target labels for training set</h4>
+            <div class="image-container">
+                <img src="assets/svm_Y_train.jpg" alt="SVM Y Train Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/svm_y_train.csv" target="_blank" class="github-button">View SVM_Y_Train.csv</a>
+            </div>
+
+            <!-- X Test -->
+            <h4 class="fade-in">📁 SVM_X_Test: Feature matrix used for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/svm_X_test.jpg" alt="SVM X Test Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/svm_X_test.csv" target="_blank" class="github-button">View SVM_X_Test.csv</a>
+            </div>
+
+            <!-- Y Test -->
+            <h4 class="fade-in">🏷️ SVM_Y_Test: True labels used to validate performance</h4>
+            <div class="image-container">
+                <img src="assets/svm_Y_test.jpg" alt="SVM Y Test Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/svm_y_test.csv" target="_blank" class="github-button">View SVM_Y_Test.csv</a>
+            </div>
+
+
+            <p class="fade-in">
+                These disjoint datasets ensure that model evaluation is performed on unseen data, preventing <strong>data leakage</strong> and preserving generalization.
+                This clean split is essential for fair benchmarking and for comparing the performance of different SVM kernels (Linear, Polynomial, RBF) in subsequent steps.
+            </p>
+
+            <!-- SVM Modeling and Evaluation -->
+            <h2>Support Vector Machine (SVM) Modeling</h2>
+
+            <p class="fade-in">
+                To assess how different SVM kernels perform on ultra-processed food classification, we ran extensive modeling and evaluation using
+                <code>svm_kernel_compare.py</code>. This script iteratively trains SVM models using <strong>three different kernel types</strong>—Linear, Polynomial, and RBF—each across three cost values: <code>C=0.1</code>, <code>C=1</code>, and <code>C=10</code>.
+            </p>
+
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/svm_kernel_compare.py" target="_blank" class="github-button">View SVM Modeling Code</a>
+            </div>
+
+            <h3>Results and Confusion Matrices</h3>
+
+            <p class="fade-in">
+                For each configuration, we recorded the <strong>confusion matrix</strong>, <strong>classification report</strong>, and <strong>accuracy score</strong>. These results were saved in the <code>/visuals</code> and <code>/reports</code> directories respectively.
+            </p>
+            
+            <!-- Linear Kernels -->
+            <h4 class="fade-in">🔹 Linear Kernel</h4>
+
+            <!-- Linear C=0.1 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_linear_C0.1.png" alt="Linear Kernel C=0.1" class="topic-image">
+            </div>
+            <p class="fade-in">
+                With C=0.1, the linear kernel model shows high bias and fails to capture the complexity of the class boundary. It classifies all instances as Class 0, completely misclassifying every Class 1 sample. Although Class 0 has perfect precision, the recall for Class 1 is zero, resulting in significant performance issues on minority class detection. The accuracy is 79.49%, but this is misleading due to class imbalance.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C0.1_report.txt" target="_blank" class="github-button">View Linear C=0.1 Report</a>
+            </div>
+
+            <!-- Linear C=1 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_linear_C1.png" alt="Linear Kernel C=1" class="topic-image">
+            </div>
+            <p class="fade-in">
+                At C=1, the model improves substantially. It correctly identifies half of the Class 1 samples while maintaining a strong performance on Class 0. This configuration balances bias and variance, resulting in an improved accuracy of 87.18%. The confusion matrix reflects a better tradeoff—fewer false negatives and greater generalization to unseen data.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C1_report.txt" target="_blank" class="github-button">View Linear C=1 Report</a>
+            </div>
+
+            <!-- Linear C=10 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_linear_C10.png" alt="Linear Kernel C=10" class="topic-image">
+            </div>
+            <p class="fade-in">
+                Increasing the cost parameter to C=10 doesn’t change the confusion matrix from the C=1 case, which suggests that the model has saturated its ability to improve linearly on this dataset. It still misclassifies four Class 1 items and one Class 0, resulting in the same 87.18% accuracy. This implies that further penalizing misclassification may not enhance linear kernel performance and could even lead to overfitting with different data.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C10_report.txt" target="_blank" class="github-button">View Linear C=10 Report</a>
+            </div>
+            
+            <!-- Polynomial Kernels -->
+            <h4 class="fade-in">🔸 Polynomial Kernel</h4>
+
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_poly_C0.1.png" alt="Polynomial Kernel C=0.1" class="topic-image">
+            </div>
+            <p class="fade-in">
+                With <strong>C=0.1</strong>, the Polynomial Kernel still managed an accuracy of 87.18%. Class 0 (Potato Chips) was perfectly classified, 
+                but 5 instances from Class 1 (Cookies & Brownies) were misclassified as Class 0. This suggests that while the model performs well overall, 
+                it may underfit when the regularization is too strong.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C0.1_report.txt" target="_blank" class="github-button">View Poly C=0.1 Report</a>
+            </div>
+
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_poly_C1.png" alt="Polynomial Kernel C=1" class="topic-image">
+            </div>
+            <p class="fade-in">
+                Increasing the cost parameter to <strong>C=1</strong> yielded no change in accuracy. The exact same confusion matrix was observed,
+                indicating that the model may be relatively insensitive to moderate increases in C when using the Polynomial kernel.
+                It continues to struggle with correctly identifying a minority of Class 1 samples.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C1_report.txt" target="_blank" class="github-button">View Poly C=1 Report</a>
+            </div>
+
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_poly_C10.png" alt="Polynomial Kernel C=10" class="topic-image">
+            </div>
+            <p class="fade-in">
+                At a higher cost value of <strong>C=10</strong>, the performance remained unchanged. The SVM model showed consistency but limited
+                improvement with increased complexity. While Class 0 continues to be accurately captured, the boundary flexibility still fails 
+                to fully capture nuances in the Class 1 distribution.
+            </p>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C10_report.txt" target="_blank" class="github-button">View Poly C=10 Report</a>
+            </div>
+            
+            <!-- RBF Kernels -->
+            <h4 class="fade-in">🔹 RBF Kernel</h4>
+
+            <p class="fade-in">
+                The <strong>Radial Basis Function (RBF)</strong> kernel, also known as the Gaussian kernel, is widely used for non-linear classification problems. It projects the data into an infinite-dimensional space to separate classes that are not linearly separable. Below are the confusion matrices at different values of <code>C</code>—the regularization parameter. A low value of <code>C</code> allows for a wider margin but more misclassifications, while a high <code>C</code> tries to classify all training examples correctly, potentially overfitting the data.
+            </p>
+
+            <!-- C = 0.1 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_rbf_C0.1.png" alt="RBF Kernel C=0.1" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C0.1_report.txt" target="_blank" class="github-button">View RBF C=0.1 Report</a>
+            </div>
+            <p class="fade-in">
+                With <code>C=0.1</code>, the model prioritized margin maximization over correct classification. As a result, all instances of Class 1 were misclassified as Class 0. Although the accuracy remained decent due to the class imbalance, the recall for Class 1 dropped to zero—indicating the model's failure to identify the minority class.
+            </p>
+
+            <!-- C = 1 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_rbf_C1.png" alt="RBF Kernel C=1" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C1_report.txt" target="_blank" class="github-button">View RBF C=1 Report</a>
+            </div>
+            <p class="fade-in">
+                At <code>C=1</code>, the RBF kernel performed the best among all tested configurations. It achieved a balance between bias and variance, correctly identifying 50% of Class 1 instances and all of Class 0. This yielded the highest accuracy of <strong>89.74%</strong> and a fair recall for both classes.
+            </p>
+
+            <!-- C = 10 -->
+            <div class="image-container">
+                <img src="visuals/svm_conf_matrix_rbf_C10.png" alt="RBF Kernel C=10" class="topic-image">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C10_report.txt" target="_blank" class="github-button">View RBF C=10 Report</a>
+            </div>
+            <p class="fade-in">
+                Increasing the regularization to <code>C=10</code> slightly reduced performance. The model overfit to the training data, misclassifying 5 out of 8 Class 1 instances. The accuracy decreased to <strong>87.18%</strong>, and although the margin was tighter, generalization suffered slightly.
+            </p>
+
+            <h3>Kernel Performance Comparison</h3>
+
+            <p class="fade-in">
+                The bar chart below offers a comprehensive comparison of <strong>accuracy scores</strong> achieved by each SVM kernel—<code>linear</code>, <code>polynomial</code>, and <code>rbf</code>—across three different regularization parameter settings: <strong>C = 0.1, 1, and 10</strong>.
+                Accuracy is a key metric here as it helps us evaluate how well the classifier is generalizing to unseen data, particularly in distinguishing between our two food categories: <strong>Potato Chips</strong> and <strong>Cookies and Brownies</strong>.
+            </p>
+            
+            <div class="image-container">
+                <img src="visuals/svm_kernel_accuracy_comparison.png" alt="SVM Kernel Accuracy Comparison" class="topic-image">
+            </div>
+            
+            <p class="fade-in">
+                🔹 <strong>Linear Kernel:</strong> Performance improved as the value of <code>C</code> increased. With <code>C = 0.1</code>, the model underfit and misclassified all minority class instances, yielding a lower overall accuracy. At <code>C = 1</code> and <code>C = 10</code>, performance plateaued around <strong>87.18%</strong> with improved recall for Class 1. This kernel worked best when the decision boundary was relatively simple and the data was nearly linearly separable.
+            </p>
+            
+            <p class="fade-in">
+                🔸 <strong>Polynomial Kernel:</strong> Across all cost values, this kernel maintained stable accuracy scores—hovering consistently around <strong>87.18%</strong>. However, its ability to distinguish the minority class (Class 1) didn’t significantly improve, and the model displayed signs of overfitting at higher cost values due to the increased complexity of the decision surface. While theoretically powerful for capturing interactions, the polynomial kernel’s practical gain was limited in this case.
+            </p>
+            
+            <p class="fade-in">
+                🔹 <strong>RBF Kernel:</strong> Among all tested configurations, the RBF kernel with <code>C = 1</code> emerged as the top performer with an accuracy of <strong>89.74%</strong>. It accurately classified both majority and minority classes without overfitting. At <code>C = 0.1</code>, the model overgeneralized and ignored minority classes, but higher values of <code>C</code> struck a better balance between margin and fit. This demonstrates the RBF kernel’s strength in capturing <strong>non-linear boundaries</strong> with minimal parameter tuning.
+            </p>
+            
+            <p class="fade-in">
+                💡 <strong>Key Takeaway:</strong> The <strong>RBF kernel at C=1</strong> consistently outperformed its linear and polynomial counterparts by balancing sensitivity and specificity. Its ability to handle non-linear decision boundaries made it the most appropriate choice for classifying food items with nuanced nutrient profiles. While the linear kernel is computationally efficient and interpretable, it may struggle when data exhibits complex patterns. The polynomial kernel offered flexibility but introduced noise without significant gains. Therefore, for applications in real-world food classification or nutrition analysis, the <strong>RBF kernel provides the best trade-off between accuracy, generalization, and robustness</strong>.
+            </p>
+
+            <!-- SVM Conclusions -->
+            <h2>Conclusions</h2>
+
+            <p class="fade-in">
+                This SVM modeling exercise provided several key insights into the classification of ultra-processed food categories—specifically distinguishing between <strong>Potato Chips</strong> and <strong>Cookies & Brownies</strong>.
+                These categories, although both highly processed, possess distinct nutritional signatures that make them ideal candidates for supervised binary classification.
+            </p>
+
+            <p class="fade-in">
+                The experiments revealed that <strong>kernel choice</strong> and <strong>cost parameter tuning</strong> significantly impact model performance. Linear kernels, while fast and interpretable, struggled slightly with complex class boundaries—especially at lower cost values.
+                Polynomial kernels captured non-linear relationships but plateaued in performance and risked overfitting. The standout performer was the <strong>RBF kernel with C = 1</strong>, which struck the best balance between <strong>generalization and accuracy</strong>.
+            </p>
+
+            <p class="fade-in">
+                From a practical standpoint, this modeling process reinforces the idea that food classification is not always a linear problem. Nutritional dimensions such as saturated fat, sugar content, and carbohydrate ratios often interact in <strong>non-linear ways</strong>.
+                This makes kernels like RBF ideal for real-world dietary pattern recognition, health diagnostics, or recommendation systems.
+            </p>
+
+            <p class="fade-in">
+                More broadly, this analysis demonstrates how <strong>Support Vector Machines</strong> can be leveraged to detect patterns within complex health and nutrition data.
+                The ability to model nuanced category differences with relatively little training data speaks to SVM's robustness in <strong>high-dimensional, structured domains</strong> like food science.
+            </p>
+
+            <!-- Symbolic Summary Visual -->
+            <div class="image-container">
+                <img src="assets/svm_ultra_vs_real.jpg" alt="Symbolic Processed vs Whole Food Tray" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <p class="fade-in">
+                The image above visually encapsulates the broader issue at hand: the growing divide between whole, nourishing foods and ultra-processed, convenience-driven choices.
+                While models like SVM help in classifying these foods, they also shed light on underlying consumption patterns that affect health outcomes at a population level.
+            </p>
+
+            <!-- Summary Chart -->
+            <div class="image-container">
+                <img src="visuals/svm_kernel_accuracy_comparison.png" alt="SVM Accuracy Comparison Summary" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <p class="fade-in">
+                As shown above, the accuracy distribution across kernel types further reinforces the RBF kernel’s superior performance on this task. For future iterations of this project, one could explore multi-class SVMs, add more nuanced food categories, or even integrate text features (like ingredient lists) for a hybrid model.
+                In conclusion, SVMs not only classify food effectively—they help reveal the hidden structure within what we eat, and offer a data-driven lens through which we can understand the food landscape more critically.
+            </p>
+
+            
+        </div>
     </div>
 
         <!-- Your existing HTML content -->
