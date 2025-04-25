@@ -58,6 +58,17 @@
                 <li><strong>Categorical Naïve Bayes (CNB)</strong>: Deals with discrete categories. Used <code>KBinsDiscretizer</code> to convert continuous values into bins.</li>
             </ul>
 
+            <h2>🔧 Why Smoothing Matters in Naïve Bayes</h2>
+            <p class="fade-in">
+                Smoothing is a crucial enhancement in Naïve Bayes classification, particularly when working with real-world food datasets that often contain sparse or unevenly distributed features. In essence, it addresses the problem of zero probability — which occurs when a feature-label combination is missing from the training data. Without smoothing, such cases would result in multiplying by zero, causing the entire posterior probability to collapse.
+            </p>
+            <p class="fade-in">
+                For instance, in food classification, a rare nutrient (like vitamin K or Omega-3) might not appear in every category. If a food lacks that nutrient, the model may unfairly penalize the category simply due to absence in the training set. Smoothing, typically implemented via Laplace or Lidstone correction, adjusts these zero counts by adding a small constant (often +1) to each frequency.
+            </p>
+            <p class="fade-in">
+                This not only prevents division errors but also improves generalization by assigning a small, non-zero probability to unseen events. It is especially important for models like Multinomial and Bernoulli NB, where word frequencies or binary indicators are common. By applying smoothing, our models remain robust even when facing rare or previously unseen nutritional combinations.
+            </p>
+
             <h2>Data Preparation</h2>
             <p class="fade-in">
                 Our input dataset, <code>clean_normalized_data.csv</code>, was divided into stratified training (70%) and testing (30%) sets. Different preprocessing strategies were applied:
