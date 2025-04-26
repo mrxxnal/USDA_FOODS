@@ -20,58 +20,128 @@
         <a href="introduction.html">Introduction</a>
         <a href="data_prep.html">Data Prep</a>
         <a href="eda.html">EDA</a>        
-        <a href="pca.html" class="active">PCA</a>
+        <a href="pca.html">PCA</a>
         <a href="clustering.html">Clustering</a>
         <a href="arm.html">ARM</a>
         <a href="decision_trees.html">Decision Trees</a>
         <a href="naive_bayes.html">Naive Bayes</a>
         <a href="svm.html">SVM</a>
         <a href="regression.html">Regression</a>
-        <a href="randomforest.html"class="active"></a>>Random Forest</a>
+        <a href="randomforest.html"class="active">Random Forest</a>
         <a href="conclusions.html">Conclusions</a>
         <a href="about_me.html">About Me</a>
     </div>
 
-        <!-- Typing Animation for Header -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let text = "Principal Component Analysis (PCA)";
-                let i = 0;
-                function typeWriter() {
-                    if (i < text.length) {
-                        document.getElementById("typing-title").innerHTML += text.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
-                    }
-                }
-                typeWriter();
-            });
-        </script>
-    
-        <!-- Scroll-Based Fade-In Effect -->
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let fadeInElements = document.querySelectorAll(".fade-in");
-                function fadeInOnScroll() {
-                    fadeInElements.forEach(element => {
-                        let position = element.getBoundingClientRect().top;
-                        let screenHeight = window.innerHeight;
-                        if (position < screenHeight - 100) {
-                            element.classList.add("visible");
+    <div class="content-section">
+        <h1 id="typing-title"></h1>
+        <div class="content-wrapper">
+
+            <!-- 📚 Introduction to Random Forests -->
+            <h2>What Is Random Forest?</h2>
+
+            <p class="fade-in">
+                <strong>Random Forest</strong> is a highly effective and versatile <strong>ensemble learning method</strong> used for both <strong>classification</strong> and <strong>regression tasks</strong>. 
+                Built upon the foundation of <strong>decision trees</strong>, Random Forests overcome the common pitfalls of individual trees—namely, their tendency to <strong>overfit</strong> on training data. 
+                Instead of relying on a single tree, Random Forests create a <strong>collection (ensemble) of decision trees</strong> and aggregate their predictions to produce a more <strong>robust and generalized model</strong>.
+            </p>
+
+            <div class="gif-section">
+                <img src="assets/random_forest_building.gif" alt="Random Forest Building Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <p class="fade-in">
+                Each individual tree in the forest is trained on a <strong>bootstrapped subset</strong> of the data, meaning a random sample drawn with replacement.
+                Additionally, during the tree-building process, Random Forests perform <strong>feature bagging</strong>: at each split, a random subset of features is selected, 
+                rather than evaluating all features. This injects further randomness into the model, leading to a <strong>decorrelated forest</strong> where the prediction errors of individual trees cancel out.
+            </p>
+
+            <h2>How Random Forest Works</h2>
+
+            <p class="fade-in">
+                The Random Forest algorithm follows a systematic ensemble strategy:
+            </p>
+
+            <ul class="fade-in">
+                <li>Draw <strong>bootstrap samples</strong> from the original dataset (random sampling with replacement).</li>
+                <li>Train an independent <strong>decision tree</strong> on each sample.</li>
+                <li>At every node split, select the best split only among a <strong>random subset of features</strong> (not all features).</li>
+                <li>Aggregate the predictions:
+                    <ul>
+                        <li>For <strong>classification</strong>: take a <strong>majority vote</strong> across all trees.</li>
+                        <li>For <strong>regression</strong>: take the <strong>average prediction</strong> across all trees.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="image-container">
+                <img src="assets/random_forest_workflow.png" alt="Random Forest Workflow" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
+            <p class="fade-in">
+                The image above illustrates the full Random Forest process: multiple decision trees are independently built using bootstrapped data samples and random feature selection, and their outputs are aggregated to form a single strong prediction.
+            </p>
+
+            <h2>Why Random Forest Is Powerful</h2>
+
+            <p class="fade-in">
+                The strength of Random Forest comes from two main pillars:
+            </p>
+
+            <ul class="fade-in">
+                <li>🌳 <strong>Variance Reduction:</strong> By combining many uncorrelated trees, Random Forest reduces the overall model variance without increasing bias, thus improving prediction stability and accuracy.</li>
+                <li>🌳 <strong>Robustness to Overfitting:</strong> While individual decision trees can overfit, Random Forests, through averaging, significantly minimize overfitting—especially when configured with sufficient depth and trees.</li>
+            </ul>
+
+            <p class="fade-in">
+                Moreover, Random Forests are capable of handling <strong>high-dimensional data</strong> (large numbers of features) very effectively, are <strong>resistant to noise</strong>, and provide valuable insights through <strong>feature importance measures</strong>—showing which features were most influential in predictions.
+            </p>
+
+            <p class="fade-in">
+                In this project, Random Forest modeling will help us <strong>classify ultra-processed foods</strong> like <em>Candy</em>, <em>Ready-to-eat Cereal</em>, and <em>Apples</em> based on their nutritional features, 
+                uncovering how simple ingredients, sugars, and fiber content drive categorical differences.
+            </p>
+
+            <!-- Typing Animation for Header -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let text = "Random Forest";
+                    let i = 0;
+                    function typeWriter() {
+                        if (i < text.length) {
+                            document.getElementById("typing-title").innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(typeWriter, 50);
                         }
-                    });
+                    }
+                    typeWriter();
+                });
+            </script>
+        
+            <!-- Scroll-Based Fade-In Effect -->
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let fadeInElements = document.querySelectorAll(".fade-in");
+                    function fadeInOnScroll() {
+                        fadeInElements.forEach(element => {
+                            let position = element.getBoundingClientRect().top;
+                            let screenHeight = window.innerHeight;
+                            if (position < screenHeight - 100) {
+                                element.classList.add("visible");
+                            }
+                        });
+                    }
+                    window.addEventListener("scroll", fadeInOnScroll);
+                    fadeInOnScroll();
+                });
+            </script>
+        
+            <script>
+                function toggleMenu() {
+                    var navbar = document.querySelector(".navbar");
+                    navbar.classList.toggle("active");
                 }
-                window.addEventListener("scroll", fadeInOnScroll);
-                fadeInOnScroll();
-            });
-        </script>
-    
-        <script>
-            function toggleMenu() {
-                var navbar = document.querySelector(".navbar");
-                navbar.classList.toggle("active");
-            }
-        </script>
-    
-    </body>
-    </html>
+            </script>
+        </div>
+    </div>
+</body>
+</html>

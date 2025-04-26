@@ -1,0 +1,12 @@
+Random Forest Accuracy: 0.9690
+
+Classification Report:
+              precision    recall  f1-score   support
+
+   Ice Cream       0.96      0.98      0.97       436
+       Pizza       0.99      0.95      0.97       276
+        Milk       0.90      0.90      0.90        30
+
+    accuracy                           0.97       742
+   macro avg       0.95      0.95      0.95       742
+weighted avg       0.97      0.97      0.97       742
