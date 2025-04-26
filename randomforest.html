@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Principal Component Analysis (PCA)</title>
+    <title>Random Forest</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -36,69 +36,310 @@
         <h1 id="typing-title"></h1>
         <div class="content-wrapper">
 
-            <!-- 📚 Introduction to Random Forests -->
-            <h2>What Is Random Forest?</h2>
+        <!-- 📚 Introduction to Random Forests -->
+        <h2>What Is Random Forest?</h2>
 
-            <p class="fade-in">
-                <strong>Random Forest</strong> is a highly effective and versatile <strong>ensemble learning method</strong> used for both <strong>classification</strong> and <strong>regression tasks</strong>. 
-                Built upon the foundation of <strong>decision trees</strong>, Random Forests overcome the common pitfalls of individual trees—namely, their tendency to <strong>overfit</strong> on training data. 
-                Instead of relying on a single tree, Random Forests create a <strong>collection (ensemble) of decision trees</strong> and aggregate their predictions to produce a more <strong>robust and generalized model</strong>.
-            </p>
+        <p class="fade-in">
+            <strong>Random Forest</strong> is a highly effective and versatile <strong>ensemble learning method</strong> used for both <strong>classification</strong> and <strong>regression tasks</strong>. 
+            Built upon the foundation of <strong>decision trees</strong>, Random Forests overcome the common pitfalls of individual trees—namely, their tendency to <strong>overfit</strong> on training data. 
+            Instead of relying on a single tree, Random Forests create a <strong>collection (ensemble) of decision trees</strong> and aggregate their predictions to produce a more <strong>robust and generalized model</strong>.
+        </p>
 
-            <div class="gif-section">
-                <img src="assets/random_forest_building.gif" alt="Random Forest Building Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        <div class="gif-section">
+            <img src="assets/random_forest_building.gif" alt="Random Forest Building Animation" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+
+        <p class="fade-in">
+            Each individual tree in the forest is trained on a <strong>bootstrapped subset</strong> of the data, meaning a random sample drawn with replacement.
+            Additionally, during the tree-building process, Random Forests perform <strong>feature bagging</strong>: at each split, a random subset of features is selected, 
+            rather than evaluating all features. This injects further randomness into the model, leading to a <strong>decorrelated forest</strong> where the prediction errors of individual trees cancel out.
+        </p>
+
+        <h2>How Random Forest Works</h2>
+
+        <p class="fade-in">
+            The Random Forest algorithm follows a systematic ensemble strategy:
+        </p>
+
+        <ul class="fade-in">
+            <li>Draw <strong>bootstrap samples</strong> from the original dataset (random sampling with replacement).</li>
+            <li>Train an independent <strong>decision tree</strong> on each sample.</li>
+            <li>At every node split, select the best split only among a <strong>random subset of features</strong> (not all features).</li>
+            <li>Aggregate the predictions:
+                <ul>
+                    <li>For <strong>classification</strong>: take a <strong>majority vote</strong> across all trees.</li>
+                    <li>For <strong>regression</strong>: take the <strong>average prediction</strong> across all trees.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <div class="image-container">
+            <img src="assets/random_forest_workflow.png" alt="Random Forest Workflow" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+
+        <p class="fade-in">
+            The image above illustrates the full Random Forest process: multiple decision trees are independently built using bootstrapped data samples and random feature selection, and their outputs are aggregated to form a single strong prediction.
+        </p>
+
+        <h2>Why Random Forest Is Powerful</h2>
+
+        <p class="fade-in">
+            The strength of Random Forest comes from two main pillars:
+        </p>
+
+        <ul class="fade-in">
+            <li>🌳 <strong>Variance Reduction:</strong> By combining many uncorrelated trees, Random Forest reduces the overall model variance without increasing bias, thus improving prediction stability and accuracy.</li>
+            <li>🌳 <strong>Robustness to Overfitting:</strong> While individual decision trees can overfit, Random Forests, through averaging, significantly minimize overfitting—especially when configured with sufficient depth and trees.</li>
+        </ul>
+
+        <p class="fade-in">
+            Moreover, Random Forests are capable of handling <strong>high-dimensional data</strong> (large numbers of features) very effectively, are <strong>resistant to noise</strong>, and provide valuable insights through <strong>feature importance measures</strong>—showing which features were most influential in predictions.
+        </p>
+
+        <p class="fade-in">
+            In this project, Random Forest modeling will help us <strong>classify ultra-processed foods</strong> like <em>Ice Cream</em>, <em>Pizza</em>, and <em>Milk</em> based on their nutritional features, 
+            uncovering how calorie content, fat ratios, and protein levels drive categorical differences across processed desserts, savory meals, and wholesome beverages.
+        </p>
+
+        <!-- Random Forest Data Preparation -->
+        <h2>Data Preparation for Random Forest Modeling</h2>
+
+        <p class="fade-in">
+            Random Forests are ensemble learning models that require <strong>labeled, numeric data</strong> for supervised classification tasks. 
+            For our Random Forest analysis, we began with the <code>clean_normalized_data.csv</code> file. 
+            This dataset includes critical nutritional attributes such as <strong>calories, protein, fat, carbohydrates</strong>, and engineered nutrient ratios like <code>calories_per_fat</code>, <code>calories_per_protein</code>, and <code>calories_per_carb</code>. 
+            As the data was already normalized, it served as an ideal baseline for building robust ensemble classifiers.
+        </p>
+
+        <div class="image-container">
+            <img src="assets/clean_normalized_data.png" alt="Clean Normalized Data Preview for Random Forest" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+        </div>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/clean_normalized_data.csv" target="_blank" class="github-button">View Dataset</a>
+        </div>
+
+        <h3>Selected Categories for Multi-Class Classification</h3>
+
+        <p class="fade-in">
+            For Random Forest modeling, we expanded the classification problem to include three nutritionally diverse categories:
+            <strong>Ice Cream</strong> (label 0), <strong>Pizza</strong> (label 1), and <strong>Milk</strong> (label 2). 
+            These categories were selected to create a meaningful contrast between indulgent desserts, savory meal components, and natural, minimally processed beverages. 
+            Each of these food types exhibits distinct macronutrient profiles, making them an excellent test for a robust multi-class classifier.
+        </p>
+
+        <p class="fade-in">
+            We filtered the <code>clean_normalized_data.csv</code> to extract only the rows corresponding to these three selected food groups.
+            A simple mapping function was then applied to assign numeric labels, enabling supervised learning with a multi-class setup.
+        </p>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/rf_filtered.py" target="_blank" class="github-button">View Filtering Script</a>
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/rf_filtered_data.csv" target="_blank" class="github-button">View Filtered Dataset</a>
+        </div>
+
+        <div class="image-container">
+            <img src="assets/rf_filtered_data.jpg" alt="Filtered Data for Random Forest Modeling" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+        </div>
+
+        <h3>Train-Test Splitting and Feature Handling</h3>
+
+        <p class="fade-in">
+            After filtering the dataset to retain only items belonging to Ice Cream, Pizza, and Milk, we isolated only the <strong>numeric attributes</strong> relevant for modeling. 
+            Non-numeric fields such as <code>description</code>, <code>brand</code>, and <code>category</code> were intentionally excluded, ensuring the model focused purely on quantitative nutrition-based features.
+        </p>
+
+        <p class="fade-in">
+            We assigned numeric labels as follows:
+        </p>
+
+        <ul class="fade-in">
+            <li>🍦 Ice Cream → Label 0</li>
+            <li>🍕 Pizza → Label 1</li>
+            <li>🥛 Milk → Label 2</li>
+        </ul>
+
+        <p class="fade-in">
+            To maintain class distribution fairness, we performed a <strong>stratified 70-30 split</strong> using 
+            <code>train_test_split(..., stratify=y)</code>. 
+            This stratification ensures that both training and testing datasets contain balanced proportions of each class, thereby avoiding model bias toward more abundant categories.
+        </p>
+
+        <p class="fade-in">
+            Importantly, the <strong>training and testing sets are fully disjoint</strong>, ensuring that no food item overlaps between them. 
+            This eliminates any possibility of <em>data leakage</em> and guarantees that the reported model performance accurately reflects its ability to generalize to unseen data.
+        </p>
+
+            <!-- X Train -->
+            <h4 class="fade-in">📁 RF_X_Train: Feature matrix used for training</h4>
+            <div class="image-container">
+                <img src="assets/rf_X_train.jpg" alt="Random Forest X Train Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/rf_X_train.csv" target="_blank" class="github-button">View RF_X_Train.csv</a>
+            </div>
+
+            <!-- Y Train -->
+            <h4 class="fade-in">🏷️ RF_Y_Train: Target labels for training set</h4>
+            <div class="image-container">
+                <img src="assets/rf_Y_train.jpg" alt="Random Forest Y Train Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/rf_y_train.csv" target="_blank" class="github-button">View RF_Y_Train.csv</a>
+            </div>
+
+            <!-- X Test -->
+            <h4 class="fade-in">📁 RF_X_Test: Feature matrix used for evaluation</h4>
+            <div class="image-container">
+                <img src="assets/rf_X_test.jpg" alt="Random Forest X Test Dataset" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/rf_X_test.csv" target="_blank" class="github-button">View RF_X_Test.csv</a>
+            </div>
+
+            <!-- Y Test -->
+            <h4 class="fade-in">🏷️ RF_Y_Test: True labels used to validate performance</h4>
+            <div class="image-container">
+                <img src="assets/rf_Y_test.jpg" alt="Random Forest Y Test Labels" class="topic-image" style="max-width: 100%; border-radius: 8px;">
+            </div>
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/data/rf_y_test.csv" target="_blank" class="github-button">View RF_Y_Test.csv</a>
             </div>
 
             <p class="fade-in">
-                Each individual tree in the forest is trained on a <strong>bootstrapped subset</strong> of the data, meaning a random sample drawn with replacement.
-                Additionally, during the tree-building process, Random Forests perform <strong>feature bagging</strong>: at each split, a random subset of features is selected, 
-                rather than evaluating all features. This injects further randomness into the model, leading to a <strong>decorrelated forest</strong> where the prediction errors of individual trees cancel out.
+                With this well-prepared, stratified, and fully numeric dataset, Random Forest models can be trained efficiently and evaluated rigorously, ensuring robust classification performance across diverse food categories ranging from highly processed candies to fresh fruits.
             </p>
 
-            <h2>How Random Forest Works</h2>
+            <!-- (c) Code -->
+            <h2>Model Codebase</h2>
+            <p class="fade-in">
+                The Random Forest model was implemented using Scikit-learn’s <code>RandomForestClassifier</code> from the <code>ensemble</code> module. 
+                This supervised learning setup aimed to solve a multi-class classification problem, distinguishing between three food categories: 
+                <strong>Ice Cream</strong>, <strong>Pizza</strong>, and <strong>Milk</strong>. 
+                These categories were selected to represent a spectrum from highly processed to natural foods, offering a challenging yet informative modeling task.
+            </p>
 
             <p class="fade-in">
-                The Random Forest algorithm follows a systematic ensemble strategy:
+                First, the input datasets—<code>rf_X_train.csv</code> and <code>rf_X_test.csv</code>—were loaded along with their corresponding labels <code>rf_y_train.csv</code> and <code>rf_y_test.csv</code>. 
+                These datasets had already undergone a <strong>stratified 70-30 train-test split</strong>, ensuring that the proportion of samples from each category remained consistent across both training and testing sets.
             </p>
 
-            <ul class="fade-in">
-                <li>Draw <strong>bootstrap samples</strong> from the original dataset (random sampling with replacement).</li>
-                <li>Train an independent <strong>decision tree</strong> on each sample.</li>
-                <li>At every node split, select the best split only among a <strong>random subset of features</strong> (not all features).</li>
-                <li>Aggregate the predictions:
-                    <ul>
-                        <li>For <strong>classification</strong>: take a <strong>majority vote</strong> across all trees.</li>
-                        <li>For <strong>regression</strong>: take the <strong>average prediction</strong> across all trees.</li>
-                    </ul>
-                </li>
-            </ul>
+            <p class="fade-in">
+                A Random Forest model was then initialized with <code>n_estimators=100</code> trees, meaning the ensemble was composed of 100 decision trees, each trained on a different <em>bootstrapped subset</em> of the data.
+                The <code>random_state=42</code> parameter was set to ensure reproducibility of the results.
+            </p>
+
+            <p class="fade-in">
+                After training the model on the training set, predictions were made on the unseen test set. 
+                The model’s performance was assessed using key evaluation metrics: <strong>overall accuracy</strong>, a <strong>confusion matrix</strong> to visualize misclassifications, 
+                and a <strong>classification report</strong> detailing <em>precision, recall, F1-score</em>, and <em>support</em> for each category.
+            </p>
+
+            <p class="fade-in">
+                To preserve the outputs, the classification report was saved as a text file (<code>rf_report.txt</code>) in the <code>reports</code> folder. 
+                A normalized confusion matrix was generated using Seaborn’s heatmap visualization and stored as <code>rf_conf_matrix.png</code> in the <code>visuals</code> folder.
+            </p>
+
+            <p class="fade-in">
+                Finally, feature importances were extracted to understand which nutritional attributes most influenced the model’s decisions. 
+                The top 10 features were visualized in a ranked bar plot (<code>rf_feature_importances.png</code>), providing valuable insights into which factors like <strong>protein content</strong> and <strong>calories per protein</strong> were most predictive.
+            </p>
+
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/rf_modeling.py" target="_blank" class="github-button">View Random Forest Model Code</a>
+            </div>
+
+            <!-- (d) Results -->
+
+            <h3 class="fade-in">Confusion Matrix</h3>
+            <p class="fade-in">
+                The confusion matrix below provides a comprehensive visualization of the Random Forest model’s classification performance across the three food categories: 
+                <strong>Ice Cream</strong>, <strong>Pizza</strong>, and <strong>Milk</strong>. 
+                Each row of the matrix represents the true class label, while each column corresponds to the model’s predicted label.
+            </p>
+            
+            <p class="fade-in">
+                High values along the diagonal indicate correct classifications, where the model accurately predicted the true class. 
+                Off-diagonal elements represent misclassifications, highlighting where the model confused one category for another.
+            </p>
+            
+            <p class="fade-in">
+                In this visualization, the color intensity is proportional to the number of samples classified in each category — darker shades represent higher counts, providing a quick visual cue of model strengths and weaknesses.
+                A strong diagonal with minimal off-diagonal noise demonstrates the model’s ability to correctly distinguish between the selected food groups.
+            </p>
+            
+            <p class="fade-in">
+                Specifically, the Random Forest model achieved high precision for <strong>Ice Cream</strong> and <strong>Pizza</strong>, with a minor degree of misclassification between Ice Cream and Pizza.
+                <strong>Milk</strong> samples, though fewer in number, were largely classified correctly, showcasing the model's ability to generalize even across minority classes.
+            </p>
+            
+            <p class="fade-in">
+                Overall, the confusion matrix confirms the Random Forest’s excellent performance with a final accuracy of <strong>96.9%</strong>, reinforcing the model’s robustness in handling multi-class, nutrition-based classification tasks.
+            </p>
 
             <div class="image-container">
-                <img src="assets/random_forest_workflow.png" alt="Random Forest Workflow" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+                <img src="visuals/rf_conf_matrix.png" alt="Random Forest Confusion Matrix" class="topic-image">
+            </div>
+            <p class="fade-in">
+                The Random Forest model achieved an impressive overall test accuracy of <strong>96.90%</strong> on unseen data.
+                The model exhibited exceptional predictive performance for the <strong>Ice Cream</strong> and <strong>Pizza</strong> categories, achieving high precision and recall scores across both classes.
+                Misclassifications were minimal: for example, only <strong>4 Pizza instances</strong> were incorrectly predicted as Ice Cream, highlighting the model’s fine-grained ability to distinguish between categories with overlapping nutritional profiles.
+            </p>
+            
+            <p class="fade-in">
+                Notably, the <strong>Milk</strong> class—despite having significantly fewer samples compared to Ice Cream and Pizza—achieved a strong <strong>90% precision</strong> and <strong>90% recall</strong>.
+                This outcome underscores the model’s robustness and its ability to maintain generalization even when faced with underrepresented classes, an essential property for real-world food classification where some categories naturally have fewer examples.
+            </p>
+
+            <div class="image-container">
+                <img src="assets/rf_report.jpg" alt="Random Forest Classification Report Snapshot" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+            
+            <div class="button-section">
+                <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/rf_report.txt" target="_blank" class="github-button">View Classification Report</a>
+            </div>
+
+            <h3 class="fade-in">Feature Importance Analysis</h3>
+            <p class="fade-in">
+                One of the key strengths of Random Forest models lies in their ability to provide intrinsic estimates of <strong>feature importance</strong>. 
+                Feature importance quantifies the relative contribution of each predictor variable toward improving model purity at decision splits.
+                In essence, it reflects how influential a feature was in helping the model separate categories correctly throughout the ensemble of trees.
+            </p>
+            
+            <p class="fade-in">
+                The bar chart below visualizes the top-ranked features according to their importance scores.
+                Features like <strong>protein</strong> and <strong>calories_per_protein</strong> emerged as dominant factors, suggesting that protein content relative to calories plays a crucial role in differentiating between processed foods (like Pizza and Ice Cream) and natural products (like Milk).
+                Caloric measures and macronutrient balances (such as <strong>calories_per_fat</strong> and <strong>carbs</strong>) also showed significant contributions, reflecting how energy density and macronutrient composition shape food classification boundaries.
+            </p>
+
+            <div class="image-container">
+                <img src="visuals/rf_feature_importances.png" alt="Random Forest Feature Importances" class="topic-image">
             </div>
 
             <p class="fade-in">
-                The image above illustrates the full Random Forest process: multiple decision trees are independently built using bootstrapped data samples and random feature selection, and their outputs are aggregated to form a single strong prediction.
+                Among all nutrient features, <strong>protein content</strong> emerged as the most decisive factor in distinguishing between Ice Cream, Pizza, and Milk. 
+                <strong>Calories per protein</strong> was the second most important feature, followed by overall <strong>calories</strong> and <strong>calories per fat</strong>. 
+                These features highlight the nutritional divergence between high-protein foods like Milk, calorie-dense foods like Ice Cream, and complex foods like Pizza.
             </p>
 
-            <h2>Why Random Forest Is Powerful</h2>
+            <h2>Conclusions & Takeaways</h2>
 
             <p class="fade-in">
-                The strength of Random Forest comes from two main pillars:
+                The Random Forest model delivered exceptional classification performance, achieving an overall test accuracy of <strong>96.90%</strong> on the three-category food dataset (Ice Cream, Pizza, Milk). 
+                This high level of accuracy underscores Random Forest's ability to capture complex, non-linear patterns in nutritional data even when categories exhibit overlapping macronutrient distributions. 
+                By leveraging ensemble averaging across hundreds of decision trees, the model minimized variance, corrected for overfitting tendencies seen in individual trees, and maintained stable predictive power across multiple data subsets.
             </p>
-
-            <ul class="fade-in">
-                <li>🌳 <strong>Variance Reduction:</strong> By combining many uncorrelated trees, Random Forest reduces the overall model variance without increasing bias, thus improving prediction stability and accuracy.</li>
-                <li>🌳 <strong>Robustness to Overfitting:</strong> While individual decision trees can overfit, Random Forests, through averaging, significantly minimize overfitting—especially when configured with sufficient depth and trees.</li>
-            </ul>
-
+            
             <p class="fade-in">
-                Moreover, Random Forests are capable of handling <strong>high-dimensional data</strong> (large numbers of features) very effectively, are <strong>resistant to noise</strong>, and provide valuable insights through <strong>feature importance measures</strong>—showing which features were most influential in predictions.
+                One of the most insightful findings of this modeling exercise was the identification of <strong>protein-related features</strong> and <strong>calorie-based ratios</strong> (such as <code>calories_per_protein</code> and <code>calories_per_fat</code>) as primary drivers of category distinction.
+                This highlights the importance of macronutrient density, rather than just absolute calorie content, in determining whether a food item belongs to a processed or minimally processed group. 
+                Such insights could have meaningful applications in fields like food labeling, nutritional epidemiology, and machine learning-driven dietary recommendation systems.
             </p>
-
+            
             <p class="fade-in">
-                In this project, Random Forest modeling will help us <strong>classify ultra-processed foods</strong> like <em>Candy</em>, <em>Ready-to-eat Cereal</em>, and <em>Apples</em> based on their nutritional features, 
-                uncovering how simple ingredients, sugars, and fiber content drive categorical differences.
+                More broadly, this project reaffirmed why Random Forests are a cornerstone of modern ensemble learning: the integration of <strong>bootstrapping</strong> (sampling data with replacement), 
+                <strong>feature bagging</strong> (random feature selection at splits), and <strong>ensemble aggregation</strong> (majority voting) yielded a classifier that was not only highly accurate but also highly interpretable. 
+                The feature importance scores offered transparent explanations for model behavior, making Random Forests a powerful, explainable AI technique suitable for complex real-world datasets like food nutrition.
             </p>
 
             <!-- Typing Animation for Header -->

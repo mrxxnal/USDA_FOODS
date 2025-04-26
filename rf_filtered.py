@@ -1,5 +1,3 @@
-# 🍭 Step 1: Filter clean_normalized_data.csv for Candy, Cereal, and Apples
-
 import pandas as pd
 
 # Load the full dataset
