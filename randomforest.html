@@ -36,6 +36,40 @@
         <h1 id="typing-title"></h1>
         <div class="content-wrapper">
 
+        <!-- 📚 Introduction to Ensemble Learning -->
+        <h2>Introduction to Ensemble Learning</h2>
+
+        <p class="fade-in">
+            <strong>Ensemble Learning</strong> is a powerful machine learning paradigm where multiple models—often called "base learners"—are strategically combined to solve the same problem and improve overall predictive performance. 
+            Instead of relying on the decisions of a single model, ensemble techniques harness the collective wisdom of multiple diverse models, leading to better generalization, reduced overfitting, and increased robustness against noisy data. 
+            By aggregating predictions through methods such as voting, averaging, or stacking, ensembles mitigate the weaknesses of individual models and capitalize on their strengths. 
+            Whether models make different types of errors or have different strengths across various subsets of data, ensemble learning weaves them together to form a much more resilient final model.
+        </p>
+
+        <p class="fade-in">
+            In this project, ensemble learning plays a critical role in classifying ultra-processed and minimally processed foods based on their nutritional features. 
+            The method selected—<strong>Random Forest</strong>—embodies the essence of ensemble learning by building a multitude of decision trees and merging their outputs through majority voting for classification tasks. 
+            A simplified visual depiction of ensemble learning is shown below, where multiple individual models contribute to a unified final decision. 
+            This concept directly applies to our project because ultra-processed foods often have overlapping and noisy nutrient profiles; relying on just one decision boundary would be fragile, but combining multiple trees stabilizes the classification. 
+            Thus, ensemble learning ensures a more accurate and reliable categorization, even when dealing with the inherent messiness of real-world food data.
+        </p>
+
+        <div class="image-container">
+            <img src="assets/ensemble_learning_diagram.png" alt="Ensemble Learning Diagram" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+        </div>
+
+        <div class="button-section">
+            <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/rf_modeling.py" target="_blank" class="github-button">View Ensemble Learning (Random Forest) Code</a>
+        </div>
+
+        <p class="fade-in">
+            The specific ensemble technique employed here is <strong>Random Forest</strong>, a bagging-based method that aggregates the predictions of hundreds of randomly grown decision trees. 
+            Each tree is trained on a bootstrapped sample of the data, and at each split, only a random subset of features is considered—injecting diversity among the trees. 
+            In the USDA_FOODS project, Random Forest achieved an outstanding test accuracy of <strong>96.90%</strong> in classifying foods like Ice Cream, Pizza, and Milk, demonstrating the true strength of ensemble learning: building stability, reducing bias, and maximizing model reliability. 
+            Compared to using a single decision tree—which might overfit to quirks in the training set—the ensemble approach generalizes remarkably well to unseen foods, making it the ideal choice for real-world nutritional classification problems. 
+            Through this application, ensemble learning proves to be not just a technical enhancement but a cornerstone for trustworthy and scalable machine learning solutions.
+        </p>
+
         <!-- 📚 Introduction to Random Forests -->
         <h2>What Is Random Forest?</h2>
 
