@@ -38,10 +38,14 @@
         <div class="content-wrapper">
             <!-- Introduction to Clustering -->
             <h2>Introduction to Clustering</h2>
+
             <p class="fade-in">
-                <strong>Clustering</strong> is a fundamental unsupervised machine learning technique that groups similar data points based on their characteristics. 
-                It is widely used in applications such as <strong>customer segmentation</strong>, <strong>anomaly detection</strong>, and <strong>biological data analysis</strong>. 
-                In this project, clustering is applied to categorize food items based on their <strong>nutritional attributes</strong>, allowing us to uncover meaningful patterns in dietary habits.
+                <strong>Clustering</strong> is a cornerstone technique in unsupervised machine learning, where the goal is to automatically discover natural groupings within data without any predefined labels or categories. 
+                Unlike supervised learning—which relies on known outcomes—clustering invites the algorithm to find its own structure within the dataset, based purely on similarities among data points. 
+                This approach is widely used in real-world applications such as <strong>customer segmentation</strong> for personalized marketing, <strong>anomaly detection</strong> in cybersecurity, and <strong>biological data analysis</strong> to identify gene or protein families.
+                In the context of this project, clustering offers a powerful, unbiased way to explore and categorize food items based entirely on their <strong>nutritional profiles</strong>, without prior assumptions about how foods should be grouped. 
+                By analyzing attributes like calories, sugars, fats, fiber, and protein content, clustering enables the discovery of hidden dietary patterns that may not be immediately obvious through traditional classification. 
+                Ultimately, applying clustering to nutrition data helps reveal underlying trends in food composition, consumer preferences, and even potential nutritional gaps—laying the foundation for smarter, more personalized food recommendations.
             </p>
 
             <div class="gif-section">
@@ -49,13 +53,13 @@
             </div>
     
             <p class="fade-in">
-                The three clustering techniques implemented in this project are:
+                In this project, three distinct clustering techniques were explored, each offering a unique lens through which to understand the structure of nutritional data:
             </p>
-    
+            
             <ul class="fade-in">
-                <li><strong>K-Means Clustering:</strong> A partition-based clustering algorithm that divides data into a predefined number of clusters.</li>
-                <li><strong>Hierarchical Clustering:</strong> An agglomerative approach that builds a dendrogram to visualize relationships between clusters.</li>
-                <li><strong>DBSCAN (Density-Based Clustering):</strong> A density-based method that identifies clusters of varying shapes and detects outliers.</li>
+                <li><strong>K-Means Clustering:</strong> A popular partition-based method that divides data points into a predefined number of clusters by minimizing the distance between points and their assigned cluster centers. It excels when the data exhibits clear, spherical groupings and provides an efficient, scalable approach to clustering large datasets.</li>
+                <li><strong>Hierarchical Clustering:</strong> An agglomerative technique that builds a tree-like structure known as a <em>dendrogram</em>, revealing nested relationships between food items. It does not require predefining the number of clusters, making it ideal for uncovering multi-level hierarchies and understanding how closely different items are related at various levels of granularity.</li>
+                <li><strong>DBSCAN (Density-Based Spatial Clustering of Applications with Noise):</strong> A powerful density-based algorithm that identifies clusters based on areas of high data point density, while simultaneously detecting outliers. Unlike K-Means, DBSCAN can find clusters of arbitrary shapes and is exceptionally robust to noise, making it ideal for complex, non-linear nutritional patterns where traditional partitioning methods might fail.</li>
             </ul>
     
             <div class="image-container">
@@ -63,13 +67,13 @@
             </div>
     
             <p class="fade-in">
-                The table above highlights the characteristics of each clustering method:
+                Each clustering method brings its own strengths and limitations to the table, offering diverse insights into the underlying nutritional patterns:
             </p>
-    
+            
             <ul class="fade-in">
-                <li><strong>K-Means</strong>: Efficient and scalable but assumes clusters are spherical.</li>
-                <li><strong>Hierarchical Clustering</strong>: Provides a hierarchical structure but is computationally expensive.</li>
-                <li><strong>DBSCAN</strong>: Detects arbitrary-shaped clusters and handles noise but requires careful parameter tuning.</li>
+                <li><strong>K-Means Clustering:</strong> Highly efficient and scalable, making it ideal for large datasets. However, it operates best when clusters are spherical and similarly sized, which may not always align with the natural structure of real-world nutritional data.</li>
+                <li><strong>Hierarchical Clustering:</strong> Provides a detailed, tree-like view of data relationships, capturing multiple layers of similarity between food items. While it excels at revealing complex hierarchies, it can be computationally intensive, particularly for larger datasets.</li>
+                <li><strong>DBSCAN:</strong> Exceptionally good at detecting clusters of arbitrary shapes and identifying outliers, making it a powerful tool for irregular data landscapes. However, it requires careful tuning of parameters like epsilon and minimum points, which can influence the quality and stability of the resulting clusters.</li>
             </ul>
 
             <!-- Distance Metrics in Clustering -->
@@ -87,34 +91,37 @@
             <h3>Common Distance Metrics</h3>
 
             <ul class="fade-in">
-                <li><strong>Euclidean Distance:</strong> Measures the straight-line distance between two points. Used in <strong>K-Means</strong> and <strong>DBSCAN</strong> for clustering in continuous space.</li>
+                <li><strong>Euclidean Distance:</strong> Often visualized as the straight-line distance between two points in space, Euclidean distance is the most intuitive and widely used metric. In clustering algorithms like <strong>K-Means</strong> and <strong>DBSCAN</strong>, it helps in grouping points that are closer together geometrically. It assumes the data lies in a continuous, isotropic space where proximity equates to similarity. However, Euclidean distance may become less effective in very high-dimensional datasets, where the "curse of dimensionality" can distort true similarities.</li>
 
-                <li><strong>Cosine Similarity:</strong> Measures the cosine of the angle between two vectors. Often used in <strong>text clustering</strong> and <strong>hierarchical clustering</strong> for high-dimensional data.</li>
+                <li><strong>Cosine Similarity:</strong> Instead of focusing on distance, cosine similarity measures the orientation between two vectors. It calculates the cosine of the angle separating them, making it ideal for comparing text documents or high-dimensional datasets where magnitude differences are less important than directional trends. Used heavily in <strong>text clustering</strong> and often in <strong>hierarchical clustering</strong>, this metric shines when the actual values matter less than the overall shape or composition of the vectors.</li>
 
-                <li><strong>Hamming Distance:</strong> Measures the number of positions where two binary strings differ. Applied in clustering categorical and text-based data.</li>
+                <li><strong>Hamming Distance:</strong> Specifically tailored for categorical or binary data, Hamming distance counts the number of positions at which corresponding elements differ. It is particularly useful when clustering data like genetic sequences, text encoded as binary, or survey responses. Hamming distance provides a simple yet powerful way to quantify dissimilarity when attributes are not numeric but rather binary outcomes like "yes/no" or "present/absent."</li>
 
-                <li><strong>Manhattan Distance:</strong> Computes the sum of absolute differences between coordinates. Suitable for grid-like structured data and <strong>K-Means</strong> when features are not continuous.</li>
+                <li><strong>Manhattan Distance:</strong> Also known as "taxicab" distance, Manhattan distance measures the sum of absolute differences across dimensions. This metric mimics how a taxi would navigate a city grid—turning at intersections rather than traveling diagonally. It works well for <strong>K-Means</strong> clustering when feature scales differ or when the data structure inherently favors stepwise (grid-like) movement rather than straight-line measurements.</li>
 
-                <li><strong>Minkowski Distance:</strong> A generalization of Euclidean and Manhattan distances. <strong>P=1</strong> corresponds to Manhattan, <strong>P=2</strong> to Euclidean.</li>
+                <li><strong>Minkowski Distance:</strong> A generalization that encompasses both Euclidean and Manhattan distances. By adjusting the parameter <strong>p</strong>, Minkowski distance can be tuned to behave like Manhattan (<strong>p=1</strong>) or Euclidean (<strong>p=2</strong>). It provides a flexible tool for clustering, allowing researchers to experiment and choose a distance metric that best matches their data’s underlying geometry.</li>
 
-                <li><strong>Chebyshev Distance:</strong> Measures the greatest absolute difference between feature values. Useful in applications where extreme feature differences define cluster separations.</li>
+                <li><strong>Chebyshev Distance:</strong> Instead of summing or squaring differences, Chebyshev distance simply finds the largest absolute difference along any coordinate dimension. It's particularly useful in environments where one dominant feature can determine cluster membership—such as maximum deviation in a critical nutrient or ingredient that sharply separates different types of food products.</li>
 
-                <li><strong>Jaccard Similarity:</strong> Measures the similarity between sets. Frequently used in clustering text documents and gene sequence analysis.</li>
+                <li><strong>Jaccard Similarity:</strong> A set-based metric that measures the proportion of shared elements between two sets. Jaccard is excellent for clustering binary, categorical, or text data where overlap matters more than absolute counts. It’s commonly used in applications like document clustering, social network analysis, and biological data comparisons where "intersection over union" provides meaningful similarity estimates.</li>
 
-                <li><strong>Haversine Distance:</strong> Calculates the shortest distance between two points on a sphere. Essential for <strong>geo-spatial clustering</strong> applications like mapping and transportation.</li>
+                <li><strong>Haversine Distance:</strong> Specially designed for measuring the shortest distance between two points on a sphere, Haversine distance is indispensable in <strong>geo-spatial clustering</strong>—such as mapping food consumption patterns across different regions or studying regional dietary variations. It accounts for the Earth's curvature, making it ideal for clustering based on real-world geographic coordinates.</li>
 
-                <li><strong>Sørensen-Dice Coefficient:</strong> Similar to Jaccard but gives more weight to common elements. Used for string similarity and bioinformatics clustering.</li>
+                <li><strong>Sørensen-Dice Coefficient:</strong> Similar in spirit to Jaccard similarity but more sensitive to common elements. The Sørensen-Dice coefficient doubles the weight of shared features, making it especially suited for biological clustering tasks, string matching, and medical data analysis where even slight overlaps carry important meaning.</li>
             </ul>
 
             <h3>Impact of Distance Metrics on Clustering</h3>
+
             <p class="fade-in">
-                Different clustering methods work best with specific distance metrics:
+                Different clustering algorithms are tailored to work best with particular distance metrics, and the choice of metric can significantly impact the quality and interpretability of clusters:
             </p>
 
             <ul class="fade-in">
-                <li><strong>K-Means:</strong> Primarily uses <strong>Euclidean distance</strong>, forming spherical clusters.</li>
-                <li><strong>Hierarchical Clustering:</strong> Supports multiple metrics, including <strong>cosine similarity</strong> and <strong>Jaccard distance</strong>, depending on the dataset.</li>
-                <li><strong>DBSCAN:</strong> Typically employs <strong>Euclidean distance</strong> but can be adapted to other metrics for non-linear clusters.</li>
+                <li><strong>K-Means:</strong> Primarily utilizes <strong>Euclidean distance</strong> to create spherical clusters. As a result, it assumes that all clusters have similar density and size, which can sometimes limit its ability to accurately group irregularly distributed food items or highly skewed nutrient profiles.</li>
+
+                <li><strong>Hierarchical Clustering:</strong> Is flexible with distance metrics, allowing practitioners to select <strong>cosine similarity</strong>, <strong>Jaccard distance</strong>, or <strong>Euclidean distance</strong> depending on the nature of the data. This adaptability enables hierarchical models to uncover rich multi-level structures in both numerical and categorical datasets, like layered similarities between processed and natural foods.</li>
+
+                <li><strong>DBSCAN:</strong> Typically uses <strong>Euclidean distance</strong> but is not restricted to it. It can be modified to incorporate custom distance metrics like Haversine for spatial data or Manhattan for grid-like distributions. Because DBSCAN relies on density estimation rather than shape assumptions, choosing the right distance metric is crucial to accurately detect organic cluster boundaries and outliers.</li>
             </ul>
 
             <p class="fade-in">
