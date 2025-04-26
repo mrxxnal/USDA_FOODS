@@ -226,71 +226,112 @@
 
             <!-- Linear C=0.1 -->
             <div class="image-container">
-                <img src="visuals/svm_conf_matrix_linear_C0.1.png" alt="Linear Kernel C=0.1" class="topic-image">
+                <img src="visuals/svm_conf_matrix_linear_C0.1.png" alt="Linear Kernel C=0.1 Confusion Matrix" class="topic-image">
             </div>
             <p class="fade-in">
-                With C=0.1, the linear kernel model shows high bias and fails to capture the complexity of the class boundary. It classifies all instances as Class 0, completely misclassifying every Class 1 sample. Although Class 0 has perfect precision, the recall for Class 1 is zero, resulting in significant performance issues on minority class detection. The accuracy is 79.49%, but this is misleading due to class imbalance.
+                With <strong>C=0.1</strong>, the linear kernel model exhibits high bias and fails to capture the complexity of the class boundaries. 
+                It classifies all instances as Class 0 (majority class), completely misclassifying every Class 1 sample. 
+                The precision for Class 0 is 79%, but recall for Class 1 is zero, leading to a substantial degradation in overall model reliability for minority detection. 
+                Although the reported accuracy stands at <strong>79.49%</strong>, this value is misleading because it reflects the imbalance favoring Class 0.
             </p>
+
+            <div class="image-container">
+                <img src="assets/svm_linear_C0.1_report.jpg" alt="SVM Linear C=0.1 Classification Report" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C0.1_report.txt" target="_blank" class="github-button">View Linear C=0.1 Report</a>
             </div>
 
             <!-- Linear C=1 -->
             <div class="image-container">
-                <img src="visuals/svm_conf_matrix_linear_C1.png" alt="Linear Kernel C=1" class="topic-image">
+                <img src="visuals/svm_conf_matrix_linear_C1.png" alt="Linear Kernel C=1 Confusion Matrix" class="topic-image">
             </div>
             <p class="fade-in">
-                At C=1, the model improves substantially. It correctly identifies half of the Class 1 samples while maintaining a strong performance on Class 0. This configuration balances bias and variance, resulting in an improved accuracy of 87.18%. The confusion matrix reflects a better tradeoff—fewer false negatives and greater generalization to unseen data.
+                At <strong>C=1</strong>, the linear kernel model improves significantly. 
+                It correctly identifies half of the Class 1 samples, while maintaining strong performance on Class 0 with 88% precision and 97% recall.
+                The overall model accuracy rises to <strong>87.18%</strong>. 
+                This configuration strikes a better balance between bias and variance, allowing the model to generalize more effectively without overfitting.
+                The confusion matrix shows fewer false negatives, resulting in greater predictive reliability across both classes.
             </p>
+
+            <div class="image-container">
+                <img src="assets/svm_linear_C1_report.jpg" alt="SVM Linear C=1 Classification Report" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C1_report.txt" target="_blank" class="github-button">View Linear C=1 Report</a>
             </div>
 
             <!-- Linear C=10 -->
             <div class="image-container">
-                <img src="visuals/svm_conf_matrix_linear_C10.png" alt="Linear Kernel C=10" class="topic-image">
+                <img src="visuals/svm_conf_matrix_linear_C10.png" alt="Linear Kernel C=10 Confusion Matrix" class="topic-image">
             </div>
             <p class="fade-in">
-                Increasing the cost parameter to C=10 doesn’t change the confusion matrix from the C=1 case, which suggests that the model has saturated its ability to improve linearly on this dataset. It still misclassifies four Class 1 items and one Class 0, resulting in the same 87.18% accuracy. This implies that further penalizing misclassification may not enhance linear kernel performance and could even lead to overfitting with different data.
+                Increasing the cost parameter to <strong>C=10</strong> does not yield any improvement over the C=1 model. 
+                The confusion matrix and classification metrics remain identical, with an accuracy of <strong>87.18%</strong>.
+                This suggests that the linear kernel has already captured the best linear boundary possible for this data, and additional penalization of misclassification does not improve performance.
+                Further increases in C could lead to overfitting, but without visible performance gains, highlighting the limits of linear separation for this dataset.
             </p>
+
+            <div class="image-container">
+                <img src="assets/svm_linear_C10_report.jpg" alt="SVM Linear C=10 Classification Report" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
+
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_linear_C10_report.txt" target="_blank" class="github-button">View Linear C=10 Report</a>
             </div>
-            
+
+
             <!-- Polynomial Kernels -->
             <h4 class="fade-in">🔸 Polynomial Kernel</h4>
 
+            <!-- Polynomial C=0.1 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_poly_C0.1.png" alt="Polynomial Kernel C=0.1" class="topic-image">
             </div>
+            <div class="image-container">
+                <img src="assets/svm_poly_C0.1_report.jpg" alt="Polynomial Kernel Report C=0.1" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <p class="fade-in">
-                With <strong>C=0.1</strong>, the Polynomial Kernel still managed an accuracy of 87.18%. Class 0 (Potato Chips) was perfectly classified, 
-                but 5 instances from Class 1 (Cookies & Brownies) were misclassified as Class 0. This suggests that while the model performs well overall, 
-                it may underfit when the regularization is too strong.
+                With <strong>C=0.1</strong>, the Polynomial Kernel achieved an accuracy of <strong>87.18%</strong>. 
+                Class 0 was predicted with perfect recall (1.00), meaning all instances of Class 0 were correctly classified. 
+                However, the model struggled to fully capture Class 1, with a recall of only 0.38. 
+                While the precision for Class 1 was perfect (1.00), indicating that when it predicted Class 1 it was correct, it still missed over half of the true Class 1 examples.
+                This highlights a tendency of the model to be conservative with minority class predictions at lower C values.
             </p>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C0.1_report.txt" target="_blank" class="github-button">View Poly C=0.1 Report</a>
             </div>
 
+            <!-- Polynomial C=1 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_poly_C1.png" alt="Polynomial Kernel C=1" class="topic-image">
             </div>
+            <div class="image-container">
+                <img src="assets/svm_poly_C1_report.jpg" alt="Polynomial Kernel Report C=1" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <p class="fade-in">
-                Increasing the cost parameter to <strong>C=1</strong> yielded no change in accuracy. The exact same confusion matrix was observed,
-                indicating that the model may be relatively insensitive to moderate increases in C when using the Polynomial kernel.
-                It continues to struggle with correctly identifying a minority of Class 1 samples.
+                Increasing the cost parameter to <strong>C=1</strong> resulted in no change to the confusion matrix or classification metrics—the accuracy remained at <strong>87.18%</strong>. 
+                The model retained perfect precision for Class 1 but continued to suffer from low recall (0.38) for that class. 
+                This suggests that simply increasing the penalty on misclassification (C) was not enough to shift the decision boundary to favor better detection of minority samples with this kernel.
             </p>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C1_report.txt" target="_blank" class="github-button">View Poly C=1 Report</a>
             </div>
 
+            <!-- Polynomial C=10 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_poly_C10.png" alt="Polynomial Kernel C=10" class="topic-image">
             </div>
+            <div class="image-container">
+                <img src="assets/svm_poly_C10_report.jpg" alt="Polynomial Kernel Report C=10" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <p class="fade-in">
-                At a higher cost value of <strong>C=10</strong>, the performance remained unchanged. The SVM model showed consistency but limited
-                improvement with increased complexity. While Class 0 continues to be accurately captured, the boundary flexibility still fails 
-                to fully capture nuances in the Class 1 distribution.
+                At a higher cost value of <strong>C=10</strong>, the classification results remained identical to C=0.1 and C=1. 
+                No improvement in recall, precision, or overall accuracy was observed. 
+                This stability indicates that for this dataset, the polynomial kernel's flexibility was not sensitive to regularization strength, 
+                and further hyperparameter tuning (like changing the polynomial degree) would likely be needed to significantly improve minority class capture.
             </p>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_poly_C10_report.txt" target="_blank" class="github-button">View Poly C=10 Report</a>
@@ -300,47 +341,83 @@
             <h4 class="fade-in">🔹 RBF Kernel</h4>
 
             <p class="fade-in">
-                The <strong>Radial Basis Function (RBF)</strong> kernel, also known as the Gaussian kernel, is widely used for non-linear classification problems. It projects the data into an infinite-dimensional space to separate classes that are not linearly separable. Below are the confusion matrices at different values of <code>C</code>—the regularization parameter. A low value of <code>C</code> allows for a wider margin but more misclassifications, while a high <code>C</code> tries to classify all training examples correctly, potentially overfitting the data.
+                The <strong>Radial Basis Function (RBF)</strong> kernel, also known as the Gaussian kernel, is one of the most powerful tools for non-linear classification tasks. 
+                By mapping input features into an infinite-dimensional space, it enables linear separation of data that is otherwise inseparable in the original feature space. 
+                Below are detailed results at different values of <code>C</code> (the regularization strength), illustrating how tuning this parameter affects model complexity, bias, and generalization.
             </p>
 
             <!-- C = 0.1 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_rbf_C0.1.png" alt="RBF Kernel C=0.1" class="topic-image">
             </div>
+            <p class="fade-in">
+                At <strong>C=0.1</strong>, the RBF model heavily prioritized margin maximization, allowing more misclassifications to create a wider margin. 
+                While Class 0 (Potato Chips) was perfectly classified with a recall of 100%, the model completely failed to capture Class 1 (Cookies & Brownies)—resulting in zero recall and precision for that class. 
+                The overall accuracy remained deceptively high at <strong>79.49%</strong> due to class imbalance but the macro-averaged F1 score was poor, highlighting serious shortcomings in minority class detection.
+            </p>
+            <div class="image-container">
+                <img src="assets/svm_rbf_C0.1_report.jpg" alt="RBF Kernel C=0.1 Report Snapshot" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C0.1_report.txt" target="_blank" class="github-button">View RBF C=0.1 Report</a>
             </div>
-            <p class="fade-in">
-                With <code>C=0.1</code>, the model prioritized margin maximization over correct classification. As a result, all instances of Class 1 were misclassified as Class 0. Although the accuracy remained decent due to the class imbalance, the recall for Class 1 dropped to zero—indicating the model's failure to identify the minority class.
-            </p>
 
             <!-- C = 1 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_rbf_C1.png" alt="RBF Kernel C=1" class="topic-image">
             </div>
+            <p class="fade-in">
+                Upon increasing the regularization to <strong>C=1</strong>, the model's performance improved dramatically. 
+                The accuracy rose to an impressive <strong>89.74%</strong>. 
+                Class 0 was perfectly captured with high precision and recall, and 50% of Class 1 instances were correctly identified. 
+                Macro and weighted averages across precision, recall, and F1-score also reflected balanced generalization, making this setting the best among RBF models tested.
+            </p>
+            <div class="image-container">
+                <img src="assets/svm_rbf_C1_report.jpg" alt="RBF Kernel C=1 Report Snapshot" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C1_report.txt" target="_blank" class="github-button">View RBF C=1 Report</a>
             </div>
-            <p class="fade-in">
-                At <code>C=1</code>, the RBF kernel performed the best among all tested configurations. It achieved a balance between bias and variance, correctly identifying 50% of Class 1 instances and all of Class 0. This yielded the highest accuracy of <strong>89.74%</strong> and a fair recall for both classes.
-            </p>
 
             <!-- C = 10 -->
             <div class="image-container">
                 <img src="visuals/svm_conf_matrix_rbf_C10.png" alt="RBF Kernel C=10" class="topic-image">
             </div>
+            <p class="fade-in">
+                At <strong>C=10</strong>, despite tighter margins and a stronger penalty on misclassification, the model’s performance slightly declined. 
+                It overfit on the training data, leading to reduced flexibility on unseen test data. 
+                Although Class 0 remained well-predicted, Class 1 performance degraded, as seen by the drop in recall and F1-score. 
+                The final accuracy dropped to <strong>87.18%</strong>, emphasizing the importance of balanced regularization.
+            </p>
+            <div class="image-container">
+                <img src="assets/svm_rbf_C10_report.jpg" alt="RBF Kernel C=10 Report Snapshot" class="topic-image" style="max-width: 100%; border-radius: 8px; margin-top: 20px;">
+            </div>
             <div class="button-section">
                 <a href="https://github.com/mrxxnal/USDA_FOODS/blob/main/reports/svm_rbf_C10_report.txt" target="_blank" class="github-button">View RBF C=10 Report</a>
             </div>
-            <p class="fade-in">
-                Increasing the regularization to <code>C=10</code> slightly reduced performance. The model overfit to the training data, misclassifying 5 out of 8 Class 1 instances. The accuracy decreased to <strong>87.18%</strong>, and although the margin was tighter, generalization suffered slightly.
-            </p>
 
             <h3>Kernel Performance Comparison</h3>
 
             <p class="fade-in">
-                The bar chart below offers a comprehensive comparison of <strong>accuracy scores</strong> achieved by each SVM kernel—<code>linear</code>, <code>polynomial</code>, and <code>rbf</code>—across three different regularization parameter settings: <strong>C = 0.1, 1, and 10</strong>.
-                Accuracy is a key metric here as it helps us evaluate how well the classifier is generalizing to unseen data, particularly in distinguishing between our two food categories: <strong>Potato Chips</strong> and <strong>Cookies and Brownies</strong>.
+                The bar chart below presents a comprehensive side-by-side comparison of the <strong>accuracy scores</strong> achieved by each SVM kernel—<code>linear</code>, <code>polynomial</code>, and <code>rbf</code>—evaluated across three different values of the regularization parameter <strong>C</strong>: 0.1, 1, and 10.
+                Each kernel introduces a different method of transforming or interpreting the input feature space: 
+                the <strong>linear kernel</strong> fits a straight hyperplane, 
+                the <strong>polynomial kernel</strong> introduces higher-degree feature interactions, 
+                and the <strong>radial basis function (RBF) kernel</strong> maps inputs into an infinite-dimensional space to capture non-linear patterns.
+            </p>
+            
+            <p class="fade-in">
+                The <strong>regularization parameter C</strong> plays a critical role: 
+                smaller values (e.g., C=0.1) emphasize a wider margin at the expense of training accuracy (potential underfitting), 
+                while larger values (e.g., C=10) push the model to classify training examples more accurately, risking overfitting.
+                Observing kernel behavior across these three C values allows us to study how each method balances the bias-variance trade-off.
+            </p>
+            
+            <p class="fade-in">
+                From the comparative analysis, it is evident that <strong>increasing C generally improved model performance up to a point</strong>, particularly for the RBF kernel, which achieved the highest overall accuracy at C=1 (approximately 90%). 
+                The <strong>linear kernel</strong> demonstrated stability between C=1 and C=10, but struggled to perfectly separate complex patterns in the data.
+                Meanwhile, the <strong>polynomial kernel</strong> maintained consistent accuracy across all C values but exhibited slightly less sensitivity to model complexity adjustments.
+                Overall, the RBF kernel outperformed others in balancing precision, recall, and generalization, making it the most suitable for this specific two-class food classification task involving <em>Potato Chips</em> and <em>Cookies and Brownies</em>.
             </p>
             
             <div class="image-container">
@@ -348,19 +425,36 @@
             </div>
             
             <p class="fade-in">
-                🔹 <strong>Linear Kernel:</strong> Performance improved as the value of <code>C</code> increased. With <code>C = 0.1</code>, the model underfit and misclassified all minority class instances, yielding a lower overall accuracy. At <code>C = 1</code> and <code>C = 10</code>, performance plateaued around <strong>87.18%</strong> with improved recall for Class 1. This kernel worked best when the decision boundary was relatively simple and the data was nearly linearly separable.
+                🔹 <strong>Linear Kernel:</strong> Performance noticeably improved as the regularization parameter <code>C</code> increased. 
+                With a low <code>C = 0.1</code>, the model suffered from underfitting, predicting only the majority class correctly while entirely failing to recognize the minority class (Class 1).
+                As <code>C</code> increased to 1 and 10, the model's ability to distinguish between classes stabilized, achieving an accuracy of <strong>87.18%</strong> in both cases. 
+                Despite the better results, the linear kernel struggled to fully capture the complex patterns between the food categories, showing that linear decision boundaries were somewhat limiting for our dataset.
             </p>
             
             <p class="fade-in">
-                🔸 <strong>Polynomial Kernel:</strong> Across all cost values, this kernel maintained stable accuracy scores—hovering consistently around <strong>87.18%</strong>. However, its ability to distinguish the minority class (Class 1) didn’t significantly improve, and the model displayed signs of overfitting at higher cost values due to the increased complexity of the decision surface. While theoretically powerful for capturing interactions, the polynomial kernel’s practical gain was limited in this case.
+                🔸 <strong>Polynomial Kernel:</strong> The polynomial kernel demonstrated very stable, albeit modest, performance across all tested values of <code>C</code>. 
+                Accuracy consistently hovered around <strong>87.18%</strong>, but the recall for the minority class remained low, indicating a persistent difficulty in identifying Class 1 samples correctly.
+                Even as <code>C</code> increased, the added decision boundary complexity did not translate into better generalization. 
+                This highlights a key limitation: while polynomial transformations theoretically allow for curved and complex decision boundaries, 
+                in practice they can lead to overfitting or flat performance gains if the degree of the polynomial and other hyperparameters are not carefully tuned for the specific data distribution.
             </p>
             
             <p class="fade-in">
-                🔹 <strong>RBF Kernel:</strong> Among all tested configurations, the RBF kernel with <code>C = 1</code> emerged as the top performer with an accuracy of <strong>89.74%</strong>. It accurately classified both majority and minority classes without overfitting. At <code>C = 0.1</code>, the model overgeneralized and ignored minority classes, but higher values of <code>C</code> struck a better balance between margin and fit. This demonstrates the RBF kernel’s strength in capturing <strong>non-linear boundaries</strong> with minimal parameter tuning.
+                🔹 <strong>RBF Kernel:</strong> The RBF (Radial Basis Function) kernel outshined both the linear and polynomial kernels in this task. 
+                At <code>C = 1</code>, it achieved the highest observed accuracy of <strong>89.74%</strong>, effectively balancing flexibility and generalization.
+                It successfully captured non-linear separations between the two food categories, distinguishing both majority and minority classes far better than the other kernels.
+                Although performance dipped slightly at <code>C = 10</code> due to minor overfitting tendencies, the RBF kernel clearly demonstrated its power in modeling complex, real-world boundaries when minimal hyperparameter tuning is desired.
             </p>
             
             <p class="fade-in">
-                💡 <strong>Key Takeaway:</strong> The <strong>RBF kernel at C=1</strong> consistently outperformed its linear and polynomial counterparts by balancing sensitivity and specificity. Its ability to handle non-linear decision boundaries made it the most appropriate choice for classifying food items with nuanced nutrient profiles. While the linear kernel is computationally efficient and interpretable, it may struggle when data exhibits complex patterns. The polynomial kernel offered flexibility but introduced noise without significant gains. Therefore, for applications in real-world food classification or nutrition analysis, the <strong>RBF kernel provides the best trade-off between accuracy, generalization, and robustness</strong>.
+                💡 <strong>Key Takeaway:</strong> Among all the tested kernels, the <strong>RBF kernel with C=1</strong> emerged as the most reliable performer, consistently balancing sensitivity to minority classes with overall specificity. 
+                Its inherent ability to model complex, non-linear relationships made it exceptionally suited for distinguishing food items with subtle and overlapping nutrient profiles. 
+                Although the <strong>linear kernel</strong> offered simplicity, speed, and interpretability, it lacked the flexibility needed to capture intricate patterns present in real-world nutritional data. 
+                On the other hand, the <strong>polynomial kernel</strong> provided theoretical adaptability through higher-order transformations but added unnecessary noise, 
+                ultimately resulting in stagnant accuracy gains and limited practical benefits. 
+                Given these observations, the <strong>RBF kernel</strong> stands out as the most appropriate choice for tasks like food classification, nutrition modeling, or any problem where 
+                <em>complex class boundaries</em> and <em>high-dimensional feature spaces</em> are expected. 
+                It offers the best trade-off between accuracy, generalization, and robustness—qualities that are essential for building models that can be trusted in critical real-world applications.
             </p>
 
             <!-- SVM Conclusions -->
